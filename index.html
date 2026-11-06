@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matemática 360º - Treino Diário 10.º Ano (Ficha de Avaliação A4)</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    .math-font { font-family: 'KaTeX_Main', 'Times New Roman', serif; }
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+    /* Folha milimétrica / quadriculada para resoluções manuscritas */
+    .grid-papel-resolucao {
+      background-size: 20px 20px;
+      background-image: 
+        linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+        linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);
+    }
+
+    /* ESTILOS DE IMPRESSÃO A4 FORMATO OFICIAL */
+    @media print {
+      body {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        font-size: 11pt;
+      }
+
+      header, nav, #painel-controlo, #status-sessao, #painel-submissao, #botoes-impressao, #aba-dashboard {
+        display: none !important;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+
+      .print-only {
+        display: block !important;
+      }
+
+      .a4-page-break {
+        page-break-inside: avoid;
+        break-inside: avoid;
+        margin-bottom: 24px;
+      }
+
+      .campo-input-ecra {
+        display: none !important;
+      }
+
+      .area-resolucao-impressao {
+        display: block !important;
+        border: 1px solid #cbd5e1 !important;
+        min-height: 140px;
+        margin-top: 10px;
+      }
+
+      .container-prova-a4 {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+    }
+
+    @media screen {
+      .print-only {
+        display: none;
+      }
+      .area-resolucao-impressao {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans">
+
+  <!-- Cabeçalho (Oculto na Impressão) -->
+  <header class="bg-indigo-900 text-white shadow-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
+      <div class="flex items-center gap-3">
+        <div class="bg-indigo-600 p-2.5 rounded-xl shadow-inner text-amber-300">
+          <i class="fa-solid fa-graduation-cap text-2xl"></i>
+        </div>
+        <div>
+          <h1 class="font-bold text-lg leading-tight flex items-center gap-2">
+            Matemática 360º <span class="bg-amber-400 text-indigo-950 text-xs px-2 py-0.5 rounded font-black">10.º ANO</span>
+          </h1>
+          <p class="text-xs text-indigo-200">Sessão Diária de 60 Minutos &bull; Ficha A4 &bull; Avaliação 0–20</p>
+        </div>
+      </div>
+
+      <!-- Navegação Principal -->
+      <nav class="flex bg-indigo-950/70 p-1 rounded-xl border border-indigo-700/50 text-sm">
+        <button id="nav-btn-treino" onclick="mudarAba('treino')" class="px-3.5 py-1.5 rounded-lg font-medium transition flex items-center gap-2 bg-indigo-600 text-white shadow">
+          <i class="fa-solid fa-pen-ruler"></i> Treino (1h)
+        </button>
+        <button id="nav-btn-resultados" onclick="mudarAba('resultados')" class="px-3.5 py-1.5 rounded-lg font-medium transition flex items-center gap-2 text-indigo-200 hover:text-white">
+          <i class="fa-solid fa-square-poll-vertical"></i> Avaliação &amp; Resolução
+        </button>
+        <button id="nav-btn-dashboard" onclick="mudarAba('dashboard')" class="px-3.5 py-1.5 rounded-lg font-medium transition flex items-center gap-2 text-indigo-200 hover:text-white">
+          <i class="fa-solid fa-chart-line"></i> Dashboard
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Cabeçalho Oficial Escolar A4 (Visível Apenas na Impressão) -->
+  <div class="print-only p-4 border-b-2 border-black mb-6">
+    <div class="flex justify-between items-start">
+      <div>
+        <h2 class="text-base font-bold uppercase tracking-wider">Ficha de Avaliação Formativa Diária &bull; Matemática A (10.º Ano)</h2>
+        <p class="text-xs text-gray-700">Manual de Referência: <em>Matemática 360º</em> &bull; Duração: 60 minutos &bull; Cotação Total: 20,0 valores</p>
+      </div>
+      <div class="border border-black px-3 py-1.5 text-center">
+        <div class="text-[10px] font-bold uppercase">Classificação</div>
+        <div class="text-base font-bold text-gray-400">______ / 20</div>
+      </div>
+    </div>
+    <div class="grid grid-cols-3 gap-2 mt-3 pt-2 border-t border-gray-300 text-xs">
+      <div><strong>Nome do Aluno:</strong> ____________________________________</div>
+      <div><strong>Turma:</strong> 10.º ______ &nbsp; <strong>N.º:</strong> ______</div>
+      <div><strong>Data da Realização:</strong> ____ / ____ / ________</div>
+    </div>
+  </div>
+
+  <!-- Conteúdo Principal -->
+  <main class="max-w-6xl mx-auto px-4 py-6 flex-1 w-full container-prova-a4">
+
+    <!-- ==================== ABA 1: TREINO DIÁRIO (1 HORA) ==================== -->
+    <section id="aba-treino" class="space-y-6">
+      
+      <!-- Painel de Controlo da Sessão -->
+      <div id="painel-controlo" class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-4">
+        <div class="flex-1 min-w-[280px]">
+          <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+            Matéria em estudo na escola (Matemática 360º):
+          </label>
+          <select id="filtro-dominio" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl p-2.5 font-medium focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+            <option value="todos">Todos os Temas (Revisão Geral do 10.º Ano)</option>
+            <option value="logica">1. Lógica e Teoria dos Conjuntos</option>
+            <option value="geometria">2. Geometria Analítica no Plano e Espaço</option>
+            <option value="funcoes">3. Funções e Gráficos (Generalidades e Módulo)</option>
+            <option value="estatistica">4. Estatística (Medidas de Dispersão e Quartis)</option>
+          </select>
+        </div>
+
+        <div class="flex items-center gap-4 bg-indigo-50 border border-indigo-100 p-3 rounded-xl">
+          <div class="text-indigo-600 text-2xl">
+            <i class="fa-solid fa-stopwatch-20"></i>
+          </div>
+          <div>
+            <div class="text-xs font-bold text-indigo-900 uppercase">Sessão Regular</div>
+            <div class="text-sm font-semibold text-indigo-700">60 Minutos &bull; 8 Questões</div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-2 w-full sm:w-auto">
+          <button onclick="iniciarSessao()" class="flex-1 sm:flex-initial px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-play"></i> Gerar Sessão Diária
+          </button>
+          
+          <button id="btn-imprimir-enunciado" onclick="imprimirFichaEnunciado()" class="hidden flex-1 sm:flex-initial px-4 py-3 bg-slate-800 hover:bg-slate-900 text-white font-bold rounded-xl shadow transition items-center justify-center gap-2">
+            <i class="fa-solid fa-print"></i> Imprimir Ficha A4
+          </button>
+        </div>
+      </div>
+
+      <!-- Barra de Estado e Cronómetro -->
+      <div id="status-sessao" class="hidden bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow flex justify-between items-center">
+        <div class="flex items-center gap-3">
+          <span class="inline-flex items-center justify-center bg-indigo-600 text-white text-xs px-2.5 py-1 rounded-full font-bold">
+            Progresso: <span id="progresso-exercicios" class="ml-1">0/8</span>
+          </span>
+          <span class="text-xs text-slate-300 hidden md:inline">Cotação por item: 2,5 valores</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <i class="fa-regular fa-clock text-amber-400 text-lg"></i>
+          <span id="cronometro-sessao" class="font-mono text-xl font-bold tracking-wider text-amber-400">60:00</span>
+        </div>
+      </div>
+
+      <!-- Lista de Exercícios -->
+      <div id="container-exercicios" class="space-y-6">
+        <!-- Renderizado dinamicamente -->
+      </div>
+
+      <!-- Painel de Submissão -->
+      <div id="painel-submissao" class="hidden text-center pt-4 no-print">
+        <button onclick="submeterTreino()" class="px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-base rounded-xl shadow-lg transition">
+          <i class="fa-solid fa-check-double mr-2"></i> Submeter Respostas e Avaliar (0 a 20)
+        </button>
+      </div>
+    </section>
+
+    <!-- ==================== ABA 2: RESULTADOS & RESOLUÇÃO COMPLETA ==================== -->
+    <section id="aba-resultados" class="hidden space-y-6">
+      
+      <!-- Card com Nota e Botão de Imprimir Resoluções -->
+      <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 max-w-xl mx-auto flex flex-col items-center gap-4 text-center">
+        <div id="card-nota" class="w-full space-y-2">
+          <!-- Preenchido via JS -->
+        </div>
+        
+        <div class="no-print pt-2">
+          <button onclick="imprimirResolucaoCompleta()" class="px-5 py-2.5 bg-indigo-700 hover:bg-indigo-800 text-white font-bold text-sm rounded-xl shadow transition flex items-center gap-2">
+            <i class="fa-solid fa-file-pdf"></i> Imprimir Critérios e Resolução da Ficha A4
+          </button>
+        </div>
+      </div>
+
+      <!-- Resoluções Passo a Passo -->
+      <div class="space-y-4">
+        <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2 border-b pb-2">
+          <i class="fa-solid fa-list-check text-indigo-600"></i> Resolução Integral e Critérios de Classificação da Prova Diária
+        </h3>
+        <div id="lista-resolucoes" class="space-y-4">
+          <!-- Preenchido via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ABA 3: DASHBOARD DE DESEMPENHO ==================== -->
+    <section id="aba-dashboard" class="hidden space-y-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3">
+          <div class="bg-amber-100 text-amber-600 p-3 rounded-xl text-xl"><i class="fa-solid fa-fire"></i></div>
+          <div>
+            <div class="text-xs text-slate-500 font-bold uppercase">Streak Diário</div>
+            <div id="kpi-streak" class="text-2xl font-black text-slate-800">0 dias</div>
+          </div>
+        </div>
+
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3">
+          <div class="bg-indigo-100 text-indigo-600 p-3 rounded-xl text-xl"><i class="fa-solid fa-award"></i></div>
+          <div>
+            <div class="text-xs text-slate-500 font-bold uppercase">Média Global</div>
+            <div id="kpi-media" class="text-2xl font-black text-slate-800">-- / 20</div>
+          </div>
+        </div>
+
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3">
+          <div class="bg-emerald-100 text-emerald-600 p-3 rounded-xl text-xl"><i class="fa-solid fa-hourglass-half"></i></div>
+          <div>
+            <div class="text-xs text-slate-500 font-bold uppercase">Horas Feitas</div>
+            <div id="kpi-horas" class="text-2xl font-black text-slate-800">0h</div>
+          </div>
+        </div>
+
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3">
+          <div class="bg-blue-100 text-blue-600 p-3 rounded-xl text-xl"><i class="fa-solid fa-circle-check"></i></div>
+          <div>
+            <div class="text-xs text-slate-500 font-bold uppercase">Exercícios</div>
+            <div id="kpi-total-ex" class="text-2xl font-black text-slate-800">0</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+          <h4 class="font-bold text-slate-800 text-sm mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-chart-area text-indigo-600"></i> Evolução das Fichas de 1 Hora
+          </h4>
+          <div class="h-64">
+            <canvas id="grafico-evolucao"></canvas>
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+          <h4 class="font-bold text-slate-800 text-sm mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-chart-pie text-emerald-600"></i> Domínio dos Módulos do Manual
+          </h4>
+          <div class="h-64">
+            <canvas id="grafico-dominio"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+        <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+          <i class="fa-solid fa-compass-drafting text-amber-500"></i> Diagnóstico Pedagógico do Aluno
+        </h4>
+        <div id="lista-diagnostico" class="space-y-2 text-sm text-slate-600">
+          <!-- Preenchido via JS -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // ==========================================
+    // 1. BANCO DE EXERCÍCIOS (MATEMÁTICA 360º - 10º ANO)
+    // ==========================================
+    const BANCO_EXERCICIOS = [
+      {
+        id: "LOG_01",
+        dominio: "logica",
+        temaNome: "Lógica e Teoria dos Conjuntos",
+        subtema: "Negação de Proposições Quantificadas",
+        manualRef: "Caderno 1, Pág. 24, Ex. 3",
+        cotacaoValores: 2.5,
+        tempoEstimadoMin: 5,
+        enunciado: "Considere em $\\mathbb{R}$ a proposição $p: \\forall x \\in \\mathbb{R},\\; x^2 + 1 > 0$. Indique o valor lógico da proposição $\\sim p$ (escreva 'V' para verdadeiro ou 'F' para falso).",
+        tipo: "texto",
+        respostaCorreta: "F",
+        passosResolucao: [
+          "Como $x^2 \\ge 0$ para qualquer $x \\in \\mathbb{R}$, tem-se $x^2 + 1 \\ge 1 > 0$, logo a proposição $p$ é estritamente verdadeira.",
+          "A negação de uma proposição com valor lógico V é obrigatoriamente Falsa: $\\sim p \\iff \\text{F}.",
+          "Forma quantificada da negação: $\\exists x \\in \\mathbb{R} : x^2 + 1 \\le 0$ (condição impossível em $\\mathbb{R}$)."
+        ]
+      },
+      {
+        id: "LOG_02",
+        dominio: "logica",
+        temaNome: "Lógica e Teoria dos Conjuntos",
+        subtema: "Operações com Intervalos Reais",
+        manualRef: "Caderno 1, Pág. 38, Ex. 7",
+        cotacaoValores: 2.5,
+        tempoEstimadoMin: 6,
+        enunciado: "Considere os conjuntos $A = ]-\\infty, 4]$ e $B = ]1, 7[$. Determine o maior número inteiro pertencente ao conjunto $A \\cap B$.",
+        tipo: "numero",
+        respostaCorreta: 4,
+        passosResolucao: [
+          "Efetua-se a interseção na reta real: $A \\cap B = ]-\\infty, 4] \\cap ]1, 7[ = ]1, 4]$.",
+          "O conjunto dos números inteiros neste intervalo é $\\{2, 3, 4\\}$.",
+          "O maior elemento inteiro deste conjunto é 4."
+        ]
+      },
+      {
+        id: "GEO_01",
+        dominio: "geometria",
+        temaNome: "Geometria Analítica",
+        subtema: "Ortogonalidade e Produto Escalar",
+        manualRef: "Caderno 1, Pág. 115, Ex. 5",
+        cotacaoValores: 2.5,
+        tempoEstimadoMin: 8,
+        enunciado: "No plano euclidiano, considere os vetores $\\vec{u} = (2, -3)$ e $\\vec{v} = (k, 4)$. Determine o valor real do parâmetro $k$ de modo a que os vetores $\\vec{u}$ e $\\vec{v}$ sejam perpendiculares.",
+        tipo: "numero",
+        respostaCorreta: 6,
+        passosResolucao: [
+          "Condição necessária e suficiente de perpendicularidade: $\\vec{u} \\cdot \\vec{v} = 0$.",
+          "Expressão analítica do produto escalar: $u_x v_x + u_y v_y = 0$.",
+          "Substituindo as componentes: $2(k) + (-3)(4) = 0 \\iff 2k - 12 = 0$.",
+          "Resolvendo a equação linear: $2k = 12 \\iff k = 6$."
+        ]
+      },
+      {
+        id: "GEO_02",
+        dominio: "geometria",
+        temaNome: "Geometria Analítica",
+        subtema: "Superfície Esférica no Espaço",
+        manualRef: "Caderno 1, Pág. 89, Ex. 2",
+        cotacaoValores: 2.5,
+        tempoEstimadoMin: 8,
+        enunciado: "No espaço munido de um referencial o.n. $Oxyz$, a equação da superfície esférica de centro $C(1, -3, 0)$ é dada por $(x-1)^2 + (y+3)^2 + z^2 = 25$. Calcule o valor da cota positiva $z$ do ponto $P(1, 0, z)$ pertencente à superfície.",
+        tipo: "numero",
+        respostaCorreta: 4,
+        passosResolucao: [
+          "Substituem-se as coordenadas $x = 1$ e $y = 0$ na equação cartesiana dada:",
+          "$(1 - 1)^2 + (0 + 3)^2 + z^2 = 25 \\iff 0^2 + 9 + z^2 = 25$.",
+          "$z^2 = 25 - 9 = 16 \\iff z = \\pm 4$.",
+          "Como o enunciado restringe à cota estritamente positiva, obtém-se $z = 4$."
+        ]
+      },
+      {
+        id: "GEO_03",
+        dominio: "geometria",
+        temaNome: "Geometria Analítica",
+        subtema: "Equação Cartesiana do Plano",
+        manualRef: "Caderno 1, Pág. 142, Ex. 8",
+        cotacaoValores: 2.5,
+        tempoEstimadoMin: 10,
+        enunciado: "O plano $\\alpha$ passa pelo ponto $A(2, -1, 3)$ e é normal ao vetor $\\vec{n} = (3, 1, -2)$. A sua equação geral toma a forma $3x + y - 2z + d = 0$. Calcule o valor numérico de $d$.",
+        tipo: "numero",
+        respostaCorreta: 1,
+        passosResolucao: [
+          "A equação canónica do plano definido por um ponto $A(x_0, y_0, z_0)$ e vetor normal $(a,b,c)$ é: $a(x-x_0) + b(y-y_0) + c(z-z_0) = 0$.",
+          "Substituindo: $3(x - 2) + 1(y + 1) - 2(z - 3) = 0$.",
+          "Desenvolvendo: $3x - 6 + y + 1 - 2z + 6 = 0 \\iff 3x + y - 2z + 1 = 0$.",
+          "Identificando os coeficientes na forma geral pedida: $d = 1$."
+        ]
+      },
+      {
+        id: "FUN_01",
+        dominio: "funcoes",
+        temaNome: "Funções e Gráficos",
+        subtema: "Vértice e Extremos da Função Quadrática",
+        manualRef: "Caderno 2, Pág. 52, Ex. 4",
+        cotacaoValores: 2.5,
+        tempoEstimadoMin: 7,
+        enunciado: "Considere a função real de variável real definida por $f(x) = -2x^2 + 8x - 3$. Calcule o valor máximo absoluto da função $f$.",
+        tipo: "numero",
+        respostaCorreta: 5,
+        passosResolucao: [
+          "Como $a = -2 < 0$, a parábola tem concavidade voltada para baixo, admitindo um vértice que é ponto de máximo absoluto.",
+          "Abcissa do vértice: $x_v = -\\frac{b}{2a} = -\\frac{8}{2(-2)} = 2$.",
+          "O valor máximo da função corresponde a $f(x_v) = f(2) = -2(2)^2 + 8(2) - 3 = -8 + 16 - 3 = 5$."
+        ]
+      },
+      {
+        id: "FUN_02",
+        dominio: "funcoes",
+        temaNome: "Funções e Gráficos",
+        subtema: "Equações com Módulo",
+        manualRef: "Caderno 2, Pág. 78, Ex. 6",
+        cotacaoValores: 2.5,
+        tempoEstimadoMin: 8,
+        enunciado: "Determine o zero estritamente superior a 3 da função real $g(x) = |2x - 6| - 4$.",
+        tipo: "numero",
+        respostaCorreta: 5,
+        passosResolucao: [
+          "Para calcular os zeros: $g(x) = 0 \\iff |2x - 6| - 4 = 0 \\iff |2x - 6| = 4$.",
+          "Pela definição formal de módulo: $2x - 6 = 4 \\quad \\vee \\quad 2x - 6 = -4$.",
+          "Ramo 1: $2x = 10 \\iff x = 5$.",
+          "Ramo 2: $2x = 2 \\iff x = 1$.",
+          "Como a condição imposta é $x > 3$, a solução única válida é $x = 5$."
+        ]
+      },
+      {
+        id: "EST_01",
+        dominio: "estatistica",
+        temaNome: "Estatística",
+        subtema: "Amplitude Interquartil",
+        manualRef: "Caderno 2, Pág. 134, Ex. 1",
+        cotacaoValores: 2.5,
+        tempoEstimadoMin: 5,
+        enunciado: "Uma amostra estatística com distribuição ordenada apresenta primeiro quartil $Q_1 = 14$ e terceiro quartil $Q_3 = 29$. Determine o valor da amplitude interquartil desta amostra.",
+        tipo: "numero",
+        respostaCorreta: 15,
+        passosResolucao: [
+          "Por definição estatística, a amplitude interquartil ($AIQ$) é a diferença entre o 3.º e o 1.º quartil: $AIQ = Q_3 - Q_1$.",
+          "Substituindo os dados: $AIQ = 29 - 14 = 15$."
+        ]
+      }
+    ];
+
+    // ==========================================
+    // 2. ESTADO DA SESSÃO
+    // ==========================================
+    const NUMERO_EXERCICIOS = 8;
+    let sessaoAtiva = [];
+    let respostasUtilizador = {};
+    let tempoRestanteSegundos = 3600;
+    let intervaloCronometro = null;
+
+    window.addEventListener('DOMContentLoaded', () => {
+      carregarDashboard();
+      renderizarMatematica();
+    });
+
+    function mudarAba(aba) {
+      ['treino', 'resultados', 'dashboard'].forEach(nome => {
+        document.getElementById(`aba-${nome}`).classList.add('hidden');
+        const btn = document.getElementById(`nav-btn-${nome}`);
+        btn.classList.remove('bg-indigo-600', 'text-white', 'shadow');
+        btn.classList.add('text-indigo-200');
+      });
+
+      document.getElementById(`aba-${aba}`).classList.remove('hidden');
+      const btnAtivo = document.getElementById(`nav-btn-${aba}`);
+      btnAtivo.classList.add('bg-indigo-600', 'text-white', 'shadow');
+      btnAtivo.classList.remove('text-indigo-200');
+
+      if (aba === 'dashboard') carregarDashboard();
+      renderizarMatematica();
+    }
+
+    // ==========================================
+    // 3. CRIAÇÃO DA FICHA E IMPRESSÃO A4
+    // ==========================================
+    function iniciarSessao() {
+      const dominioSelecionado = document.getElementById('filtro-dominio').value;
+      
+      let pool = BANCO_EXERCICIOS;
+      if (dominioSelecionado !== 'todos') {
+        pool = BANCO_EXERCICIOS.filter(ex => ex.dominio === dominioSelecionado);
+        if (pool.length === 0) pool = BANCO_EXERCICIOS;
+      }
+
+      const baralhados = [...pool].sort(() => 0.5 - Math.random());
+      sessaoAtiva = baralhados.slice(0, NUMERO_EXERCICIOS);
+      
+      if (sessaoAtiva.length < NUMERO_EXERCICIOS) {
+        const restantes = BANCO_EXERCICIOS.filter(ex => !sessaoAtiva.includes(ex));
+        sessaoAtiva = sessaoAtiva.concat(restantes.slice(0, NUMERO_EXERCICIOS - sessaoAtiva.length));
+      }
+
+      respostasUtilizador = {};
+      tempoRestanteSegundos = 3600;
+
+      if (intervaloCronometro) clearInterval(intervaloCronometro);
+      intervaloCronometro = setInterval(atualizarCronometro, 1000);
+
+      document.getElementById('status-sessao').classList.remove('hidden');
+      document.getElementById('painel-submissao').classList.remove('hidden');
+      document.getElementById('btn-imprimir-enunciado').classList.remove('hidden');
+      document.getElementById('btn-imprimir-enunciado').classList.add('flex');
+      document.getElementById('progresso-exercicios').textContent = `0/${sessaoAtiva.length}`;
+
+      renderizarListaExercicios();
+    }
+
+    function atualizarCronometro() {
+      if (tempoRestanteSegundos <= 0) {
+        clearInterval(intervaloCronometro);
+        alert('Terminaram os 60 minutos de estudo. Submissão automática da ficha.');
+        submeterTreino();
+        return;
+      }
+      tempoRestanteSegundos--;
+      const min = Math.floor(tempoRestanteSegundos / 60);
+      const seg = tempoRestanteSegundos % 60;
+      document.getElementById('cronometro-sessao').textContent = 
+        `${String(min).padStart(2, '0')}:${String(seg).padStart(2, '0')}`;
+    }
+
+    function renderizarListaExercicios() {
+      const container = document.getElementById('container-exercicios');
+      container.innerHTML = '';
+
+      sessaoAtiva.forEach((ex, idx) => {
+        const card = document.createElement('div');
+        card.className = "bg-white p-5 rounded-2xl shadow-sm border border-slate-200 a4-page-break space-y-4";
+        card.innerHTML = `
+          <div class="flex flex-wrap justify-between items-center border-b border-slate-200 pb-2 gap-2">
+            <div class="flex items-center gap-2">
+              <span class="bg-indigo-900 text-white text-xs font-bold px-2 py-0.5 rounded">
+                Item ${idx + 1}
+              </span>
+              <span class="text-xs font-bold text-slate-700">${ex.temaNome} &bull; ${ex.subtema}</span>
+            </div>
+            <div class="text-xs font-bold text-slate-500">
+              Cotação: ${ex.cotacaoValores} val. &nbsp;|&nbsp; Ref: ${ex.manualRef}
+            </div>
+          </div>
+
+          <div class="text-slate-900 text-base leading-relaxed math-font py-1">
+            ${ex.enunciado}
+          </div>
+
+          <!-- Campo de Input (Visível no Ecrã) -->
+          <div class="campo-input-ecra pt-2 flex items-center gap-3">
+            <label class="text-xs font-bold uppercase text-slate-500">A tua resposta final:</label>
+            <input 
+              type="text" 
+              placeholder="Ex: 6, 1/2, V..." 
+              id="resp-${ex.id}"
+              oninput="registarResposta('${ex.id}', this.value)"
+              class="w-48 bg-slate-50 border border-slate-300 rounded-xl px-3 py-1.5 font-medium text-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+            />
+          </div>
+
+          <!-- Área Milimétrica de Resolução (Visível exclusivamente na impressão A4) -->
+          <div class="area-resolucao-impressao rounded p-3">
+            <div class="text-[9px] font-bold text-gray-500 uppercase tracking-widest mb-1">
+              Espaço reservado à demonstração, cálculos e resposta do Item ${idx + 1}:
+            </div>
+            <div class="w-full h-36 grid-papel-resolucao rounded"></div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      renderizarMatematica();
+    }
+
+    function registarResposta(id, valor) {
+      respostasUtilizador[id] = valor.trim();
+      const respondidas = Object.values(respostasUtilizador).filter(v => v !== '').length;
+      document.getElementById('progresso-exercicios').textContent = `${respondidas}/${sessaoAtiva.length}`;
+    }
+
+    function imprimirFichaEnunciado() {
+      window.print();
+    }
+
+    function imprimirResolucaoCompleta() {
+      window.print();
+    }
+
+    // ==========================================
+    // 4. AVALIAÇÃO E DISPONIBILIZAÇÃO DA RESOLUÇÃO
+    // ==========================================
+    function avaliarResposta(correta, dada, tipo) {
+      if (!dada) return false;
+      const dLimpa = dada.toLowerCase().replace(/\s+/g, '');
+      const cLimpa = String(correta).toLowerCase().replace(/\s+/g, '');
+
+      if (dLimpa === cLimpa) return true;
+
+      if (tipo === 'numero') {
+        const valDada = resolverFracao(dLimpa);
+        const valCorreta = Number(correta);
+        if (!isNaN(valDada) && Math.abs(valDada - valCorreta) < 0.01) return true;
+      }
+      return false;
+    }
+
+    function resolverFracao(str) {
+      if (str.includes('/')) {
+        const partes = str.split('/');
+        return parseFloat(partes[0]) / parseFloat(partes[1]);
+      }
+      return parseFloat(str.replace(',', '.'));
+    }
+
+    function submeterTreino() {
+      if (intervaloCronometro) clearInterval(intervaloCronometro);
+
+      let cotacaoTotalObtida = 0;
+      let certas = 0;
+      const relatorioSessao = [];
+
+      sessaoAtiva.forEach(ex => {
+        const dada = respostasUtilizador[ex.id] || "";
+        const acertou = avaliarResposta(ex.respostaCorreta, dada, ex.tipo);
+        
+        if (acertou) {
+          certas++;
+          cotacaoTotalObtida += ex.cotacaoValores;
+        }
+
+        relatorioSessao.push({
+          ...ex,
+          respostaDada: dada,
+          acertou: acertou
+        });
+      });
+
+      const notaFinal = Number(cotacaoTotalObtida.toFixed(1));
+
+      guardarHistoricoSessao(notaFinal, certas, sessaoAtiva.length, relatorioSessao);
+      apresentarResultadosComResolucao(notaFinal, certas, sessaoAtiva.length, relatorioSessao);
+      mudarAba('resultados');
+    }
+
+    function apresentarResultadosComResolucao(nota, certas, total, lista) {
+      const card = document.getElementById('card-nota');
+      let corNota = nota >= 14 ? 'text-emerald-600' : (nota >= 10 ? 'text-amber-600' : 'text-rose-600');
+
+      card.innerHTML = `
+        <div class="text-xs font-bold uppercase tracking-wider text-slate-400">Classificação Oficial da Ficha Diária</div>
+        <div class="text-5xl font-black ${corNota}">${nota} <span class="text-2xl text-slate-400">/ 20</span></div>
+        <div class="text-sm font-medium text-slate-600">${certas} de ${total} exercícios corretos</div>
+      `;
+
+      const containerResolucoes = document.getElementById('lista-resolucoes');
+      containerResolucoes.innerHTML = '';
+
+      lista.forEach((item, idx) => {
+        const div = document.createElement('div');
+        div.className = `p-5 rounded-2xl border ${item.acertou ? 'bg-emerald-50/40 border-emerald-300' : 'bg-rose-50/40 border-rose-300'} a4-page-break space-y-3`;
+
+        let passosHtml = item.passosResolucao.map(p => `<li class="math-font leading-relaxed">${p}</li>`).join('');
+
+        div.innerHTML = `
+          <div class="flex justify-between items-center text-xs border-b pb-2">
+            <span class="font-bold uppercase ${item.acertou ? 'text-emerald-700' : 'text-rose-700'}">
+              <i class="fa-solid ${item.acertou ? 'fa-circle-check' : 'fa-circle-xmark'} mr-1"></i>
+              Item ${idx + 1}: ${item.acertou ? `Cotação Plena (+${item.cotacaoValores} val)` : '0,0 valores'}
+            </span>
+            <span class="text-slate-500 font-semibold">${item.manualRef}</span>
+          </div>
+
+          <div class="text-slate-900 font-medium math-font text-sm">
+            ${item.enunciado}
+          </div>
+
+          <div class="text-xs flex gap-6 bg-white/80 p-2.5 rounded-xl border border-slate-200">
+            <div><span class="text-slate-500 font-bold uppercase">Resposta submetida:</span> <span class="font-mono font-bold">${item.respostaDada || '(em branco)'}</span></div>
+            <div><span class="text-slate-500 font-bold uppercase">Solução matemática:</span> <span class="font-mono font-bold text-indigo-700">${item.respostaCorreta}</span></div>
+          </div>
+
+          <div>
+            <div class="text-xs font-bold uppercase text-slate-700 mb-1.5 flex items-center gap-1.5">
+              <i class="fa-solid fa-graduation-cap text-indigo-600"></i> Demonstração Analítica Passo a Passo:
+            </div>
+            <ol class="list-decimal list-inside text-xs text-slate-800 space-y-1.5 bg-white p-3.5 rounded-xl border border-slate-200">
+              ${passosHtml}
+            </ol>
+          </div>
+        `;
+        containerResolucoes.appendChild(div);
+      });
+
+      renderizarMatematica();
+    }
+
+    // ==========================================
+    // 5. HISTÓRICO E DASHBOARD
+    // ==========================================
+    function guardarHistoricoSessao(nota, certas, total, detalhes) {
+      const historico = JSON.parse(localStorage.getItem('m360_historico') || '[]');
+      historico.push({
+        data: new Date().toISOString(),
+        nota: nota,
+        certas: certas,
+        total: total,
+        horas: 1,
+        detalhes: detalhes.map(d => ({ dominio: d.dominio, acertou: d.acertou }))
+      });
+      localStorage.setItem('m360_historico', JSON.stringify(historico));
+    }
+
+    let chartEvolucao = null;
+    let chartDominio = null;
+
+    function carregarDashboard() {
+      const historico = JSON.parse(localStorage.getItem('m360_historico') || '[]');
+
+      document.getElementById('kpi-horas').textContent = `${historico.length * 1}h`;
+      document.getElementById('kpi-total-ex').textContent = `${historico.length * NUMERO_EXERCICIOS}`;
+
+      if (historico.length > 0) {
+        const media = (historico.reduce((acc, h) => acc + h.nota, 0) / historico.length).toFixed(1);
+        document.getElementById('kpi-media').textContent = `${media} / 20`;
+      }
+
+      document.getElementById('kpi-streak').textContent = `${calcularStreak(historico)} dias`;
+
+      renderizarGraficoEvolucao(historico);
+      renderizarGraficoDominio(historico);
+      gerarDiagnostico(historico);
+    }
+
+    function calcularStreak(historico) {
+      if (historico.length === 0) return 0;
+      const datas = [...new Set(historico.map(h => h.data.split('T')[0]))].sort().reverse();
+      let streak = 0;
+      let hoje = new Date();
+      for (let i = 0; i < datas.length; i++) {
+        let d = new Date(datas[i]);
+        let diff = Math.floor((hoje - d) / (1000 * 60 * 60 * 24));
+        if (diff === streak || diff === streak + 1) streak++;
+        else break;
+      }
+      return streak;
+    }
+
+    function renderizarGraficoEvolucao(historico) {
+      const ctx = document.getElementById('grafico-evolucao').getContext('2d');
+      if (chartEvolucao) chartEvolucao.destroy();
+
+      const labels = historico.map((_, i) => `Ficha ${i+1}`);
+      const notas = historico.map(h => h.nota);
+
+      chartEvolucao = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels.length ? labels : ['Sem dados'],
+          datasets: [{
+            label: 'Classificação (0 a 20)',
+            data: notas.length ? notas : [0],
+            borderColor: '#4338ca',
+            backgroundColor: 'rgba(67, 56, 202, 0.1)',
+            fill: true,
+            tension: 0.25,
+            borderWidth: 2,
+            pointBackgroundColor: '#4338ca'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: { min: 0, max: 20, grid: { color: '#f1f5f9' } },
+            x: { grid: { display: false } }
+          }
+        }
+      });
+    }
+
+    function renderizarGraficoDominio(historico) {
+      const ctx = document.getElementById('grafico-dominio').getContext('2d');
+      if (chartDominio) chartDominio.destroy();
+
+      const stats = { logica: { t: 0, c: 0 }, geometria: { t: 0, c: 0 }, funcoes: { t: 0, c: 0 }, estatistica: { t: 0, c: 0 } };
+
+      historico.forEach(h => {
+        h.detalhes?.forEach(d => {
+          if (stats[d.dominio]) {
+            stats[d.dominio].t++;
+            if (d.acertou) stats[d.dominio].c++;
+          }
+        });
+      });
+
+      const calcPct = (k) => stats[k].t > 0 ? Math.round((stats[k].c / stats[k].t) * 100) : 0;
+
+      chartDominio = new Chart(ctx, {
+        type: 'radar',
+        data: {
+          labels: ['Lógica e Conjuntos', 'Geometria Analítica', 'Funções & Gráficos', 'Estatística'],
+          datasets: [{
+            label: 'Taxa de Acerto (%)',
+            data: [calcPct('logica'), calcPct('geometria'), calcPct('funcoes'), calcPct('estatistica')],
+            backgroundColor: 'rgba(16, 185, 129, 0.2)',
+            borderColor: '#10b981',
+            pointBackgroundColor: '#10b981',
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: { r: { min: 0, max: 100, ticks: { stepSize: 25 } } }
+        }
+      });
+    }
+
+    function gerarDiagnostico(historico) {
+      const div = document.getElementById('lista-diagnostico');
+      if (historico.length === 0) {
+        div.innerHTML = `<p class="italic text-slate-400">Gera e submete a primeira ficha diária para emitir recomendações.</p>`;
+        return;
+      }
+      const media = (historico.reduce((acc, h) => acc + h.nota, 0) / historico.length);
+      div.innerHTML = media >= 14
+        ? `<div class="p-3 bg-emerald-50 text-emerald-800 rounded-xl border border-emerald-200"><strong>Desempenho Muito Bom:</strong> O aluno demonstra rigor de cálculo e autonomia na resolução dentro dos 60 minutos.</div>`
+        : `<div class="p-3 bg-amber-50 text-amber-800 rounded-xl border border-amber-200"><strong>Atenção ao Raciocínio Formal:</strong> Média de ${media.toFixed(1)} valores. Consulta a resolução impressa e revê os exercícios assinalados no <em>Matemática 360º</em>.</div>`;
+    }
+
+    function renderizarMatematica() {
+      if (window.renderMathInElement) {
+        renderMathInElement(document.body, {
+          delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false }
+          ],
+          throwOnError: false
+        });
+      }
+    }
+  </script>
+</body>
+</html>
