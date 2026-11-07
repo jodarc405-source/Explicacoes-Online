@@ -1,3 +1,4 @@
+// Caderno 2: Funções e Gráficos Parte 1 (Tópicos 9, 10) - 72 Itens
 const EXERCICIOS_FUNCOES_1 = [
   {
     "id": "FUNC_9_01",
@@ -399,6 +400,563 @@ const EXERCICIOS_FUNCOES_1 = [
     "subtema": "Generalidades sobre Funções e Monotonia",
     "paginaInicio": 10,
     "paginaFim": 35
+  },
+  {
+    "id": "FUNC_9_16",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Generalidades sobre Funções e Monotonia",
+    "paginaInicio": 10,
+    "paginaFim": 35,
+    "manualRef": "Caderno 2, Pág. 26, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é o domínio da função $f(x) = \\frac{1}{x - 5}$?",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "O denominador não se pode anular: $x - 5 \\ne 0 \\iff x \\ne 5$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$\\mathbb{R} \\setminus \\{5\\}$"
+      },
+      {
+        "id": "B",
+        "texto": "$\\mathbb{R}$"
+      },
+      {
+        "id": "C",
+        "texto": "$[5, +\\infty[$"
+      },
+      {
+        "id": "D",
+        "texto": "$]-\\infty, 5[$"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_9_17",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Generalidades sobre Funções e Monotonia",
+    "paginaInicio": 10,
+    "paginaFim": 35,
+    "manualRef": "Caderno 2, Pág. 27, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Determine a imagem de $x = 4$ pela função $f(x) = 2x^2 - 3x + 1$.",
+    "tipo": "numero",
+    "respostaCorreta": 21,
+    "passosResolucao": [
+      "$f(4) = 2(16) - 3(4) + 1 = 32 - 12 + 1 = 21$."
+    ]
+  },
+  {
+    "id": "FUNC_9_18",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Generalidades sobre Funções e Monotonia",
+    "paginaInicio": 10,
+    "paginaFim": 35,
+    "manualRef": "Caderno 2, Pág. 28, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se $f(x) = 3x - 6$, qual é o zero da função?",
+    "tipo": "numero",
+    "respostaCorreta": 2,
+    "passosResolucao": [
+      "$3x - 6 = 0 \\iff 3x = 6 \\iff x = 2$."
+    ]
+  },
+  {
+    "id": "FUNC_9_19",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Generalidades sobre Funções e Monotonia",
+    "paginaInicio": 10,
+    "paginaFim": 35,
+    "manualRef": "Caderno 2, Pág. 29, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A função $f(x) = -2x + 7$ é estritamente:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "O declive é $m = -2 < 0$, logo a função é estritamente decrescente em $\\mathbb{R}$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Decrescente em $\\mathbb{R}$"
+      },
+      {
+        "id": "B",
+        "texto": "Crescente em $\\mathbb{R}$"
+      },
+      {
+        "id": "C",
+        "texto": "Constante"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_9_20",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Generalidades sobre Funções e Monotonia",
+    "paginaInicio": 10,
+    "paginaFim": 35,
+    "manualRef": "Caderno 2, Pág. 30, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O contradomínio de $f(x) = x^2$ em $\\mathbb{R}$ é:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "O quadrado de qualquer real é não negativo, assumindo o valor 0 em $x = 0$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$[0, +\\infty[$"
+      },
+      {
+        "id": "B",
+        "texto": "$\\mathbb{R}$"
+      },
+      {
+        "id": "C",
+        "texto": "$]0, +\\infty[$"
+      },
+      {
+        "id": "D",
+        "texto": "$[-1, +\\infty[$"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_9_21",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Generalidades sobre Funções e Monotonia",
+    "paginaInicio": 10,
+    "paginaFim": 35,
+    "manualRef": "Caderno 2, Pág. 31, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se $f(2) = 10$ e $f(6) = 18$, qual é a taxa média de variação de $f$ no intervalo $[2, 6]$?",
+    "tipo": "numero",
+    "respostaCorreta": 2,
+    "passosResolucao": [
+      "$\\text{TMV} = \\frac{18 - 10}{6 - 2} = \\frac{8}{4} = 2$."
+    ]
+  },
+  {
+    "id": "FUNC_9_22",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Generalidades sobre Funções e Monotonia",
+    "paginaInicio": 10,
+    "paginaFim": 35,
+    "manualRef": "Caderno 2, Pág. 32, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A função $g(x) = \\sqrt{x + 7}$ está definida para:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "$x + 7 \\ge 0 \\iff x \\ge -7$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$x \\ge -7$"
+      },
+      {
+        "id": "B",
+        "texto": "$x > -7$"
+      },
+      {
+        "id": "C",
+        "texto": "$x \\le -7$"
+      },
+      {
+        "id": "D",
+        "texto": "$x \\ge 0$"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_9_23",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Generalidades sobre Funções e Monotonia",
+    "paginaInicio": 10,
+    "paginaFim": 35,
+    "manualRef": "Caderno 2, Pág. 33, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Uma função diz-se constante se:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Por definição, uma função constante atribui o mesmo valor $c$ a qualquer objeto do domínio."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Todas as imagens são iguais: $f(x) = c$"
+      },
+      {
+        "id": "B",
+        "texto": "Passa pela origem"
+      },
+      {
+        "id": "C",
+        "texto": "O seu gráfico é uma curva"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_9_24",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Generalidades sobre Funções e Monotonia",
+    "paginaInicio": 10,
+    "paginaFim": 35,
+    "manualRef": "Caderno 2, Pág. 34, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se o ponto $(3, k)$ pertence ao gráfico de $f(x) = x^2 + 2x$, determine $k$.",
+    "tipo": "numero",
+    "respostaCorreta": 15,
+    "passosResolucao": [
+      "$k = f(3) = 3^2 + 2(3) = 9 + 6 = 15$."
+    ]
+  },
+  {
+    "id": "FUNC_9_25",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Generalidades sobre Funções e Monotonia",
+    "paginaInicio": 10,
+    "paginaFim": 35,
+    "manualRef": "Caderno 2, Pág. 10, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é o domínio de $h(x) = \\frac{x}{\\sqrt{x - 1}}$?",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "O radicando no denominador tem de ser estritamente positivo: $x - 1 > 0 \\iff x > 1$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$]1, +\\infty[$"
+      },
+      {
+        "id": "B",
+        "texto": "$[1, +\\infty[$"
+      },
+      {
+        "id": "C",
+        "texto": "$\\mathbb{R} \\setminus \\{1\\}$"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_9_26",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Generalidades sobre Funções e Monotonia",
+    "paginaInicio": 10,
+    "paginaFim": 35,
+    "manualRef": "Caderno 2, Pág. 11, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Quantos zeros tem a função $f(x) = x^2 - 16$?",
+    "tipo": "numero",
+    "respostaCorreta": 2,
+    "passosResolucao": [
+      "$x^2 = 16 \\iff x = \\pm 4$. Tem 2 zeros."
+    ]
+  },
+  {
+    "id": "FUNC_9_27",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Generalidades sobre Funções e Monotonia",
+    "paginaInicio": 10,
+    "paginaFim": 35,
+    "manualRef": "Caderno 2, Pág. 12, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O ponto onde o gráfico de qualquer função interseta o eixo $Oy$ tem abcissa igual a:",
+    "tipo": "numero",
+    "respostaCorreta": 0,
+    "passosResolucao": [
+      "No eixo das ordenadas a abcissa é sempre $x = 0$."
+    ]
+  },
+  {
+    "id": "FUNC_9_28",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Generalidades sobre Funções e Monotonia",
+    "paginaInicio": 10,
+    "paginaFim": 35,
+    "manualRef": "Caderno 2, Pág. 13, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se $f$ é monótona crescente e $a < b$, então:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Uma função crescente preserva a ordem dos elementos."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$f(a) \\le f(b)$"
+      },
+      {
+        "id": "B",
+        "texto": "$f(a) > f(b)$"
+      },
+      {
+        "id": "C",
+        "texto": "$f(a) = f(b)$"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_9_29",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Generalidades sobre Funções e Monotonia",
+    "paginaInicio": 10,
+    "paginaFim": 35,
+    "manualRef": "Caderno 2, Pág. 14, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é a imagem da origem por $f(x) = 5x - 9$?",
+    "tipo": "numero",
+    "respostaCorreta": -9,
+    "passosResolucao": [
+      "$f(0) = 5(0) - 9 = -9$."
+    ]
+  },
+  {
+    "id": "FUNC_9_30",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Generalidades sobre Funções e Monotonia",
+    "paginaInicio": 10,
+    "paginaFim": 35,
+    "manualRef": "Caderno 2, Pág. 15, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se $f(x) = 2x + 1$, qual é a expressão de $f(x + 1)$?",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "$f(x + 1) = 2(x + 1) + 1 = 2x + 2 + 1 = 2x + 3$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$2x + 3$"
+      },
+      {
+        "id": "B",
+        "texto": "$2x + 2$"
+      },
+      {
+        "id": "C",
+        "texto": "$2x + 1$"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_9_31",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Generalidades sobre Funções e Monotonia",
+    "paginaInicio": 10,
+    "paginaFim": 35,
+    "manualRef": "Caderno 2, Pág. 16, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O máximo de uma função $f$ num intervalo $I$ é:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "O máximo é a maior imagem $M$ tal que $f(x) \\le M$ para todo $x \\in I$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "O maior valor assumido por $f$ em $I$"
+      },
+      {
+        "id": "B",
+        "texto": "O maior valor do domínio"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_9_32",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Generalidades sobre Funções e Monotonia",
+    "paginaInicio": 10,
+    "paginaFim": 35,
+    "manualRef": "Caderno 2, Pág. 17, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Determine o zero da função afim $f(x) = -4x + 20$.",
+    "tipo": "numero",
+    "respostaCorreta": 5,
+    "passosResolucao": [
+      "$-4x + 20 = 0 \\iff 4x = 20 \\iff x = 5$."
+    ]
+  },
+  {
+    "id": "FUNC_9_33",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Generalidades sobre Funções e Monotonia",
+    "paginaInicio": 10,
+    "paginaFim": 35,
+    "manualRef": "Caderno 2, Pág. 18, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A função $f(x) = x^2 + 1$ tem contradomínio:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Como $x^2 \\ge 0$, $x^2 + 1 \\ge 1$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$[1, +\\infty[$"
+      },
+      {
+        "id": "B",
+        "texto": "$[0, +\\infty[$"
+      },
+      {
+        "id": "C",
+        "texto": "$\\mathbb{R}$"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_9_34",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Generalidades sobre Funções e Monotonia",
+    "paginaInicio": 10,
+    "paginaFim": 35,
+    "manualRef": "Caderno 2, Pág. 19, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se $f(x) = 3$ para todo o $x$, qual é a taxa de variação de $f$?",
+    "tipo": "numero",
+    "respostaCorreta": 0,
+    "passosResolucao": [
+      "Funções constantes têm taxa de variação nula: 0."
+    ]
+  },
+  {
+    "id": "FUNC_9_35",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Generalidades sobre Funções e Monotonia",
+    "paginaInicio": 10,
+    "paginaFim": 35,
+    "manualRef": "Caderno 2, Pág. 20, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Uma função diz-se injetiva se:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Definição: $x_1 \\ne x_2 \\implies f(x_1) \\ne f(x_2)$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Objetos diferentes têm imagens diferentes"
+      },
+      {
+        "id": "B",
+        "texto": "Todas as imagens são positivas"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_9_36",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Generalidades sobre Funções e Monotonia",
+    "paginaInicio": 10,
+    "paginaFim": 35,
+    "manualRef": "Caderno 2, Pág. 21, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se $f(x) = x^3$, o zero da função é:",
+    "tipo": "numero",
+    "respostaCorreta": 0,
+    "passosResolucao": [
+      "$x^3 = 0 \\iff x = 0$."
+    ]
   },
   {
     "id": "FUNC_10_01",
@@ -872,5 +1430,624 @@ const EXERCICIOS_FUNCOES_1 = [
     "subtema": "Transformações de Gráficos e Paridade",
     "paginaInicio": 36,
     "paginaFim": 60
+  },
+  {
+    "id": "FUNC_10_16",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Transformações de Gráficos e Paridade",
+    "paginaInicio": 36,
+    "paginaFim": 60,
+    "manualRef": "Caderno 2, Pág. 52, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se $f$ é par e $f(5) = -8$, qual é o valor de $f(-5)$?",
+    "tipo": "numero",
+    "respostaCorreta": -8,
+    "passosResolucao": [
+      "Para uma função par, $f(-x) = f(x)$. Logo, $f(-5) = f(5) = -8$."
+    ]
+  },
+  {
+    "id": "FUNC_10_17",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Transformações de Gráficos e Paridade",
+    "paginaInicio": 36,
+    "paginaFim": 60,
+    "manualRef": "Caderno 2, Pág. 53, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O gráfico de $y = f(x) - 4$ obtém-se transladando o gráfico de $f$:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Subtrair 4 ao valor da função desloca verticalmente 4 unidades para baixo."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "4 unidades para baixo"
+      },
+      {
+        "id": "B",
+        "texto": "4 unidades para cima"
+      },
+      {
+        "id": "C",
+        "texto": "4 unidades para a direita"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_10_18",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Transformações de Gráficos e Paridade",
+    "paginaInicio": 36,
+    "paginaFim": 60,
+    "manualRef": "Caderno 2, Pág. 54, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O gráfico de $y = f(x + 2)$ obtém-se transladando o gráfico de $f$:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "$x \\mapsto x + 2$ translada 2 unidades no sentido negativo de $Ox$ (para a esquerda)."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "2 unidades para a esquerda"
+      },
+      {
+        "id": "B",
+        "texto": "2 unidades para a direita"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_10_19",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Transformações de Gráficos e Paridade",
+    "paginaInicio": 36,
+    "paginaFim": 60,
+    "manualRef": "Caderno 2, Pág. 55, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A função $f(x) = x^5$ é:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "$f(-x) = (-x)^5 = -x^5 = -f(x)$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Ímpar"
+      },
+      {
+        "id": "B",
+        "texto": "Par"
+      },
+      {
+        "id": "C",
+        "texto": "Nem par nem ímpar"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_10_20",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Transformações de Gráficos e Paridade",
+    "paginaInicio": 36,
+    "paginaFim": 60,
+    "manualRef": "Caderno 2, Pág. 56, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O gráfico de $y = 3f(x)$ sofreu uma:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Multiplicar por 3 no exterior dilata verticalmente o gráfico por um fator 3."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Dilatação vertical de fator 3"
+      },
+      {
+        "id": "B",
+        "texto": "Contração horizontal"
+      },
+      {
+        "id": "C",
+        "texto": "Translação"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_10_21",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Transformações de Gráficos e Paridade",
+    "paginaInicio": 36,
+    "paginaFim": 60,
+    "manualRef": "Caderno 2, Pág. 57, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se $f$ é ímpar e o ponto $(2, 7)$ pertence ao gráfico, que ponto pertence garantidamente?",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Para uma função ímpar, $(x, y) \\in G_f \\implies (-x, -y) \\in G_f$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$(-2, -7)$"
+      },
+      {
+        "id": "B",
+        "texto": "$(-2, 7)$"
+      },
+      {
+        "id": "C",
+        "texto": "$(2, -7)$"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_10_22",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Transformações de Gráficos e Paridade",
+    "paginaInicio": 36,
+    "paginaFim": 60,
+    "manualRef": "Caderno 2, Pág. 58, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A função $f(x) = x^2 + 5$ é:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "$(-x)^2 + 5 = x^2 + 5 = f(x)$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Par"
+      },
+      {
+        "id": "B",
+        "texto": "Ímpar"
+      },
+      {
+        "id": "C",
+        "texto": "Sem paridade"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_10_23",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Transformações de Gráficos e Paridade",
+    "paginaInicio": 36,
+    "paginaFim": 60,
+    "manualRef": "Caderno 2, Pág. 59, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se o contradomínio de $f$ é $[0, 4]$, qual é o contradomínio de $g(x) = f(x) + 3$?",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Somando 3 a todos os valores: $[0 + 3, 4 + 3] = [3, 7]$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$[3, 7]$"
+      },
+      {
+        "id": "B",
+        "texto": "$[0, 7]$"
+      },
+      {
+        "id": "C",
+        "texto": "$[-3, 1]$"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_10_24",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Transformações de Gráficos e Paridade",
+    "paginaInicio": 36,
+    "paginaFim": 60,
+    "manualRef": "Caderno 2, Pág. 36, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A função $f(x) = \\cos(x)$ é conhecida por ser:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "$\\cos(-x) = \\cos(x)$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Par"
+      },
+      {
+        "id": "B",
+        "texto": "Ímpar"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_10_25",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Transformações de Gráficos e Paridade",
+    "paginaInicio": 36,
+    "paginaFim": 60,
+    "manualRef": "Caderno 2, Pág. 37, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se o vértice da parábola de $f(x)$ é $(0, 0)$, qual é o vértice de $f(x - 5) + 8$?",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Translação pelo vetor $(5, 8)$: novo vértice $(5, 8)$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$(5, 8)$"
+      },
+      {
+        "id": "B",
+        "texto": "$(-5, 8)$"
+      },
+      {
+        "id": "C",
+        "texto": "$(5, -8)$"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_10_26",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Transformações de Gráficos e Paridade",
+    "paginaInicio": 36,
+    "paginaFim": 60,
+    "manualRef": "Caderno 2, Pág. 38, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O simétrico de um gráfico relativamente à reta $x = 0$ (eixo $Oy$) corresponde a:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "A reflexão axial por $Oy$ substitui $x$ por $-x$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$y = f(-x)$"
+      },
+      {
+        "id": "B",
+        "texto": "$y = -f(x)$"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_10_27",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Transformações de Gráficos e Paridade",
+    "paginaInicio": 36,
+    "paginaFim": 60,
+    "manualRef": "Caderno 2, Pág. 39, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A função $f(x) = x^3 + x$ é:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "$(-x)^3 + (-x) = -(x^3 + x) = -f(x)$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Ímpar"
+      },
+      {
+        "id": "B",
+        "texto": "Par"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_10_28",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Transformações de Gráficos e Paridade",
+    "paginaInicio": 36,
+    "paginaFim": 60,
+    "manualRef": "Caderno 2, Pág. 40, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se o zero de $f(x)$ é $x = 6$, qual é o zero de $g(x) = f(2x)$?",
+    "tipo": "numero",
+    "respostaCorreta": 3,
+    "passosResolucao": [
+      "$f(2x) = 0 \\implies 2x = 6 \\implies x = 3$."
+    ]
+  },
+  {
+    "id": "FUNC_10_29",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Transformações de Gráficos e Paridade",
+    "paginaInicio": 36,
+    "paginaFim": 60,
+    "manualRef": "Caderno 2, Pág. 41, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A função constante $f(x) = 0$ é:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "$f(-x) = 0 = f(x)$ e $f(-x) = 0 = -f(x)$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Simultaneamente par e ímpar"
+      },
+      {
+        "id": "B",
+        "texto": "Apenas par"
+      },
+      {
+        "id": "C",
+        "texto": "Apenas ímpar"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_10_30",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Transformações de Gráficos e Paridade",
+    "paginaInicio": 36,
+    "paginaFim": 60,
+    "manualRef": "Caderno 2, Pág. 42, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O gráfico de $y = |f(x)|$ obtém-se refletindo para cima da abcissa:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "O módulo torna positivas todas as ordenadas negativas através de reflexão pelo eixo $Ox$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "As partes do gráfico onde $f(x) < 0$"
+      },
+      {
+        "id": "B",
+        "texto": "Todo o gráfico"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_10_31",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Transformações de Gráficos e Paridade",
+    "paginaInicio": 36,
+    "paginaFim": 60,
+    "manualRef": "Caderno 2, Pág. 43, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se $D_f = [-2, 5]$, qual é o domínio de $y = f(-x)$?",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "$-2 \\le -x \\le 5 \\iff -5 \\le x \\le 2$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$[-5, 2]$"
+      },
+      {
+        "id": "B",
+        "texto": "$[-2, 5]$"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_10_32",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Transformações de Gráficos e Paridade",
+    "paginaInicio": 36,
+    "paginaFim": 60,
+    "manualRef": "Caderno 2, Pág. 44, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Uma função com gráfico simétrico em relação à origem satisfaz:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "É a definição de função ímpar."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$f(-x) = -f(x)$"
+      },
+      {
+        "id": "B",
+        "texto": "$f(-x) = f(x)$"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_10_33",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Transformações de Gráficos e Paridade",
+    "paginaInicio": 36,
+    "paginaFim": 60,
+    "manualRef": "Caderno 2, Pág. 45, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A transformação $y = \\frac{1}{2}f(x)$ é uma:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Reduz todas as distâncias verticais a metade."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Contração vertical de fator $\\frac{1}{2}$"
+      },
+      {
+        "id": "B",
+        "texto": "Dilatação vertical"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_10_34",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Transformações de Gráficos e Paridade",
+    "paginaInicio": 36,
+    "paginaFim": 60,
+    "manualRef": "Caderno 2, Pág. 46, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se $f(x) = x^4 - 1$, o valor de $f(-2) - f(2)$ é:",
+    "tipo": "numero",
+    "respostaCorreta": 0,
+    "passosResolucao": [
+      "Sendo par, $f(-2) = f(2)$, logo a diferença é 0."
+    ]
+  },
+  {
+    "id": "FUNC_10_35",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Transformações de Gráficos e Paridade",
+    "paginaInicio": 36,
+    "paginaFim": 60,
+    "manualRef": "Caderno 2, Pág. 47, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O gráfico de $y = -f(-x)$ é simétrico do gráfico de $f$ em relação a:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Reflexão simultânea por $Ox$ e $Oy$ equivale à rotação de $180^\\circ$ em torno da origem."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Origem $(0, 0)$"
+      },
+      {
+        "id": "B",
+        "texto": "Eixo $Ox$"
+      },
+      {
+        "id": "C",
+        "texto": "Eixo $Oy$"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_10_36",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Transformações de Gráficos e Paridade",
+    "paginaInicio": 36,
+    "paginaFim": 60,
+    "manualRef": "Caderno 2, Pág. 48, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A função $f(x) = x^2 - 3x$ é:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "$(-x)^2 - 3(-x) = x^2 + 3x$, que é diferente de $f(x)$ e de $-f(x)$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Nem par nem ímpar"
+      },
+      {
+        "id": "B",
+        "texto": "Par"
+      },
+      {
+        "id": "C",
+        "texto": "Ímpar"
+      }
+    ]
   }
 ];

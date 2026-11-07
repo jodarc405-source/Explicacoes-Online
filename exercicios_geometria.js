@@ -1,4 +1,4 @@
-// Caderno 1: Geometria Analítica no Plano e no Espaço (Págs. 62 a 170)
+// Caderno 1: Geometria Analítica no Plano e no Espaço (Págs. 62 a 170) - 180 Itens
 const EXERCICIOS_GEOMETRIA = [
   {
     "id": "GEO_4_01",
@@ -411,6 +411,595 @@ const EXERCICIOS_GEOMETRIA = [
     "subtema": "Geometria no Plano, Distâncias e Círculos",
     "paginaInicio": 62,
     "paginaFim": 85
+  },
+  {
+    "id": "GEO_4_16",
+    "topicoId": "topico_4",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Plano, Distâncias e Círculos",
+    "paginaInicio": 62,
+    "paginaFim": 85,
+    "manualRef": "Caderno 1, Pág. 78, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Determine a distância entre a origem $O(0, 0)$ e o ponto $P(-8, 6)$ no plano cartesiano.",
+    "tipo": "numero",
+    "respostaCorreta": 10,
+    "passosResolucao": [
+      "$d(O, P) = \\sqrt{(-8)^2 + 6^2} = \\sqrt{64 + 36} = \\sqrt{100} = 10$."
+    ]
+  },
+  {
+    "id": "GEO_4_17",
+    "topicoId": "topico_4",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Plano, Distâncias e Círculos",
+    "paginaInicio": 62,
+    "paginaFim": 85,
+    "manualRef": "Caderno 1, Pág. 79, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é o raio da circunferência definida por $x^2 + y^2 = 64$?",
+    "tipo": "numero",
+    "respostaCorreta": 8,
+    "passosResolucao": [
+      "$r = \\sqrt{64} = 8$."
+    ]
+  },
+  {
+    "id": "GEO_4_18",
+    "topicoId": "topico_4",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Plano, Distâncias e Círculos",
+    "paginaInicio": 62,
+    "paginaFim": 85,
+    "manualRef": "Caderno 1, Pág. 80, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é o ponto médio do segmento $[AB]$ com $A(2, -4)$ e $B(6, 10)$?",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "$M = \\left(\\frac{2 + 6}{2}, \\frac{-4 + 10}{2}\\right) = (4, 3)$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$(4, 3)$"
+      },
+      {
+        "id": "B",
+        "texto": "$(8, 6)$"
+      },
+      {
+        "id": "C",
+        "texto": "$(4, 6)$"
+      },
+      {
+        "id": "D",
+        "texto": "$(2, 3)$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_4_19",
+    "topicoId": "topico_4",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Plano, Distâncias e Círculos",
+    "paginaInicio": 62,
+    "paginaFim": 85,
+    "manualRef": "Caderno 1, Pág. 81, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A reta paralela a $y = 4x - 1$ que passa pela origem tem que equação reduzida?",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Retas paralelas têm o mesmo declive ($m = 4$). Passando na origem, $b = 0$, logo $y = 4x$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$y = 4x$"
+      },
+      {
+        "id": "B",
+        "texto": "$y = -4x$"
+      },
+      {
+        "id": "C",
+        "texto": "$y = \\frac{1}{4}x$"
+      },
+      {
+        "id": "D",
+        "texto": "$y = 4x + 1$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_4_20",
+    "topicoId": "topico_4",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Plano, Distâncias e Círculos",
+    "paginaInicio": 62,
+    "paginaFim": 85,
+    "manualRef": "Caderno 1, Pág. 82, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Determine o declive da reta que passa pelos pontos $A(1, 3)$ e $B(5, 11)$.",
+    "tipo": "numero",
+    "respostaCorreta": 2,
+    "passosResolucao": [
+      "$m = \\frac{11 - 3}{5 - 1} = \\frac{8}{4} = 2$."
+    ]
+  },
+  {
+    "id": "GEO_4_21",
+    "topicoId": "topico_4",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Plano, Distâncias e Círculos",
+    "paginaInicio": 62,
+    "paginaFim": 85,
+    "manualRef": "Caderno 1, Pág. 83, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é a equação da circunferência de centro em $(0, 0)$ tangente à reta horizontal $y = 5$?",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "O raio é a distância do centro $(0, 0)$ à reta $y = 5$, que é $r = 5$. Logo, $x^2 + y^2 = 25$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$x^2 + y^2 = 25$"
+      },
+      {
+        "id": "B",
+        "texto": "$x^2 + y^2 = 5$"
+      },
+      {
+        "id": "C",
+        "texto": "$x^2 + y^2 = 10$"
+      },
+      {
+        "id": "D",
+        "texto": "$(x - 5)^2 + y^2 = 25$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_4_22",
+    "topicoId": "topico_4",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Plano, Distâncias e Círculos",
+    "paginaInicio": 62,
+    "paginaFim": 85,
+    "manualRef": "Caderno 1, Pág. 84, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A mediatriz do segmento cujos extremos são $A(-3, 2)$ e $B(7, 2)$ é a reta vertical:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "A ordenada é comum ($y = 2$), logo a mediatriz é vertical passando no ponto médio das abcissas: $x = \\frac{-3 + 7}{2} = 2$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$x = 2$"
+      },
+      {
+        "id": "B",
+        "texto": "$x = 5$"
+      },
+      {
+        "id": "C",
+        "texto": "$y = 2$"
+      },
+      {
+        "id": "D",
+        "texto": "$x = 0$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_4_23",
+    "topicoId": "topico_4",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Plano, Distâncias e Círculos",
+    "paginaInicio": 62,
+    "paginaFim": 85,
+    "manualRef": "Caderno 1, Pág. 62, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O ponto $P(3, k)$ pertence à circunferência $x^2 + y^2 = 25$. Sabendo que $k > 0$, determine $k$.",
+    "tipo": "numero",
+    "respostaCorreta": 4,
+    "passosResolucao": [
+      "$3^2 + k^2 = 25 \\iff 9 + k^2 = 25 \\iff k^2 = 16$. Sendo $k > 0$, $k = 4$."
+    ]
+  },
+  {
+    "id": "GEO_4_24",
+    "topicoId": "topico_4",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Plano, Distâncias e Círculos",
+    "paginaInicio": 62,
+    "paginaFim": 85,
+    "manualRef": "Caderno 1, Pág. 63, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "As retas $r: y = 2x + 1$ e $s: y = -\\frac{1}{2}x + 4$ formam entre si um ângulo de:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "O produto dos declives é $2 \\times \\left(-\\frac{1}{2}\\right) = -1$, logo são perpendiculares ($90^\\circ$)."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$90^\\circ$"
+      },
+      {
+        "id": "B",
+        "texto": "$45^\\circ$"
+      },
+      {
+        "id": "C",
+        "texto": "$0^\\circ$"
+      },
+      {
+        "id": "D",
+        "texto": "$60^\\circ$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_4_25",
+    "topicoId": "topico_4",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Plano, Distâncias e Círculos",
+    "paginaInicio": 62,
+    "paginaFim": 85,
+    "manualRef": "Caderno 1, Pág. 64, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é a ordenada do ponto de interseção da reta $y = 3x - 7$ com o eixo das ordenadas ($x = 0$)?",
+    "tipo": "numero",
+    "respostaCorreta": -7,
+    "passosResolucao": [
+      "Para $x = 0$, $y = 3(0) - 7 = -7$."
+    ]
+  },
+  {
+    "id": "GEO_4_26",
+    "topicoId": "topico_4",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Plano, Distâncias e Círculos",
+    "paginaInicio": 62,
+    "paginaFim": 85,
+    "manualRef": "Caderno 1, Pág. 65, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O diâmetro de um círculo de área $36\\pi$ é igual a:",
+    "tipo": "numero",
+    "respostaCorreta": 12,
+    "passosResolucao": [
+      "$\\pi r^2 = 36\\pi \\implies r = 6$. Diâmetro $= 2r = 12$."
+    ]
+  },
+  {
+    "id": "GEO_4_27",
+    "topicoId": "topico_4",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Plano, Distâncias e Círculos",
+    "paginaInicio": 62,
+    "paginaFim": 85,
+    "manualRef": "Caderno 1, Pág. 66, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O conjunto de pontos definido por $(x - 1)^2 + (y - 2)^2 < 9$ representa:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "A desigualdade estrita $<$ define o interior aberto do círculo sem a fronteira."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "O interior de um círculo de raio 3"
+      },
+      {
+        "id": "B",
+        "texto": "A circunferência de raio 3"
+      },
+      {
+        "id": "C",
+        "texto": "O exterior de um círculo"
+      },
+      {
+        "id": "D",
+        "texto": "Um círculo fechado"
+      }
+    ]
+  },
+  {
+    "id": "GEO_4_28",
+    "topicoId": "topico_4",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Plano, Distâncias e Círculos",
+    "paginaInicio": 62,
+    "paginaFim": 85,
+    "manualRef": "Caderno 1, Pág. 67, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Determine a distância entre os pontos $A(-1, -1)$ e $B(2, 3)$.",
+    "tipo": "numero",
+    "respostaCorreta": 5,
+    "passosResolucao": [
+      "$d = \\sqrt{(2 - (-1))^2 + (3 - (-1))^2} = \\sqrt{3^2 + 4^2} = \\sqrt{25} = 5$."
+    ]
+  },
+  {
+    "id": "GEO_4_29",
+    "topicoId": "topico_4",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Plano, Distâncias e Círculos",
+    "paginaInicio": 62,
+    "paginaFim": 85,
+    "manualRef": "Caderno 1, Pág. 68, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é a equação reduzida da reta horizontal que passa pelo ponto $P(9, -4)$?",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Uma reta horizontal tem equação $y = k$. Como passa por $P(9, -4)$, a equação é $y = -4$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$y = -4$"
+      },
+      {
+        "id": "B",
+        "texto": "$x = 9$"
+      },
+      {
+        "id": "C",
+        "texto": "$y = 9$"
+      },
+      {
+        "id": "D",
+        "texto": "$x = -4$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_4_30",
+    "topicoId": "topico_4",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Plano, Distâncias e Círculos",
+    "paginaInicio": 62,
+    "paginaFim": 85,
+    "manualRef": "Caderno 1, Pág. 69, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se o ponto $C(2, 3)$ é o centro de uma circunferência de raio 1, o ponto $(2, 4)$ pertence à:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "$d(C, (2, 4)) = \\sqrt{(2-2)^2 + (4-3)^2} = 1 = r$, logo pertence à linha da circunferência."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Circunferência"
+      },
+      {
+        "id": "B",
+        "texto": "Exterior da circunferência"
+      },
+      {
+        "id": "C",
+        "texto": "Interior estrito"
+      },
+      {
+        "id": "D",
+        "texto": "Origem"
+      }
+    ]
+  },
+  {
+    "id": "GEO_4_31",
+    "topicoId": "topico_4",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Plano, Distâncias e Círculos",
+    "paginaInicio": 62,
+    "paginaFim": 85,
+    "manualRef": "Caderno 1, Pág. 70, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é a abcissa na origem (zero) da reta de equação $y = 2x - 8$?",
+    "tipo": "numero",
+    "respostaCorreta": 4,
+    "passosResolucao": [
+      "$2x - 8 = 0 \\iff 2x = 8 \\iff x = 4$."
+    ]
+  },
+  {
+    "id": "GEO_4_32",
+    "topicoId": "topico_4",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Plano, Distâncias e Círculos",
+    "paginaInicio": 62,
+    "paginaFim": 85,
+    "manualRef": "Caderno 1, Pág. 71, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é a distância da reta $y = 7$ à reta $y = -3$ no plano?",
+    "tipo": "numero",
+    "respostaCorreta": 10,
+    "passosResolucao": [
+      "A distância entre duas retas horizontais é $|7 - (-3)| = 10$."
+    ]
+  },
+  {
+    "id": "GEO_4_33",
+    "topicoId": "topico_4",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Plano, Distâncias e Círculos",
+    "paginaInicio": 62,
+    "paginaFim": 85,
+    "manualRef": "Caderno 1, Pág. 72, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A inequação $x^2 + y^2 \\ge 16$ define:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "$\\|P - O\\|^2 \\ge 16$ define todos os pontos à distância 4 ou superior da origem."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "O exterior e a fronteira da circunferência de raio 4"
+      },
+      {
+        "id": "B",
+        "texto": "O interior do círculo"
+      },
+      {
+        "id": "C",
+        "texto": "Um setor circular"
+      },
+      {
+        "id": "D",
+        "texto": "O semiplano superior"
+      }
+    ]
+  },
+  {
+    "id": "GEO_4_34",
+    "topicoId": "topico_4",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Plano, Distâncias e Círculos",
+    "paginaInicio": 62,
+    "paginaFim": 85,
+    "manualRef": "Caderno 1, Pág. 73, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O triângulo com vértices $(0, 0)$, $(8, 0)$ e $(0, 6)$ tem que perímetro?",
+    "tipo": "numero",
+    "respostaCorreta": 24,
+    "passosResolucao": [
+      "Catetos: 8 e 6. Hipotenusa: $\\sqrt{8^2 + 6^2} = \\sqrt{100} = 10$. Perímetro: $8 + 6 + 10 = 24$."
+    ]
+  },
+  {
+    "id": "GEO_4_35",
+    "topicoId": "topico_4",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Plano, Distâncias e Círculos",
+    "paginaInicio": 62,
+    "paginaFim": 85,
+    "manualRef": "Caderno 1, Pág. 74, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A reta $x = 5$ é perpendicular a qual dos eixos cartesianos?",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "A reta $x = 5$ é vertical, intersetando perpendicularmente o eixo horizontal $Ox$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Eixo das abcissas ($Ox$)"
+      },
+      {
+        "id": "B",
+        "texto": "Eixo das ordenadas ($Oy$)"
+      }
+    ]
+  },
+  {
+    "id": "GEO_4_36",
+    "topicoId": "topico_4",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Plano, Distâncias e Círculos",
+    "paginaInicio": 62,
+    "paginaFim": 85,
+    "manualRef": "Caderno 1, Pág. 75, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é a área do círculo fechado de equação $(x - 3)^2 + (y + 1)^2 \\le 49$?",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "$r^2 = 49$, logo $\\text{Área} = \\pi r^2 = 49\\pi$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$49\\pi$"
+      },
+      {
+        "id": "B",
+        "texto": "$7\\pi$"
+      },
+      {
+        "id": "C",
+        "texto": "$14\\pi$"
+      },
+      {
+        "id": "D",
+        "texto": "$98\\pi$"
+      }
+    ]
   },
   {
     "id": "GEO_5_01",
@@ -838,6 +1427,627 @@ const EXERCICIOS_GEOMETRIA = [
     "paginaFim": 105
   },
   {
+    "id": "GEO_5_16",
+    "topicoId": "topico_5",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Espaço e Superfícies Esféricas",
+    "paginaInicio": 86,
+    "paginaFim": 105,
+    "manualRef": "Caderno 1, Pág. 102, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Determine a distância da origem $O(0, 0, 0)$ ao ponto $A(1, 2, 2)$ no espaço.",
+    "tipo": "numero",
+    "respostaCorreta": 3,
+    "passosResolucao": [
+      "$d = \\sqrt{1^2 + 2^2 + 2^2} = \\sqrt{1 + 4 + 4} = \\sqrt{9} = 3$."
+    ]
+  },
+  {
+    "id": "GEO_5_17",
+    "topicoId": "topico_5",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Espaço e Superfícies Esféricas",
+    "paginaInicio": 86,
+    "paginaFim": 105,
+    "manualRef": "Caderno 1, Pág. 103, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é a equação cartesiana do plano paralelo a $xOz$ que passa pelo ponto $P(2, -8, 5)$?",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Planos paralelos ao plano coordenado $xOz$ têm ordenada constante: $y = k$. Logo, $y = -8$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$y = -8$"
+      },
+      {
+        "id": "B",
+        "texto": "$x = 2$"
+      },
+      {
+        "id": "C",
+        "texto": "$z = 5$"
+      },
+      {
+        "id": "D",
+        "texto": "$y = 8$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_5_18",
+    "topicoId": "topico_5",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Espaço e Superfícies Esféricas",
+    "paginaInicio": 86,
+    "paginaFim": 105,
+    "manualRef": "Caderno 1, Pág. 104, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O centro da superfície esférica $(x - 1)^2 + (y + 4)^2 + (z - 7)^2 = 81$ tem que cota $z$?",
+    "tipo": "numero",
+    "respostaCorreta": 7,
+    "passosResolucao": [
+      "A cota do centro $C(x_0, y_0, z_0)$ é $z_0 = 7$."
+    ]
+  },
+  {
+    "id": "GEO_5_19",
+    "topicoId": "topico_5",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Espaço e Superfícies Esféricas",
+    "paginaInicio": 86,
+    "paginaFim": 105,
+    "manualRef": "Caderno 1, Pág. 86, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A reta paralela ao eixo $Oz$ que passa por $P(3, 4, 0)$ é dada pelo sistema:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Uma reta vertical no espaço tem abcissa e ordenada fixas: $x = 3 \\land y = 4$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$x = 3 \\land y = 4$"
+      },
+      {
+        "id": "B",
+        "texto": "$z = 0$"
+      },
+      {
+        "id": "C",
+        "texto": "$x = 3 \\land z = 4$"
+      },
+      {
+        "id": "D",
+        "texto": "$y = 4 \\land z = 0$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_5_20",
+    "topicoId": "topico_5",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Espaço e Superfícies Esféricas",
+    "paginaInicio": 86,
+    "paginaFim": 105,
+    "manualRef": "Caderno 1, Pág. 87, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O raio da superfície esférica $x^2 + y^2 + z^2 = 100$ é:",
+    "tipo": "numero",
+    "respostaCorreta": 10,
+    "passosResolucao": [
+      "$R = \\sqrt{100} = 10$."
+    ]
+  },
+  {
+    "id": "GEO_5_21",
+    "topicoId": "topico_5",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Espaço e Superfícies Esféricas",
+    "paginaInicio": 86,
+    "paginaFim": 105,
+    "manualRef": "Caderno 1, Pág. 88, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é a distância do ponto $P(4, 7, -9)$ ao plano coordenado $xOz$?",
+    "tipo": "numero",
+    "respostaCorreta": 7,
+    "passosResolucao": [
+      "A distância ao plano $xOz$ é $|y| = |7| = 7$."
+    ]
+  },
+  {
+    "id": "GEO_5_22",
+    "topicoId": "topico_5",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Espaço e Superfícies Esféricas",
+    "paginaInicio": 86,
+    "paginaFim": 105,
+    "manualRef": "Caderno 1, Pág. 89, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O ponto médio de $[AB]$, com $A(0, 0, 4)$ e $B(0, 0, 10)$, é:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "$M = (0, 0, \\frac{4 + 10}{2}) = (0, 0, 7)$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$(0, 0, 7)$"
+      },
+      {
+        "id": "B",
+        "texto": "$(0, 0, 14)$"
+      },
+      {
+        "id": "C",
+        "texto": "$(0, 0, 6)$"
+      },
+      {
+        "id": "D",
+        "texto": "$(0, 7, 0)$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_5_23",
+    "topicoId": "topico_5",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Espaço e Superfícies Esféricas",
+    "paginaInicio": 86,
+    "paginaFim": 105,
+    "manualRef": "Caderno 1, Pág. 90, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O simétrico do ponto $P(1, 2, 3)$ em relação ao plano $xOy$ é:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "A reflexão pelo plano $xOy$ inverte o sinal da cota: $(x, y, z) \\mapsto (x, y, -z)$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$(1, 2, -3)$"
+      },
+      {
+        "id": "B",
+        "texto": "$(-1, -2, 3)$"
+      },
+      {
+        "id": "C",
+        "texto": "$(-1, 2, 3)$"
+      },
+      {
+        "id": "D",
+        "texto": "$(1, -2, 3)$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_5_24",
+    "topicoId": "topico_5",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Espaço e Superfícies Esféricas",
+    "paginaInicio": 86,
+    "paginaFim": 105,
+    "manualRef": "Caderno 1, Pág. 91, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Seja a esfera $(x - 2)^2 + y^2 + z^2 \\le 25$. O ponto $(2, 0, 5)$ pertence à:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "$(2 - 2)^2 + 0^2 + 5^2 = 25$, logo está exatamente na fronteira."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Superfície esférica (fronteira)"
+      },
+      {
+        "id": "B",
+        "texto": "Interior estrito"
+      },
+      {
+        "id": "C",
+        "texto": "Exterior"
+      }
+    ]
+  },
+  {
+    "id": "GEO_5_25",
+    "topicoId": "topico_5",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Espaço e Superfícies Esféricas",
+    "paginaInicio": 86,
+    "paginaFim": 105,
+    "manualRef": "Caderno 1, Pág. 92, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é a distância entre $A(1, 0, 0)$ e $B(0, 0, 0)$?",
+    "tipo": "numero",
+    "respostaCorreta": 1,
+    "passosResolucao": [
+      "A distância é simplesmente 1 unidade."
+    ]
+  },
+  {
+    "id": "GEO_5_26",
+    "topicoId": "topico_5",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Espaço e Superfícies Esféricas",
+    "paginaInicio": 86,
+    "paginaFim": 105,
+    "manualRef": "Caderno 1, Pág. 93, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O plano mediador do segmento de extremos $(0, 0, -2)$ e $(0, 0, 6)$ tem equação:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "O segmento está sobre o eixo $Oz$, ponto médio $z = \\frac{-2 + 6}{2} = 2$. Logo, o plano é $z = 2$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$z = 2$"
+      },
+      {
+        "id": "B",
+        "texto": "$z = 4$"
+      },
+      {
+        "id": "C",
+        "texto": "$x = 2$"
+      },
+      {
+        "id": "D",
+        "texto": "$y = 2$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_5_27",
+    "topicoId": "topico_5",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Espaço e Superfícies Esféricas",
+    "paginaInicio": 86,
+    "paginaFim": 105,
+    "manualRef": "Caderno 1, Pág. 94, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O ponto $(0, 5, 0)$ pertence a que eixo coordenado?",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Tem abcissa e cota nulas, logo pertence a $Oy$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Eixo das ordenadas ($Oy$)"
+      },
+      {
+        "id": "B",
+        "texto": "Eixo das abcissas ($Ox$)"
+      },
+      {
+        "id": "C",
+        "texto": "Eixo das cotas ($Oz$)"
+      }
+    ]
+  },
+  {
+    "id": "GEO_5_28",
+    "topicoId": "topico_5",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Espaço e Superfícies Esféricas",
+    "paginaInicio": 86,
+    "paginaFim": 105,
+    "manualRef": "Caderno 1, Pág. 95, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Quantos eixos coordenados definem o referencial cartesiano no espaço?",
+    "tipo": "numero",
+    "respostaCorreta": 3,
+    "passosResolucao": [
+      "São 3 eixos ortogonais: $Ox$, $Oy$ e $Oz$."
+    ]
+  },
+  {
+    "id": "GEO_5_29",
+    "topicoId": "topico_5",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Espaço e Superfícies Esféricas",
+    "paginaInicio": 86,
+    "paginaFim": 105,
+    "manualRef": "Caderno 1, Pág. 96, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A equação $y = 0$ no espaço tridimensional representa:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Todos os pontos com ordenada nula formam o plano $xOz$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "O plano coordenado $xOz$"
+      },
+      {
+        "id": "B",
+        "texto": "O eixo $Oy$"
+      },
+      {
+        "id": "C",
+        "texto": "A origem"
+      },
+      {
+        "id": "D",
+        "texto": "O plano $xOy$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_5_30",
+    "topicoId": "topico_5",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Espaço e Superfícies Esféricas",
+    "paginaInicio": 86,
+    "paginaFim": 105,
+    "manualRef": "Caderno 1, Pág. 97, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A distância do ponto $P(2, 3, 4)$ ao eixo $Oz$ é:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "A distância de $(x, y, z)$ a $Oz$ é $\\sqrt{x^2 + y^2} = \\sqrt{4 + 9} = \\sqrt{13}$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$\\sqrt{2^2 + 3^2} = \\sqrt{13}$"
+      },
+      {
+        "id": "B",
+        "texto": "4"
+      },
+      {
+        "id": "C",
+        "texto": "5"
+      },
+      {
+        "id": "D",
+        "texto": "$\\sqrt{29}$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_5_31",
+    "topicoId": "topico_5",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Espaço e Superfícies Esféricas",
+    "paginaInicio": 86,
+    "paginaFim": 105,
+    "manualRef": "Caderno 1, Pág. 98, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é o valor de $k$ para que $(0, k, 0)$ diste 5 unidades da origem?",
+    "tipo": "numero",
+    "respostaCorreta": 5,
+    "passosResolucao": [
+      "$\\sqrt{0^2 + k^2 + 0^2} = 5 \\implies |k| = 5$. O valor positivo é 5."
+    ]
+  },
+  {
+    "id": "GEO_5_32",
+    "topicoId": "topico_5",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Espaço e Superfícies Esféricas",
+    "paginaInicio": 86,
+    "paginaFim": 105,
+    "manualRef": "Caderno 1, Pág. 99, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Uma superfície esférica tem diâmetro 8. Qual é o seu volume?",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Raio $R = 4$. Volume $= \\frac{4}{3}\\pi R^3 = \\frac{4}{3}\\pi (64) = \\frac{256}{3}\\pi$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$\\frac{256}{3}\\pi$"
+      },
+      {
+        "id": "B",
+        "texto": "$\\{64\\pi\\}$"
+      },
+      {
+        "id": "C",
+        "texto": "$32\\pi$"
+      },
+      {
+        "id": "D",
+        "texto": "$\\frac{500}{3}\\pi$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_5_33",
+    "topicoId": "topico_5",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Espaço e Superfícies Esféricas",
+    "paginaInicio": 86,
+    "paginaFim": 105,
+    "manualRef": "Caderno 1, Pág. 100, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A interseção da esfera $x^2 + y^2 + z^2 \\le 9$ com o plano $z = 0$ é:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Substituindo $z = 0$, obtém-se $x^2 + y^2 \\le 9$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Um círculo de raio 3 no plano $xOy$"
+      },
+      {
+        "id": "B",
+        "texto": "Uma esfera"
+      },
+      {
+        "id": "C",
+        "texto": "Um ponto"
+      },
+      {
+        "id": "D",
+        "texto": "Vazio"
+      }
+    ]
+  },
+  {
+    "id": "GEO_5_34",
+    "topicoId": "topico_5",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Espaço e Superfícies Esféricas",
+    "paginaInicio": 86,
+    "paginaFim": 105,
+    "manualRef": "Caderno 1, Pág. 101, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O ponto $(2, -3, 0)$ pertence ao plano coordenado:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Como a cota é zero, pertence ao plano $xOy$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$xOy$ (porque $z = 0$)"
+      },
+      {
+        "id": "B",
+        "texto": "$yOz$"
+      },
+      {
+        "id": "C",
+        "texto": "$xOz$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_5_35",
+    "topicoId": "topico_5",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Espaço e Superfícies Esféricas",
+    "paginaInicio": 86,
+    "paginaFim": 105,
+    "manualRef": "Caderno 1, Pág. 102, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Determine o centro da esfera de equação $x^2 + (y - 3)^2 + (z + 2)^2 \\le 16$.",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Comparando com a equação canónica, o centro é $(0, 3, -2)$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$(0, 3, -2)$"
+      },
+      {
+        "id": "B",
+        "texto": "$(0, -3, 2)$"
+      },
+      {
+        "id": "C",
+        "texto": "$(1, 3, -2)$"
+      },
+      {
+        "id": "D",
+        "texto": "$(0, 3, 2)$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_5_36",
+    "topicoId": "topico_5",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Geometria no Espaço e Superfícies Esféricas",
+    "paginaInicio": 86,
+    "paginaFim": 105,
+    "manualRef": "Caderno 1, Pág. 103, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A distância entre $P(1, 1, 1)$ e $Q(2, 3, 3)$ é:",
+    "tipo": "numero",
+    "respostaCorreta": 3,
+    "passosResolucao": [
+      "$d = \\sqrt{(2-1)^2 + (3-1)^2 + (3-1)^2} = \\sqrt{1 + 4 + 4} = \\sqrt{9} = 3$."
+    ]
+  },
+  {
     "id": "GEO_6_01",
     "manualRef": "Caderno 1, Pág. 110, Ex. 2",
     "origem": "Manual Escolar",
@@ -1240,6 +2450,589 @@ const EXERCICIOS_GEOMETRIA = [
     "paginaFim": 125
   },
   {
+    "id": "GEO_6_16",
+    "topicoId": "topico_6",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Vetores e Equação Vetorial da Reta",
+    "paginaInicio": 106,
+    "paginaFim": 125,
+    "manualRef": "Caderno 1, Pág. 122, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Sejam $\\vec{u} = (2, -1, 3)$ e $\\vec{v} = (1, 4, -2)$. As coordenadas de $\\vec{u} + \\vec{v}$ são:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "$(2+1, -1+4, 3+(-2)) = (3, 3, 1)$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$(3, 3, 1)$"
+      },
+      {
+        "id": "B",
+        "texto": "$(3, -3, 1)$"
+      },
+      {
+        "id": "C",
+        "texto": "$(1, -5, 5)$"
+      },
+      {
+        "id": "D",
+        "texto": "$(2, 4, -6)$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_6_17",
+    "topicoId": "topico_6",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Vetores e Equação Vetorial da Reta",
+    "paginaInicio": 106,
+    "paginaFim": 125,
+    "manualRef": "Caderno 1, Pág. 123, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é a norma do vetor nulo $\\vec{0}$?",
+    "tipo": "numero",
+    "respostaCorreta": 0,
+    "passosResolucao": [
+      "A norma do vetor nulo é 0."
+    ]
+  },
+  {
+    "id": "GEO_6_18",
+    "topicoId": "topico_6",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Vetores e Equação Vetorial da Reta",
+    "paginaInicio": 106,
+    "paginaFim": 125,
+    "manualRef": "Caderno 1, Pág. 124, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O vetor diretor da reta $(x, y) = (1, 5) + k(3, -2)$ é:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "O vetor diretor é o vetor que multiplica o parâmetro real $k$: $(3, -2)$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$\\vec{v} = (3, -2)$"
+      },
+      {
+        "id": "B",
+        "texto": "$\\vec{v} = (1, 5)$"
+      },
+      {
+        "id": "C",
+        "texto": "$\\vec{v} = (-2, 3)$"
+      },
+      {
+        "id": "D",
+        "texto": "$\\vec{v} = (4, 3)$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_6_19",
+    "topicoId": "topico_6",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Vetores e Equação Vetorial da Reta",
+    "paginaInicio": 106,
+    "paginaFim": 125,
+    "manualRef": "Caderno 1, Pág. 106, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se $\\vec{u} = (k, 6)$ é colinear com $\\vec{v} = (2, 3)$, qual é o valor de $k$?",
+    "tipo": "numero",
+    "respostaCorreta": 4,
+    "passosResolucao": [
+      "$\\frac{6}{3} = 2 \\implies k = 2 \\times 2 = 4$."
+    ]
+  },
+  {
+    "id": "GEO_6_20",
+    "topicoId": "topico_6",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Vetores e Equação Vetorial da Reta",
+    "paginaInicio": 106,
+    "paginaFim": 125,
+    "manualRef": "Caderno 1, Pág. 107, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é a norma do vetor $\\vec{w} = (-6, 8)$?",
+    "tipo": "numero",
+    "respostaCorreta": 10,
+    "passosResolucao": [
+      "$\\|\\vec{w}\\| = \\sqrt{(-6)^2 + 8^2} = \\sqrt{36 + 64} = 10$."
+    ]
+  },
+  {
+    "id": "GEO_6_21",
+    "topicoId": "topico_6",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Vetores e Equação Vetorial da Reta",
+    "paginaInicio": 106,
+    "paginaFim": 125,
+    "manualRef": "Caderno 1, Pág. 108, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se $A(1, 2)$ e $\\vec{u} = (3, -4)$, o ponto $B = A + \\vec{u}$ tem coordenadas:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "$(1+3, 2+(-4)) = (4, -2)$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$(4, -2)$"
+      },
+      {
+        "id": "B",
+        "texto": "$(2, -6)$"
+      },
+      {
+        "id": "C",
+        "texto": "$(-2, 6)$"
+      },
+      {
+        "id": "D",
+        "texto": "$(4, 2)$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_6_22",
+    "topicoId": "topico_6",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Vetores e Equação Vetorial da Reta",
+    "paginaInicio": 106,
+    "paginaFim": 125,
+    "manualRef": "Caderno 1, Pág. 109, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Dois vetores dizem-se simétricos se:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Vetores simétricos verificam $\\vec{u} = -\\vec{v}$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Têm a mesma direção e norma, mas sentidos opostos"
+      },
+      {
+        "id": "B",
+        "texto": "Têm normas diferentes"
+      },
+      {
+        "id": "C",
+        "texto": "São perpendiculares"
+      }
+    ]
+  },
+  {
+    "id": "GEO_6_23",
+    "topicoId": "topico_6",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Vetores e Equação Vetorial da Reta",
+    "paginaInicio": 106,
+    "paginaFim": 125,
+    "manualRef": "Caderno 1, Pág. 110, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O vetor unitário com a mesma direção e sentido de $\\vec{v} = (0, 7)$ é:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "$\\frac{1}{7}(0, 7) = (0, 1)$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$(0, 1)$"
+      },
+      {
+        "id": "B",
+        "texto": "$(0, -1)$"
+      },
+      {
+        "id": "C",
+        "texto": "$(1, 0)$"
+      },
+      {
+        "id": "D",
+        "texto": "$(0, 7)$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_6_24",
+    "topicoId": "topico_6",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Vetores e Equação Vetorial da Reta",
+    "paginaInicio": 106,
+    "paginaFim": 125,
+    "manualRef": "Caderno 1, Pág. 111, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A reta no espaço que passa por $(1, 0, 2)$ com direção $(0, 1, 0)$ é paralela a que eixo?",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "O vetor diretor $(0, 1, 0)$ é o vetor unitário do eixo das ordenadas $Oy$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Eixo $Oy$"
+      },
+      {
+        "id": "B",
+        "texto": "Eixo $Ox$"
+      },
+      {
+        "id": "C",
+        "texto": "Eixo $Oz$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_6_25",
+    "topicoId": "topico_6",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Vetores e Equação Vetorial da Reta",
+    "paginaInicio": 106,
+    "paginaFim": 125,
+    "manualRef": "Caderno 1, Pág. 112, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Calcule a primeira coordenada do vetor $2\\vec{u} - \\vec{v}$, sendo $\\vec{u} = (5, 1)$ e $\\vec{v} = (3, 4)$.",
+    "tipo": "numero",
+    "respostaCorreta": 7,
+    "passosResolucao": [
+      "$2(5) - 3 = 10 - 3 = 7$."
+    ]
+  },
+  {
+    "id": "GEO_6_26",
+    "topicoId": "topico_6",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Vetores e Equação Vetorial da Reta",
+    "paginaInicio": 106,
+    "paginaFim": 125,
+    "manualRef": "Caderno 1, Pág. 113, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se $\\vec{AB} = (4, 7)$ e $A(1, 1)$, qual é a ordenada de $B$?",
+    "tipo": "numero",
+    "respostaCorreta": 8,
+    "passosResolucao": [
+      "$y_B - 1 = 7 \\iff y_B = 8$."
+    ]
+  },
+  {
+    "id": "GEO_6_27",
+    "topicoId": "topico_6",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Vetores e Equação Vetorial da Reta",
+    "paginaInicio": 106,
+    "paginaFim": 125,
+    "manualRef": "Caderno 1, Pág. 114, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O conjunto de equações paramétricas $x = 2 + t, y = 3 - 2t, t \\in \\mathbb{R}$ define:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Equações lineares num único parâmetro $t$ definem uma reta no plano."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Uma reta no plano"
+      },
+      {
+        "id": "B",
+        "texto": "Um plano"
+      },
+      {
+        "id": "C",
+        "texto": "Uma circunferência"
+      }
+    ]
+  },
+  {
+    "id": "GEO_6_28",
+    "topicoId": "topico_6",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Vetores e Equação Vetorial da Reta",
+    "paginaInicio": 106,
+    "paginaFim": 125,
+    "manualRef": "Caderno 1, Pág. 115, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Seja $\\vec{u} = (1, 2, 2)$. Qual é a norma de $-3\\vec{u}$?",
+    "tipo": "numero",
+    "respostaCorreta": 9,
+    "passosResolucao": [
+      "$\\|\\vec{u}\\| = \\sqrt{1 + 4 + 4} = 3$. $\\|-3\\vec{u}\\| = 3 \\times 3 = 9$."
+    ]
+  },
+  {
+    "id": "GEO_6_29",
+    "topicoId": "topico_6",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Vetores e Equação Vetorial da Reta",
+    "paginaInicio": 106,
+    "paginaFim": 125,
+    "manualRef": "Caderno 1, Pág. 116, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é o declive da reta com vetor diretor $\\vec{v} = (4, 12)$ no plano?",
+    "tipo": "numero",
+    "respostaCorreta": 3,
+    "passosResolucao": [
+      "$m = \\frac{v_2}{v_1} = \\frac{12}{4} = 3$."
+    ]
+  },
+  {
+    "id": "GEO_6_30",
+    "topicoId": "topico_6",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Vetores e Equação Vetorial da Reta",
+    "paginaInicio": 106,
+    "paginaFim": 125,
+    "manualRef": "Caderno 1, Pág. 117, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se dois vetores têm a mesma direção, dizem-se:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Vetores com a mesma direção são colineares."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Colineares"
+      },
+      {
+        "id": "B",
+        "texto": "Ortogonais"
+      },
+      {
+        "id": "C",
+        "texto": "Concorrentes"
+      }
+    ]
+  },
+  {
+    "id": "GEO_6_31",
+    "topicoId": "topico_6",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Vetores e Equação Vetorial da Reta",
+    "paginaInicio": 106,
+    "paginaFim": 125,
+    "manualRef": "Caderno 1, Pág. 118, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é o vetor simétrico de $\\vec{u} = (-3, 5, -8)$?",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "$-\\vec{u} = (3, -5, 8)$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$(3, -5, 8)$"
+      },
+      {
+        "id": "B",
+        "texto": "(-3, 5, 8)"
+      },
+      {
+        "id": "C",
+        "texto": "$(3, 5, -8)$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_6_32",
+    "topicoId": "topico_6",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Vetores e Equação Vetorial da Reta",
+    "paginaInicio": 106,
+    "paginaFim": 125,
+    "manualRef": "Caderno 1, Pág. 119, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Para que valor de $t$ o ponto da reta $(x, y) = (1, 2) + t(3, 4)$ tem abcissa 10?",
+    "tipo": "numero",
+    "respostaCorreta": 3,
+    "passosResolucao": [
+      "$1 + 3t = 10 \\iff 3t = 9 \\iff t = 3$."
+    ]
+  },
+  {
+    "id": "GEO_6_33",
+    "topicoId": "topico_6",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Vetores e Equação Vetorial da Reta",
+    "paginaInicio": 106,
+    "paginaFim": 125,
+    "manualRef": "Caderno 1, Pág. 120, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A norma de qualquer vetor é sempre um número:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "A norma é uma distância euclidiana, sendo $\\ge 0$ (igual a zero apenas no vetor nulo)."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Real não negativo ($\\ge 0$)"
+      },
+      {
+        "id": "B",
+        "texto": "Estritamente positivo"
+      },
+      {
+        "id": "C",
+        "texto": "Inteiro"
+      }
+    ]
+  },
+  {
+    "id": "GEO_6_34",
+    "topicoId": "topico_6",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Vetores e Equação Vetorial da Reta",
+    "paginaInicio": 106,
+    "paginaFim": 125,
+    "manualRef": "Caderno 1, Pág. 121, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se $\\vec{u} = (a, b)$, então $\\|\\vec{u}\\|^2$ é igual a:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "$\\|\\vec{u}\\|^2 = (\\sqrt{a^2 + b^2})^2 = a^2 + b^2$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$a^2 + b^2$"
+      },
+      {
+        "id": "B",
+        "texto": "$a + b$"
+      },
+      {
+        "id": "C",
+        "texto": "$(a + b)^2$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_6_35",
+    "topicoId": "topico_6",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Vetores e Equação Vetorial da Reta",
+    "paginaInicio": 106,
+    "paginaFim": 125,
+    "manualRef": "Caderno 1, Pág. 122, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Determine a cota do ponto da reta $(x, y, z) = (0, 1, 4) + k(2, -1, 3)$ correspondente a $k = 2$.",
+    "tipo": "numero",
+    "respostaCorreta": 10,
+    "passosResolucao": [
+      "$z = 4 + 2(3) = 4 + 6 = 10$."
+    ]
+  },
+  {
+    "id": "GEO_6_36",
+    "topicoId": "topico_6",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Vetores e Equação Vetorial da Reta",
+    "paginaInicio": 106,
+    "paginaFim": 125,
+    "manualRef": "Caderno 1, Pág. 123, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A reta que passa por $P(1, 2)$ com vetor diretor $\\vec{v} = (0, 3)$ é:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Como $v_1 = 0$, a abcissa permanece constante: $x = 1$ (vertical)."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "A reta vertical $x = 1$"
+      },
+      {
+        "id": "B",
+        "texto": "A reta horizontal $y = 2$"
+      },
+      {
+        "id": "C",
+        "texto": "A reta $y = 3x$"
+      }
+    ]
+  },
+  {
     "id": "GEO_7_01",
     "manualRef": "Caderno 1, Pág. 130, Ex. 1",
     "origem": "Manual Escolar",
@@ -1606,6 +3399,463 @@ const EXERCICIOS_GEOMETRIA = [
     "subtema": "Produto Escalar e Perpendicularidade",
     "paginaInicio": 126,
     "paginaFim": 145
+  },
+  {
+    "id": "GEO_7_16",
+    "topicoId": "topico_7",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Produto Escalar e Perpendicularidade",
+    "paginaInicio": 126,
+    "paginaFim": 145,
+    "manualRef": "Caderno 1, Pág. 142, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Calcule $\\vec{u} \\cdot \\vec{v}$ sendo $\\vec{u} = (2, 5)$ e $\\vec{v} = (-5, 2)$.",
+    "tipo": "numero",
+    "respostaCorreta": 0,
+    "passosResolucao": [
+      "$\\vec{u} \\cdot \\vec{v} = 2(-5) + 5(2) = -10 + 10 = 0$."
+    ]
+  },
+  {
+    "id": "GEO_7_17",
+    "topicoId": "topico_7",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Produto Escalar e Perpendicularidade",
+    "paginaInicio": 126,
+    "paginaFim": 145,
+    "manualRef": "Caderno 1, Pág. 143, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se $\\vec{u} \\cdot \\vec{v} = 0$ para vetores não nulos, que ângulo formam?",
+    "tipo": "numero",
+    "respostaCorreta": 90,
+    "passosResolucao": [
+      "Vetores ortogonais formam um ângulo de $90^\\circ$."
+    ]
+  },
+  {
+    "id": "GEO_7_18",
+    "topicoId": "topico_7",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Produto Escalar e Perpendicularidade",
+    "paginaInicio": 126,
+    "paginaFim": 145,
+    "manualRef": "Caderno 1, Pág. 144, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Calcule o produto escalar de $\\vec{a} = (1, 2, 3)$ por $\\vec{b} = (4, -2, 1)$.",
+    "tipo": "numero",
+    "respostaCorreta": 3,
+    "passosResolucao": [
+      "$1(4) + 2(-2) + 3(1) = 4 - 4 + 3 = 3$."
+    ]
+  },
+  {
+    "id": "GEO_7_19",
+    "topicoId": "topico_7",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Produto Escalar e Perpendicularidade",
+    "paginaInicio": 126,
+    "paginaFim": 145,
+    "manualRef": "Caderno 1, Pág. 126, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Sabendo que $\\|\\vec{u}\\| = 3$, $\\|\\vec{v}\\| = 4$ e $\\theta = 0^\\circ$, determine $\\vec{u} \\cdot \\vec{v}$.",
+    "tipo": "numero",
+    "respostaCorreta": 12,
+    "passosResolucao": [
+      "$3 \\times 4 \\times \\cos(0^\\circ) = 12 \\times 1 = 12$."
+    ]
+  },
+  {
+    "id": "GEO_7_20",
+    "topicoId": "topico_7",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Produto Escalar e Perpendicularidade",
+    "paginaInicio": 126,
+    "paginaFim": 145,
+    "manualRef": "Caderno 1, Pág. 127, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Determine $k$ para que $(k, 2)$ e $(3, -6)$ sejam perpendiculares.",
+    "tipo": "numero",
+    "respostaCorreta": 4,
+    "passosResolucao": [
+      "$3k + 2(-6) = 0 \\iff 3k = 12 \\iff k = 4$."
+    ]
+  },
+  {
+    "id": "GEO_7_21",
+    "topicoId": "topico_7",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Produto Escalar e Perpendicularidade",
+    "paginaInicio": 126,
+    "paginaFim": 145,
+    "manualRef": "Caderno 1, Pág. 128, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se $\\vec{u} \\cdot \\vec{u} = 25$, qual é a norma do vetor $\\vec{u}$?",
+    "tipo": "numero",
+    "respostaCorreta": 5,
+    "passosResolucao": [
+      "$\\|\\vec{u}\\| = \\sqrt{25} = 5$."
+    ]
+  },
+  {
+    "id": "GEO_7_22",
+    "topicoId": "topico_7",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Produto Escalar e Perpendicularidade",
+    "paginaInicio": 126,
+    "paginaFim": 145,
+    "manualRef": "Caderno 1, Pág. 129, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O produto escalar de um vetor $\\vec{u}$ pelo vetor nulo $\\vec{0}$ é igual a:",
+    "tipo": "numero",
+    "respostaCorreta": 0,
+    "passosResolucao": [
+      "$\\vec{u} \\cdot \\vec{0} = 0$."
+    ]
+  },
+  {
+    "id": "GEO_7_23",
+    "topicoId": "topico_7",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Produto Escalar e Perpendicularidade",
+    "paginaInicio": 126,
+    "paginaFim": 145,
+    "manualRef": "Caderno 1, Pág. 130, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se $\\theta = 180^\\circ$, o valor de $\\cos(\\theta)$ é:",
+    "tipo": "numero",
+    "respostaCorreta": -1,
+    "passosResolucao": [
+      "$\\cos(180^\\circ) = -1$."
+    ]
+  },
+  {
+    "id": "GEO_7_24",
+    "topicoId": "topico_7",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Produto Escalar e Perpendicularidade",
+    "paginaInicio": 126,
+    "paginaFim": 145,
+    "manualRef": "Caderno 1, Pág. 131, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se $\\|\\vec{u}\\| = 6$, $\\|\\vec{v}\\| = 2$ e $\\vec{u} \\cdot \\vec{v} = -6$, qual é o valor de $\\cos(\\theta)$?",
+    "tipo": "numero",
+    "respostaCorreta": -0.5,
+    "passosResolucao": [
+      "$\\cos(\\theta) = \\frac{-6}{6 \\times 2} = \\frac{-6}{12} = -0.5$."
+    ]
+  },
+  {
+    "id": "GEO_7_25",
+    "topicoId": "topico_7",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Produto Escalar e Perpendicularidade",
+    "paginaInicio": 126,
+    "paginaFim": 145,
+    "manualRef": "Caderno 1, Pág. 132, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual das seguintes expressões representa o Teorema de Pitágoras vetorial?",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Quando $\\vec{u} \\cdot \\vec{v} = 0$, o termo cruzado anula-se, resultando no Teorema de Pitágoras."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$\\|\\vec{u} + \\vec{v}\\|^2 = \\|\\vec{u}\\|^2 + \\|\\vec{v}\\|^2$ (se $\\vec{u} \\perp \\vec{v}$)"
+      },
+      {
+        "id": "B",
+        "texto": "$\\vec{u} \\cdot \\vec{v} = 1$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_7_26",
+    "topicoId": "topico_7",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Produto Escalar e Perpendicularidade",
+    "paginaInicio": 126,
+    "paginaFim": 145,
+    "manualRef": "Caderno 1, Pág. 133, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Seja $\\vec{u} = (1, 1)$ e $\\vec{v} = (1, 0)$. Calcule $\\vec{u} \\cdot \\vec{v}$.",
+    "tipo": "numero",
+    "respostaCorreta": 1,
+    "passosResolucao": [
+      "$1(1) + 1(0) = 1$."
+    ]
+  },
+  {
+    "id": "GEO_7_27",
+    "topicoId": "topico_7",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Produto Escalar e Perpendicularidade",
+    "paginaInicio": 126,
+    "paginaFim": 145,
+    "manualRef": "Caderno 1, Pág. 134, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O quadrado escalar $(\\vec{u} - \\vec{v})^2$ desenvolve-se como:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Desenvolvimento de quadrado de binómio escalar."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$\\|\\vec{u}\\|^2 - 2\\vec{u} \\cdot \\vec{v} + \\|\\vec{v}\\|^2$"
+      },
+      {
+        "id": "B",
+        "texto": "$\\|\\vec{u}\\|^2 - \\|\\vec{v}\\|^2$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_7_28",
+    "topicoId": "topico_7",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Produto Escalar e Perpendicularidade",
+    "paginaInicio": 126,
+    "paginaFim": 145,
+    "manualRef": "Caderno 1, Pág. 135, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Calcule $\\vec{u} \\cdot \\vec{v}$ para $\\vec{u} = (3, 0)$ e $\\vec{v} = (5, 0)$.",
+    "tipo": "numero",
+    "respostaCorreta": 15,
+    "passosResolucao": [
+      "$3(5) + 0(0) = 15$."
+    ]
+  },
+  {
+    "id": "GEO_7_29",
+    "topicoId": "topico_7",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Produto Escalar e Perpendicularidade",
+    "paginaInicio": 126,
+    "paginaFim": 145,
+    "manualRef": "Caderno 1, Pág. 136, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se dois vetores têm a mesma direção e sentido oposto, o produto escalar é:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "$\\cos(180^\\circ) = -1$, logo $\\vec{u} \\cdot \\vec{v} = -\\|\\vec{u}\\| \\|\\vec{v}\\|$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Negativo: $-\\|\\vec{u}\\| \\|\\vec{v}\\|$"
+      },
+      {
+        "id": "B",
+        "texto": "Positivo"
+      },
+      {
+        "id": "C",
+        "texto": "Nulo"
+      }
+    ]
+  },
+  {
+    "id": "GEO_7_30",
+    "topicoId": "topico_7",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Produto Escalar e Perpendicularidade",
+    "paginaInicio": 126,
+    "paginaFim": 145,
+    "manualRef": "Caderno 1, Pág. 137, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Determine $m$ para que $(m, 3, 1)$ e $(2, -2, 4)$ sejam ortogonais.",
+    "tipo": "numero",
+    "respostaCorreta": 1,
+    "passosResolucao": [
+      "$2m + 3(-2) + 1(4) = 0 \\iff 2m - 6 + 4 = 0 \\iff 2m = 2 \\iff m = 1$."
+    ]
+  },
+  {
+    "id": "GEO_7_31",
+    "topicoId": "topico_7",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Produto Escalar e Perpendicularidade",
+    "paginaInicio": 126,
+    "paginaFim": 145,
+    "manualRef": "Caderno 1, Pág. 138, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é o valor de $\\vec{u} \\cdot \\vec{v}$ se $\\theta = 90^\\circ$?",
+    "tipo": "numero",
+    "respostaCorreta": 0,
+    "passosResolucao": [
+      "$\\cos(90^\\circ) = 0$, logo o produto escalar é 0."
+    ]
+  },
+  {
+    "id": "GEO_7_32",
+    "topicoId": "topico_7",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Produto Escalar e Perpendicularidade",
+    "paginaInicio": 126,
+    "paginaFim": 145,
+    "manualRef": "Caderno 1, Pág. 139, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se $\\|\\vec{u}\\| = 5$ e $\\|\\vec{v}\\| = 5$ com $\\theta = 60^\\circ$, determine $\\vec{u} \\cdot \\vec{v}$.",
+    "tipo": "numero",
+    "respostaCorreta": 12.5,
+    "passosResolucao": [
+      "$5 \\times 5 \\times 0.5 = 12.5$."
+    ]
+  },
+  {
+    "id": "GEO_7_33",
+    "topicoId": "topico_7",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Produto Escalar e Perpendicularidade",
+    "paginaInicio": 126,
+    "paginaFim": 145,
+    "manualRef": "Caderno 1, Pág. 140, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A desigualdade de Cauchy-Schwarz para vetores afirma que:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Como $|\\cos(\\theta)| \\le 1$, temos $|\\vec{u} \\cdot \\vec{v}| \\le \\|\\vec{u}\\| \\|\\vec{v}\\|$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$|\\vec{u} \\cdot \\vec{v}| \\le \\|\\vec{u}\\| \\|\\vec{v}\\|$"
+      },
+      {
+        "id": "B",
+        "texto": "$|\\vec{u} \\cdot \\vec{v}| \\ge \\|\\vec{u}\\| \\|\\vec{v}\\|$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_7_34",
+    "topicoId": "topico_7",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Produto Escalar e Perpendicularidade",
+    "paginaInicio": 126,
+    "paginaFim": 145,
+    "manualRef": "Caderno 1, Pág. 141, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Calcule $\\vec{i} \\cdot \\vec{j}$ no referencial ortonormado plano.",
+    "tipo": "numero",
+    "respostaCorreta": 0,
+    "passosResolucao": [
+      "Os vetores da base canónica são perpendiculares entre si, logo o produto escalar é 0."
+    ]
+  },
+  {
+    "id": "GEO_7_35",
+    "topicoId": "topico_7",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Produto Escalar e Perpendicularidade",
+    "paginaInicio": 126,
+    "paginaFim": 145,
+    "manualRef": "Caderno 1, Pág. 142, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se $\\vec{u} \\cdot \\vec{v} > 0$, o ângulo entre eles é:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "O cosseno é positivo no 1.º quadrante, logo o ângulo é agudo."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Agudo"
+      },
+      {
+        "id": "B",
+        "texto": "Obtuso"
+      },
+      {
+        "id": "C",
+        "texto": "Reto"
+      }
+    ]
+  },
+  {
+    "id": "GEO_7_36",
+    "topicoId": "topico_7",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Produto Escalar e Perpendicularidade",
+    "paginaInicio": 126,
+    "paginaFim": 145,
+    "manualRef": "Caderno 1, Pág. 143, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Calcule $(\\vec{u} + \\vec{v}) \\cdot (\\vec{u} - \\vec{v})$ sabendo que $\\|\\vec{u}\\| = 5$ e $\\|\\vec{v}\\| = 3$.",
+    "tipo": "numero",
+    "respostaCorreta": 16,
+    "passosResolucao": [
+      "$= \\|\\vec{u}\\|^2 - \\|\\vec{v}\\|^2 = 5^2 - 3^2 = 25 - 9 = 16$."
+    ]
   },
   {
     "id": "GEO_8_01",
@@ -2046,5 +4296,588 @@ const EXERCICIOS_GEOMETRIA = [
     "subtema": "Equações de Planos e Lugares Geométricos",
     "paginaInicio": 146,
     "paginaFim": 170
+  },
+  {
+    "id": "GEO_8_16",
+    "topicoId": "topico_8",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Equações de Planos e Lugares Geométricos",
+    "paginaInicio": 146,
+    "paginaFim": 170,
+    "manualRef": "Caderno 1, Pág. 162, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é um vetor normal ao plano $x - 5y + 2z = 8$?",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Os coeficientes de $(x, y, z)$ dão as coordenadas do vetor normal: $(1, -5, 2)$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$\\vec{n} = (1, -5, 2)$"
+      },
+      {
+        "id": "B",
+        "texto": "$\\vec{n} = (1, 5, 2)$"
+      },
+      {
+        "id": "C",
+        "texto": "$\\vec{n} = (8, 0, 0)$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_8_17",
+    "topicoId": "topico_8",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Equações de Planos e Lugares Geométricos",
+    "paginaInicio": 146,
+    "paginaFim": 170,
+    "manualRef": "Caderno 1, Pág. 163, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Determine o termo independente $D$ do plano $x + y + z + D = 0$ que passa por $(1, 2, 3)$.",
+    "tipo": "numero",
+    "respostaCorreta": -6,
+    "passosResolucao": [
+      "$1 + 2 + 3 + D = 0 \\iff 6 + D = 0 \\iff D = -6$."
+    ]
+  },
+  {
+    "id": "GEO_8_18",
+    "topicoId": "topico_8",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Equações de Planos e Lugares Geométricos",
+    "paginaInicio": 146,
+    "paginaFim": 170,
+    "manualRef": "Caderno 1, Pág. 164, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Os planos $2x - y + 3z = 4$ e $4x - 2y + 6z = 1$ são:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Os vetores normais são proporcionais $(4, -2, 6) = 2(2, -1, 3)$, mas os termos independentes não são coincidentes."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Estritamente paralelos"
+      },
+      {
+        "id": "B",
+        "texto": "Coincidentes"
+      },
+      {
+        "id": "C",
+        "texto": "Perpendiculares"
+      }
+    ]
+  },
+  {
+    "id": "GEO_8_19",
+    "topicoId": "topico_8",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Equações de Planos e Lugares Geométricos",
+    "paginaInicio": 146,
+    "paginaFim": 170,
+    "manualRef": "Caderno 1, Pág. 165, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A reta perpendicular ao plano $3x + 2y - z = 5$ tem a direção de que vetor?",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "O vetor diretor da reta perpendicular ao plano é o próprio vetor normal ao plano: $(3, 2, -1)$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$\\vec{v} = (3, 2, -1)$"
+      },
+      {
+        "id": "B",
+        "texto": "$\\vec{v} = (5, 0, 0)$"
+      },
+      {
+        "id": "C",
+        "texto": "$\\vec{v} = (3, -2, 1)$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_8_20",
+    "topicoId": "topico_8",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Equações de Planos e Lugares Geométricos",
+    "paginaInicio": 146,
+    "paginaFim": 170,
+    "manualRef": "Caderno 1, Pág. 166, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O plano paralelo a $yOz$ que passa por $(7, 1, -4)$ tem que equação?",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Planos paralelos a $yOz$ têm abcissa fixa: $x = 7$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$x = 7$"
+      },
+      {
+        "id": "B",
+        "texto": "$y = 1$"
+      },
+      {
+        "id": "C",
+        "texto": "$z = -4$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_8_21",
+    "topicoId": "topico_8",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Equações de Planos e Lugares Geométricos",
+    "paginaInicio": 146,
+    "paginaFim": 170,
+    "manualRef": "Caderno 1, Pág. 167, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é o valor de $k$ para que os planos $x + ky + z = 0$ e $2x - 4y + 2z = 5$ sejam perpendiculares?",
+    "tipo": "numero",
+    "respostaCorreta": 1,
+    "passosResolucao": [
+      "$\\vec{n}_1 \\cdot \\vec{n}_2 = 1(2) + k(-4) + 1(2) = 0 \\iff 4 - 4k = 0 \\iff k = 1$."
+    ]
+  },
+  {
+    "id": "GEO_8_22",
+    "topicoId": "topico_8",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Equações de Planos e Lugares Geométricos",
+    "paginaInicio": 146,
+    "paginaFim": 170,
+    "manualRef": "Caderno 1, Pág. 168, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A interseção do plano $x + 2y + 3z = 6$ com o eixo $Oz$ ($x = 0, y = 0$) tem que cota $z$?",
+    "tipo": "numero",
+    "respostaCorreta": 2,
+    "passosResolucao": [
+      "$3z = 6 \\iff z = 2$."
+    ]
+  },
+  {
+    "id": "GEO_8_23",
+    "topicoId": "topico_8",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Equações de Planos e Lugares Geométricos",
+    "paginaInicio": 146,
+    "paginaFim": 170,
+    "manualRef": "Caderno 1, Pág. 169, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O plano de equação $z = 0$ corresponde a qual dos planos coordenados?",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Cota nula define o plano horizontal $xOy$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Plano $xOy$"
+      },
+      {
+        "id": "B",
+        "texto": "Plano $xOz$"
+      },
+      {
+        "id": "C",
+        "texto": "Plano $yOz$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_8_24",
+    "topicoId": "topico_8",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Equações de Planos e Lugares Geométricos",
+    "paginaInicio": 146,
+    "paginaFim": 170,
+    "manualRef": "Caderno 1, Pág. 146, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se um plano passa na origem, o seu termo independente $D$ na equação $Ax + By + Cz + D = 0$ é:",
+    "tipo": "numero",
+    "respostaCorreta": 0,
+    "passosResolucao": [
+      "$A(0) + B(0) + C(0) + D = 0 \\implies D = 0$."
+    ]
+  },
+  {
+    "id": "GEO_8_25",
+    "topicoId": "topico_8",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Equações de Planos e Lugares Geométricos",
+    "paginaInicio": 146,
+    "paginaFim": 170,
+    "manualRef": "Caderno 1, Pág. 147, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é a distância do ponto $(0, 0, 8)$ ao plano $z = 3$?",
+    "tipo": "numero",
+    "respostaCorreta": 5,
+    "passosResolucao": [
+      "A distância é $|8 - 3| = 5$."
+    ]
+  },
+  {
+    "id": "GEO_8_26",
+    "topicoId": "topico_8",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Equações de Planos e Lugares Geométricos",
+    "paginaInicio": 146,
+    "paginaFim": 170,
+    "manualRef": "Caderno 1, Pág. 148, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A esfera $(x - 1)^2 + (y - 1)^2 + (z - 1)^2 = 9$ interseta o plano $x = 1$ segundo:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Substituindo $x = 1$, temos $(y - 1)^2 + (z - 1)^2 = 9$, que é uma circunferência de raio 3 no plano."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Uma circunferência de raio 3"
+      },
+      {
+        "id": "B",
+        "texto": "Um único ponto"
+      },
+      {
+        "id": "C",
+        "texto": "Vazio"
+      }
+    ]
+  },
+  {
+    "id": "GEO_8_27",
+    "topicoId": "topico_8",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Equações de Planos e Lugares Geométricos",
+    "paginaInicio": 146,
+    "paginaFim": 170,
+    "manualRef": "Caderno 1, Pág. 149, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O plano mediador de $[AB]$ com $A(1, 0, 0)$ e $B(-1, 0, 0)$ tem equação:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "O ponto médio é a origem e o vetor normal é $\\vec{AB} = (-2, 0, 0)$, logo o plano é $x = 0$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$x = 0$ (plano $yOz$)"
+      },
+      {
+        "id": "B",
+        "texto": "$y = 0$"
+      },
+      {
+        "id": "C",
+        "texto": "$z = 0$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_8_28",
+    "topicoId": "topico_8",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Equações de Planos e Lugares Geométricos",
+    "paginaInicio": 146,
+    "paginaFim": 170,
+    "manualRef": "Caderno 1, Pág. 150, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Dois planos com vetores normais não colineares intersetam-se segundo:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Dois planos secantes intersetam-se exatamente numa reta comum."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Uma reta"
+      },
+      {
+        "id": "B",
+        "texto": "Um ponto"
+      },
+      {
+        "id": "C",
+        "texto": "Um plano"
+      }
+    ]
+  },
+  {
+    "id": "GEO_8_29",
+    "topicoId": "topico_8",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Equações de Planos e Lugares Geométricos",
+    "paginaInicio": 146,
+    "paginaFim": 170,
+    "manualRef": "Caderno 1, Pág. 151, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é o valor de $p$ para que o ponto $(p, 1, 2)$ pertença ao plano $2x - y + z = 7$?",
+    "tipo": "numero",
+    "respostaCorreta": 3,
+    "passosResolucao": [
+      "$2p - 1 + 2 = 7 \\iff 2p + 1 = 7 \\iff 2p = 6 \\iff p = 3$."
+    ]
+  },
+  {
+    "id": "GEO_8_30",
+    "topicoId": "topico_8",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Equações de Planos e Lugares Geométricos",
+    "paginaInicio": 146,
+    "paginaFim": 170,
+    "manualRef": "Caderno 1, Pág. 152, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A equação $2x = 8$ no espaço tridimensional representa:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "No espaço $Oxyz$, uma equação linear define um plano."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "O plano $x = 4$"
+      },
+      {
+        "id": "B",
+        "texto": "A reta $x = 4$"
+      },
+      {
+        "id": "C",
+        "texto": "O ponto 4"
+      }
+    ]
+  },
+  {
+    "id": "GEO_8_31",
+    "topicoId": "topico_8",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Equações de Planos e Lugares Geométricos",
+    "paginaInicio": 146,
+    "paginaFim": 170,
+    "manualRef": "Caderno 1, Pág. 153, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é o vetor normal unitário de $z = 5$ com sentido positivo?",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "O vetor normal a $z = k$ tem direção do eixo $Oz$: $(0, 0, 1)$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$(0, 0, 1)$"
+      },
+      {
+        "id": "B",
+        "texto": "$(0, 1, 0)$"
+      },
+      {
+        "id": "C",
+        "texto": "$(1, 0, 0)$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_8_32",
+    "topicoId": "topico_8",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Equações de Planos e Lugares Geométricos",
+    "paginaInicio": 146,
+    "paginaFim": 170,
+    "manualRef": "Caderno 1, Pág. 154, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se $\\vec{n}_1 = (1, 0, 0)$ e $\\vec{n}_2 = (0, 1, 0)$, os planos correspondentes são:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "$\\vec{n}_1 \\cdot \\vec{n}_2 = 1(0) + 0(1) + 0(0) = 0$, logo são perpendiculares."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Perpendiculares"
+      },
+      {
+        "id": "B",
+        "texto": "Paralelos"
+      },
+      {
+        "id": "C",
+        "texto": "Coincidentes"
+      }
+    ]
+  },
+  {
+    "id": "GEO_8_33",
+    "topicoId": "topico_8",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Equações de Planos e Lugares Geométricos",
+    "paginaInicio": 146,
+    "paginaFim": 170,
+    "manualRef": "Caderno 1, Pág. 155, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A distância entre os planos paralelos $x = 2$ e $x = 9$ é:",
+    "tipo": "numero",
+    "respostaCorreta": 7,
+    "passosResolucao": [
+      "$|9 - 2| = 7$."
+    ]
+  },
+  {
+    "id": "GEO_8_34",
+    "topicoId": "topico_8",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Equações de Planos e Lugares Geométricos",
+    "paginaInicio": 146,
+    "paginaFim": 170,
+    "manualRef": "Caderno 1, Pág. 156, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A condição $x \\ge 0 \\land y \\ge 0 \\land z = 0$ define:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "$z = 0$ restringe a figura ao plano $xOy$; as desigualdades definem o 1.º quadrante."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "O 1.º quadrante do plano $xOy$"
+      },
+      {
+        "id": "B",
+        "texto": "O 1.º octante do espaço"
+      }
+    ]
+  },
+  {
+    "id": "GEO_8_35",
+    "topicoId": "topico_8",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Equações de Planos e Lugares Geométricos",
+    "paginaInicio": 146,
+    "paginaFim": 170,
+    "manualRef": "Caderno 1, Pág. 157, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O plano que passa por $(0, 0, 0)$ com vetor normal $(1, 2, 3)$ é:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "$1(x - 0) + 2(y - 0) + 3(z - 0) = 0 \\iff x + 2y + 3z = 0$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$x + 2y + 3z = 0$"
+      },
+      {
+        "id": "B",
+        "texto": "$x + 2y + 3z = 6$"
+      }
+    ]
+  },
+  {
+    "id": "GEO_8_36",
+    "topicoId": "topico_8",
+    "dominio": "geometria",
+    "temaNome": "Geometria Analítica",
+    "subtema": "Equações de Planos e Lugares Geométricos",
+    "paginaInicio": 146,
+    "paginaFim": 170,
+    "manualRef": "Caderno 1, Pág. 158, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A interseção do plano $x + y + z = 1$ com o plano $z = 0$ no plano $xOy$ é a reta:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Substituindo $z = 0$ obtém-se $x + y = 1$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$x + y = 1$"
+      },
+      {
+        "id": "B",
+        "texto": "$x = 1$"
+      }
+    ]
   }
 ];

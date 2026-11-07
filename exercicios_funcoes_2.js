@@ -1,3 +1,4 @@
+// Caderno 2: Funções e Gráficos Parte 2 (Tópicos 11, 12) - 72 Itens
 const EXERCICIOS_FUNCOES_2 = [
   {
     "id": "FUNC_11_01",
@@ -424,6 +425,515 @@ const EXERCICIOS_FUNCOES_2 = [
     "paginaFim": 90
   },
   {
+    "id": "FUNC_11_16",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Funções Quadráticas e Função Módulo",
+    "paginaInicio": 61,
+    "paginaFim": 90,
+    "manualRef": "Caderno 2, Pág. 77, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é o vértice da parábola $y = (x - 5)^2 + 2$?",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Forma canónica $y = a(x - h)^2 + k$: vértice em $(5, 2)$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$(5, 2)$"
+      },
+      {
+        "id": "B",
+        "texto": "$(-5, 2)$"
+      },
+      {
+        "id": "C",
+        "texto": "$(5, -2)$"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_11_17",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Funções Quadráticas e Função Módulo",
+    "paginaInicio": 61,
+    "paginaFim": 90,
+    "manualRef": "Caderno 2, Pág. 78, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Quantas soluções tem a equação $|x - 2| = 0$?",
+    "tipo": "numero",
+    "respostaCorreta": 1,
+    "passosResolucao": [
+      "$x - 2 = 0 \\iff x = 2$. Tem 1 solução."
+    ]
+  },
+  {
+    "id": "FUNC_11_18",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Funções Quadráticas e Função Módulo",
+    "paginaInicio": 61,
+    "paginaFim": 90,
+    "manualRef": "Caderno 2, Pág. 79, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se $y = -2x^2 + 8x - 3$, qual é a abcissa do vértice?",
+    "tipo": "numero",
+    "respostaCorreta": 2,
+    "passosResolucao": [
+      "$x_v = -\\frac{b}{2a} = -\\frac{8}{2(-2)} = 2$."
+    ]
+  },
+  {
+    "id": "FUNC_11_19",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Funções Quadráticas e Função Módulo",
+    "paginaInicio": 61,
+    "paginaFim": 90,
+    "manualRef": "Caderno 2, Pág. 80, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O valor de $|-17|$ é:",
+    "tipo": "numero",
+    "respostaCorreta": 17,
+    "passosResolucao": [
+      "O módulo de um número negativo é o seu simétrico: 17."
+    ]
+  },
+  {
+    "id": "FUNC_11_20",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Funções Quadráticas e Função Módulo",
+    "paginaInicio": 61,
+    "paginaFim": 90,
+    "manualRef": "Caderno 2, Pág. 81, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A parábola $y = 3(x + 1)^2 - 4$ tem concavidade voltada para:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Sendo $a > 0$, a concavidade aponta para cima."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Cima (porque $a = 3 > 0$)"
+      },
+      {
+        "id": "B",
+        "texto": "Baixo"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_11_21",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Funções Quadráticas e Função Módulo",
+    "paginaInicio": 61,
+    "paginaFim": 90,
+    "manualRef": "Caderno 2, Pág. 82, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é a menor das raízes de $x^2 - 7x + 10 = 0$?",
+    "tipo": "numero",
+    "respostaCorreta": 2,
+    "passosResolucao": [
+      "$(x - 2)(x - 5) = 0$. As raízes são 2 e 5. A menor é 2."
+    ]
+  },
+  {
+    "id": "FUNC_11_22",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Funções Quadráticas e Função Módulo",
+    "paginaInicio": 61,
+    "paginaFim": 90,
+    "manualRef": "Caderno 2, Pág. 83, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A inequação $|x| \\le 5$ tem como conjunto-solução:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "$|x| \\le 5 \\iff -5 \\le x \\le 5$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$[-5, 5]$"
+      },
+      {
+        "id": "B",
+        "texto": "$]-\\infty, 5]$"
+      },
+      {
+        "id": "C",
+        "texto": "$[0, 5]$"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_11_23",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Funções Quadráticas e Função Módulo",
+    "paginaInicio": 61,
+    "paginaFim": 90,
+    "manualRef": "Caderno 2, Pág. 84, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O eixo de simetria da parábola $y = 2(x - 7)^2 + 1$ é a reta:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "A reta vertical passa no vértice: $x = 7$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$x = 7$"
+      },
+      {
+        "id": "B",
+        "texto": "$y = 7$"
+      },
+      {
+        "id": "C",
+        "texto": "$x = -7$"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_11_24",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Funções Quadráticas e Função Módulo",
+    "paginaInicio": 61,
+    "paginaFim": 90,
+    "manualRef": "Caderno 2, Pág. 85, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é o valor mínimo da função $f(x) = (x - 3)^2 + 9$?",
+    "tipo": "numero",
+    "respostaCorreta": 9,
+    "passosResolucao": [
+      "O menor valor de $(x - 3)^2$ é 0, logo o mínimo é $0 + 9 = 9$."
+    ]
+  },
+  {
+    "id": "FUNC_11_25",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Funções Quadráticas e Função Módulo",
+    "paginaInicio": 61,
+    "paginaFim": 90,
+    "manualRef": "Caderno 2, Pág. 86, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Quantas soluções reais tem a equação $x^2 + 25 = 0$?",
+    "tipo": "numero",
+    "respostaCorreta": 0,
+    "passosResolucao": [
+      "$x^2 = -25$ não tem soluções reais. 0 soluções."
+    ]
+  },
+  {
+    "id": "FUNC_11_26",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Funções Quadráticas e Função Módulo",
+    "paginaInicio": 61,
+    "paginaFim": 90,
+    "manualRef": "Caderno 2, Pág. 87, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A expressão $|3 - \\pi|$ é igual a:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Como $\\pi \\approx 3.1416 > 3$, $3 - \\pi < 0$, logo $|3 - \\pi| = -(3 - \\pi) = \\pi - 3$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$\\pi - 3$"
+      },
+      {
+        "id": "B",
+        "texto": "$3 - \\pi$"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_11_27",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Funções Quadráticas e Função Módulo",
+    "paginaInicio": 61,
+    "paginaFim": 90,
+    "manualRef": "Caderno 2, Pág. 88, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O produto das raízes de $x^2 - 6x + 8 = 0$ é:",
+    "tipo": "numero",
+    "respostaCorreta": 8,
+    "passosResolucao": [
+      "Pelas relações de Viète, o produto é $\\frac{c}{a} = \\frac{8}{1} = 8$."
+    ]
+  },
+  {
+    "id": "FUNC_11_28",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Funções Quadráticas e Função Módulo",
+    "paginaInicio": 61,
+    "paginaFim": 90,
+    "manualRef": "Caderno 2, Pág. 89, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O gráfico de $f(x) = -|x| + 4$ atinge o seu valor máximo em $x = 0$. Qual é esse máximo?",
+    "tipo": "numero",
+    "respostaCorreta": 4,
+    "passosResolucao": [
+      "$f(0) = -0 + 4 = 4$."
+    ]
+  },
+  {
+    "id": "FUNC_11_29",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Funções Quadráticas e Função Módulo",
+    "paginaInicio": 61,
+    "paginaFim": 90,
+    "manualRef": "Caderno 2, Pág. 61, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A inequação $x^2 - 9 > 0$ tem por solução:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "A parábola tem concavidade para cima e zeros em $\\pm 3$, sendo positiva no exterior."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$]-\\infty, -3[ \\cup ]3, +\\infty[$"
+      },
+      {
+        "id": "B",
+        "texto": "$]-3, 3[$"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_11_30",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Funções Quadráticas e Função Módulo",
+    "paginaInicio": 61,
+    "paginaFim": 90,
+    "manualRef": "Caderno 2, Pág. 62, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se o discriminante $\\Delta < 0$, a parábola:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Sem raízes reais, a curva não toca no eixo das abcissas."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Não interseta o eixo $Ox$"
+      },
+      {
+        "id": "B",
+        "texto": "É tangente a $Ox$"
+      },
+      {
+        "id": "C",
+        "texto": "Corta $Ox$ em dois pontos"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_11_31",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Funções Quadráticas e Função Módulo",
+    "paginaInicio": 61,
+    "paginaFim": 90,
+    "manualRef": "Caderno 2, Pág. 63, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Resolva em $\\mathbb{R}$: $|x - 1| = 4$. Qual é a maior solução?",
+    "tipo": "numero",
+    "respostaCorreta": 5,
+    "passosResolucao": [
+      "$x - 1 = 4 \\implies x = 5$ (e $x - 1 = -4 \\implies x = -3$). A maior é 5."
+    ]
+  },
+  {
+    "id": "FUNC_11_32",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Funções Quadráticas e Função Módulo",
+    "paginaInicio": 61,
+    "paginaFim": 90,
+    "manualRef": "Caderno 2, Pág. 64, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é a ordenada do vértice de $y = x^2 - 4x$?",
+    "tipo": "numero",
+    "respostaCorreta": -4,
+    "passosResolucao": [
+      "$x_v = 2$. $y_v = 2^2 - 4(2) = 4 - 8 = -4$."
+    ]
+  },
+  {
+    "id": "FUNC_11_33",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Funções Quadráticas e Função Módulo",
+    "paginaInicio": 61,
+    "paginaFim": 90,
+    "manualRef": "Caderno 2, Pág. 65, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A função módulo $f(x) = |x|$ é crescente em:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Para $x \\ge 0$, $f(x) = x$, que tem declive positivo."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$[0, +\\infty[$"
+      },
+      {
+        "id": "B",
+        "texto": "$]-\\infty, 0]$"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_11_34",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Funções Quadráticas e Função Módulo",
+    "paginaInicio": 61,
+    "paginaFim": 90,
+    "manualRef": "Caderno 2, Pág. 66, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O conjunto de soluções de $x^2 \\le 0$ em $\\mathbb{R}$ é:",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "Como $x^2 \\ge 0$, a única possibilidade é $x^2 = 0 \\iff x = 0$."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "$\\{0\\}$"
+      },
+      {
+        "id": "B",
+        "texto": "$\\emptyset$"
+      },
+      {
+        "id": "C",
+        "texto": "$\\mathbb{R}$"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_11_35",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Funções Quadráticas e Função Módulo",
+    "paginaInicio": 61,
+    "paginaFim": 90,
+    "manualRef": "Caderno 2, Pág. 67, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Determine o zero positivo de $f(x) = |2x| - 8$.",
+    "tipo": "numero",
+    "respostaCorreta": 4,
+    "passosResolucao": [
+      "$|2x| = 8 \\implies 2x = 8 \\implies x = 4$."
+    ]
+  },
+  {
+    "id": "FUNC_11_36",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Funções Quadráticas e Função Módulo",
+    "paginaInicio": 61,
+    "paginaFim": 90,
+    "manualRef": "Caderno 2, Pág. 68, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A parábola $y = a x^2$ passa pelo ponto $(2, 12)$. Determine o valor de $a$.",
+    "tipo": "numero",
+    "respostaCorreta": 3,
+    "passosResolucao": [
+      "$12 = a(2^2) \\iff 12 = 4a \\iff a = 3$."
+    ]
+  },
+  {
     "id": "FUNC_12_01",
     "manualRef": "Caderno 2, Pág. 96, Ex. 1",
     "origem": "Manual Escolar",
@@ -807,5 +1317,414 @@ const EXERCICIOS_FUNCOES_2 = [
     "subtema": "Modelos Funcionais e Otimização",
     "paginaInicio": 91,
     "paginaFim": 120
+  },
+  {
+    "id": "FUNC_12_16",
+    "topicoId": "topico_12",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Modelos Funcionais e Otimização",
+    "paginaInicio": 91,
+    "paginaFim": 120,
+    "manualRef": "Caderno 2, Pág. 107, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Uma bola é lançada verticalmente e a sua altura em metros é $h(t) = -5t^2 + 10t$. Em que instante atinge a altura máxima?",
+    "tipo": "numero",
+    "respostaCorreta": 1,
+    "passosResolucao": [
+      "$t_v = -\\frac{10}{2(-5)} = 1$ segundo."
+    ]
+  },
+  {
+    "id": "FUNC_12_17",
+    "topicoId": "topico_12",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Modelos Funcionais e Otimização",
+    "paginaInicio": 91,
+    "paginaFim": 120,
+    "manualRef": "Caderno 2, Pág. 108, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "No modelo anterior $h(t) = -5t^2 + 10t$, qual é a altura máxima em metros?",
+    "tipo": "numero",
+    "respostaCorreta": 5,
+    "passosResolucao": [
+      "$h(1) = -5(1) + 10(1) = 5$ metros."
+    ]
+  },
+  {
+    "id": "FUNC_12_18",
+    "topicoId": "topico_12",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Modelos Funcionais e Otimização",
+    "paginaInicio": 91,
+    "paginaFim": 120,
+    "manualRef": "Caderno 2, Pág. 109, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O lucro de uma venda de $x$ camisolas é $L(x) = -2x^2 + 40x - 50$. Quantas camisolas maximizam o lucro?",
+    "tipo": "numero",
+    "respostaCorreta": 10,
+    "passosResolucao": [
+      "$x_v = -\\frac{40}{2(-2)} = 10$."
+    ]
+  },
+  {
+    "id": "FUNC_12_19",
+    "topicoId": "topico_12",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Modelos Funcionais e Otimização",
+    "paginaInicio": 91,
+    "paginaFim": 120,
+    "manualRef": "Caderno 2, Pág. 110, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Dois números têm soma 14. Qual é o produto máximo que podem ter?",
+    "tipo": "numero",
+    "respostaCorreta": 49,
+    "passosResolucao": [
+      "O produto máximo ocorre quando os números são iguais: $7 \\times 7 = 49$."
+    ]
+  },
+  {
+    "id": "FUNC_12_20",
+    "topicoId": "topico_12",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Modelos Funcionais e Otimização",
+    "paginaInicio": 91,
+    "paginaFim": 120,
+    "manualRef": "Caderno 2, Pág. 111, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "O custo em euros de produzir $x$ peças é $C(x) = x^2 - 12x + 100$. Para quantas peças o custo é mínimo?",
+    "tipo": "numero",
+    "respostaCorreta": 6,
+    "passosResolucao": [
+      "$x_v = -\\frac{-12}{2(1)} = 6$."
+    ]
+  },
+  {
+    "id": "FUNC_12_21",
+    "topicoId": "topico_12",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Modelos Funcionais e Otimização",
+    "paginaInicio": 91,
+    "paginaFim": 120,
+    "manualRef": "Caderno 2, Pág. 112, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Um retângulo de perímetro 20 cm tem área máxima quando é um quadrado de lado:",
+    "tipo": "numero",
+    "respostaCorreta": 5,
+    "passosResolucao": [
+      "$\\text{Lado} = \\frac{20}{4} = 5$ cm."
+    ]
+  },
+  {
+    "id": "FUNC_12_22",
+    "topicoId": "topico_12",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Modelos Funcionais e Otimização",
+    "paginaInicio": 91,
+    "paginaFim": 120,
+    "manualRef": "Caderno 2, Pág. 113, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A receita da venda de bilhetes a preço $p$ é $R(p) = -10p^2 + 120p$. Qual é o preço ótimo?",
+    "tipo": "numero",
+    "respostaCorreta": 6,
+    "passosResolucao": [
+      "$p_v = -\\frac{120}{2(-10)} = 6$ euros."
+    ]
+  },
+  {
+    "id": "FUNC_12_23",
+    "topicoId": "topico_12",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Modelos Funcionais e Otimização",
+    "paginaInicio": 91,
+    "paginaFim": 120,
+    "manualRef": "Caderno 2, Pág. 114, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Um projétil é lançado com $h(t) = 40t - 5t^2$. Em que instante regressa ao solo ($h = 0$)?",
+    "tipo": "numero",
+    "respostaCorreta": 8,
+    "passosResolucao": [
+      "$40t - 5t^2 = 0 \\iff 5t(8 - t) = 0 \\implies t = 8$ segundos."
+    ]
+  },
+  {
+    "id": "FUNC_12_24",
+    "topicoId": "topico_12",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Modelos Funcionais e Otimização",
+    "paginaInicio": 91,
+    "paginaFim": 120,
+    "manualRef": "Caderno 2, Pág. 115, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A função afim $C(t) = 15 + 2t$ representa o custo de um táxi com bandeirada de 15€ e 2€/km. Qual é o custo de 10 km?",
+    "tipo": "numero",
+    "respostaCorreta": 35,
+    "passosResolucao": [
+      "$C(10) = 15 + 2(10) = 35$ euros."
+    ]
+  },
+  {
+    "id": "FUNC_12_25",
+    "topicoId": "topico_12",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Modelos Funcionais e Otimização",
+    "paginaInicio": 91,
+    "paginaFim": 120,
+    "manualRef": "Caderno 2, Pág. 116, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Num modelo linear $y = mx$, a grandeza $y$ é diretamente proporcional a $x$. Como se chama a constante $m$?",
+    "tipo": "escolha_multipla",
+    "respostaCorreta": "A",
+    "passosResolucao": [
+      "$m$ é a constante de proporcionalidade direta."
+    ],
+    "opcoes": [
+      {
+        "id": "A",
+        "texto": "Constante de proporcionalidade direta"
+      },
+      {
+        "id": "B",
+        "texto": "Ordenada na origem"
+      }
+    ]
+  },
+  {
+    "id": "FUNC_12_26",
+    "topicoId": "topico_12",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Modelos Funcionais e Otimização",
+    "paginaInicio": 91,
+    "paginaFim": 120,
+    "manualRef": "Caderno 2, Pág. 117, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é o valor mínimo de $f(x) = 3x^2 - 18x + 30$?",
+    "tipo": "numero",
+    "respostaCorreta": 3,
+    "passosResolucao": [
+      "$x_v = \\frac{18}{6} = 3$. $f(3) = 3(9) - 18(3) + 30 = 27 - 54 + 30 = 3$."
+    ]
+  },
+  {
+    "id": "FUNC_12_27",
+    "topicoId": "topico_12",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Modelos Funcionais e Otimização",
+    "paginaInicio": 91,
+    "paginaFim": 120,
+    "manualRef": "Caderno 2, Pág. 118, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se a população de bactérias duplica a cada hora a partir de 100 bactérias, quantas há ao fim de 3 horas?",
+    "tipo": "numero",
+    "respostaCorreta": 800,
+    "passosResolucao": [
+      "$100 \\times 2^3 = 100 \\times 8 = 800$."
+    ]
+  },
+  {
+    "id": "FUNC_12_28",
+    "topicoId": "topico_12",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Modelos Funcionais e Otimização",
+    "paginaInicio": 91,
+    "paginaFim": 120,
+    "manualRef": "Caderno 2, Pág. 119, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A área de um triângulo retângulo com soma dos catetos igual a 12 cm é máxima para catetos de comprimento:",
+    "tipo": "numero",
+    "respostaCorreta": 6,
+    "passosResolucao": [
+      "A área é máxima quando os catetos são iguais: $c = 6$ cm."
+    ]
+  },
+  {
+    "id": "FUNC_12_29",
+    "topicoId": "topico_12",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Modelos Funcionais e Otimização",
+    "paginaInicio": 91,
+    "paginaFim": 120,
+    "manualRef": "Caderno 2, Pág. 91, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é o valor máximo da área no exercício anterior?",
+    "tipo": "numero",
+    "respostaCorreta": 18,
+    "passosResolucao": [
+      "$\\text{Área} = \\frac{6 \\times 6}{2} = 18$ cm$^2$."
+    ]
+  },
+  {
+    "id": "FUNC_12_30",
+    "topicoId": "topico_12",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Modelos Funcionais e Otimização",
+    "paginaInicio": 91,
+    "paginaFim": 120,
+    "manualRef": "Caderno 2, Pág. 92, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "No modelo $V(t) = 50 - 5t$, qual é o tempo até o volume atingir 0?",
+    "tipo": "numero",
+    "respostaCorreta": 10,
+    "passosResolucao": [
+      "$50 - 5t = 0 \\iff 5t = 50 \\iff t = 10$."
+    ]
+  },
+  {
+    "id": "FUNC_12_31",
+    "topicoId": "topico_12",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Modelos Funcionais e Otimização",
+    "paginaInicio": 91,
+    "paginaFim": 120,
+    "manualRef": "Caderno 2, Pág. 93, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Se o lucro máximo é atingido para 15 unidades e o lucro é dado por $L(x) = -(x - 15)^2 + 200$, qual é esse lucro?",
+    "tipo": "numero",
+    "respostaCorreta": 200,
+    "passosResolucao": [
+      "O lucro máximo no vértice é 200."
+    ]
+  },
+  {
+    "id": "FUNC_12_32",
+    "topicoId": "topico_12",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Modelos Funcionais e Otimização",
+    "paginaInicio": 91,
+    "paginaFim": 120,
+    "manualRef": "Caderno 2, Pág. 94, Ex. 3",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Um terreno retangular tem área fixa de 36 m$^2$. Qual é o perímetro mínimo?",
+    "tipo": "numero",
+    "respostaCorreta": 24,
+    "passosResolucao": [
+      "O perímetro é mínimo quando é quadrado de lado $\\sqrt{36} = 6$. Perímetro $= 4 \\times 6 = 24$."
+    ]
+  },
+  {
+    "id": "FUNC_12_33",
+    "topicoId": "topico_12",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Modelos Funcionais e Otimização",
+    "paginaInicio": 91,
+    "paginaFim": 120,
+    "manualRef": "Caderno 2, Pág. 95, Ex. 4",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "A função $f(t) = 20 - 4t$ representa a velocidade de desaceleração. Em que segundo o objeto para ($v = 0$)?",
+    "tipo": "numero",
+    "respostaCorreta": 5,
+    "passosResolucao": [
+      "$20 - 4t = 0 \\iff t = 5$."
+    ]
+  },
+  {
+    "id": "FUNC_12_34",
+    "topicoId": "topico_12",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Modelos Funcionais e Otimização",
+    "paginaInicio": 91,
+    "paginaFim": 120,
+    "manualRef": "Caderno 2, Pág. 96, Ex. 5",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Dois números positivos têm diferença 6. Qual é o valor de $x$ que minimiza o seu produto $x(x + 6)$?",
+    "tipo": "numero",
+    "respostaCorreta": -3,
+    "passosResolucao": [
+      "O vértice de $x^2 + 6x$ é em $x = -3$."
+    ]
+  },
+  {
+    "id": "FUNC_12_35",
+    "topicoId": "topico_12",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Modelos Funcionais e Otimização",
+    "paginaInicio": 91,
+    "paginaFim": 120,
+    "manualRef": "Caderno 2, Pág. 97, Ex. 1",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Um retângulo com um lado apoiado num rio tem vedação nos outros 3 lados com total de 60 metros. A largura ótima é:",
+    "tipo": "numero",
+    "respostaCorreta": 15,
+    "passosResolucao": [
+      "$A(x) = x(60 - 2x) = -2x^2 + 60x \\implies x_v = \\frac{60}{4} = 15$."
+    ]
+  },
+  {
+    "id": "FUNC_12_36",
+    "topicoId": "topico_12",
+    "dominio": "funcoes",
+    "temaNome": "Funções e Gráficos",
+    "subtema": "Modelos Funcionais e Otimização",
+    "paginaInicio": 91,
+    "paginaFim": 120,
+    "manualRef": "Caderno 2, Pág. 98, Ex. 2",
+    "origem": "CEO Banco Oficial",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é a área máxima desse terreno?",
+    "tipo": "numero",
+    "respostaCorreta": 450,
+    "passosResolucao": [
+      "$A(15) = 15(60 - 30) = 15 \\times 30 = 450$ m$^2$."
+    ]
   }
 ];

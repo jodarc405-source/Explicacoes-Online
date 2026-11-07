@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Matemática 10.º Ano - Treino Diário 10.º Ano (Ficha de Avaliação A4)</title>
+  <title>CEO - Centro de Estudo Online | Matemática 10.º Ano</title>
+  <link rel="icon" type="image/png" href="logo_ceo.png">
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -92,14 +93,13 @@
   <header class="bg-indigo-900 text-white shadow-md sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
       <div class="flex items-center gap-3">
-        <div class="bg-indigo-600 p-2.5 rounded-xl shadow-inner text-amber-300">
-          <i class="fa-solid fa-graduation-cap text-2xl"></i>
-        </div>
+        <img src="logo_ceo.png" alt="CEO Logo" class="w-11 h-11 rounded-xl shadow border border-indigo-400/40 object-cover bg-indigo-950" />
         <div>
           <h1 class="font-bold text-lg leading-tight flex items-center gap-2">
-            Matemática 10.º Ano <span class="bg-amber-400 text-indigo-950 text-xs px-2 py-0.5 rounded font-black">10.º ANO</span>
+            CEO <span class="text-xs text-indigo-300 font-normal hidden sm:inline">&bull; Centro de Estudo Online</span>
+            <span class="bg-amber-400 text-indigo-950 text-xs px-2 py-0.5 rounded font-black">10.º ANO</span>
           </h1>
-          <p class="text-xs text-indigo-200">Sessão Diária de 60 Minutos &bull; Ficha A4 &bull; Avaliação 0–20</p>
+          <p class="text-xs text-indigo-200">Treino Diário de 60 Minutos &bull; Ficha A4 &bull; Avaliação 0–20</p>
         </div>
       </div>
 
@@ -122,8 +122,8 @@
   <div class="print-only p-4 border-b-2 border-black mb-6">
     <div class="flex justify-between items-start">
       <div>
-        <h2 class="text-base font-bold uppercase tracking-wider">Ficha de Avaliação Formativa Diária &bull; Matemática A (10.º Ano)</h2>
-        <p class="text-xs text-gray-700">Manual Escolar de Referência &bull; Duração: 60 minutos &bull; Cotação Total: 20,0 valores</p>
+        <h2 class="text-base font-bold uppercase tracking-wider">CEO &bull; Centro de Estudo Online &bull; Matemática A (10.º Ano)</h2>
+        <p class="text-xs text-gray-700">Ficha de Avaliação Formativa &bull; Duração: 60 minutos &bull; Cotação Total: 20,0 valores</p>
         <p id="print-subtitulo-materia" class="text-xs font-semibold text-gray-800 mt-1"></p>
       </div>
       <div class="border border-black px-3 py-1.5 text-center">
@@ -141,26 +141,52 @@
   <!-- Conteúdo Principal -->
   <main class="max-w-6xl mx-auto px-4 py-6 flex-1 w-full container-prova-a4">
 
-    <!-- ==================== ABA 1: TREINO DIÁRIO (1 HORA) ==================== -->
+    <!-- ==================== ABA 1: TREINO DIÁRIO E FIM DE SEMANA ==================== -->
     <section id="aba-treino" class="space-y-6">
       
+      <!-- Seletor de Modalidade: Diária vs Fim de Semana (Sábado/Domingo) -->
+      <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Modalidade da Ficha:</span>
+        </div>
+        <div class="flex flex-wrap gap-2 text-xs font-bold">
+          <button id="btn-modo-diario" onclick="selecionarModalidade('diario')" class="px-4 py-2 rounded-xl border transition flex items-center gap-2 bg-indigo-600 text-white border-indigo-700 shadow-sm">
+            <i class="fa-solid fa-calendar-day"></i> Treino Diário (Seg–Sex)
+          </button>
+          <button id="btn-modo-sabado" onclick="selecionarModalidade('sabado')" class="px-4 py-2 rounded-xl border transition flex items-center gap-2 bg-slate-100 text-slate-700 border-slate-300 hover:bg-slate-200">
+            <i class="fa-solid fa-calendar-check text-indigo-600"></i> Ficha de Sábado (Consolidação I)
+          </button>
+          <button id="btn-modo-domingo" onclick="selecionarModalidade('domingo')" class="px-4 py-2 rounded-xl border transition flex items-center gap-2 bg-slate-100 text-slate-700 border-slate-300 hover:bg-slate-200">
+            <i class="fa-solid fa-shield-halved text-amber-600"></i> Ficha de Domingo (Consolidação II)
+          </button>
+        </div>
+      </div>
+
+      <!-- Banner Informativo da Modalidade Ativa -->
+      <div id="banner-modalidade" class="bg-indigo-50 border border-indigo-200 p-3.5 rounded-xl flex items-center justify-between text-xs text-indigo-950">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-circle-info text-indigo-600 text-base"></i>
+          <span id="texto-banner-modalidade"><strong>Modo Diário Ativo:</strong> 5 exercícios inéditos da matéria em estudo + 3 exercícios de matérias anteriores rodados equitativamente.</span>
+        </div>
+      </div>
+
       <!-- Painel de Controlo da Sessão com Seleção por Livro / Páginas -->
       <div id="painel-controlo" class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-4">
         
         <div class="border-b border-slate-100 pb-3 flex flex-wrap justify-between items-center gap-2">
           <div>
             <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
-              <i class="fa-solid fa-book-open text-indigo-600"></i> Selecionar Matéria do Manual Escolar (10.º Ano)
+              <i class="fa-solid fa-book-open text-indigo-600"></i> Matéria em Estudo na Escola (Manual do 10.º Ano)
             </h3>
-            <p class="text-xs text-slate-500">Escolha o caderno, o tema e o número de páginas estudadas pelo aluno até ao momento.</p>
+            <p class="text-xs text-slate-500">Escolha o volume, a matéria e o número de páginas estudadas pelo aluno até ao momento.</p>
           </div>
-          <span class="text-xs bg-indigo-50 text-indigo-700 font-bold px-3 py-1 rounded-full border border-indigo-200">
-            10.º Ano
+          <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-3 py-1 rounded-full border border-emerald-200">
+            Banco com 504 Exercícios (100 Dias)
           </span>
         </div>
 
         <!-- Seletores: Caderno, Tópico e Página Atual -->
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
+        <div id="grupo-seletores-materia" class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
           
           <!-- Seletor de Caderno -->
           <div class="md:col-span-4">
@@ -202,7 +228,7 @@
 
         <!-- Botões de Ação -->
         <div class="flex flex-wrap gap-3 pt-2">
-          <button onclick="iniciarSessao()" class="flex-1 sm:flex-initial px-6 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow transition flex items-center justify-center gap-2">
+          <button id="btn-iniciar-sessao" onclick="iniciarSessao()" class="flex-1 sm:flex-initial px-6 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow transition flex items-center justify-center gap-2">
             <i class="fa-solid fa-play"></i> Gerar Ficha Diária de 1 Hora
           </button>
           
@@ -266,7 +292,7 @@
       </div>
     </section>
 
-    <!-- ==================== ABA 3: DASHBOARD DE DESEMPENHO ==================== -->
+    <!-- ==================== ABA 3: DASHBOARD DE DESEMPENHO E CALENDÁRIO ==================== -->
     <section id="aba-dashboard" class="hidden space-y-6">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3">
@@ -302,6 +328,65 @@
         </div>
       </div>
 
+      <!-- ==================== CALENDÁRIO MENSAL DE DESEMPENHO E ATIVIDADE ==================== -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-wrap justify-between items-center gap-3 border-b border-slate-100 pb-3">
+          <div>
+            <h4 class="font-bold text-slate-800 text-base flex items-center gap-2">
+              <i class="fa-solid fa-calendar-days text-indigo-600"></i> Calendário Mensal de Atividade e Medalhas
+            </h4>
+            <p class="text-xs text-slate-500">Histórico dia a dia com ícones de classificação e avaliação de desempenho.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="mudarMesCalendario(-1)" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-lg transition">
+              <i class="fa-solid fa-chevron-left mr-1"></i> Anterior
+            </button>
+            <span id="label-mes-ano-calendario" class="font-bold text-slate-800 text-sm min-w-[150px] text-center">Novembro 2026</span>
+            <button onclick="mudarMesCalendario(1)" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-lg transition">
+              Seguinte <i class="fa-solid fa-chevron-right ml-1"></i>
+            </button>
+            <button onclick="irParaHojeCalendario()" class="px-2.5 py-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-bold rounded-lg border border-indigo-200 transition">
+              Hoje
+            </button>
+          </div>
+        </div>
+
+        <!-- Grelha do Calendário -->
+        <div id="grelha-calendario-container" class="overflow-x-auto">
+          <!-- Renderizado via JS -->
+        </div>
+
+        <!-- Detalhes do Dia Selecionado -->
+        <div id="detalhe-dia-calendario" class="hidden p-4 bg-indigo-50/80 border border-indigo-200 rounded-xl text-xs space-y-1.5">
+          <!-- Preenchido via JS ao clicar no dia -->
+        </div>
+
+        <!-- Legenda dos Ícones e Medalhas Conforme Especificado -->
+        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div class="font-bold text-slate-700 flex items-center gap-1.5">
+            <i class="fa-solid fa-ribbon text-indigo-600"></i> Critérios de Medalhas no Calendário:
+          </div>
+          <div class="flex flex-wrap items-center gap-3 text-xs font-medium">
+            <div class="flex items-center gap-1.5 bg-amber-50 border border-amber-300 px-2.5 py-1 rounded-lg text-amber-900 font-bold shadow-xs">
+              <i class="fa-solid fa-trophy text-amber-500 text-sm"></i> Ouro (18 a 20)
+            </div>
+            <div class="flex items-center gap-1.5 bg-slate-100 border border-slate-300 px-2.5 py-1 rounded-lg text-slate-800 font-bold shadow-xs">
+              <i class="fa-solid fa-medal text-slate-400 text-sm"></i> Prata (14 a 17)
+            </div>
+            <div class="flex items-center gap-1.5 bg-amber-100/70 border border-amber-400 px-2.5 py-1 rounded-lg text-amber-950 font-bold shadow-xs">
+              <i class="fa-solid fa-award text-amber-700 text-sm"></i> Bronze (10 a 13)
+            </div>
+            <div class="flex items-center gap-1.5 bg-orange-50 border border-orange-300 px-2.5 py-1 rounded-lg text-orange-900 font-bold shadow-xs">
+              <i class="fa-solid fa-face-frown text-orange-500 text-sm"></i> Mau (6 a 9)
+            </div>
+            <div class="flex items-center gap-1.5 bg-rose-50 border border-rose-300 px-2.5 py-1 rounded-lg text-rose-900 font-bold shadow-xs">
+              <i class="fa-solid fa-face-sad-tear text-rose-600 text-sm"></i> Muito Mau (0 a 5)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gráficos de Evolução e Radar -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
           <h4 class="font-bold text-slate-800 text-sm mb-4 flex items-center gap-2">
@@ -314,7 +399,7 @@
 
         <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
           <h4 class="font-bold text-slate-800 text-sm mb-4 flex items-center gap-2">
-            <i class="fa-solid fa-chart-pie text-emerald-600"></i> Domínio dos Módulos do Manual
+            <i class="fa-solid fa-chart-pie text-emerald-600"></i> Domínio dos Módulos do Programa
           </h4>
           <div class="h-64">
             <canvas id="grafico-dominio"></canvas>
@@ -334,7 +419,7 @@
 
   </main>
 
-  <!-- SCRIPTS DOS DADOS DO MANUAL MATEMÁTICA 10.º ANO -->
+  <!-- SCRIPTS DOS DADOS DO MANUAL MATEMÁTICA 10.º ANO (504 EXERCÍCIOS) -->
   <script src="banco_topicos.js"></script>
   <script src="exercicios_logica.js"></script>
   <script src="exercicios_geometria_plano.js"></script>
@@ -343,6 +428,6 @@
   <script src="exercicios_funcoes_2.js"></script>
   <script src="exercicios_estatistica.js"></script>
 
-    <script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

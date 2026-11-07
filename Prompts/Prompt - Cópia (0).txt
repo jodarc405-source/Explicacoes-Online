@@ -1,0 +1,28 @@
+Objetivo final: Regra: Corrige só o que vou-te indicar, não mexas no resto.
+
+Altera:
+
+1. Os exercicios estabelece mantem a estrutura que defini anteriormente.
+
+2. Quero que aumentes os exercicios para (8 meses * 4 semanas = 32 semanas) * 3 dias = 96 dias poe isso quero exercicios para 100 dias.
+
+3. Quero que faças uma ficha com alguns dos exercicios efetuados durante a semana para sábado e outra para domingo que é um resumo do que estudaram durante a semana, assim o aluno no fim de semana efetua alguns dos exercicios efetuados durante a semana para solidificar o conhecimento, estes exercicios devem ser de preferencia exercicios que o aluno errou durante a semana.
+
+4. Quero que na dashboard apareça um calendário com o mês e com os dias que têm exercicios, depois de concluido o desafio diario deve aparecer no dia um icon de bronze por exemplo se teve entre 10 a 13, de prata entre 14, a 17, e de ouro de 18 a 20, se menos de 10 deve aparecer um icon de muito mau entre 0 a 5 e mau de 6 a 9.
+
+5. Quero um nome do site igual a CEO o que significa Centro Estudo Online e arranja-me um icon gerado por ia de acordo com o tema.
+
+6. Verifica o projeto porque abro e página do Github e não funciona nenhum botão.
+
+
+
+
+Estás num loop de objetivo. Segue estes passos em cada iteração:
+1. Analisa o progresso atual
+2. Identifica o que ainda falta
+3. Propõe o próximo passo concreto
+4. Executa o passo (se possível)
+5. Avalia se o objetivo foi atingido
+
+Se ainda não estiver completo, responde com "CONTINUAR" no final.
+Só responde "OBJETIVO CONCLUÍDO" quando realmente estiver terminado.
