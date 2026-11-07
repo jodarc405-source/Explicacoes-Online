@@ -12,6 +12,7 @@ const PONTOS_POR_EXERCICIO = 2.5;     // 8 * 2.5 = 20.0 valores
 const STORAGE_HISTORICO = 'mat10_historico';
 const STORAGE_AUTH = 'mat10_auth';
 const STORAGE_FALTAS = 'mat10_faltas';
+const STORAGE_RESET_KEY = 'mat10_clean_reset_v2'; // Chave para garantir reset limpo inicial
 
 // Estado da Aplicação
 let modalidadeSessao = 'diario'; // 'diario' | 'sabado' | 'domingo'
@@ -20,6 +21,9 @@ let respostasAluno = {};
 let segundosRestantes = DURACAO_SESSAO_SEGUNDOS;
 let intervaloCronometro = null;
 let sessaoEmAndamento = false;
+
+// Data de treino selecionada através do calendário
+let dataTreinoSelecionada = null;
 
 // Recuperação de Faltas
 let faltaEmRecuperacaoId = null;
@@ -63,13 +67,22 @@ function obterExerciciosPorTopico(topicoId) {
 // INICIALIZAÇÃO DA APLICAÇÃO
 // ==========================================
 window.addEventListener('DOMContentLoaded', () => {
+  // 1. Reset automático de histórico prévio para iniciar limpo
+  verificarAutoReset();
+
+  // 2. Inicialização de autenticação e dados
   inicializarAuth();
   sincronizarFaltasComHistorico();
   atualizarListaTopicos();
+
+  // 3. REGRA: A primeira página ao abrir deve ser SEMPRE a Dashboard!
+  mudarAba('dashboard');
+
+  // 4. Renderizar a dashboard com contagens limpas e calendário
   carregarDashboard();
   renderizarMatematica();
 
-  // Sugestão automática de fim de semana se for Sábado ou Domingo
+  // Sugestão automática de modalidade para hoje
   const diaSemanaHoje = new Date().getDay(); // 0 = Dom, 6 = Sáb
   if (diaSemanaHoje === 6) {
     selecionarModalidade('sabado');
@@ -78,14 +91,25 @@ window.addEventListener('DOMContentLoaded', () => {
   } else {
     selecionarModalidade('diario');
   }
-
-  // Se for aluno e já tiver efetuado pelo menos a primeira ficha, verificar faltas
-  const historico = JSON.parse(localStorage.getItem(STORAGE_HISTORICO) || '[]');
-  const auth = obterConfigAuth();
-  if (historico.length > 0 && auth.sessaoAtiva && auth.sessaoAtiva.perfil === 'aluno') {
-    setTimeout(verificarFaltasObrigatoriasAluno, 600);
-  }
 });
+
+// Reset às contagens e notas solicitado pelo utilizador
+function verificarAutoReset() {
+  if (!localStorage.getItem(STORAGE_RESET_KEY)) {
+    localStorage.removeItem(STORAGE_HISTORICO);
+    localStorage.removeItem(STORAGE_FALTAS);
+    localStorage.setItem(STORAGE_RESET_KEY, 'true');
+  }
+}
+
+function confirmarResetHistorico() {
+  if (confirm("Tens a certeza de que desejas apagar o histórico de exercícios realizados e reiniciar todas as contagens, notas e faltas para zero?")) {
+    localStorage.removeItem(STORAGE_HISTORICO);
+    localStorage.removeItem(STORAGE_FALTAS);
+    alert("Histórico e contagens reiniciados com sucesso! O sistema está pronto do zero.");
+    carregarDashboard();
+  }
+}
 
 // ==========================================
 // 1. SISTEMA DE LOGIN & PERFIS INTERLIGADOS
@@ -299,7 +323,6 @@ function submeterAlteracaoSenha() {
   msgErro.classList.add('hidden');
   msgSucesso.classList.add('hidden');
 
-  // Verificar senha atual
   const perfilAtivo = auth.sessaoAtiva ? auth.sessaoAtiva.perfil : 'aluno';
   const senhaEsperada = (perfilAtivo === 'pais') ? auth.senhaPais : auth.senhaAluno;
 
@@ -309,7 +332,6 @@ function submeterAlteracaoSenha() {
     return;
   }
 
-  // Se for aluno, não pode alterar a senha dos pais!
   if (perfilAtivo === 'aluno' && alvoPerfil === 'pais') {
     msgErro.textContent = 'O Aluno apenas tem permissão para alterar a sua própria palavra-passe.';
     msgErro.classList.remove('hidden');
@@ -328,7 +350,6 @@ function submeterAlteracaoSenha() {
     return;
   }
 
-  // Salvar a nova palavra-passe
   if (alvoPerfil === 'aluno') {
     auth.senhaAluno = senhaNova;
   } else {
@@ -347,8 +368,6 @@ function submeterAlteracaoSenha() {
 // ==========================================
 // 3. DIAS DE ESTUDO & REGISTO DE FALTAS
 // ==========================================
-// Regime oficial: Segundas (1), Quartas (3), Sextas (5), Sábado (6) e Domingo (0).
-// Terças (2) e Quintas (4) são dias de descanso.
 function isDiaDeEstudo(dataObj) {
   const diaSem = dataObj.getDay();
   return (diaSem === 1 || diaSem === 3 || diaSem === 5 || diaSem === 6 || diaSem === 0);
@@ -380,22 +399,21 @@ function salvarFaltas(faltas) {
   localStorage.setItem(STORAGE_FALTAS, JSON.stringify(faltas));
 }
 
-// REGRA: AS FALTAS INICIAM SÓ DEPOIS DO ALUNO EFETUAR A PRIMEIRA FICHA!
+// REGRA IMPERATIVA: AS FALTAS INICIAM SÓ DEPOIS DO ALUNO EFETUAR A PRIMEIRA FICHA!
 function sincronizarFaltasComHistorico() {
   const historico = JSON.parse(localStorage.getItem(STORAGE_HISTORICO) || '[]');
 
-  // Se o aluno ainda não efetuou nenhuma ficha, não há qualquer falta!
-  if (historico.length === 0) {
+  // Se o aluno ainda não efetuou nenhuma ficha, NUNCA há faltas!
+  if (!historico || historico.length === 0) {
     salvarFaltas([]);
     return;
   }
 
-  // Data da primeira ficha realizada
   const timestamps = historico.map(s => new Date(s.data).getTime());
   const dataPrimeiraFicha = new Date(Math.min(...timestamps));
   dataPrimeiraFicha.setHours(0, 0, 0, 0);
 
-  // As faltas só começam a contar para os dias estritamente posteriores à primeira ficha realizada
+  // As faltas só começam a contar no dia seguinte à PRIMEIRA ficha alguma vez concluída
   const dataInicioFaltas = new Date(dataPrimeiraFicha);
   dataInicioFaltas.setDate(dataInicioFaltas.getDate() + 1);
 
@@ -403,9 +421,7 @@ function sincronizarFaltasComHistorico() {
   hoje.setHours(0, 0, 0, 0);
 
   if (dataInicioFaltas >= hoje) {
-    // Ainda não decorreram dias completos de estudo após a primeira ficha
-    let faltasValidas = obterFaltas().filter(f => new Date(f.data + 'T00:00:00') >= dataInicioFaltas);
-    salvarFaltas(faltasValidas);
+    salvarFaltas([]);
     return;
   }
 
@@ -424,11 +440,11 @@ function sincronizarFaltasComHistorico() {
             id: 'falta_' + dataIso,
             data: dataIso,
             diaSemana: obterNomeDiaSemana(cursor),
-            justificacaoAluno: null, // pendente de preenchimento obrigatório
+            justificacaoAluno: null,
             dataRecuperacaoAgendada: null,
             recuperada: false,
             dataRecuperacaoEfetiva: null,
-            estadoPais: 'Pendente', // 'Pendente' | 'Justificada' | 'Injustificada'
+            estadoPais: 'Pendente',
             parecerPais: '',
             criadaEm: new Date().toISOString()
           });
@@ -437,7 +453,6 @@ function sincronizarFaltasComHistorico() {
     }
   }
 
-  // Sincronizar faltas que já foram recuperadas
   historico.forEach(s => {
     if (s.faltaIdRecuperada) {
       const f = faltas.find(item => item.id === s.faltaIdRecuperada);
@@ -460,7 +475,7 @@ function verificarFaltasObrigatoriasAluno() {
   if (!auth.sessaoAtiva || auth.sessaoAtiva.perfil !== 'aluno') return;
 
   const historico = JSON.parse(localStorage.getItem(STORAGE_HISTORICO) || '[]');
-  if (historico.length === 0) return; // As faltas só iniciam depois da primeira ficha
+  if (!historico || historico.length === 0) return; // As faltas só iniciam depois da primeira ficha
 
   const faltas = obterFaltas();
   const faltasSemJustificacao = faltas.filter(f => !f.justificacaoAluno || f.justificacaoAluno.trim() === '');
@@ -473,7 +488,6 @@ function verificarFaltasObrigatoriasAluno() {
     return;
   }
 
-  // Renderizar o formulário obrigatório
   let html = '';
   const hojeIso = formatarDataIso(new Date());
 
@@ -604,7 +618,7 @@ function calcularMetricasAssiduidade() {
 
   const totalDiasEstudoEsperados = fichasFeitas + faltasTotal;
 
-  // Se o aluno ainda não fez nenhuma ficha, está no início da jornada
+  // Se o aluno ainda não fez nenhuma ficha, está no início limpo da jornada
   if (fichasFeitas === 0) {
     return {
       fichasFeitas: 0,
@@ -617,12 +631,12 @@ function calcularMetricasAssiduidade() {
       taxaAssiduidade: 100,
       escala: {
         nivel: 'exemplar',
-        titulo: 'Aluno Exemplar (Início)',
+        titulo: 'Aluno Exemplar (Início da Jornada)',
         icone: 'fa-trophy',
         corTexto: 'text-amber-500',
         corBg: 'bg-amber-50',
         corBorda: 'border-amber-300',
-        descricao: 'Pronto para iniciar! Realiza a tua primeira ficha de 60 minutos para inaugurar o teu histórico escolar e a contagem de assiduidade.'
+        descricao: 'Bem-vindo ao CEO! Clica em qualquer dia do calendário abaixo ou acede a "Treino" para realizares a tua primeira ficha formativa e iniciares o histórico escolar.'
       }
     };
   }
@@ -708,7 +722,6 @@ function renderizarEscalaTipoAluno() {
       </div>
     </div>
 
-    <!-- Destaque do Perfil Atual -->
     <div class="p-4 rounded-2xl border-2 ${e.corBorda} ${e.corBg} flex flex-col md:flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-4">
         <div class="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-3xl ${e.corTexto} border border-slate-200/80">
@@ -722,7 +735,6 @@ function renderizarEscalaTipoAluno() {
       </div>
     </div>
 
-    <!-- Barra de Progresso Visual de Assiduidade -->
     <div class="space-y-1.5">
       <div class="flex justify-between text-xs font-bold text-slate-600">
         <span>Assiduidade Global dos Dias de Estudo</span>
@@ -733,7 +745,6 @@ function renderizarEscalaTipoAluno() {
       </div>
     </div>
 
-    <!-- 4 Indicadores Rápidos -->
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2 text-center text-xs">
       <div class="bg-slate-50 border border-slate-200 p-2.5 rounded-xl">
         <div class="text-slate-500 font-bold">Fichas Realizadas</div>
@@ -772,7 +783,7 @@ function renderizarRegistoFaltas() {
     tabelaHtml = `
       <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-900 flex items-center gap-2">
         <i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i>
-        <span><strong>Excelente!</strong> Não existem faltas registadas. O aluno está a cumprir o calendário de estudo sem interrupções.</span>
+        <span><strong>Excelente!</strong> Não existem faltas registadas. O registo de assiduidade aos treinos oficiais inicia-se após a primeira ficha concluída.</span>
       </div>
     `;
   } else {
@@ -897,7 +908,7 @@ function cancelarModoRecuperacao() {
 }
 
 // ==========================================
-// 8. CALENDÁRIO MENSAL INTEGRADO
+// 8. CALENDÁRIO MENSAL & SELEÇÃO DE DIA DE EXERCÍCIO
 // ==========================================
 const NOMES_MESES = [
   'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
@@ -923,7 +934,6 @@ function renderizarCalendario() {
 
   document.getElementById('label-mes-ano-calendario').textContent = `${NOMES_MESES[mes]} ${ano}`;
 
-  // Mapear histórico por dia (formato YYYY-MM-DD)
   const mapaHistoricoPorDia = {};
   historico.forEach(item => {
     const dStr = item.data.split('T')[0];
@@ -933,16 +943,13 @@ function renderizarCalendario() {
     mapaHistoricoPorDia[dStr].push(item);
   });
 
-  // Mapear faltas por dia
   const mapaFaltasPorDia = {};
   faltas.forEach(f => {
     mapaFaltasPorDia[f.data] = f;
   });
 
-  // Dias da semana
   const diasSemana = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
 
-  // Primeiro dia do mês (0 = dom, 1 = seg...)
   const primeiroDiaDoMes = new Date(ano, mes, 1);
   let diaSemanaInicial = primeiroDiaDoMes.getDay();
   diaSemanaInicial = diaSemanaInicial === 0 ? 6 : diaSemanaInicial - 1; // Segunda = 0
@@ -960,7 +967,6 @@ function renderizarCalendario() {
       <div class="grid grid-cols-7 gap-2">
   `;
 
-  // Dias do mês anterior
   for (let i = diaSemanaInicial - 1; i >= 0; i--) {
     const numDia = totalDiasMesAnterior - i;
     html += `
@@ -970,7 +976,6 @@ function renderizarCalendario() {
     `;
   }
 
-  // Dias do mês atual
   const hoje = new Date();
   hoje.setHours(0, 0, 0, 0);
   const hojeStr = formatarDataIso(hoje);
@@ -987,7 +992,7 @@ function renderizarCalendario() {
     const faltaNesteDia = mapaFaltasPorDia[dataIso];
 
     let conteudoIcone = '';
-    let bordaClasse = isHoje ? 'border-2 border-indigo-500 bg-indigo-50/30' : 'border border-slate-200 bg-white hover:border-indigo-300';
+    let bordaClasse = isHoje ? 'border-2 border-indigo-500 bg-indigo-50/30' : 'border border-slate-200 bg-white hover:border-indigo-400 hover:shadow-sm';
 
     if (sessoesNesteDia.length > 0) {
       const melhorNota = Math.max(...sessoesNesteDia.map(s => s.nota));
@@ -1088,8 +1093,8 @@ function renderizarCalendario() {
     } else if (isHoje && eDiaEstudo) {
       conteudoIcone = `
         <div class="flex flex-col items-center mt-1">
-          <span class="text-[9px] font-bold text-indigo-700 bg-indigo-100/80 px-1.5 py-0.5 rounded-full">
-            <i class="fa-solid fa-hourglass-half mr-0.5"></i> Pendente Hoje
+          <span class="text-[9px] font-bold text-indigo-700 bg-indigo-100/90 px-1.5 py-0.5 rounded-full animate-pulse">
+            <i class="fa-solid fa-play mr-1"></i> Treinar Hoje
           </span>
         </div>
       `;
@@ -1100,7 +1105,7 @@ function renderizarCalendario() {
       : `<span class="text-[8px] font-medium text-slate-400 bg-slate-100 px-1 rounded">Livre</span>`;
 
     html += `
-      <div onclick="mostrarDetalheDia('${dataIso}')" class="min-h-[85px] p-2 rounded-xl transition cursor-pointer flex flex-col justify-between ${bordaClasse}">
+      <div onclick="mostrarDetalheDia('${dataIso}')" ondblclick="irParaTreinoComData('${dataIso}')" title="Clica para ver os detalhes e iniciar o treino deste dia" class="min-h-[85px] p-2 rounded-xl transition cursor-pointer flex flex-col justify-between ${bordaClasse}">
         <div class="flex justify-between items-center text-xs font-bold">
           <span class="${isHoje ? 'bg-indigo-600 text-white w-5 h-5 flex items-center justify-center rounded-full text-[10px]' : 'text-slate-700'}">${dia}</span>
           ${badgeEstudo}
@@ -1118,6 +1123,7 @@ function renderizarCalendario() {
   container.innerHTML = html;
 }
 
+// Detalhe ao clicar num dia do calendário & botão direto para os exercícios
 function mostrarDetalheDia(dataIso) {
   const historico = JSON.parse(localStorage.getItem(STORAGE_HISTORICO) || '[]');
   const faltas = obterFaltas();
@@ -1164,14 +1170,20 @@ function mostrarDetalheDia(dataIso) {
   }
 
   div.innerHTML = `
-    <div class="flex justify-between items-center border-b border-indigo-200/80 pb-2">
-      <div class="font-bold text-indigo-950 text-sm">
-        <i class="fa-solid fa-calendar-day text-indigo-600 mr-1.5"></i>
-        ${nomeDia}, ${dataIso} &bull; ${eDiaEstudo ? '<span class="text-indigo-600 font-bold">Dia Oficial de Estudo</span>' : '<span class="text-slate-500">Dia de Descanso</span>'}
+    <div class="flex flex-wrap justify-between items-center border-b border-indigo-200/80 pb-2 gap-2">
+      <div class="font-bold text-indigo-950 text-sm flex items-center gap-2">
+        <i class="fa-solid fa-calendar-day text-indigo-600"></i>
+        <span>${nomeDia}, ${dataIso}</span>
+        ${eDiaEstudo ? '<span class="text-[10px] bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded-full font-bold">Dia Oficial de Estudo</span>' : '<span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full">Dia Livre / Descanso</span>'}
       </div>
-      <button onclick="document.getElementById('detalhe-dia-calendario').classList.add('hidden')" class="text-slate-400 hover:text-slate-700 text-xs font-bold">
-        <i class="fa-solid fa-xmark"></i> Fechar
-      </button>
+      <div class="flex items-center gap-2">
+        <button onclick="irParaTreinoComData('${dataIso}')" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs shadow-md transition flex items-center gap-1.5">
+          <i class="fa-solid fa-play"></i> Fazer Treino deste Dia (${nomeDia})
+        </button>
+        <button onclick="document.getElementById('detalhe-dia-calendario').classList.add('hidden')" class="p-2 text-slate-400 hover:text-slate-700 text-xs font-bold">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
     </div>
     <div class="space-y-2 mt-2">
       ${infoFaltaHtml}
@@ -1185,21 +1197,79 @@ function mostrarDetalheDia(dataIso) {
   div.classList.remove('hidden');
 }
 
+// Redireciona o aluno do calendário para a página de exercícios daquele dia
+function irParaTreinoComData(dataIso) {
+  dataTreinoSelecionada = dataIso;
+  const dataObj = new Date(dataIso + 'T00:00:00');
+  const diaSemana = dataObj.getDay(); // 0 = Dom, 6 = Sáb
+  const nomeDia = obterNomeDiaSemana(dataObj);
+
+  // Ajusta automaticamente a modalidade em função do dia selecionado no calendário
+  if (diaSemana === 6) {
+    selecionarModalidade('sabado');
+  } else if (diaSemana === 0) {
+    selecionarModalidade('domingo');
+  } else {
+    selecionarModalidade('diario');
+  }
+
+  // Se houver uma falta pendente para este dia, ativa o modo de recuperação
+  const faltas = obterFaltas();
+  const falta = faltas.find(f => f.data === dataIso);
+  if (falta && !falta.recuperada) {
+    faltaEmRecuperacaoId = falta.id;
+    const bannerRecup = document.getElementById('banner-modo-recuperacao');
+    const textoRecup = document.getElementById('texto-banner-recuperacao');
+    if (bannerRecup && textoRecup) {
+      textoRecup.innerHTML = `<strong>A recuperar falta de ${nomeDia}, ${dataIso}:</strong> Resolve esta ficha de 8 exercícios. Ao submeteres, a tua falta ficará regularizada!`;
+      bannerRecup.classList.remove('hidden');
+    }
+  }
+
+  // Notificar na aba de treino o dia que foi selecionado
+  const bannerDia = document.getElementById('banner-dia-selecionado');
+  const titBanner = document.getElementById('titulo-banner-dia-selecionado');
+  const subBanner = document.getElementById('subtitulo-banner-dia-selecionado');
+  if (bannerDia && titBanner && subBanner) {
+    titBanner.textContent = `Ficha Selecionada para: ${nomeDia}, ${dataIso}`;
+    subBanner.textContent = `Configura a matéria que pretendes treinar ou clica em "Iniciar Desafio" para começares a tua ficha de 60 minutos.`;
+    bannerDia.classList.remove('hidden');
+  }
+
+  // Transição para a página de exercícios
+  mudarAba('treino');
+
+  // Scroll suave para o painel de controlo
+  setTimeout(() => {
+    const painel = document.getElementById('painel-controlo');
+    if (painel) {
+      painel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, 100);
+}
+
 // ==========================================
 // 9. NAVEGAÇÃO & CONTROLO DAS ABAS
 // ==========================================
 function mudarAba(aba) {
   ['treino', 'resultados', 'dashboard'].forEach(nome => {
-    document.getElementById(`aba-${nome}`).classList.add('hidden');
+    const sec = document.getElementById(`aba-${nome}`);
+    if (sec) sec.classList.add('hidden');
     const btn = document.getElementById(`nav-btn-${nome}`);
-    btn.classList.remove('bg-indigo-600', 'text-white', 'shadow');
-    btn.classList.add('text-indigo-200');
+    if (btn) {
+      btn.classList.remove('bg-indigo-600', 'text-white', 'shadow');
+      btn.classList.add('text-indigo-200');
+    }
   });
 
-  document.getElementById(`aba-${aba}`).classList.remove('hidden');
+  const secAtiva = document.getElementById(`aba-${aba}`);
+  if (secAtiva) secAtiva.classList.remove('hidden');
+
   const btnAtivo = document.getElementById(`nav-btn-${aba}`);
-  btnAtivo.classList.add('bg-indigo-600', 'text-white', 'shadow');
-  btnAtivo.classList.remove('text-indigo-200');
+  if (btnAtivo) {
+    btnAtivo.classList.add('bg-indigo-600', 'text-white', 'shadow');
+    btnAtivo.classList.remove('text-indigo-200');
+  }
 
   if (aba === 'dashboard') {
     carregarDashboard();
@@ -1215,18 +1285,18 @@ function selecionarModalidade(modo) {
   const banner = document.getElementById('texto-banner-modalidade');
 
   [btnDiario, btnSabado, btnDomingo].forEach(b => {
-    b.className = 'px-4 py-2 rounded-xl border transition flex items-center gap-2 bg-slate-100 text-slate-700 border-slate-300 hover:bg-slate-200';
+    if (b) b.className = 'px-4 py-2 rounded-xl border transition flex items-center gap-2 bg-slate-100 text-slate-700 border-slate-300 hover:bg-slate-200';
   });
 
-  if (modo === 'diario') {
+  if (modo === 'diario' && btnDiario) {
     btnDiario.className = 'px-4 py-2 rounded-xl border transition flex items-center gap-2 bg-indigo-600 text-white border-indigo-700 shadow-sm';
-    banner.innerHTML = '<strong>Modo Diário Ativo:</strong> 5 exercícios inéditos da matéria em estudo + 3 exercícios de matérias anteriores rodados equitativamente.';
-  } else if (modo === 'sabado') {
+    if (banner) banner.innerHTML = '<strong>Modo Diário Ativo:</strong> 5 exercícios inéditos da matéria em estudo + 3 exercícios de matérias anteriores rodados equitativamente.';
+  } else if (modo === 'sabado' && btnSabado) {
     btnSabado.className = 'px-4 py-2 rounded-xl border transition flex items-center gap-2 bg-amber-600 text-white border-amber-700 shadow-sm';
-    banner.innerHTML = '<strong>Modo Sábado Ativo (Consolidação Semanal):</strong> Resumo das matérias estudadas durante a semana, priorizando questões onde o aluno teve dúvidas ou erros.';
-  } else if (modo === 'domingo') {
+    if (banner) banner.innerHTML = '<strong>Modo Sábado Ativo (Consolidação Semanal):</strong> Resumo das matérias estudadas durante a semana, priorizando questões onde o aluno teve dúvidas ou erros.';
+  } else if (modo === 'domingo' && btnDomingo) {
     btnDomingo.className = 'px-4 py-2 rounded-xl border transition flex items-center gap-2 bg-purple-600 text-white border-purple-700 shadow-sm';
-    banner.innerHTML = '<strong>Modo Domingo Ativo (Revisão & Retificação):</strong> Incide prioritariamente sobre os exercícios errados durante a semana para solidificar o conhecimento antes da nova semana escolar.';
+    if (banner) banner.innerHTML = '<strong>Modo Domingo Ativo (Revisão & Retificação):</strong> Incide prioritariamente sobre os exercícios errados durante a semana para solidificar o conhecimento antes da nova semana escolar.';
   }
 
   const topicoSelect = document.getElementById('seletor-topico');
@@ -1382,7 +1452,6 @@ function iniciarSessao() {
   const topicoAtual = TOPICOS_MANUAL.find(t => t.id === topicoId);
   if (!topicoAtual) return;
 
-  // Gerar exercícios utilizando o mapeamento central
   if (modalidadeSessao === 'sabado' || modalidadeSessao === 'domingo') {
     exerciciosAtuais = gerarFichaFimDeSemana(modalidadeSessao, topicoAtual);
   } else {
@@ -1392,13 +1461,11 @@ function iniciarSessao() {
   respostasAluno = {};
   sessaoEmAndamento = true;
 
-  // Atualizar cabeçalho de impressão
   const printSub = document.getElementById('print-subtitulo-materia');
   if (printSub) {
     printSub.textContent = `Matéria Avaliada: ${topicoAtual.temaNome} - ${topicoAtual.subtema} (Modalidade: ${modalidadeSessao.toUpperCase()})`;
   }
 
-  // Cronómetro
   segundosRestantes = DURACAO_SESSAO_SEGUNDOS;
   atualizarCronometro();
   if (intervaloCronometro) clearInterval(intervaloCronometro);
@@ -1412,7 +1479,6 @@ function iniciarSessao() {
     }
   }, 1000);
 
-  // Exibir componentes
   document.getElementById('status-sessao').classList.remove('hidden');
   document.getElementById('painel-submissao').classList.remove('hidden');
   document.getElementById('btn-imprimir-enunciado').classList.remove('hidden');
@@ -1420,7 +1486,6 @@ function iniciarSessao() {
   renderizarListaExercicios();
   renderizarMatematica();
 
-  // Scroll suave até aos exercícios
   document.getElementById('status-sessao').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
@@ -1428,7 +1493,6 @@ function gerarFichaDiariaRegular(topicoAtual) {
   const indexTopico = TOPICOS_MANUAL.findIndex(t => t.id === topicoAtual.id);
   const topicosAnteriores = TOPICOS_MANUAL.slice(0, indexTopico);
 
-  // Obter o banco do tópico atual (36 exercícios disponíveis)
   const bancoAtual = obterExerciciosPorTopico(topicoAtual.id);
   const exerciciosSelecionados = [];
 
@@ -1441,17 +1505,14 @@ function gerarFichaDiariaRegular(topicoAtual) {
   const bancoNaoRepetido = bancoAtual.filter(ex => !idsJaFeitos.has(ex.id));
   const poolAtual = bancoNaoRepetido.length >= 5 ? bancoNaoRepetido : bancoAtual;
 
-  // Se for o primeiro tópico
   if (topicosAnteriores.length === 0) {
     const shuffle = [...poolAtual].sort(() => 0.5 - Math.random());
     return shuffle.slice(0, NUMERO_EXERCICIOS);
   }
 
-  // 5 exercícios inéditos da matéria atual
   const shuffleAtual = [...poolAtual].sort(() => 0.5 - Math.random());
   exerciciosSelecionados.push(...shuffleAtual.slice(0, 5));
 
-  // 3 exercícios de matérias anteriores distribuídos equitativamente
   const contagemPorTopico = {};
   topicosAnteriores.forEach(t => { contagemPorTopico[t.id] = 0; });
   historico.forEach(s => {
@@ -1480,7 +1541,6 @@ function gerarFichaDiariaRegular(topicoAtual) {
     }
   });
 
-  // Preencher até 8 se necessário
   while (exerciciosSelecionados.length < NUMERO_EXERCICIOS && poolAtual.length > 0) {
     const extra = poolAtual[Math.floor(Math.random() * poolAtual.length)];
     if (!exerciciosSelecionados.some(e => e.id === extra.id)) {
@@ -1498,7 +1558,6 @@ function gerarFichaFimDeSemana(modo, topicoAtual) {
   const errosSemana = obterErrosSemanaAtual();
   const feitosSemana = obterExerciciosFeitosSemanaAtual();
 
-  // 1. Prioridade absoluta: exercícios errados durante a semana
   const errosUnicos = [];
   const idsVistos = new Set();
   errosSemana.forEach(ex => {
@@ -1513,7 +1572,6 @@ function gerarFichaFimDeSemana(modo, topicoAtual) {
 
   listaFimDeSemana.push(...errosUnicos.slice(0, 5));
 
-  // 2. Faltando para 8: exercícios feitos durante a semana para fixação
   if (listaFimDeSemana.length < NUMERO_EXERCICIOS) {
     const restantesSemana = feitosSemana.filter(ex => !idsVistos.has(ex.id));
     const shuffleRestantes = [...restantesSemana].sort(() => 0.5 - Math.random());
@@ -1528,7 +1586,6 @@ function gerarFichaFimDeSemana(modo, topicoAtual) {
     });
   }
 
-  // 3. Se ainda faltar, preenche com exercícios da matéria em estudo
   if (listaFimDeSemana.length < NUMERO_EXERCICIOS) {
     const bancoAtual = obterExerciciosPorTopico(topicoAtual.id);
     const pool = bancoAtual.filter(ex => !idsVistos.has(ex.id));
@@ -1549,7 +1606,9 @@ function atualizarCronometro() {
   if (elem) elem.textContent = texto;
 }
 
-// Renderização dos Exercícios com Espaço Amplo para Resolução e Rascunho
+// ==============================================================================
+// 11. ESPAÇO DE RESOLUÇÃO PROPORCIONAL AO DESENVOLVIMENTO DO EXERCÍCIO
+// ==============================================================================
 function renderizarListaExercicios() {
   const container = document.getElementById('container-exercicios');
   container.innerHTML = '';
@@ -1561,6 +1620,20 @@ function renderizarListaExercicios() {
     const etiqueta = ex.etiquetaRevisao
       ? `<span class="bg-amber-100 text-amber-900 border border-amber-300 text-[10px] font-bold px-2 py-0.5 rounded-full">${ex.etiquetaRevisao}</span>`
       : `<span class="bg-indigo-100 text-indigo-800 text-[10px] font-bold px-2 py-0.5 rounded-full">${ex.subtema} (Pág. ${ex.paginaInicio || ex.pagina || '10'})</span>`;
+
+    // CÁLCULO DINÂMICO E PROPORCIONAL DO ESPAÇO DE RESOLUÇÃO
+    // Com base no número de passos de dedução e extensão dos cálculos previstos
+    const passosCount = (ex.resolucao && Array.isArray(ex.resolucao)) ? ex.resolucao.length : 3;
+    const totalCaracteresResolucao = (ex.resolucao && Array.isArray(ex.resolucao)) 
+      ? ex.resolucao.join(' ').length 
+      : 150;
+
+    // Linhas dinâmicas calculadas: de 8 linhas (simples) até 26 linhas (complexas com equações/tabelas)
+    let linhasDinamicas = Math.round(passosCount * 2.8 + totalCaracteresResolucao / 40);
+    linhasDinamicas = Math.max(8, Math.min(26, linhasDinamicas));
+
+    const alturaPixelEcra = Math.max(180, linhasDinamicas * 24);
+    const alturaPixelImpressao = Math.max(200, linhasDinamicas * 22);
 
     card.innerHTML = `
       <div class="flex justify-between items-center border-b border-slate-100 pb-2.5">
@@ -1577,26 +1650,33 @@ function renderizarListaExercicios() {
         ${ex.enunciado}
       </div>
 
-      <!-- Campo de Resposta no Ecrã -->
+      <!-- Campo de Resposta Final -->
       <div class="campo-input-ecra pt-1">
         ${renderizarOpcoesOuInput(ex)}
       </div>
 
-      <!-- ESPAÇO PARA O ALUNO RESOLVER O EXERCÍCIO NO ECRÃ (Rascunho & Deduções) -->
-      <div class="mt-4 pt-3 border-t border-slate-100 space-y-1.5 no-print">
-        <div class="flex items-center justify-between text-xs text-slate-600 font-bold">
+      <!-- ESPAÇO DE RESOLUÇÃO DO ALUNO (PROPORCIONAL AO DESENVOLVIMENTO DO EXERCÍCIO) -->
+      <div class="mt-4 pt-3 border-t border-slate-200 space-y-2 no-print">
+        <div class="flex flex-wrap items-center justify-between text-xs text-slate-700 font-bold gap-2">
           <span class="flex items-center gap-1.5">
-            <i class="fa-solid fa-pencil text-indigo-600"></i> Espaço de Resolução &amp; Rascunho do Aluno:
+            <i class="fa-solid fa-pencil text-indigo-600"></i> Espaço de Resolução &amp; Cálculos do Aluno:
           </span>
-          <span class="text-[10px] text-slate-400 font-normal">Podes efetuar aqui os teus cálculos intermédios</span>
+          <span class="text-[10px] text-indigo-700 bg-indigo-50 border border-indigo-200 px-2.5 py-0.5 rounded-full font-semibold">
+            Espaço Proporcional: ~${linhasDinamicas} linhas de cálculo (${passosCount} passos de dedução)
+          </span>
         </div>
-        <textarea id="rascunho_${ex.id}" rows="4" placeholder="✍️ Utiliza este espaço para cálculos, passos intermédios, equações e deduções..." class="w-full p-3 bg-amber-50/20 border border-slate-300 rounded-xl text-xs font-mono text-slate-800 placeholder:text-slate-400 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none transition resize-y"></textarea>
+        <textarea id="rascunho_${ex.id}" 
+          rows="${linhasDinamicas}" 
+          style="min-height: ${alturaPixelEcra}px;"
+          oninput="this.style.height = ''; this.style.height = Math.max(${alturaPixelEcra}, this.scrollHeight) + 'px'"
+          placeholder="✍️ Desenvolve aqui a tua resolução completa (espaço dimensionado em função da complexidade deste exercício: equações, cálculos, transformações e justificação)..." 
+          class="w-full p-4 bg-amber-50/20 border-2 border-slate-300 rounded-2xl text-xs font-mono text-slate-800 placeholder:text-slate-400 focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 focus:outline-none transition resize-y"></textarea>
       </div>
 
       <!-- Área de Resolução e Cálculos na Impressão A4 (Folha Milimétrica Oficial) -->
-      <div class="area-resolucao-impressao grid-papel-resolucao p-3 rounded mt-3">
+      <div class="area-resolucao-impressao grid-papel-resolucao p-4 rounded-xl mt-4" style="min-height: ${alturaPixelImpressao}px;">
         <div class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1">
-          Espaço reservado para cálculos, deduções e justificação formal (Folha Milimétrica Oficial)
+          Espaço proporcional para resolução manuscrita (Folha Milimétrica &bull; Desenvolvimento Estimado: ${passosCount} passos)
         </div>
       </div>
     `;
@@ -1655,7 +1735,7 @@ function imprimirResolucaoCompleta() {
 }
 
 // ==========================================
-// 11. AVALIAÇÃO FORMAL (0 A 20 VALORES)
+// 12. AVALIAÇÃO FORMAL (0 A 20 VALORES)
 // ==========================================
 function avaliarResposta(correta, dada, tipo) {
   if (!dada) return false;
@@ -1803,7 +1883,7 @@ function guardarHistoricoSessao(nota, certas, total, detalhes, modalidade) {
 
   const novaSessao = {
     id: 'sessao_' + Date.now(),
-    data: hoje,
+    data: dataTreinoSelecionada ? `${dataTreinoSelecionada}T12:00:00.000Z` : hoje,
     nota,
     certas,
     total,
@@ -1829,7 +1909,7 @@ function guardarHistoricoSessao(nota, certas, total, detalhes, modalidade) {
 }
 
 // ==========================================
-// 12. DASHBOARD & DIAGNÓSTICO PEDAGÓGICO
+// 13. DASHBOARD & DIAGNÓSTICO PEDAGÓGICO
 // ==========================================
 let chartEvolucao = null;
 let chartDominio = null;
@@ -1843,6 +1923,8 @@ function carregarDashboard() {
   if (historico.length > 0) {
     const media = (historico.reduce((acc, h) => acc + h.nota, 0) / historico.length).toFixed(1);
     document.getElementById('kpi-media').textContent = `${media} / 20`;
+  } else {
+    document.getElementById('kpi-media').textContent = `-- / 20`;
   }
 
   document.getElementById('kpi-streak').textContent = `${calcularStreak(historico)} dias`;
@@ -1958,7 +2040,7 @@ function renderizarGraficoDominio(historico) {
 function gerarDiagnostico(historico) {
   const div = document.getElementById('lista-diagnostico');
   if (historico.length === 0) {
-    div.innerHTML = `<p class="italic text-slate-400">Gera e submete a primeira ficha diária para emitir recomendações personalizadas.</p>`;
+    div.innerHTML = `<p class="italic text-slate-400">Seleciona um dia no calendário ou clica em "Treino" para realizares a tua primeira ficha e gerar o diagnóstico de aprendizagem.</p>`;
     return;
   }
   const media = (historico.reduce((acc, h) => acc + h.nota, 0) / historico.length);

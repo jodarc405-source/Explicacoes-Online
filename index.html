@@ -66,7 +66,6 @@
       .area-resolucao-impressao {
         display: block !important;
         border: 1px solid #cbd5e1 !important;
-        min-height: 150px;
         margin-top: 10px;
       }
 
@@ -103,17 +102,17 @@
         </div>
       </div>
 
-      <!-- Navegação Principal & Estado da Conta -->
+      <!-- Navegação Principal & Estado da Conta (Dashboard ativo por padrão) -->
       <div class="flex flex-wrap items-center gap-3">
         <nav class="flex bg-indigo-950/70 p-1 rounded-xl border border-indigo-700/50 text-sm">
-          <button id="nav-btn-treino" onclick="mudarAba('treino')" class="px-3.5 py-1.5 rounded-lg font-medium transition flex items-center gap-2 bg-indigo-600 text-white shadow">
+          <button id="nav-btn-dashboard" onclick="mudarAba('dashboard')" class="px-3.5 py-1.5 rounded-lg font-medium transition flex items-center gap-2 bg-indigo-600 text-white shadow">
+            <i class="fa-solid fa-chart-line"></i> Dashboard &amp; Assiduidade
+          </button>
+          <button id="nav-btn-treino" onclick="mudarAba('treino')" class="px-3.5 py-1.5 rounded-lg font-medium transition flex items-center gap-2 text-indigo-200 hover:text-white">
             <i class="fa-solid fa-pen-ruler"></i> Treino (1h)
           </button>
           <button id="nav-btn-resultados" onclick="mudarAba('resultados')" class="px-3.5 py-1.5 rounded-lg font-medium transition flex items-center gap-2 text-indigo-200 hover:text-white">
             <i class="fa-solid fa-square-poll-vertical"></i> Avaliação &amp; Resolução
-          </button>
-          <button id="nav-btn-dashboard" onclick="mudarAba('dashboard')" class="px-3.5 py-1.5 rounded-lg font-medium transition flex items-center gap-2 text-indigo-200 hover:text-white">
-            <i class="fa-solid fa-chart-line"></i> Dashboard &amp; Assiduidade
           </button>
         </nav>
 
@@ -158,8 +157,180 @@
   <!-- Conteúdo Principal -->
   <main class="max-w-6xl mx-auto px-4 py-6 flex-1 w-full container-prova-a4">
 
+    <!-- ==================== ABA 3: DASHBOARD E ASSIDUIDADE (PRIMEIRA PÁGINA POR DEFEITO) ==================== -->
+    <section id="aba-dashboard" class="space-y-6">
+
+      <!-- 4 KPIs Principais com Botão de Reset de Contagens -->
+      <div class="flex flex-wrap justify-between items-center gap-2">
+        <div class="text-xs text-slate-500 font-semibold">
+          <i class="fa-solid fa-house-chimney text-indigo-600 mr-1"></i> Painel Inicial do Aluno &bull; Seleciona um dia no calendário para começar
+        </div>
+        <button onclick="confirmarResetHistorico()" title="Reiniciar todas as contagens, notas e exercícios realizados" class="px-3 py-1.5 bg-white hover:bg-rose-50 text-slate-600 hover:text-rose-700 text-xs font-bold rounded-xl border border-slate-200 hover:border-rose-300 transition flex items-center gap-1.5 shadow-xs">
+          <i class="fa-solid fa-rotate-left text-slate-400"></i> Reiniciar Contagens / Reset
+        </button>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3">
+          <div class="bg-amber-100 text-amber-600 p-3 rounded-xl text-xl"><i class="fa-solid fa-fire"></i></div>
+          <div>
+            <div class="text-xs text-slate-500 font-bold uppercase">Streak Diário</div>
+            <div id="kpi-streak" class="text-2xl font-black text-slate-800">0 dias</div>
+          </div>
+        </div>
+
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3">
+          <div class="bg-indigo-100 text-indigo-600 p-3 rounded-xl text-xl"><i class="fa-solid fa-award"></i></div>
+          <div>
+            <div class="text-xs text-slate-500 font-bold uppercase">Média Global</div>
+            <div id="kpi-media" class="text-2xl font-black text-slate-800">-- / 20</div>
+          </div>
+        </div>
+
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3">
+          <div class="bg-emerald-100 text-emerald-600 p-3 rounded-xl text-xl"><i class="fa-solid fa-hourglass-half"></i></div>
+          <div>
+            <div class="text-xs text-slate-500 font-bold uppercase">Horas Feitas</div>
+            <div id="kpi-horas" class="text-2xl font-black text-slate-800">0h</div>
+          </div>
+        </div>
+
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3">
+          <div class="bg-blue-100 text-blue-600 p-3 rounded-xl text-xl"><i class="fa-solid fa-circle-check"></i></div>
+          <div>
+            <div class="text-xs text-slate-500 font-bold uppercase">Exercícios</div>
+            <div id="kpi-total-ex" class="text-2xl font-black text-slate-800">0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== CALENDÁRIO MENSAL DE ESTUDO & SELEÇÃO DE DIAS ==================== -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-wrap justify-between items-center gap-3 border-b border-slate-100 pb-3">
+          <div>
+            <h4 class="font-bold text-slate-800 text-base flex items-center gap-2">
+              <i class="fa-solid fa-calendar-days text-indigo-600"></i> Calendário Mensal de Estudo e Medalhas
+            </h4>
+            <p class="text-xs text-slate-500">
+              Clica em qualquer dia para ver os detalhes e clica em <strong>"Fazer Treino deste Dia"</strong> para ires diretamente para a ficha de exercícios!
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="mudarMesCalendario(-1)" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-lg transition">
+              <i class="fa-solid fa-chevron-left mr-1"></i> Anterior
+            </button>
+            <span id="label-mes-ano-calendario" class="font-bold text-slate-800 text-sm min-w-[150px] text-center">Novembro 2026</span>
+            <button onclick="mudarMesCalendario(1)" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-lg transition">
+              Seguinte <i class="fa-solid fa-chevron-right ml-1"></i>
+            </button>
+            <button onclick="irParaHojeCalendario()" class="px-2.5 py-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-bold rounded-lg border border-indigo-200 transition">
+              Hoje
+            </button>
+          </div>
+        </div>
+
+        <!-- Grelha do Calendário (Com seleção interativa de dias) -->
+        <div id="grelha-calendario-container" class="overflow-x-auto">
+          <!-- Renderizado via JS -->
+        </div>
+
+        <!-- Detalhes do Dia Selecionado com Botão de Acesso Direto aos Exercícios -->
+        <div id="detalhe-dia-calendario" class="hidden p-4 bg-indigo-50/90 border-2 border-indigo-200 rounded-2xl text-xs space-y-2">
+          <!-- Preenchido via JS ao clicar no dia -->
+        </div>
+
+        <!-- Legenda Completa de Medalhas e Faltas Conforme Especificado -->
+        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-2 text-xs">
+          <div class="font-bold text-slate-700 flex items-center gap-1.5">
+            <i class="fa-solid fa-ribbon text-indigo-600"></i> Critérios de Classificação e Símbolos no Calendário:
+          </div>
+          <div class="flex flex-wrap items-center gap-2 text-xs font-medium">
+            <div class="flex items-center gap-1 bg-amber-50 border border-amber-300 px-2 py-0.5 rounded-lg text-amber-900 font-bold">
+              <i class="fa-solid fa-trophy text-amber-500"></i> Ouro (18–20)
+            </div>
+            <div class="flex items-center gap-1 bg-slate-100 border border-slate-300 px-2 py-0.5 rounded-lg text-slate-800 font-bold">
+              <i class="fa-solid fa-medal text-slate-400"></i> Prata (14–17)
+            </div>
+            <div class="flex items-center gap-1 bg-amber-100/70 border border-amber-400 px-2 py-0.5 rounded-lg text-amber-950 font-bold">
+              <i class="fa-solid fa-award text-amber-700"></i> Bronze (10–13)
+            </div>
+            <div class="flex items-center gap-1 bg-orange-50 border border-orange-300 px-2 py-0.5 rounded-lg text-orange-900 font-bold">
+              <i class="fa-solid fa-face-frown text-orange-500"></i> Mau (6–9)
+            </div>
+            <div class="flex items-center gap-1 bg-rose-50 border border-rose-300 px-2 py-0.5 rounded-lg text-rose-900 font-bold">
+              <i class="fa-solid fa-face-sad-tear text-rose-600"></i> Muito Mau (0–5)
+            </div>
+            <div class="flex items-center gap-1 bg-rose-100 border border-rose-300 px-2 py-0.5 rounded-lg text-rose-900 font-bold">
+              <i class="fa-solid fa-circle-xmark text-rose-600"></i> Falta Injustificada
+            </div>
+            <div class="flex items-center gap-1 bg-blue-50 border border-blue-300 px-2 py-0.5 rounded-lg text-blue-900 font-bold">
+              <i class="fa-solid fa-file-circle-check text-blue-600"></i> Falta Justificada
+            </div>
+            <div class="flex items-center gap-1 bg-emerald-50 border border-emerald-300 px-2 py-0.5 rounded-lg text-emerald-900 font-bold">
+              <i class="fa-solid fa-circle-check text-emerald-600"></i> Recuperada
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== ESCALA DO TIPO DE ALUNO ==================== -->
+      <div id="card-escala-tipo-aluno" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+        <!-- Renderizado dinamicamente via JS -->
+      </div>
+
+      <!-- ==================== REGISTO E CONTROLO DE ASSIDUIDADE E FALTAS ==================== -->
+      <div id="card-registo-faltas" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+        <!-- Renderizado dinamicamente via JS -->
+      </div>
+
+      <!-- Gráficos de Evolução e Radar -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+          <h4 class="font-bold text-slate-800 text-sm mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-chart-area text-indigo-600"></i> Evolução das Fichas de 1 Hora
+          </h4>
+          <div class="h-64">
+            <canvas id="grafico-evolucao"></canvas>
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+          <h4 class="font-bold text-slate-800 text-sm mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-chart-pie text-emerald-600"></i> Domínio dos Módulos do Programa
+          </h4>
+          <div class="h-64">
+            <canvas id="grafico-dominio"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Diagnóstico Pedagógico -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+        <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+          <i class="fa-solid fa-compass-drafting text-amber-500"></i> Diagnóstico Pedagógico do Aluno
+        </h4>
+        <div id="lista-diagnostico" class="space-y-2 text-sm text-slate-600">
+          <!-- Preenchido via JS -->
+        </div>
+      </div>
+    </section>
+
     <!-- ==================== ABA 1: TREINO DIÁRIO E FIM DE SEMANA ==================== -->
-    <section id="aba-treino" class="space-y-6">
+    <section id="aba-treino" class="hidden space-y-6">
+
+      <!-- Banner de Dia Selecionado a partir do Calendário -->
+      <div id="banner-dia-selecionado" class="hidden bg-indigo-50 border-2 border-indigo-300 p-4 rounded-2xl text-xs text-indigo-950 flex items-center justify-between shadow-sm">
+        <div class="flex items-center gap-3">
+          <i class="fa-solid fa-calendar-day text-indigo-600 text-2xl"></i>
+          <div>
+            <h5 class="font-bold text-sm text-indigo-900" id="titulo-banner-dia-selecionado">Dia Selecionado no Calendário</h5>
+            <p id="subtitulo-banner-dia-selecionado" class="text-indigo-800">A configurar a ficha para a data selecionada.</p>
+          </div>
+        </div>
+        <button onclick="mudarAba('dashboard')" class="px-3 py-1.5 bg-white hover:bg-slate-100 text-indigo-700 font-bold rounded-xl text-xs border border-indigo-200 transition">
+          <i class="fa-solid fa-arrow-left mr-1"></i> Voltar ao Calendário
+        </button>
+      </div>
 
       <!-- Aviso para Modo Pais / Encarregados de Educação -->
       <div id="banner-aviso-pais" class="hidden bg-amber-50 border-2 border-amber-300 p-4 rounded-2xl text-xs text-amber-950 flex items-center justify-between shadow-sm">
@@ -222,7 +393,6 @@
       <!-- Painel de Controlo do Treino -->
       <div id="painel-controlo" class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-4">
         
-        <!-- Cabeçalho Informativo -->
         <div class="border-b border-slate-100 pb-3 flex flex-wrap justify-between items-center gap-3">
           <div>
             <h2 class="text-base font-bold text-slate-800 flex items-center gap-2">
@@ -238,7 +408,6 @@
         <!-- Seletores por Caderno, Tópico e Número de Página -->
         <div id="grupo-seletores-materia" class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
           
-          <!-- Seletor do Caderno / Volume -->
           <div class="md:col-span-4">
             <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">
               1. Selecionar Caderno
@@ -249,7 +418,6 @@
             </select>
           </div>
 
-          <!-- Seletor do Tópico do Programa -->
           <div class="md:col-span-5">
             <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">
               2. Matéria / Unidade Curricular
@@ -259,7 +427,6 @@
             </select>
           </div>
 
-          <!-- Input do Número de Página Estudada -->
           <div class="md:col-span-3">
             <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">
               3. Página que Estudou
@@ -272,12 +439,10 @@
 
         </div>
 
-        <!-- Resumo da Composição Pedagógica da Ficha -->
         <div id="resumo-estrutura-sessao" class="bg-indigo-50/70 border border-indigo-200/80 p-3.5 rounded-xl flex flex-wrap items-center justify-between gap-3 text-xs text-indigo-900">
           <!-- Injetado por JS -->
         </div>
 
-        <!-- Botões de Ação -->
         <div class="pt-2 flex flex-wrap gap-3">
           <button id="btn-iniciar-sessao" onclick="iniciarSessao()" class="flex-1 sm:flex-initial px-6 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow transition flex items-center justify-center gap-2">
             <i class="fa-solid fa-play"></i> Iniciar Desafio (60 Minutos)
@@ -306,7 +471,7 @@
         </div>
       </div>
 
-      <!-- Lista de Exercícios (Com espaço para resolução e rascunho entre exercícios) -->
+      <!-- Lista de Exercícios (Com espaço para resolução dinâmico e proporcional) -->
       <div id="container-exercicios" class="space-y-6">
         <!-- Renderizado dinamicamente pelo JavaScript -->
       </div>
@@ -323,7 +488,6 @@
     <!-- ==================== ABA 2: RESULTADOS E RESOLUÇÃO ==================== -->
     <section id="aba-resultados" class="hidden space-y-6">
       
-      <!-- Resumo da Avaliação -->
       <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col md:flex-row items-center justify-between gap-6">
         <div id="card-nota" class="w-full space-y-2">
           <!-- Renderizado via JS -->
@@ -333,13 +497,12 @@
           <button onclick="imprimirResolucaoCompleta()" class="px-5 py-3 bg-slate-800 hover:bg-slate-900 text-white font-bold rounded-xl shadow transition flex items-center gap-2 text-xs">
             <i class="fa-solid fa-print"></i> Imprimir Resoluções A4
           </button>
-          <button onclick="mudarAba('treino')" class="px-5 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow transition flex items-center gap-2 text-xs">
-            <i class="fa-solid fa-arrow-rotate-right"></i> Novo Desafio
+          <button onclick="mudarAba('dashboard')" class="px-5 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow transition flex items-center gap-2 text-xs">
+            <i class="fa-solid fa-arrow-left"></i> Voltar à Dashboard
           </button>
         </div>
       </div>
 
-      <!-- Lista de Resoluções Passo a Passo -->
       <div class="space-y-4">
         <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
           <i class="fa-solid fa-list-check text-indigo-600"></i> Resolução Detalhada Passo a Passo
@@ -351,156 +514,9 @@
 
     </section>
 
-    <!-- ==================== ABA 3: DASHBOARD E ASSIDUIDADE ==================== -->
-    <section id="aba-dashboard" class="hidden space-y-6">
-
-      <!-- 4 KPIs Principais -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3">
-          <div class="bg-amber-100 text-amber-600 p-3 rounded-xl text-xl"><i class="fa-solid fa-fire"></i></div>
-          <div>
-            <div class="text-xs text-slate-500 font-bold uppercase">Streak Diário</div>
-            <div id="kpi-streak" class="text-2xl font-black text-slate-800">0 dias</div>
-          </div>
-        </div>
-
-        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3">
-          <div class="bg-indigo-100 text-indigo-600 p-3 rounded-xl text-xl"><i class="fa-solid fa-award"></i></div>
-          <div>
-            <div class="text-xs text-slate-500 font-bold uppercase">Média Global</div>
-            <div id="kpi-media" class="text-2xl font-black text-slate-800">-- / 20</div>
-          </div>
-        </div>
-
-        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3">
-          <div class="bg-emerald-100 text-emerald-600 p-3 rounded-xl text-xl"><i class="fa-solid fa-hourglass-half"></i></div>
-          <div>
-            <div class="text-xs text-slate-500 font-bold uppercase">Horas Feitas</div>
-            <div id="kpi-horas" class="text-2xl font-black text-slate-800">0h</div>
-          </div>
-        </div>
-
-        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3">
-          <div class="bg-blue-100 text-blue-600 p-3 rounded-xl text-xl"><i class="fa-solid fa-circle-check"></i></div>
-          <div>
-            <div class="text-xs text-slate-500 font-bold uppercase">Exercícios</div>
-            <div id="kpi-total-ex" class="text-2xl font-black text-slate-800">0</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ==================== ESCALA DO TIPO DE ALUNO (ASSIDUIDADE E COMPROMISSO) ==================== -->
-      <div id="card-escala-tipo-aluno" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-        <!-- Renderizado dinamicamente via JS -->
-      </div>
-
-      <!-- ==================== REGISTO E CONTROLO DE ASSIDUIDADE E FALTAS ==================== -->
-      <div id="card-registo-faltas" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-        <!-- Renderizado dinamicamente via JS -->
-      </div>
-
-      <!-- ==================== CALENDÁRIO MENSAL DE DESEMPENHO E ATIVIDADE ==================== -->
-      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-        <div class="flex flex-wrap justify-between items-center gap-3 border-b border-slate-100 pb-3">
-          <div>
-            <h4 class="font-bold text-slate-800 text-base flex items-center gap-2">
-              <i class="fa-solid fa-calendar-days text-indigo-600"></i> Calendário Mensal de Estudo e Medalhas
-            </h4>
-            <p class="text-xs text-slate-500">Dias de estudo marcados (Seg, Qua, Sex, Sáb, Dom). Clique no dia para ver o registo detalhado.</p>
-          </div>
-          <div class="flex items-center gap-2">
-            <button onclick="mudarMesCalendario(-1)" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-lg transition">
-              <i class="fa-solid fa-chevron-left mr-1"></i> Anterior
-            </button>
-            <span id="label-mes-ano-calendario" class="font-bold text-slate-800 text-sm min-w-[150px] text-center">Novembro 2026</span>
-            <button onclick="mudarMesCalendario(1)" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-lg transition">
-              Seguinte <i class="fa-solid fa-chevron-right ml-1"></i>
-            </button>
-            <button onclick="irParaHojeCalendario()" class="px-2.5 py-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-bold rounded-lg border border-indigo-200 transition">
-              Hoje
-            </button>
-          </div>
-        </div>
-
-        <!-- Grelha do Calendário -->
-        <div id="grelha-calendario-container" class="overflow-x-auto">
-          <!-- Renderizado via JS -->
-        </div>
-
-        <!-- Detalhes do Dia Selecionado -->
-        <div id="detalhe-dia-calendario" class="hidden p-4 bg-indigo-50/80 border border-indigo-200 rounded-xl text-xs space-y-1.5">
-          <!-- Preenchido via JS ao clicar no dia -->
-        </div>
-
-        <!-- Legenda Completa de Medalhas e Faltas Conforme Especificado -->
-        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-2 text-xs">
-          <div class="font-bold text-slate-700 flex items-center gap-1.5">
-            <i class="fa-solid fa-ribbon text-indigo-600"></i> Critérios de Classificação e Símbolos no Calendário:
-          </div>
-          <div class="flex flex-wrap items-center gap-2 text-xs font-medium">
-            <div class="flex items-center gap-1 bg-amber-50 border border-amber-300 px-2 py-0.5 rounded-lg text-amber-900 font-bold">
-              <i class="fa-solid fa-trophy text-amber-500"></i> Ouro (18–20)
-            </div>
-            <div class="flex items-center gap-1 bg-slate-100 border border-slate-300 px-2 py-0.5 rounded-lg text-slate-800 font-bold">
-              <i class="fa-solid fa-medal text-slate-400"></i> Prata (14–17)
-            </div>
-            <div class="flex items-center gap-1 bg-amber-100/70 border border-amber-400 px-2 py-0.5 rounded-lg text-amber-950 font-bold">
-              <i class="fa-solid fa-award text-amber-700"></i> Bronze (10–13)
-            </div>
-            <div class="flex items-center gap-1 bg-orange-50 border border-orange-300 px-2 py-0.5 rounded-lg text-orange-900 font-bold">
-              <i class="fa-solid fa-face-frown text-orange-500"></i> Mau (6–9)
-            </div>
-            <div class="flex items-center gap-1 bg-rose-50 border border-rose-300 px-2 py-0.5 rounded-lg text-rose-900 font-bold">
-              <i class="fa-solid fa-face-sad-tear text-rose-600"></i> Muito Mau (0–5)
-            </div>
-            <div class="flex items-center gap-1 bg-rose-100 border border-rose-300 px-2 py-0.5 rounded-lg text-rose-900 font-bold">
-              <i class="fa-solid fa-circle-xmark text-rose-600"></i> Falta Injustificada
-            </div>
-            <div class="flex items-center gap-1 bg-blue-50 border border-blue-300 px-2 py-0.5 rounded-lg text-blue-900 font-bold">
-              <i class="fa-solid fa-file-circle-check text-blue-600"></i> Falta Justificada
-            </div>
-            <div class="flex items-center gap-1 bg-emerald-50 border border-emerald-300 px-2 py-0.5 rounded-lg text-emerald-900 font-bold">
-              <i class="fa-solid fa-circle-check text-emerald-600"></i> Recuperada
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Gráficos de Evolução e Radar -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-          <h4 class="font-bold text-slate-800 text-sm mb-4 flex items-center gap-2">
-            <i class="fa-solid fa-chart-area text-indigo-600"></i> Evolução das Fichas de 1 Hora
-          </h4>
-          <div class="h-64">
-            <canvas id="grafico-evolucao"></canvas>
-          </div>
-        </div>
-
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-          <h4 class="font-bold text-slate-800 text-sm mb-4 flex items-center gap-2">
-            <i class="fa-solid fa-chart-pie text-emerald-600"></i> Domínio dos Módulos do Programa
-          </h4>
-          <div class="h-64">
-            <canvas id="grafico-dominio"></canvas>
-          </div>
-        </div>
-      </div>
-
-      <!-- Diagnóstico Pedagógico -->
-      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
-        <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
-          <i class="fa-solid fa-compass-drafting text-amber-500"></i> Diagnóstico Pedagógico do Aluno
-        </h4>
-        <div id="lista-diagnostico" class="space-y-2 text-sm text-slate-600">
-          <!-- Preenchido via JS -->
-        </div>
-      </div>
-    </section>
-
   </main>
 
-  <!-- ==================== MODAL 1: LOGIN FAMILIAR (ALUNO & PAIS INTERLIGADOS) ==================== -->
+  <!-- ==================== MODAL 1: LOGIN FAMILIAR (ALUNO & PAIS) ==================== -->
   <div id="modal-login" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/70 backdrop-blur-sm p-4">
     <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-5">
       <div class="text-center space-y-1">
@@ -509,7 +525,6 @@
         <p class="text-xs text-slate-500">Acesso da Família: Aluno e Encarregados de Educação</p>
       </div>
 
-      <!-- Abas de Perfil Desejado -->
       <div class="grid grid-cols-2 gap-2 bg-slate-100 p-1.5 rounded-2xl text-xs font-bold">
         <button id="login-tab-aluno" onclick="selecionarTabLogin('aluno')" class="py-2.5 rounded-xl transition bg-indigo-600 text-white shadow-sm flex items-center justify-center gap-1.5">
           <i class="fa-solid fa-graduation-cap"></i> Sou Aluno
@@ -540,7 +555,6 @@
         </div>
 
         <div id="login-mensagem-erro" class="hidden p-2.5 bg-rose-50 border border-rose-200 text-rose-800 rounded-xl font-medium text-xs">
-          <!-- Mensagem de erro -->
         </div>
 
         <div class="bg-indigo-50 p-3 rounded-xl border border-indigo-200 text-[11px] text-indigo-900 space-y-1">
@@ -560,7 +574,7 @@
     </div>
   </div>
 
-  <!-- ==================== MODAL 2: JUSTIFICAÇÃO OBRIGATÓRIA DE FALTAS (ALUNO) ==================== -->
+  <!-- ==================== MODAL 2: JUSTIFICAÇÃO OBRIGATÓRIA DE FALTAS ==================== -->
   <div id="modal-justificar-faltas" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/80 backdrop-blur-md p-4 overflow-y-auto">
     <div class="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl border-2 border-rose-400 space-y-4 my-8">
       <div class="flex items-start gap-3 border-b border-slate-100 pb-3">
@@ -575,9 +589,7 @@
         </div>
       </div>
 
-      <!-- Lista de Faltas por Justificar -->
       <div id="lista-formulario-faltas-pendentes" class="space-y-4 max-h-[60vh] overflow-y-auto pr-1">
-        <!-- Renderizado dinamicamente por JS -->
       </div>
 
       <div class="pt-3 border-t border-slate-100 flex justify-end">
@@ -588,7 +600,7 @@
     </div>
   </div>
 
-  <!-- ==================== MODAL 3: DECISÃO PARENTAL SOBRE FALTAS (PAIS) ==================== -->
+  <!-- ==================== MODAL 3: DECISÃO PARENTAL SOBRE FALTAS ==================== -->
   <div id="modal-parecer-pais" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/70 backdrop-blur-sm p-4">
     <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-4">
       <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
@@ -631,7 +643,7 @@
     </div>
   </div>
 
-  <!-- ==================== MODAL 4: ALTERAÇÃO DE PALAVRA-PASSE (ALUNO & PAIS) ==================== -->
+  <!-- ==================== MODAL 4: ALTERAÇÃO DE PALAVRA-PASSE ==================== -->
   <div id="modal-alterar-senha" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/70 backdrop-blur-sm p-4">
     <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-4">
       <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
@@ -644,7 +656,6 @@
         </div>
       </div>
 
-      <!-- Seletor de Perfil para Alteração (Se for Pais, pode alterar de ambos) -->
       <div id="grupo-seletor-alvo-senha" class="space-y-1 text-xs">
         <label class="block font-bold text-slate-700 uppercase">Perfil a Alterar</label>
         <select id="senha-alvo-perfil" onchange="atualizarFormAlterarSenha()" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold text-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
