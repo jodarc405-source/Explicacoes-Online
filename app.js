@@ -1344,9 +1344,16 @@ function sincronizarPorNumeroPagina(paginaStr) {
   const pag = parseInt(paginaStr, 10);
   if (isNaN(pag)) return;
 
-  const topicoCorrespondente = TOPICOS_MANUAL.find(t => pag >= t.paginaInicio && pag <= t.paginaFim);
+  const cadernoAtual = parseInt(document.getElementById('seletor-caderno').value, 10) || 1;
+  let topicoCorrespondente = TOPICOS_MANUAL.find(t => t.caderno === cadernoAtual && pag >= t.paginaInicio && pag <= t.paginaFim);
+  if (!topicoCorrespondente) {
+    topicoCorrespondente = TOPICOS_MANUAL.find(t => pag >= t.paginaInicio && pag <= t.paginaFim);
+  }
   if (topicoCorrespondente) {
-    document.getElementById('seletor-caderno').value = topicoCorrespondente.caderno;
+    if (document.getElementById('seletor-caderno').value != topicoCorrespondente.caderno) {
+      document.getElementById('seletor-caderno').value = topicoCorrespondente.caderno;
+      atualizarListaTopicos();
+    }
     document.getElementById('seletor-topico').value = topicoCorrespondente.id;
     document.getElementById('label-intervalo-paginas').textContent = `Págs. ${topicoCorrespondente.paginaInicio}–${topicoCorrespondente.paginaFim}`;
     atualizarResumoEstruturaSessao(topicoCorrespondente);
@@ -1994,7 +2001,7 @@ function renderizarGraficoDominio(historico) {
   const ctx = document.getElementById('grafico-dominio');
   if (!ctx) return;
 
-  const dominios = { logica: { c: 0, t: 0 }, geometria: { c: 0, t: 0 }, funcoes: { c: 0, t: 0 }, estatistica: { c: 0, t: 0 } };
+  const dominios = { modelos: { c: 0, t: 0 }, logica: { c: 0, t: 0 }, geometria: { c: 0, t: 0 }, funcoes: { c: 0, t: 0 }, estatistica: { c: 0, t: 0 } };
 
   historico.forEach(s => {
     if (s.detalhes) {
@@ -2007,22 +2014,26 @@ function renderizarGraficoDominio(historico) {
     }
   });
 
-  const calcPct = d => dominios[d].t > 0 ? Math.round((dominios[d].c / dominios[d].t) * 100) : 0;
+  const calcPct = d => dominios[d] && dominios[d].t > 0 ? Math.round((dominios[d].c / dominios[d].t) * 100) : 0;
 
   if (chartDominio) chartDominio.destroy();
+
+  const pctModelos = (dominios.modelos.t + dominios.logica.t) > 0 
+    ? Math.round(((dominios.modelos.c + dominios.logica.c) / (dominios.modelos.t + dominios.logica.t)) * 100)
+    : 0;
 
   chartDominio = new Chart(ctx, {
     type: 'radar',
     data: {
       labels: [
-        'Lógica e Teoria de Conjuntos',
-        'Geometria Analítica',
-        'Funções e Gráficos',
-        'Estatística'
+        'Modelos Matemáticos',
+        'Estatística',
+        'Geometria Sintética',
+        'Funções'
       ],
       datasets: [{
         label: 'Taxa de Acerto (%)',
-        data: [calcPct('logica'), calcPct('geometria'), calcPct('funcoes'), calcPct('estatistica')],
+        data: [pctModelos, calcPct('estatistica'), calcPct('geometria'), calcPct('funcoes')],
         backgroundColor: 'rgba(16, 185, 129, 0.2)',
         borderColor: '#10b981',
         pointBackgroundColor: '#10b981',

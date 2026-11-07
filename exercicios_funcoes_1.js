@@ -1,2053 +1,3783 @@
-// Caderno 2: Funções e Gráficos Parte 1 (Tópicos 9, 10) - 72 Itens
+// Volume 2: Generalidades Acerca de Funções (Noção, Domínio, Zeros, Monotonia e Extremos - 108 Exercícios)
 const EXERCICIOS_FUNCOES_1 = [
   {
-    "id": "FUNC_9_01",
-    "manualRef": "Caderno 2, Pág. 16, Ex. 1",
-    "origem": "Manual Escolar",
+    "id": "FUN_9_01",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 50, Ex. 1",
     "cotacaoValores": 2.5,
     "tempoEstimadoMin": 6,
-    "enunciado": "Considere a função $f(x) = \\sqrt{2x - 6}$. Qual é o domínio de definição $D_f$ em $\\mathbb{R}$?",
-    "tipo": "escolha_multipla",
-    "opcoes": [
-      {
-        "id": "A",
-        "texto": "$[3, +\\infty[$"
-      },
-      {
-        "id": "B",
-        "texto": "$]3, +\\infty[$"
-      },
-      {
-        "id": "C",
-        "texto": "$]-\\infty, 3]$"
-      },
-      {
-        "id": "D",
-        "texto": "$[0, +\\infty[$"
-      }
+    "enunciado": "Considere a função real definida por $f(x) = 3x + 4$. Calcule a imagem do objeto $x = 2$, isto é, determine $f(2)$.",
+    "tipo": "numerica",
+    "resposta_correta": "10",
+    "respostaCorreta": "10",
+    "resolucao": [
+      "Para determinar a imagem de 2, substitui-se $x$ por 2 na expressão analítica de $f(x)$.",
+      "$f(2) = 3 \\times 2 + 4 = 6 + 4 = 10$.",
+      "Logo, $f(2) = 10$."
     ],
-    "respostaCorreta": "A",
     "passosResolucao": [
-      "Para raízes quadradas em $\\mathbb{R}$, o radicando tem de ser não negativo: $2x - 6 \\ge 0$.",
-      "$2x \\ge 6 \\iff x \\ge 3$. Portanto, $D_f = [3, +\\infty[$."
+      "Para determinar a imagem de 2, substitui-se $x$ por 2 na expressão analítica de $f(x)$.",
+      "$f(2) = 3 \\times 2 + 4 = 6 + 4 = 10$.",
+      "Logo, $f(2) = 10$."
     ],
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35
+    "espacoLinhas": 9
   },
   {
-    "id": "FUNC_9_02",
-    "manualRef": "Caderno 2, Pág. 20, Ex. 3",
-    "origem": "Exame Nacional / IAVE",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 7,
-    "enunciado": "Seja $g(x) = x^2 - 4x + 3$. Determine a soma dos zeros da função $g$.",
-    "tipo": "numero",
-    "respostaCorreta": 4,
-    "passosResolucao": [
-      "Os zeros de $g$ são as soluções de $x^2 - 4x + 3 = 0$.",
-      "Pelas relações de Viète, a soma dos zeros de $ax^2 + bx + c = 0$ é $-\\frac{b}{a} = -\\frac{-4}{1} = 4$."
-    ],
+    "id": "FUN_9_02",
     "topicoId": "topico_9",
     "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35
-  },
-  {
-    "id": "FUNC_9_03",
-    "manualRef": "Caderno 2, Pág. 24, Ex. 2",
-    "origem": "Caderno de Apoio",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 7,
-    "enunciado": "Uma função $f$ diz-se estritamente crescente num intervalo $I$ se, para quaisquer $x_1, x_2 \\in I$ com $x_1 < x_2$, se verifica:",
-    "tipo": "escolha_multipla",
-    "opcoes": [
-      {
-        "id": "A",
-        "texto": "$f(x_1) < f(x_2)$"
-      },
-      {
-        "id": "B",
-        "texto": "$f(x_1) \\le f(x_2)$"
-      },
-      {
-        "id": "C",
-        "texto": "$f(x_1) > f(x_2)$"
-      },
-      {
-        "id": "D",
-        "texto": "$f(x_1) = f(x_2)$"
-      }
-    ],
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "Por definição formal no 10.º ano, uma função é estritamente crescente se a relação de ordem estrita se preserva nas imagens: $x_1 < x_2 \\implies f(x_1) < f(x_2)$."
-    ],
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35
-  },
-  {
-    "id": "FUNC_9_04",
-    "manualRef": "Caderno 2, Pág. 28, Ex. 4",
-    "origem": "Manual Escolar",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 8,
-    "enunciado": "Considere a função afim $h(x) = -3x + 12$. Qual é a imagem de $x = 5$ por $h$?",
-    "tipo": "numero",
-    "respostaCorreta": -3,
-    "passosResolucao": [
-      "$h(5) = -3(5) + 12 = -15 + 12 = -3$."
-    ],
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35
-  },
-  {
-    "id": "FUNC_9_05",
-    "manualRef": "Caderno 2, Pág. 30, Ex. 5",
-    "origem": "Exame Nacional / IAVE",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 8,
-    "enunciado": "Qual é o domínio da função racional $f(x) = \\frac{2x + 1}{x^2 - 9}$?",
-    "tipo": "escolha_multipla",
-    "opcoes": [
-      {
-        "id": "A",
-        "texto": "$\\mathbb{R} \\setminus \\{-3, 3\\}$"
-      },
-      {
-        "id": "B",
-        "texto": "$\\mathbb{R} \\setminus \\{3\\}$"
-      },
-      {
-        "id": "C",
-        "texto": "$]-3, 3[$"
-      },
-      {
-        "id": "D",
-        "texto": "$\\mathbb{R} \\setminus \\{9\\}$"
-      }
-    ],
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "O denominador não se pode anular: $x^2 - 9 \\ne 0 \\iff x^2 \\ne 9 \\iff x \\ne \\pm 3$.",
-      "Logo, o domínio é $\\mathbb{R} \\setminus \\{-3, 3\\}$."
-    ],
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35
-  },
-  {
-    "id": "FUNC_9_06",
-    "manualRef": "Caderno 2, Pág. 31, Ex. 2",
-    "origem": "Caderno de Apoio",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 7,
-    "enunciado": "Se o contradomínio de $f$ é $[-2, 6]$, qual é o valor máximo absoluto da função $f$?",
-    "tipo": "numero",
-    "respostaCorreta": 6,
-    "passosResolucao": [
-      "O contradomínio reúne todas as imagens possíveis $f(x)$. O maior elemento do intervalo $[-2, 6]$ é 6."
-    ],
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35
-  },
-  {
-    "id": "FUNC_9_07",
-    "manualRef": "Caderno 2, Pág. 32, Ex. 1",
-    "origem": "Manual Escolar",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 7,
-    "enunciado": "Dada a função $f(x) = 4 - x^2$, qual é a ordenada na origem (ponto de interseção com o eixo $Oy$)?",
-    "tipo": "numero",
-    "respostaCorreta": 4,
-    "passosResolucao": [
-      "A ordenada na origem obtém-se calculando $f(0)$: $f(0) = 4 - 0^2 = 4$."
-    ],
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35
-  },
-  {
-    "id": "FUNC_9_08",
-    "manualRef": "Caderno 2, Pág. 32, Ex. 4",
-    "origem": "Olimpíadas da SPM",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 9,
-    "enunciado": "Quantos zeros tem a função $f(x) = x^3 - 4x$ em $\\mathbb{R}$?",
-    "tipo": "numero",
-    "respostaCorreta": 3,
-    "passosResolucao": [
-      "$x^3 - 4x = 0 \\iff x(x^2 - 4) = 0 \\iff x(x - 2)(x + 2) = 0$.",
-      "Os zeros são $x = 0$, $x = 2$ e $x = -2$. Tem 3 zeros distintos."
-    ],
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35
-  },
-  {
-    "id": "FUNC_9_09",
-    "manualRef": "Caderno 2, Pág. 33, Ex. 3",
-    "origem": "Caderno de Apoio",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 7,
-    "enunciado": "Se $f$ é estritamente decrescente em $\\mathbb{R}$ e $f(2) = 5$, qual das seguintes opções é garantidamente verdadeira?",
-    "tipo": "escolha_multipla",
-    "opcoes": [
-      {
-        "id": "A",
-        "texto": "$f(4) < 5$"
-      },
-      {
-        "id": "B",
-        "texto": "$f(4) > 5$"
-      },
-      {
-        "id": "C",
-        "texto": "$f(0) < 5$"
-      },
-      {
-        "id": "D",
-        "texto": "$f(2) = 0$"
-      }
-    ],
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "Sendo decrescente, para $4 > 2$ temos necessariamente $f(4) < f(2) = 5$."
-    ],
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35
-  },
-  {
-    "id": "FUNC_9_10",
-    "manualRef": "Caderno 2, Pág. 33, Ex. 6",
-    "origem": "Exame Nacional / IAVE",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 8,
-    "enunciado": "Calcule a taxa média de variação da função $f(x) = x^2 + 1$ no intervalo $[1, 3]$.",
-    "tipo": "numero",
-    "respostaCorreta": 4,
-    "passosResolucao": [
-      "$\\text{TMV}_{[1, 3]} = \\frac{f(3) - f(1)}{3 - 1}$.",
-      "$f(3) = 3^2 + 1 = 10$, $f(1) = 1^2 + 1 = 2$.",
-      "$\\text{TMV} = \\frac{10 - 2}{2} = \\frac{8}{2} = 4$."
-    ],
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35
-  },
-  {
-    "id": "FUNC_9_11",
-    "manualRef": "Caderno 2, Pág. 34, Ex. 2",
-    "origem": "Manual Escolar",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 8,
-    "enunciado": "O gráfico de uma função afim passa pelos pontos $(0, 3)$ e $(2, 7)$. Qual é o declive da reta?",
-    "tipo": "numero",
-    "respostaCorreta": 2,
-    "passosResolucao": [
-      "$m = \\frac{7 - 3}{2 - 0} = \\frac{4}{2} = 2$."
-    ],
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35
-  },
-  {
-    "id": "FUNC_9_12",
-    "manualRef": "Caderno 2, Pág. 34, Ex. 5",
-    "origem": "Caderno de Apoio",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 7,
-    "enunciado": "Qual é o valor mínimo da função $g(x) = (x - 4)^2 + 5$?",
-    "tipo": "numero",
-    "respostaCorreta": 5,
-    "passosResolucao": [
-      "Como $(x - 4)^2 \\ge 0$ para qualquer $x \\in \\mathbb{R}$, o menor valor possível ocorre quando $(x - 4)^2 = 0$ ($x = 4$).",
-      "Nesse ponto, $g(4) = 0 + 5 = 5$."
-    ],
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35
-  },
-  {
-    "id": "FUNC_9_13",
-    "manualRef": "Caderno 2, Pág. 35, Ex. 1",
-    "origem": "Olimpíadas da SPM",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 9,
-    "enunciado": "Se $f(x) = 2x - 1$, determine o valor de $x$ para o qual $f(f(x)) = 9$.",
-    "tipo": "numero",
-    "respostaCorreta": 3,
-    "passosResolucao": [
-      "$f(f(x)) = 2(2x - 1) - 1 = 4x - 2 - 1 = 4x - 3$.",
-      "$4x - 3 = 9 \\iff 4x = 12 \\iff x = 3$."
-    ],
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35
-  },
-  {
-    "id": "FUNC_9_14",
-    "manualRef": "Caderno 2, Pág. 35, Ex. 3",
-    "origem": "Manual Escolar",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 7,
-    "enunciado": "Qual das seguintes funções NÃO tem zeros reais?",
-    "tipo": "escolha_multipla",
-    "opcoes": [
-      {
-        "id": "A",
-        "texto": "$f(x) = x^2 + 4$"
-      },
-      {
-        "id": "B",
-        "texto": "$g(x) = x^2 - 4$"
-      },
-      {
-        "id": "C",
-        "texto": "$h(x) = x + 4$"
-      },
-      {
-        "id": "D",
-        "texto": "$j(x) = 4 - x$"
-      }
-    ],
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "$x^2 + 4 = 0 \\iff x^2 = -4$, que é impossível em $\\mathbb{R}$ pois o quadrado de um número real é sempre não negativo."
-    ],
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35
-  },
-  {
-    "id": "FUNC_9_15",
-    "manualRef": "Caderno 2, Pág. 35, Ex. 7",
-    "origem": "Exame Nacional / IAVE",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 8,
-    "enunciado": "Seja $f: \\mathbb{R} \\to \\mathbb{R}$ dada por $f(x) = 5$. O gráfico desta função é uma reta:",
-    "tipo": "escolha_multipla",
-    "opcoes": [
-      {
-        "id": "A",
-        "texto": "Horizontal com declive 0"
-      },
-      {
-        "id": "B",
-        "texto": "Vertical com declive indefinido"
-      },
-      {
-        "id": "C",
-        "texto": "Oblíqua que passa na origem"
-      },
-      {
-        "id": "D",
-        "texto": "Com declive igual a 5"
-      }
-    ],
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "A função constante $f(x) = 5$ tem imagem invariável para qualquer $x$, correspondendo à reta horizontal $y = 5$ com declive 0."
-    ],
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35
-  },
-  {
-    "id": "FUNC_9_16",
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35,
-    "manualRef": "Caderno 2, Pág. 26, Ex. 2",
-    "origem": "CEO Banco Oficial",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 51, Ex. 2",
     "cotacaoValores": 2.5,
     "tempoEstimadoMin": 6,
-    "enunciado": "Qual é o domínio da função $f(x) = \\frac{1}{x - 5}$?",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "O denominador não se pode anular: $x - 5 \\ne 0 \\iff x \\ne 5$."
+    "enunciado": "Considere a função real definida por $f(x) = 4x + 5$. Calcule a imagem do objeto $x = 3$, isto é, determine $f(3)$.",
+    "tipo": "numerica",
+    "resposta_correta": "17",
+    "respostaCorreta": "17",
+    "resolucao": [
+      "Para determinar a imagem de 3, substitui-se $x$ por 3 na expressão analítica de $f(x)$.",
+      "$f(3) = 4 \\times 3 + 5 = 12 + 5 = 17$.",
+      "Logo, $f(3) = 17$."
     ],
+    "passosResolucao": [
+      "Para determinar a imagem de 3, substitui-se $x$ por 3 na expressão analítica de $f(x)$.",
+      "$f(3) = 4 \\times 3 + 5 = 12 + 5 = 17$.",
+      "Logo, $f(3) = 17$."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_9_03",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 52, Ex. 3",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Considere a função real definida por $f(x) = 5x + 6$. Calcule a imagem do objeto $x = 4$, isto é, determine $f(4)$.",
+    "tipo": "numerica",
+    "resposta_correta": "26",
+    "respostaCorreta": "26",
+    "resolucao": [
+      "Para determinar a imagem de 4, substitui-se $x$ por 4 na expressão analítica de $f(x)$.",
+      "$f(4) = 5 \\times 4 + 6 = 20 + 6 = 26$.",
+      "Logo, $f(4) = 26$."
+    ],
+    "passosResolucao": [
+      "Para determinar a imagem de 4, substitui-se $x$ por 4 na expressão analítica de $f(x)$.",
+      "$f(4) = 5 \\times 4 + 6 = 20 + 6 = 26$.",
+      "Logo, $f(4) = 26$."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_9_04",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 53, Ex. 4",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Considere a função real definida por $f(x) = 2x + 7$. Calcule a imagem do objeto $x = 5$, isto é, determine $f(5)$.",
+    "tipo": "numerica",
+    "resposta_correta": "17",
+    "respostaCorreta": "17",
+    "resolucao": [
+      "Para determinar a imagem de 5, substitui-se $x$ por 5 na expressão analítica de $f(x)$.",
+      "$f(5) = 2 \\times 5 + 7 = 10 + 7 = 17$.",
+      "Logo, $f(5) = 17$."
+    ],
+    "passosResolucao": [
+      "Para determinar a imagem de 5, substitui-se $x$ por 5 na expressão analítica de $f(x)$.",
+      "$f(5) = 2 \\times 5 + 7 = 10 + 7 = 17$.",
+      "Logo, $f(5) = 17$."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_9_05",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 54, Ex. 5",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Considere a função real definida por $f(x) = 3x + 3$. Calcule a imagem do objeto $x = 1$, isto é, determine $f(1)$.",
+    "tipo": "numerica",
+    "resposta_correta": "6",
+    "respostaCorreta": "6",
+    "resolucao": [
+      "Para determinar a imagem de 1, substitui-se $x$ por 1 na expressão analítica de $f(x)$.",
+      "$f(1) = 3 \\times 1 + 3 = 3 + 3 = 6$.",
+      "Logo, $f(1) = 6$."
+    ],
+    "passosResolucao": [
+      "Para determinar a imagem de 1, substitui-se $x$ por 1 na expressão analítica de $f(x)$.",
+      "$f(1) = 3 \\times 1 + 3 = 3 + 3 = 6$.",
+      "Logo, $f(1) = 6$."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_9_06",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 55, Ex. 6",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Considere a função real definida por $f(x) = 4x + 4$. Calcule a imagem do objeto $x = 2$, isto é, determine $f(2)$.",
+    "tipo": "numerica",
+    "resposta_correta": "12",
+    "respostaCorreta": "12",
+    "resolucao": [
+      "Para determinar a imagem de 2, substitui-se $x$ por 2 na expressão analítica de $f(x)$.",
+      "$f(2) = 4 \\times 2 + 4 = 8 + 4 = 12$.",
+      "Logo, $f(2) = 12$."
+    ],
+    "passosResolucao": [
+      "Para determinar a imagem de 2, substitui-se $x$ por 2 na expressão analítica de $f(x)$.",
+      "$f(2) = 4 \\times 2 + 4 = 8 + 4 = 12$.",
+      "Logo, $f(2) = 12$."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_9_07",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 56, Ex. 7",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Considere a função real definida por $f(x) = 5x + 5$. Calcule a imagem do objeto $x = 3$, isto é, determine $f(3)$.",
+    "tipo": "numerica",
+    "resposta_correta": "20",
+    "respostaCorreta": "20",
+    "resolucao": [
+      "Para determinar a imagem de 3, substitui-se $x$ por 3 na expressão analítica de $f(x)$.",
+      "$f(3) = 5 \\times 3 + 5 = 15 + 5 = 20$.",
+      "Logo, $f(3) = 20$."
+    ],
+    "passosResolucao": [
+      "Para determinar a imagem de 3, substitui-se $x$ por 3 na expressão analítica de $f(x)$.",
+      "$f(3) = 5 \\times 3 + 5 = 15 + 5 = 20$.",
+      "Logo, $f(3) = 20$."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_9_08",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 57, Ex. 8",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Considere a função real definida por $f(x) = 2x + 6$. Calcule a imagem do objeto $x = 4$, isto é, determine $f(4)$.",
+    "tipo": "numerica",
+    "resposta_correta": "14",
+    "respostaCorreta": "14",
+    "resolucao": [
+      "Para determinar a imagem de 4, substitui-se $x$ por 4 na expressão analítica de $f(x)$.",
+      "$f(4) = 2 \\times 4 + 6 = 8 + 6 = 14$.",
+      "Logo, $f(4) = 14$."
+    ],
+    "passosResolucao": [
+      "Para determinar a imagem de 4, substitui-se $x$ por 4 na expressão analítica de $f(x)$.",
+      "$f(4) = 2 \\times 4 + 6 = 8 + 6 = 14$.",
+      "Logo, $f(4) = 14$."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_9_09",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 58, Ex. 9",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Considere a função real definida por $f(x) = 3x + 7$. Calcule a imagem do objeto $x = 5$, isto é, determine $f(5)$.",
+    "tipo": "numerica",
+    "resposta_correta": "22",
+    "respostaCorreta": "22",
+    "resolucao": [
+      "Para determinar a imagem de 5, substitui-se $x$ por 5 na expressão analítica de $f(x)$.",
+      "$f(5) = 3 \\times 5 + 7 = 15 + 7 = 22$.",
+      "Logo, $f(5) = 22$."
+    ],
+    "passosResolucao": [
+      "Para determinar a imagem de 5, substitui-se $x$ por 5 na expressão analítica de $f(x)$.",
+      "$f(5) = 3 \\times 5 + 7 = 15 + 7 = 22$.",
+      "Logo, $f(5) = 22$."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_9_10",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 50, Ex. 10",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Considere a função real definida por $f(x) = 4x + 3$. Calcule a imagem do objeto $x = 1$, isto é, determine $f(1)$.",
+    "tipo": "numerica",
+    "resposta_correta": "7",
+    "respostaCorreta": "7",
+    "resolucao": [
+      "Para determinar a imagem de 1, substitui-se $x$ por 1 na expressão analítica de $f(x)$.",
+      "$f(1) = 4 \\times 1 + 3 = 4 + 3 = 7$.",
+      "Logo, $f(1) = 7$."
+    ],
+    "passosResolucao": [
+      "Para determinar a imagem de 1, substitui-se $x$ por 1 na expressão analítica de $f(x)$.",
+      "$f(1) = 4 \\times 1 + 3 = 4 + 3 = 7$.",
+      "Logo, $f(1) = 7$."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_9_11",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 51, Ex. 11",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Considere a função real definida por $f(x) = 5x + 4$. Calcule a imagem do objeto $x = 2$, isto é, determine $f(2)$.",
+    "tipo": "numerica",
+    "resposta_correta": "14",
+    "respostaCorreta": "14",
+    "resolucao": [
+      "Para determinar a imagem de 2, substitui-se $x$ por 2 na expressão analítica de $f(x)$.",
+      "$f(2) = 5 \\times 2 + 4 = 10 + 4 = 14$.",
+      "Logo, $f(2) = 14$."
+    ],
+    "passosResolucao": [
+      "Para determinar a imagem de 2, substitui-se $x$ por 2 na expressão analítica de $f(x)$.",
+      "$f(2) = 5 \\times 2 + 4 = 10 + 4 = 14$.",
+      "Logo, $f(2) = 14$."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_9_12",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 52, Ex. 12",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Considere a função real definida por $f(x) = 2x + 5$. Calcule a imagem do objeto $x = 3$, isto é, determine $f(3)$.",
+    "tipo": "numerica",
+    "resposta_correta": "11",
+    "respostaCorreta": "11",
+    "resolucao": [
+      "Para determinar a imagem de 3, substitui-se $x$ por 3 na expressão analítica de $f(x)$.",
+      "$f(3) = 2 \\times 3 + 5 = 6 + 5 = 11$.",
+      "Logo, $f(3) = 11$."
+    ],
+    "passosResolucao": [
+      "Para determinar a imagem de 3, substitui-se $x$ por 3 na expressão analítica de $f(x)$.",
+      "$f(3) = 2 \\times 3 + 5 = 6 + 5 = 11$.",
+      "Logo, $f(3) = 11$."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_9_13",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 53, Ex. 13",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Seja $g$ a função definida por $g(x) = 3x - 15$. Determine o objeto cuja imagem por $g$ é igual a $24$ (resolva a equação $g(x) = 24$).",
+    "tipo": "numerica",
+    "resposta_correta": "13",
+    "respostaCorreta": "13",
+    "resolucao": [
+      "Pretende-se encontrar $x$ tal que $g(x) = 24$.",
+      "$3x - 15 = 24 \\iff 3x = 24 + 15 \\iff 3x = 39$.",
+      "$x = \\frac{39}{3} = 13$.",
+      "O objeto é $x = 13$."
+    ],
+    "passosResolucao": [
+      "Pretende-se encontrar $x$ tal que $g(x) = 24$.",
+      "$3x - 15 = 24 \\iff 3x = 24 + 15 \\iff 3x = 39$.",
+      "$x = \\frac{39}{3} = 13$.",
+      "O objeto é $x = 13$."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_9_14",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 54, Ex. 14",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Seja $g$ a função definida por $g(x) = 3x - 16$. Determine o objeto cuja imagem por $g$ é igual a $26$ (resolva a equação $g(x) = 26$).",
+    "tipo": "numerica",
+    "resposta_correta": "14",
+    "respostaCorreta": "14",
+    "resolucao": [
+      "Pretende-se encontrar $x$ tal que $g(x) = 26$.",
+      "$3x - 16 = 26 \\iff 3x = 26 + 16 \\iff 3x = 42$.",
+      "$x = \\frac{42}{3} = 14$.",
+      "O objeto é $x = 14$."
+    ],
+    "passosResolucao": [
+      "Pretende-se encontrar $x$ tal que $g(x) = 26$.",
+      "$3x - 16 = 26 \\iff 3x = 26 + 16 \\iff 3x = 42$.",
+      "$x = \\frac{42}{3} = 14$.",
+      "O objeto é $x = 14$."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_9_15",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 55, Ex. 15",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Seja $g$ a função definida por $g(x) = 3x - 17$. Determine o objeto cuja imagem por $g$ é igual a $25$ (resolva a equação $g(x) = 25$).",
+    "tipo": "numerica",
+    "resposta_correta": "14",
+    "respostaCorreta": "14",
+    "resolucao": [
+      "Pretende-se encontrar $x$ tal que $g(x) = 25$.",
+      "$3x - 17 = 25 \\iff 3x = 25 + 17 \\iff 3x = 42$.",
+      "$x = \\frac{42}{3} = 14$.",
+      "O objeto é $x = 14$."
+    ],
+    "passosResolucao": [
+      "Pretende-se encontrar $x$ tal que $g(x) = 25$.",
+      "$3x - 17 = 25 \\iff 3x = 25 + 17 \\iff 3x = 42$.",
+      "$x = \\frac{42}{3} = 14$.",
+      "O objeto é $x = 14$."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_9_16",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 56, Ex. 16",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Seja $g$ a função definida por $g(x) = 3x - 18$. Determine o objeto cuja imagem por $g$ é igual a $27$ (resolva a equação $g(x) = 27$).",
+    "tipo": "numerica",
+    "resposta_correta": "15",
+    "respostaCorreta": "15",
+    "resolucao": [
+      "Pretende-se encontrar $x$ tal que $g(x) = 27$.",
+      "$3x - 18 = 27 \\iff 3x = 27 + 18 \\iff 3x = 45$.",
+      "$x = \\frac{45}{3} = 15$.",
+      "O objeto é $x = 15$."
+    ],
+    "passosResolucao": [
+      "Pretende-se encontrar $x$ tal que $g(x) = 27$.",
+      "$3x - 18 = 27 \\iff 3x = 27 + 18 \\iff 3x = 45$.",
+      "$x = \\frac{45}{3} = 15$.",
+      "O objeto é $x = 15$."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_9_17",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 57, Ex. 17",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Seja $g$ a função definida por $g(x) = 3x - 19$. Determine o objeto cuja imagem por $g$ é igual a $29$ (resolva a equação $g(x) = 29$).",
+    "tipo": "numerica",
+    "resposta_correta": "16",
+    "respostaCorreta": "16",
+    "resolucao": [
+      "Pretende-se encontrar $x$ tal que $g(x) = 29$.",
+      "$3x - 19 = 29 \\iff 3x = 29 + 19 \\iff 3x = 48$.",
+      "$x = \\frac{48}{3} = 16$.",
+      "O objeto é $x = 16$."
+    ],
+    "passosResolucao": [
+      "Pretende-se encontrar $x$ tal que $g(x) = 29$.",
+      "$3x - 19 = 29 \\iff 3x = 29 + 19 \\iff 3x = 48$.",
+      "$x = \\frac{48}{3} = 16$.",
+      "O objeto é $x = 16$."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_9_18",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 58, Ex. 18",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Seja $g$ a função definida por $g(x) = 3x - 20$. Determine o objeto cuja imagem por $g$ é igual a $28$ (resolva a equação $g(x) = 28$).",
+    "tipo": "numerica",
+    "resposta_correta": "16",
+    "respostaCorreta": "16",
+    "resolucao": [
+      "Pretende-se encontrar $x$ tal que $g(x) = 28$.",
+      "$3x - 20 = 28 \\iff 3x = 28 + 20 \\iff 3x = 48$.",
+      "$x = \\frac{48}{3} = 16$.",
+      "O objeto é $x = 16$."
+    ],
+    "passosResolucao": [
+      "Pretende-se encontrar $x$ tal que $g(x) = 28$.",
+      "$3x - 20 = 28 \\iff 3x = 28 + 20 \\iff 3x = 48$.",
+      "$x = \\frac{48}{3} = 16$.",
+      "O objeto é $x = 16$."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_9_19",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 50, Ex. 19",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Seja $g$ a função definida por $g(x) = 3x - 21$. Determine o objeto cuja imagem por $g$ é igual a $30$ (resolva a equação $g(x) = 30$).",
+    "tipo": "numerica",
+    "resposta_correta": "17",
+    "respostaCorreta": "17",
+    "resolucao": [
+      "Pretende-se encontrar $x$ tal que $g(x) = 30$.",
+      "$3x - 21 = 30 \\iff 3x = 30 + 21 \\iff 3x = 51$.",
+      "$x = \\frac{51}{3} = 17$.",
+      "O objeto é $x = 17$."
+    ],
+    "passosResolucao": [
+      "Pretende-se encontrar $x$ tal que $g(x) = 30$.",
+      "$3x - 21 = 30 \\iff 3x = 30 + 21 \\iff 3x = 51$.",
+      "$x = \\frac{51}{3} = 17$.",
+      "O objeto é $x = 17$."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_9_20",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 51, Ex. 20",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Seja $g$ a função definida por $g(x) = 3x - 22$. Determine o objeto cuja imagem por $g$ é igual a $32$ (resolva a equação $g(x) = 32$).",
+    "tipo": "numerica",
+    "resposta_correta": "18",
+    "respostaCorreta": "18",
+    "resolucao": [
+      "Pretende-se encontrar $x$ tal que $g(x) = 32$.",
+      "$3x - 22 = 32 \\iff 3x = 32 + 22 \\iff 3x = 54$.",
+      "$x = \\frac{54}{3} = 18$.",
+      "O objeto é $x = 18$."
+    ],
+    "passosResolucao": [
+      "Pretende-se encontrar $x$ tal que $g(x) = 32$.",
+      "$3x - 22 = 32 \\iff 3x = 32 + 22 \\iff 3x = 54$.",
+      "$x = \\frac{54}{3} = 18$.",
+      "O objeto é $x = 18$."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_9_21",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 52, Ex. 21",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Seja $g$ a função definida por $g(x) = 3x - 23$. Determine o objeto cuja imagem por $g$ é igual a $31$ (resolva a equação $g(x) = 31$).",
+    "tipo": "numerica",
+    "resposta_correta": "18",
+    "respostaCorreta": "18",
+    "resolucao": [
+      "Pretende-se encontrar $x$ tal que $g(x) = 31$.",
+      "$3x - 23 = 31 \\iff 3x = 31 + 23 \\iff 3x = 54$.",
+      "$x = \\frac{54}{3} = 18$.",
+      "O objeto é $x = 18$."
+    ],
+    "passosResolucao": [
+      "Pretende-se encontrar $x$ tal que $g(x) = 31$.",
+      "$3x - 23 = 31 \\iff 3x = 31 + 23 \\iff 3x = 54$.",
+      "$x = \\frac{54}{3} = 18$.",
+      "O objeto é $x = 18$."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_9_22",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 53, Ex. 22",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Seja $g$ a função definida por $g(x) = 3x - 24$. Determine o objeto cuja imagem por $g$ é igual a $33$ (resolva a equação $g(x) = 33$).",
+    "tipo": "numerica",
+    "resposta_correta": "19",
+    "respostaCorreta": "19",
+    "resolucao": [
+      "Pretende-se encontrar $x$ tal que $g(x) = 33$.",
+      "$3x - 24 = 33 \\iff 3x = 33 + 24 \\iff 3x = 57$.",
+      "$x = \\frac{57}{3} = 19$.",
+      "O objeto é $x = 19$."
+    ],
+    "passosResolucao": [
+      "Pretende-se encontrar $x$ tal que $g(x) = 33$.",
+      "$3x - 24 = 33 \\iff 3x = 33 + 24 \\iff 3x = 57$.",
+      "$x = \\frac{57}{3} = 19$.",
+      "O objeto é $x = 19$."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_9_23",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 54, Ex. 23",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Seja $g$ a função definida por $g(x) = 3x - 25$. Determine o objeto cuja imagem por $g$ é igual a $35$ (resolva a equação $g(x) = 35$).",
+    "tipo": "numerica",
+    "resposta_correta": "20",
+    "respostaCorreta": "20",
+    "resolucao": [
+      "Pretende-se encontrar $x$ tal que $g(x) = 35$.",
+      "$3x - 25 = 35 \\iff 3x = 35 + 25 \\iff 3x = 60$.",
+      "$x = \\frac{60}{3} = 20$.",
+      "O objeto é $x = 20$."
+    ],
+    "passosResolucao": [
+      "Pretende-se encontrar $x$ tal que $g(x) = 35$.",
+      "$3x - 25 = 35 \\iff 3x = 35 + 25 \\iff 3x = 60$.",
+      "$x = \\frac{60}{3} = 20$.",
+      "O objeto é $x = 20$."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_9_24",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 55, Ex. 24",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Seja $g$ a função definida por $g(x) = 3x - 26$. Determine o objeto cuja imagem por $g$ é igual a $34$ (resolva a equação $g(x) = 34$).",
+    "tipo": "numerica",
+    "resposta_correta": "20",
+    "respostaCorreta": "20",
+    "resolucao": [
+      "Pretende-se encontrar $x$ tal que $g(x) = 34$.",
+      "$3x - 26 = 34 \\iff 3x = 34 + 26 \\iff 3x = 60$.",
+      "$x = \\frac{60}{3} = 20$.",
+      "O objeto é $x = 20$."
+    ],
+    "passosResolucao": [
+      "Pretende-se encontrar $x$ tal que $g(x) = 34$.",
+      "$3x - 26 = 34 \\iff 3x = 34 + 26 \\iff 3x = 60$.",
+      "$x = \\frac{60}{3} = 20$.",
+      "O objeto é $x = 20$."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_9_25",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 56, Ex. 25",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Uma curva no plano cartesiano representa o gráfico de uma função $y = f(x)$ se e só se:",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "$\\mathbb{R} \\setminus \\{5\\}$"
+        "chave": "A",
+        "texto": "Qualquer reta vertical intersetar a curva no máximo num único ponto"
       },
       {
-        "id": "B",
+        "chave": "B",
+        "texto": "Qualquer reta horizontal intersetar a curva em pelo menos um ponto"
+      },
+      {
+        "chave": "C",
+        "texto": "A curva for simétrica em relação à origem"
+      },
+      {
+        "chave": "D",
+        "texto": "A curva passar obrigatoriamente pela origem $(0,0)$"
+      }
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Pelo Critério da Reta Vertical, para que uma relação seja uma função, a cada objeto $x$ do domínio deve corresponder uma e uma só imagem $y$.",
+      "Assim, qualquer reta vertical $x = k$ pode intersetar o gráfico em no máximo um ponto.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "Pelo Critério da Reta Vertical, para que uma relação seja uma função, a cada objeto $x$ do domínio deve corresponder uma e uma só imagem $y$.",
+      "Assim, qualquer reta vertical $x = k$ pode intersetar o gráfico em no máximo um ponto.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_9_26",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 57, Ex. 26",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Uma curva no plano cartesiano representa o gráfico de uma função $y = f(x)$ se e só se:",
+    "tipo": "multipla_escolha",
+    "opcoes": [
+      {
+        "chave": "A",
+        "texto": "Qualquer reta vertical intersetar a curva no máximo num único ponto"
+      },
+      {
+        "chave": "B",
+        "texto": "Qualquer reta horizontal intersetar a curva em pelo menos um ponto"
+      },
+      {
+        "chave": "C",
+        "texto": "A curva for simétrica em relação à origem"
+      },
+      {
+        "chave": "D",
+        "texto": "A curva passar obrigatoriamente pela origem $(0,0)$"
+      }
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Pelo Critério da Reta Vertical, para que uma relação seja uma função, a cada objeto $x$ do domínio deve corresponder uma e uma só imagem $y$.",
+      "Assim, qualquer reta vertical $x = k$ pode intersetar o gráfico em no máximo um ponto.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "Pelo Critério da Reta Vertical, para que uma relação seja uma função, a cada objeto $x$ do domínio deve corresponder uma e uma só imagem $y$.",
+      "Assim, qualquer reta vertical $x = k$ pode intersetar o gráfico em no máximo um ponto.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_9_27",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 58, Ex. 27",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Uma curva no plano cartesiano representa o gráfico de uma função $y = f(x)$ se e só se:",
+    "tipo": "multipla_escolha",
+    "opcoes": [
+      {
+        "chave": "A",
+        "texto": "Qualquer reta vertical intersetar a curva no máximo num único ponto"
+      },
+      {
+        "chave": "B",
+        "texto": "Qualquer reta horizontal intersetar a curva em pelo menos um ponto"
+      },
+      {
+        "chave": "C",
+        "texto": "A curva for simétrica em relação à origem"
+      },
+      {
+        "chave": "D",
+        "texto": "A curva passar obrigatoriamente pela origem $(0,0)$"
+      }
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Pelo Critério da Reta Vertical, para que uma relação seja uma função, a cada objeto $x$ do domínio deve corresponder uma e uma só imagem $y$.",
+      "Assim, qualquer reta vertical $x = k$ pode intersetar o gráfico em no máximo um ponto.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "Pelo Critério da Reta Vertical, para que uma relação seja uma função, a cada objeto $x$ do domínio deve corresponder uma e uma só imagem $y$.",
+      "Assim, qualquer reta vertical $x = k$ pode intersetar o gráfico em no máximo um ponto.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_9_28",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 50, Ex. 28",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Uma curva no plano cartesiano representa o gráfico de uma função $y = f(x)$ se e só se:",
+    "tipo": "multipla_escolha",
+    "opcoes": [
+      {
+        "chave": "A",
+        "texto": "Qualquer reta vertical intersetar a curva no máximo num único ponto"
+      },
+      {
+        "chave": "B",
+        "texto": "Qualquer reta horizontal intersetar a curva em pelo menos um ponto"
+      },
+      {
+        "chave": "C",
+        "texto": "A curva for simétrica em relação à origem"
+      },
+      {
+        "chave": "D",
+        "texto": "A curva passar obrigatoriamente pela origem $(0,0)$"
+      }
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Pelo Critério da Reta Vertical, para que uma relação seja uma função, a cada objeto $x$ do domínio deve corresponder uma e uma só imagem $y$.",
+      "Assim, qualquer reta vertical $x = k$ pode intersetar o gráfico em no máximo um ponto.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "Pelo Critério da Reta Vertical, para que uma relação seja uma função, a cada objeto $x$ do domínio deve corresponder uma e uma só imagem $y$.",
+      "Assim, qualquer reta vertical $x = k$ pode intersetar o gráfico em no máximo um ponto.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_9_29",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 51, Ex. 29",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Uma curva no plano cartesiano representa o gráfico de uma função $y = f(x)$ se e só se:",
+    "tipo": "multipla_escolha",
+    "opcoes": [
+      {
+        "chave": "A",
+        "texto": "Qualquer reta vertical intersetar a curva no máximo num único ponto"
+      },
+      {
+        "chave": "B",
+        "texto": "Qualquer reta horizontal intersetar a curva em pelo menos um ponto"
+      },
+      {
+        "chave": "C",
+        "texto": "A curva for simétrica em relação à origem"
+      },
+      {
+        "chave": "D",
+        "texto": "A curva passar obrigatoriamente pela origem $(0,0)$"
+      }
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Pelo Critério da Reta Vertical, para que uma relação seja uma função, a cada objeto $x$ do domínio deve corresponder uma e uma só imagem $y$.",
+      "Assim, qualquer reta vertical $x = k$ pode intersetar o gráfico em no máximo um ponto.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "Pelo Critério da Reta Vertical, para que uma relação seja uma função, a cada objeto $x$ do domínio deve corresponder uma e uma só imagem $y$.",
+      "Assim, qualquer reta vertical $x = k$ pode intersetar o gráfico em no máximo um ponto.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_9_30",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 52, Ex. 30",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Uma curva no plano cartesiano representa o gráfico de uma função $y = f(x)$ se e só se:",
+    "tipo": "multipla_escolha",
+    "opcoes": [
+      {
+        "chave": "A",
+        "texto": "Qualquer reta vertical intersetar a curva no máximo num único ponto"
+      },
+      {
+        "chave": "B",
+        "texto": "Qualquer reta horizontal intersetar a curva em pelo menos um ponto"
+      },
+      {
+        "chave": "C",
+        "texto": "A curva for simétrica em relação à origem"
+      },
+      {
+        "chave": "D",
+        "texto": "A curva passar obrigatoriamente pela origem $(0,0)$"
+      }
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Pelo Critério da Reta Vertical, para que uma relação seja uma função, a cada objeto $x$ do domínio deve corresponder uma e uma só imagem $y$.",
+      "Assim, qualquer reta vertical $x = k$ pode intersetar o gráfico em no máximo um ponto.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "Pelo Critério da Reta Vertical, para que uma relação seja uma função, a cada objeto $x$ do domínio deve corresponder uma e uma só imagem $y$.",
+      "Assim, qualquer reta vertical $x = k$ pode intersetar o gráfico em no máximo um ponto.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_9_31",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 53, Ex. 31",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 5,
+    "enunciado": "Numa função $f: A \\to B$, o contradomínio $D'_f$ é necessariamente sempre igual ao conjunto de chegada $B$. Esta afirmação é Verdadeira (V) ou Falsa (F)?",
+    "tipo": "vf",
+    "resposta_correta": "F",
+    "respostaCorreta": "F",
+    "resolucao": [
+      "O contradomínio $D'_f$ é o conjunto de todas as imagens efetivamente assumidas, sendo um subconjunto do conjunto de chegada $B$ ($D'_f \\subseteq B$).",
+      "Apenas quando a função é sobrejetiva é que $D'_f = B$. No caso geral, podem existir elementos em $B$ que não têm objeto.",
+      "Portanto, a afirmação é Falsa (F)."
+    ],
+    "passosResolucao": [
+      "O contradomínio $D'_f$ é o conjunto de todas as imagens efetivamente assumidas, sendo um subconjunto do conjunto de chegada $B$ ($D'_f \\subseteq B$).",
+      "Apenas quando a função é sobrejetiva é que $D'_f = B$. No caso geral, podem existir elementos em $B$ que não têm objeto.",
+      "Portanto, a afirmação é Falsa (F)."
+    ],
+    "espacoLinhas": 8
+  },
+  {
+    "id": "FUN_9_32",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 54, Ex. 32",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 5,
+    "enunciado": "Numa função $f: A \\to B$, o contradomínio $D'_f$ é necessariamente sempre igual ao conjunto de chegada $B$. Esta afirmação é Verdadeira (V) ou Falsa (F)?",
+    "tipo": "vf",
+    "resposta_correta": "F",
+    "respostaCorreta": "F",
+    "resolucao": [
+      "O contradomínio $D'_f$ é o conjunto de todas as imagens efetivamente assumidas, sendo um subconjunto do conjunto de chegada $B$ ($D'_f \\subseteq B$).",
+      "Apenas quando a função é sobrejetiva é que $D'_f = B$. No caso geral, podem existir elementos em $B$ que não têm objeto.",
+      "Portanto, a afirmação é Falsa (F)."
+    ],
+    "passosResolucao": [
+      "O contradomínio $D'_f$ é o conjunto de todas as imagens efetivamente assumidas, sendo um subconjunto do conjunto de chegada $B$ ($D'_f \\subseteq B$).",
+      "Apenas quando a função é sobrejetiva é que $D'_f = B$. No caso geral, podem existir elementos em $B$ que não têm objeto.",
+      "Portanto, a afirmação é Falsa (F)."
+    ],
+    "espacoLinhas": 8
+  },
+  {
+    "id": "FUN_9_33",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 55, Ex. 33",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 5,
+    "enunciado": "Numa função $f: A \\to B$, o contradomínio $D'_f$ é necessariamente sempre igual ao conjunto de chegada $B$. Esta afirmação é Verdadeira (V) ou Falsa (F)?",
+    "tipo": "vf",
+    "resposta_correta": "F",
+    "respostaCorreta": "F",
+    "resolucao": [
+      "O contradomínio $D'_f$ é o conjunto de todas as imagens efetivamente assumidas, sendo um subconjunto do conjunto de chegada $B$ ($D'_f \\subseteq B$).",
+      "Apenas quando a função é sobrejetiva é que $D'_f = B$. No caso geral, podem existir elementos em $B$ que não têm objeto.",
+      "Portanto, a afirmação é Falsa (F)."
+    ],
+    "passosResolucao": [
+      "O contradomínio $D'_f$ é o conjunto de todas as imagens efetivamente assumidas, sendo um subconjunto do conjunto de chegada $B$ ($D'_f \\subseteq B$).",
+      "Apenas quando a função é sobrejetiva é que $D'_f = B$. No caso geral, podem existir elementos em $B$ que não têm objeto.",
+      "Portanto, a afirmação é Falsa (F)."
+    ],
+    "espacoLinhas": 8
+  },
+  {
+    "id": "FUN_9_34",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 56, Ex. 34",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 5,
+    "enunciado": "Numa função $f: A \\to B$, o contradomínio $D'_f$ é necessariamente sempre igual ao conjunto de chegada $B$. Esta afirmação é Verdadeira (V) ou Falsa (F)?",
+    "tipo": "vf",
+    "resposta_correta": "F",
+    "respostaCorreta": "F",
+    "resolucao": [
+      "O contradomínio $D'_f$ é o conjunto de todas as imagens efetivamente assumidas, sendo um subconjunto do conjunto de chegada $B$ ($D'_f \\subseteq B$).",
+      "Apenas quando a função é sobrejetiva é que $D'_f = B$. No caso geral, podem existir elementos em $B$ que não têm objeto.",
+      "Portanto, a afirmação é Falsa (F)."
+    ],
+    "passosResolucao": [
+      "O contradomínio $D'_f$ é o conjunto de todas as imagens efetivamente assumidas, sendo um subconjunto do conjunto de chegada $B$ ($D'_f \\subseteq B$).",
+      "Apenas quando a função é sobrejetiva é que $D'_f = B$. No caso geral, podem existir elementos em $B$ que não têm objeto.",
+      "Portanto, a afirmação é Falsa (F)."
+    ],
+    "espacoLinhas": 8
+  },
+  {
+    "id": "FUN_9_35",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 57, Ex. 35",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 5,
+    "enunciado": "Numa função $f: A \\to B$, o contradomínio $D'_f$ é necessariamente sempre igual ao conjunto de chegada $B$. Esta afirmação é Verdadeira (V) ou Falsa (F)?",
+    "tipo": "vf",
+    "resposta_correta": "F",
+    "respostaCorreta": "F",
+    "resolucao": [
+      "O contradomínio $D'_f$ é o conjunto de todas as imagens efetivamente assumidas, sendo um subconjunto do conjunto de chegada $B$ ($D'_f \\subseteq B$).",
+      "Apenas quando a função é sobrejetiva é que $D'_f = B$. No caso geral, podem existir elementos em $B$ que não têm objeto.",
+      "Portanto, a afirmação é Falsa (F)."
+    ],
+    "passosResolucao": [
+      "O contradomínio $D'_f$ é o conjunto de todas as imagens efetivamente assumidas, sendo um subconjunto do conjunto de chegada $B$ ($D'_f \\subseteq B$).",
+      "Apenas quando a função é sobrejetiva é que $D'_f = B$. No caso geral, podem existir elementos em $B$ que não têm objeto.",
+      "Portanto, a afirmação é Falsa (F)."
+    ],
+    "espacoLinhas": 8
+  },
+  {
+    "id": "FUN_9_36",
+    "topicoId": "topico_9",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.1/2.2 Conceito de função, domínio, contradomínio e gráfico",
+    "paginaInicio": 50,
+    "paginaFim": 58,
+    "manualRef": "Pág. 58, Ex. 36",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 5,
+    "enunciado": "Numa função $f: A \\to B$, o contradomínio $D'_f$ é necessariamente sempre igual ao conjunto de chegada $B$. Esta afirmação é Verdadeira (V) ou Falsa (F)?",
+    "tipo": "vf",
+    "resposta_correta": "F",
+    "respostaCorreta": "F",
+    "resolucao": [
+      "O contradomínio $D'_f$ é o conjunto de todas as imagens efetivamente assumidas, sendo um subconjunto do conjunto de chegada $B$ ($D'_f \\subseteq B$).",
+      "Apenas quando a função é sobrejetiva é que $D'_f = B$. No caso geral, podem existir elementos em $B$ que não têm objeto.",
+      "Portanto, a afirmação é Falsa (F)."
+    ],
+    "passosResolucao": [
+      "O contradomínio $D'_f$ é o conjunto de todas as imagens efetivamente assumidas, sendo um subconjunto do conjunto de chegada $B$ ($D'_f \\subseteq B$).",
+      "Apenas quando a função é sobrejetiva é que $D'_f = B$. No caso geral, podem existir elementos em $B$ que não têm objeto.",
+      "Portanto, a afirmação é Falsa (F)."
+    ],
+    "espacoLinhas": 8
+  },
+  {
+    "id": "FUN_10_01",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 59, Ex. 1",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Determine o zero da função real de variável real $h(x) = 2x - 6$.",
+    "tipo": "numerica",
+    "resposta_correta": "3",
+    "respostaCorreta": "3",
+    "resolucao": [
+      "Os zeros da função são as soluções da equação $h(x) = 0$.",
+      "$2x - 6 = 0 \\iff 2x = 6 \\iff x = \\frac{6}{2} = 3$.",
+      "O zero de $h$ é $x = 3$."
+    ],
+    "passosResolucao": [
+      "Os zeros da função são as soluções da equação $h(x) = 0$.",
+      "$2x - 6 = 0 \\iff 2x = 6 \\iff x = \\frac{6}{2} = 3$.",
+      "O zero de $h$ é $x = 3$."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_10_02",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 60, Ex. 2",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Determine o zero da função real de variável real $h(x) = 2x - 8$.",
+    "tipo": "numerica",
+    "resposta_correta": "4",
+    "respostaCorreta": "4",
+    "resolucao": [
+      "Os zeros da função são as soluções da equação $h(x) = 0$.",
+      "$2x - 8 = 0 \\iff 2x = 8 \\iff x = \\frac{8}{2} = 4$.",
+      "O zero de $h$ é $x = 4$."
+    ],
+    "passosResolucao": [
+      "Os zeros da função são as soluções da equação $h(x) = 0$.",
+      "$2x - 8 = 0 \\iff 2x = 8 \\iff x = \\frac{8}{2} = 4$.",
+      "O zero de $h$ é $x = 4$."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_10_03",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 61, Ex. 3",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Determine o zero da função real de variável real $h(x) = 2x - 10$.",
+    "tipo": "numerica",
+    "resposta_correta": "5",
+    "respostaCorreta": "5",
+    "resolucao": [
+      "Os zeros da função são as soluções da equação $h(x) = 0$.",
+      "$2x - 10 = 0 \\iff 2x = 10 \\iff x = \\frac{10}{2} = 5$.",
+      "O zero de $h$ é $x = 5$."
+    ],
+    "passosResolucao": [
+      "Os zeros da função são as soluções da equação $h(x) = 0$.",
+      "$2x - 10 = 0 \\iff 2x = 10 \\iff x = \\frac{10}{2} = 5$.",
+      "O zero de $h$ é $x = 5$."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_10_04",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 62, Ex. 4",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Determine o zero da função real de variável real $h(x) = 2x - 12$.",
+    "tipo": "numerica",
+    "resposta_correta": "6",
+    "respostaCorreta": "6",
+    "resolucao": [
+      "Os zeros da função são as soluções da equação $h(x) = 0$.",
+      "$2x - 12 = 0 \\iff 2x = 12 \\iff x = \\frac{12}{2} = 6$.",
+      "O zero de $h$ é $x = 6$."
+    ],
+    "passosResolucao": [
+      "Os zeros da função são as soluções da equação $h(x) = 0$.",
+      "$2x - 12 = 0 \\iff 2x = 12 \\iff x = \\frac{12}{2} = 6$.",
+      "O zero de $h$ é $x = 6$."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_10_05",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 63, Ex. 5",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Determine o zero da função real de variável real $h(x) = 2x - 14$.",
+    "tipo": "numerica",
+    "resposta_correta": "7",
+    "respostaCorreta": "7",
+    "resolucao": [
+      "Os zeros da função são as soluções da equação $h(x) = 0$.",
+      "$2x - 14 = 0 \\iff 2x = 14 \\iff x = \\frac{14}{2} = 7$.",
+      "O zero de $h$ é $x = 7$."
+    ],
+    "passosResolucao": [
+      "Os zeros da função são as soluções da equação $h(x) = 0$.",
+      "$2x - 14 = 0 \\iff 2x = 14 \\iff x = \\frac{14}{2} = 7$.",
+      "O zero de $h$ é $x = 7$."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_10_06",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 64, Ex. 6",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Determine o zero da função real de variável real $h(x) = 2x - 16$.",
+    "tipo": "numerica",
+    "resposta_correta": "8",
+    "respostaCorreta": "8",
+    "resolucao": [
+      "Os zeros da função são as soluções da equação $h(x) = 0$.",
+      "$2x - 16 = 0 \\iff 2x = 16 \\iff x = \\frac{16}{2} = 8$.",
+      "O zero de $h$ é $x = 8$."
+    ],
+    "passosResolucao": [
+      "Os zeros da função são as soluções da equação $h(x) = 0$.",
+      "$2x - 16 = 0 \\iff 2x = 16 \\iff x = \\frac{16}{2} = 8$.",
+      "O zero de $h$ é $x = 8$."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_10_07",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 65, Ex. 7",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Determine o zero da função real de variável real $h(x) = 2x - 18$.",
+    "tipo": "numerica",
+    "resposta_correta": "9",
+    "respostaCorreta": "9",
+    "resolucao": [
+      "Os zeros da função são as soluções da equação $h(x) = 0$.",
+      "$2x - 18 = 0 \\iff 2x = 18 \\iff x = \\frac{18}{2} = 9$.",
+      "O zero de $h$ é $x = 9$."
+    ],
+    "passosResolucao": [
+      "Os zeros da função são as soluções da equação $h(x) = 0$.",
+      "$2x - 18 = 0 \\iff 2x = 18 \\iff x = \\frac{18}{2} = 9$.",
+      "O zero de $h$ é $x = 9$."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_10_08",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 66, Ex. 8",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Determine o zero da função real de variável real $h(x) = 2x - 20$.",
+    "tipo": "numerica",
+    "resposta_correta": "10",
+    "respostaCorreta": "10",
+    "resolucao": [
+      "Os zeros da função são as soluções da equação $h(x) = 0$.",
+      "$2x - 20 = 0 \\iff 2x = 20 \\iff x = \\frac{20}{2} = 10$.",
+      "O zero de $h$ é $x = 10$."
+    ],
+    "passosResolucao": [
+      "Os zeros da função são as soluções da equação $h(x) = 0$.",
+      "$2x - 20 = 0 \\iff 2x = 20 \\iff x = \\frac{20}{2} = 10$.",
+      "O zero de $h$ é $x = 10$."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_10_09",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 67, Ex. 9",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Determine o zero da função real de variável real $h(x) = 2x - 22$.",
+    "tipo": "numerica",
+    "resposta_correta": "11",
+    "respostaCorreta": "11",
+    "resolucao": [
+      "Os zeros da função são as soluções da equação $h(x) = 0$.",
+      "$2x - 22 = 0 \\iff 2x = 22 \\iff x = \\frac{22}{2} = 11$.",
+      "O zero de $h$ é $x = 11$."
+    ],
+    "passosResolucao": [
+      "Os zeros da função são as soluções da equação $h(x) = 0$.",
+      "$2x - 22 = 0 \\iff 2x = 22 \\iff x = \\frac{22}{2} = 11$.",
+      "O zero de $h$ é $x = 11$."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_10_10",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 68, Ex. 10",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Determine o zero da função real de variável real $h(x) = 2x - 24$.",
+    "tipo": "numerica",
+    "resposta_correta": "12",
+    "respostaCorreta": "12",
+    "resolucao": [
+      "Os zeros da função são as soluções da equação $h(x) = 0$.",
+      "$2x - 24 = 0 \\iff 2x = 24 \\iff x = \\frac{24}{2} = 12$.",
+      "O zero de $h$ é $x = 12$."
+    ],
+    "passosResolucao": [
+      "Os zeros da função são as soluções da equação $h(x) = 0$.",
+      "$2x - 24 = 0 \\iff 2x = 24 \\iff x = \\frac{24}{2} = 12$.",
+      "O zero de $h$ é $x = 12$."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_10_11",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 69, Ex. 11",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Determine o zero da função real de variável real $h(x) = 2x - 26$.",
+    "tipo": "numerica",
+    "resposta_correta": "13",
+    "respostaCorreta": "13",
+    "resolucao": [
+      "Os zeros da função são as soluções da equação $h(x) = 0$.",
+      "$2x - 26 = 0 \\iff 2x = 26 \\iff x = \\frac{26}{2} = 13$.",
+      "O zero de $h$ é $x = 13$."
+    ],
+    "passosResolucao": [
+      "Os zeros da função são as soluções da equação $h(x) = 0$.",
+      "$2x - 26 = 0 \\iff 2x = 26 \\iff x = \\frac{26}{2} = 13$.",
+      "O zero de $h$ é $x = 13$."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_10_12",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 70, Ex. 12",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Determine o zero da função real de variável real $h(x) = 2x - 28$.",
+    "tipo": "numerica",
+    "resposta_correta": "14",
+    "respostaCorreta": "14",
+    "resolucao": [
+      "Os zeros da função são as soluções da equação $h(x) = 0$.",
+      "$2x - 28 = 0 \\iff 2x = 28 \\iff x = \\frac{28}{2} = 14$.",
+      "O zero de $h$ é $x = 14$."
+    ],
+    "passosResolucao": [
+      "Os zeros da função são as soluções da equação $h(x) = 0$.",
+      "$2x - 28 = 0 \\iff 2x = 28 \\iff x = \\frac{28}{2} = 14$.",
+      "O zero de $h$ é $x = 14$."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_10_13",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 71, Ex. 13",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é o domínio da função real $f(x) = \\frac{2x + 1}{x - 16}$?",
+    "tipo": "multipla_escolha",
+    "opcoes": [
+      {
+        "chave": "A",
+        "texto": "$\\mathbb{R} \\setminus \\{16\\}$"
+      },
+      {
+        "chave": "B",
         "texto": "$\\mathbb{R}$"
       },
       {
-        "id": "C",
-        "texto": "$[5, +\\infty[$"
+        "chave": "C",
+        "texto": "$[16, +\\infty[$"
       },
       {
-        "id": "D",
-        "texto": "$]-\\infty, 5[$"
+        "chave": "D",
+        "texto": "$\\mathbb{R} \\setminus \\{-16\\}$"
       }
-    ]
-  },
-  {
-    "id": "FUNC_9_17",
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35,
-    "manualRef": "Caderno 2, Pág. 27, Ex. 3",
-    "origem": "CEO Banco Oficial",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 6,
-    "enunciado": "Determine a imagem de $x = 4$ pela função $f(x) = 2x^2 - 3x + 1$.",
-    "tipo": "numero",
-    "respostaCorreta": 21,
-    "passosResolucao": [
-      "$f(4) = 2(16) - 3(4) + 1 = 32 - 12 + 1 = 21$."
-    ]
-  },
-  {
-    "id": "FUNC_9_18",
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35,
-    "manualRef": "Caderno 2, Pág. 28, Ex. 4",
-    "origem": "CEO Banco Oficial",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 6,
-    "enunciado": "Se $f(x) = 3x - 6$, qual é o zero da função?",
-    "tipo": "numero",
-    "respostaCorreta": 2,
-    "passosResolucao": [
-      "$3x - 6 = 0 \\iff 3x = 6 \\iff x = 2$."
-    ]
-  },
-  {
-    "id": "FUNC_9_19",
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35,
-    "manualRef": "Caderno 2, Pág. 29, Ex. 5",
-    "origem": "CEO Banco Oficial",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 6,
-    "enunciado": "A função $f(x) = -2x + 7$ é estritamente:",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "O declive é $m = -2 < 0$, logo a função é estritamente decrescente em $\\mathbb{R}$."
     ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Uma fração algébrica apenas está definida quando o seu denominador é diferente de zero.",
+      "Condição de existência: $x - 16 \\neq 0 \\iff x \\neq 16$.",
+      "Logo, o domínio é $D_f = \\mathbb{R} \\setminus \\{16\\}$.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "Uma fração algébrica apenas está definida quando o seu denominador é diferente de zero.",
+      "Condição de existência: $x - 16 \\neq 0 \\iff x \\neq 16$.",
+      "Logo, o domínio é $D_f = \\mathbb{R} \\setminus \\{16\\}$.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_10_14",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 59, Ex. 14",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é o domínio da função real $f(x) = \\frac{2x + 1}{x - 17}$?",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "Decrescente em $\\mathbb{R}$"
+        "chave": "A",
+        "texto": "$\\mathbb{R} \\setminus \\{17\\}$"
       },
       {
-        "id": "B",
-        "texto": "Crescente em $\\mathbb{R}$"
-      },
-      {
-        "id": "C",
-        "texto": "Constante"
-      }
-    ]
-  },
-  {
-    "id": "FUNC_9_20",
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35,
-    "manualRef": "Caderno 2, Pág. 30, Ex. 1",
-    "origem": "CEO Banco Oficial",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 6,
-    "enunciado": "O contradomínio de $f(x) = x^2$ em $\\mathbb{R}$ é:",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "O quadrado de qualquer real é não negativo, assumindo o valor 0 em $x = 0$."
-    ],
-    "opcoes": [
-      {
-        "id": "A",
-        "texto": "$[0, +\\infty[$"
-      },
-      {
-        "id": "B",
+        "chave": "B",
         "texto": "$\\mathbb{R}$"
       },
       {
-        "id": "C",
-        "texto": "$]0, +\\infty[$"
+        "chave": "C",
+        "texto": "$[17, +\\infty[$"
       },
       {
-        "id": "D",
-        "texto": "$[-1, +\\infty[$"
+        "chave": "D",
+        "texto": "$\\mathbb{R} \\setminus \\{-17\\}$"
       }
-    ]
-  },
-  {
-    "id": "FUNC_9_21",
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35,
-    "manualRef": "Caderno 2, Pág. 31, Ex. 2",
-    "origem": "CEO Banco Oficial",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 6,
-    "enunciado": "Se $f(2) = 10$ e $f(6) = 18$, qual é a taxa média de variação de $f$ no intervalo $[2, 6]$?",
-    "tipo": "numero",
-    "respostaCorreta": 2,
-    "passosResolucao": [
-      "$\\text{TMV} = \\frac{18 - 10}{6 - 2} = \\frac{8}{4} = 2$."
-    ]
-  },
-  {
-    "id": "FUNC_9_22",
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35,
-    "manualRef": "Caderno 2, Pág. 32, Ex. 3",
-    "origem": "CEO Banco Oficial",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 6,
-    "enunciado": "A função $g(x) = \\sqrt{x + 7}$ está definida para:",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "$x + 7 \\ge 0 \\iff x \\ge -7$."
     ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Uma fração algébrica apenas está definida quando o seu denominador é diferente de zero.",
+      "Condição de existência: $x - 17 \\neq 0 \\iff x \\neq 17$.",
+      "Logo, o domínio é $D_f = \\mathbb{R} \\setminus \\{17\\}$.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "Uma fração algébrica apenas está definida quando o seu denominador é diferente de zero.",
+      "Condição de existência: $x - 17 \\neq 0 \\iff x \\neq 17$.",
+      "Logo, o domínio é $D_f = \\mathbb{R} \\setminus \\{17\\}$.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_10_15",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 60, Ex. 15",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é o domínio da função real $f(x) = \\frac{2x + 1}{x - 18}$?",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "$x \\ge -7$"
+        "chave": "A",
+        "texto": "$\\mathbb{R} \\setminus \\{18\\}$"
       },
       {
-        "id": "B",
-        "texto": "$x > -7$"
+        "chave": "B",
+        "texto": "$\\mathbb{R}$"
       },
       {
-        "id": "C",
-        "texto": "$x \\le -7$"
+        "chave": "C",
+        "texto": "$[18, +\\infty[$"
       },
       {
-        "id": "D",
-        "texto": "$x \\ge 0$"
+        "chave": "D",
+        "texto": "$\\mathbb{R} \\setminus \\{-18\\}$"
       }
-    ]
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Uma fração algébrica apenas está definida quando o seu denominador é diferente de zero.",
+      "Condição de existência: $x - 18 \\neq 0 \\iff x \\neq 18$.",
+      "Logo, o domínio é $D_f = \\mathbb{R} \\setminus \\{18\\}$.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "Uma fração algébrica apenas está definida quando o seu denominador é diferente de zero.",
+      "Condição de existência: $x - 18 \\neq 0 \\iff x \\neq 18$.",
+      "Logo, o domínio é $D_f = \\mathbb{R} \\setminus \\{18\\}$.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
   },
   {
-    "id": "FUNC_9_23",
-    "topicoId": "topico_9",
+    "id": "FUN_10_16",
+    "topicoId": "topico_10",
     "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35,
-    "manualRef": "Caderno 2, Pág. 33, Ex. 4",
-    "origem": "CEO Banco Oficial",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 61, Ex. 16",
     "cotacaoValores": 2.5,
     "tempoEstimadoMin": 6,
-    "enunciado": "Uma função diz-se constante se:",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "Por definição, uma função constante atribui o mesmo valor $c$ a qualquer objeto do domínio."
-    ],
+    "enunciado": "Qual é o domínio da função real $f(x) = \\frac{2x + 1}{x - 19}$?",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "Todas as imagens são iguais: $f(x) = c$"
+        "chave": "A",
+        "texto": "$\\mathbb{R} \\setminus \\{19\\}$"
       },
       {
-        "id": "B",
-        "texto": "Passa pela origem"
+        "chave": "B",
+        "texto": "$\\mathbb{R}$"
       },
       {
-        "id": "C",
-        "texto": "O seu gráfico é uma curva"
+        "chave": "C",
+        "texto": "$[19, +\\infty[$"
+      },
+      {
+        "chave": "D",
+        "texto": "$\\mathbb{R} \\setminus \\{-19\\}$"
       }
-    ]
-  },
-  {
-    "id": "FUNC_9_24",
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35,
-    "manualRef": "Caderno 2, Pág. 34, Ex. 5",
-    "origem": "CEO Banco Oficial",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 6,
-    "enunciado": "Se o ponto $(3, k)$ pertence ao gráfico de $f(x) = x^2 + 2x$, determine $k$.",
-    "tipo": "numero",
-    "respostaCorreta": 15,
-    "passosResolucao": [
-      "$k = f(3) = 3^2 + 2(3) = 9 + 6 = 15$."
-    ]
-  },
-  {
-    "id": "FUNC_9_25",
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35,
-    "manualRef": "Caderno 2, Pág. 10, Ex. 1",
-    "origem": "CEO Banco Oficial",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 6,
-    "enunciado": "Qual é o domínio de $h(x) = \\frac{x}{\\sqrt{x - 1}}$?",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "O radicando no denominador tem de ser estritamente positivo: $x - 1 > 0 \\iff x > 1$."
     ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Uma fração algébrica apenas está definida quando o seu denominador é diferente de zero.",
+      "Condição de existência: $x - 19 \\neq 0 \\iff x \\neq 19$.",
+      "Logo, o domínio é $D_f = \\mathbb{R} \\setminus \\{19\\}$.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "Uma fração algébrica apenas está definida quando o seu denominador é diferente de zero.",
+      "Condição de existência: $x - 19 \\neq 0 \\iff x \\neq 19$.",
+      "Logo, o domínio é $D_f = \\mathbb{R} \\setminus \\{19\\}$.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_10_17",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 62, Ex. 17",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é o domínio da função real $f(x) = \\frac{2x + 1}{x - 20}$?",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "$]1, +\\infty[$"
+        "chave": "A",
+        "texto": "$\\mathbb{R} \\setminus \\{20\\}$"
       },
       {
-        "id": "B",
-        "texto": "$[1, +\\infty[$"
+        "chave": "B",
+        "texto": "$\\mathbb{R}$"
       },
       {
-        "id": "C",
-        "texto": "$\\mathbb{R} \\setminus \\{1\\}$"
+        "chave": "C",
+        "texto": "$[20, +\\infty[$"
+      },
+      {
+        "chave": "D",
+        "texto": "$\\mathbb{R} \\setminus \\{-20\\}$"
       }
-    ]
-  },
-  {
-    "id": "FUNC_9_26",
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35,
-    "manualRef": "Caderno 2, Pág. 11, Ex. 2",
-    "origem": "CEO Banco Oficial",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 6,
-    "enunciado": "Quantos zeros tem a função $f(x) = x^2 - 16$?",
-    "tipo": "numero",
-    "respostaCorreta": 2,
-    "passosResolucao": [
-      "$x^2 = 16 \\iff x = \\pm 4$. Tem 2 zeros."
-    ]
-  },
-  {
-    "id": "FUNC_9_27",
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35,
-    "manualRef": "Caderno 2, Pág. 12, Ex. 3",
-    "origem": "CEO Banco Oficial",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 6,
-    "enunciado": "O ponto onde o gráfico de qualquer função interseta o eixo $Oy$ tem abcissa igual a:",
-    "tipo": "numero",
-    "respostaCorreta": 0,
-    "passosResolucao": [
-      "No eixo das ordenadas a abcissa é sempre $x = 0$."
-    ]
-  },
-  {
-    "id": "FUNC_9_28",
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35,
-    "manualRef": "Caderno 2, Pág. 13, Ex. 4",
-    "origem": "CEO Banco Oficial",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 6,
-    "enunciado": "Se $f$ é monótona crescente e $a < b$, então:",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "Uma função crescente preserva a ordem dos elementos."
     ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Uma fração algébrica apenas está definida quando o seu denominador é diferente de zero.",
+      "Condição de existência: $x - 20 \\neq 0 \\iff x \\neq 20$.",
+      "Logo, o domínio é $D_f = \\mathbb{R} \\setminus \\{20\\}$.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "Uma fração algébrica apenas está definida quando o seu denominador é diferente de zero.",
+      "Condição de existência: $x - 20 \\neq 0 \\iff x \\neq 20$.",
+      "Logo, o domínio é $D_f = \\mathbb{R} \\setminus \\{20\\}$.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_10_18",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 63, Ex. 18",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é o domínio da função real $f(x) = \\frac{2x + 1}{x - 21}$?",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "$f(a) \\le f(b)$"
+        "chave": "A",
+        "texto": "$\\mathbb{R} \\setminus \\{21\\}$"
       },
       {
-        "id": "B",
-        "texto": "$f(a) > f(b)$"
+        "chave": "B",
+        "texto": "$\\mathbb{R}$"
       },
       {
-        "id": "C",
-        "texto": "$f(a) = f(b)$"
+        "chave": "C",
+        "texto": "$[21, +\\infty[$"
+      },
+      {
+        "chave": "D",
+        "texto": "$\\mathbb{R} \\setminus \\{-21\\}$"
       }
-    ]
-  },
-  {
-    "id": "FUNC_9_29",
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35,
-    "manualRef": "Caderno 2, Pág. 14, Ex. 5",
-    "origem": "CEO Banco Oficial",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 6,
-    "enunciado": "Qual é a imagem da origem por $f(x) = 5x - 9$?",
-    "tipo": "numero",
-    "respostaCorreta": -9,
-    "passosResolucao": [
-      "$f(0) = 5(0) - 9 = -9$."
-    ]
-  },
-  {
-    "id": "FUNC_9_30",
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35,
-    "manualRef": "Caderno 2, Pág. 15, Ex. 1",
-    "origem": "CEO Banco Oficial",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 6,
-    "enunciado": "Se $f(x) = 2x + 1$, qual é a expressão de $f(x + 1)$?",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "$f(x + 1) = 2(x + 1) + 1 = 2x + 2 + 1 = 2x + 3$."
     ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Uma fração algébrica apenas está definida quando o seu denominador é diferente de zero.",
+      "Condição de existência: $x - 21 \\neq 0 \\iff x \\neq 21$.",
+      "Logo, o domínio é $D_f = \\mathbb{R} \\setminus \\{21\\}$.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "Uma fração algébrica apenas está definida quando o seu denominador é diferente de zero.",
+      "Condição de existência: $x - 21 \\neq 0 \\iff x \\neq 21$.",
+      "Logo, o domínio é $D_f = \\mathbb{R} \\setminus \\{21\\}$.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_10_19",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 64, Ex. 19",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é o domínio da função real $f(x) = \\frac{2x + 1}{x - 22}$?",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "$2x + 3$"
+        "chave": "A",
+        "texto": "$\\mathbb{R} \\setminus \\{22\\}$"
       },
       {
-        "id": "B",
-        "texto": "$2x + 2$"
+        "chave": "B",
+        "texto": "$\\mathbb{R}$"
       },
       {
-        "id": "C",
-        "texto": "$2x + 1$"
+        "chave": "C",
+        "texto": "$[22, +\\infty[$"
+      },
+      {
+        "chave": "D",
+        "texto": "$\\mathbb{R} \\setminus \\{-22\\}$"
       }
-    ]
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Uma fração algébrica apenas está definida quando o seu denominador é diferente de zero.",
+      "Condição de existência: $x - 22 \\neq 0 \\iff x \\neq 22$.",
+      "Logo, o domínio é $D_f = \\mathbb{R} \\setminus \\{22\\}$.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "Uma fração algébrica apenas está definida quando o seu denominador é diferente de zero.",
+      "Condição de existência: $x - 22 \\neq 0 \\iff x \\neq 22$.",
+      "Logo, o domínio é $D_f = \\mathbb{R} \\setminus \\{22\\}$.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
   },
   {
-    "id": "FUNC_9_31",
-    "topicoId": "topico_9",
+    "id": "FUN_10_20",
+    "topicoId": "topico_10",
     "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35,
-    "manualRef": "Caderno 2, Pág. 16, Ex. 2",
-    "origem": "CEO Banco Oficial",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 65, Ex. 20",
     "cotacaoValores": 2.5,
     "tempoEstimadoMin": 6,
-    "enunciado": "O máximo de uma função $f$ num intervalo $I$ é:",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "O máximo é a maior imagem $M$ tal que $f(x) \\le M$ para todo $x \\in I$."
-    ],
+    "enunciado": "Qual é o domínio da função real $f(x) = \\frac{2x + 1}{x - 23}$?",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "O maior valor assumido por $f$ em $I$"
+        "chave": "A",
+        "texto": "$\\mathbb{R} \\setminus \\{23\\}$"
       },
       {
-        "id": "B",
-        "texto": "O maior valor do domínio"
+        "chave": "B",
+        "texto": "$\\mathbb{R}$"
+      },
+      {
+        "chave": "C",
+        "texto": "$[23, +\\infty[$"
+      },
+      {
+        "chave": "D",
+        "texto": "$\\mathbb{R} \\setminus \\{-23\\}$"
       }
-    ]
-  },
-  {
-    "id": "FUNC_9_32",
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35,
-    "manualRef": "Caderno 2, Pág. 17, Ex. 3",
-    "origem": "CEO Banco Oficial",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 6,
-    "enunciado": "Determine o zero da função afim $f(x) = -4x + 20$.",
-    "tipo": "numero",
-    "respostaCorreta": 5,
-    "passosResolucao": [
-      "$-4x + 20 = 0 \\iff 4x = 20 \\iff x = 5$."
-    ]
-  },
-  {
-    "id": "FUNC_9_33",
-    "topicoId": "topico_9",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35,
-    "manualRef": "Caderno 2, Pág. 18, Ex. 4",
-    "origem": "CEO Banco Oficial",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 6,
-    "enunciado": "A função $f(x) = x^2 + 1$ tem contradomínio:",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "Como $x^2 \\ge 0$, $x^2 + 1 \\ge 1$."
     ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Uma fração algébrica apenas está definida quando o seu denominador é diferente de zero.",
+      "Condição de existência: $x - 23 \\neq 0 \\iff x \\neq 23$.",
+      "Logo, o domínio é $D_f = \\mathbb{R} \\setminus \\{23\\}$.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "Uma fração algébrica apenas está definida quando o seu denominador é diferente de zero.",
+      "Condição de existência: $x - 23 \\neq 0 \\iff x \\neq 23$.",
+      "Logo, o domínio é $D_f = \\mathbb{R} \\setminus \\{23\\}$.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_10_21",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 66, Ex. 21",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é o domínio da função real $f(x) = \\frac{2x + 1}{x - 24}$?",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "$[1, +\\infty[$"
+        "chave": "A",
+        "texto": "$\\mathbb{R} \\setminus \\{24\\}$"
       },
       {
-        "id": "B",
-        "texto": "$[0, +\\infty[$"
+        "chave": "B",
+        "texto": "$\\mathbb{R}$"
       },
       {
-        "id": "C",
+        "chave": "C",
+        "texto": "$[24, +\\infty[$"
+      },
+      {
+        "chave": "D",
+        "texto": "$\\mathbb{R} \\setminus \\{-24\\}$"
+      }
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Uma fração algébrica apenas está definida quando o seu denominador é diferente de zero.",
+      "Condição de existência: $x - 24 \\neq 0 \\iff x \\neq 24$.",
+      "Logo, o domínio é $D_f = \\mathbb{R} \\setminus \\{24\\}$.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "Uma fração algébrica apenas está definida quando o seu denominador é diferente de zero.",
+      "Condição de existência: $x - 24 \\neq 0 \\iff x \\neq 24$.",
+      "Logo, o domínio é $D_f = \\mathbb{R} \\setminus \\{24\\}$.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_10_22",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 67, Ex. 22",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é o domínio da função real $f(x) = \\frac{2x + 1}{x - 25}$?",
+    "tipo": "multipla_escolha",
+    "opcoes": [
+      {
+        "chave": "A",
+        "texto": "$\\mathbb{R} \\setminus \\{25\\}$"
+      },
+      {
+        "chave": "B",
+        "texto": "$\\mathbb{R}$"
+      },
+      {
+        "chave": "C",
+        "texto": "$[25, +\\infty[$"
+      },
+      {
+        "chave": "D",
+        "texto": "$\\mathbb{R} \\setminus \\{-25\\}$"
+      }
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Uma fração algébrica apenas está definida quando o seu denominador é diferente de zero.",
+      "Condição de existência: $x - 25 \\neq 0 \\iff x \\neq 25$.",
+      "Logo, o domínio é $D_f = \\mathbb{R} \\setminus \\{25\\}$.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "Uma fração algébrica apenas está definida quando o seu denominador é diferente de zero.",
+      "Condição de existência: $x - 25 \\neq 0 \\iff x \\neq 25$.",
+      "Logo, o domínio é $D_f = \\mathbb{R} \\setminus \\{25\\}$.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_10_23",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 68, Ex. 23",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é o domínio da função real $f(x) = \\frac{2x + 1}{x - 26}$?",
+    "tipo": "multipla_escolha",
+    "opcoes": [
+      {
+        "chave": "A",
+        "texto": "$\\mathbb{R} \\setminus \\{26\\}$"
+      },
+      {
+        "chave": "B",
+        "texto": "$\\mathbb{R}$"
+      },
+      {
+        "chave": "C",
+        "texto": "$[26, +\\infty[$"
+      },
+      {
+        "chave": "D",
+        "texto": "$\\mathbb{R} \\setminus \\{-26\\}$"
+      }
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Uma fração algébrica apenas está definida quando o seu denominador é diferente de zero.",
+      "Condição de existência: $x - 26 \\neq 0 \\iff x \\neq 26$.",
+      "Logo, o domínio é $D_f = \\mathbb{R} \\setminus \\{26\\}$.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "Uma fração algébrica apenas está definida quando o seu denominador é diferente de zero.",
+      "Condição de existência: $x - 26 \\neq 0 \\iff x \\neq 26$.",
+      "Logo, o domínio é $D_f = \\mathbb{R} \\setminus \\{26\\}$.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_10_24",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 69, Ex. 24",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Qual é o domínio da função real $f(x) = \\frac{2x + 1}{x - 27}$?",
+    "tipo": "multipla_escolha",
+    "opcoes": [
+      {
+        "chave": "A",
+        "texto": "$\\mathbb{R} \\setminus \\{27\\}$"
+      },
+      {
+        "chave": "B",
+        "texto": "$\\mathbb{R}$"
+      },
+      {
+        "chave": "C",
+        "texto": "$[27, +\\infty[$"
+      },
+      {
+        "chave": "D",
+        "texto": "$\\mathbb{R} \\setminus \\{-27\\}$"
+      }
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Uma fração algébrica apenas está definida quando o seu denominador é diferente de zero.",
+      "Condição de existência: $x - 27 \\neq 0 \\iff x \\neq 27$.",
+      "Logo, o domínio é $D_f = \\mathbb{R} \\setminus \\{27\\}$.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "Uma fração algébrica apenas está definida quando o seu denominador é diferente de zero.",
+      "Condição de existência: $x - 27 \\neq 0 \\iff x \\neq 27$.",
+      "Logo, o domínio é $D_f = \\mathbb{R} \\setminus \\{27\\}$.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_10_25",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 70, Ex. 25",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Para que valores de $x$ se verifica a condição $f(x) > 0$, sendo $f(x) = 2x - 31$?",
+    "tipo": "multipla_escolha",
+    "opcoes": [
+      {
+        "chave": "A",
+        "texto": "$]15.5, +\\infty[$"
+      },
+      {
+        "chave": "B",
+        "texto": "$]-\\infty, 15.5[$"
+      },
+      {
+        "chave": "C",
+        "texto": "$[15.5, +\\infty[$"
+      },
+      {
+        "chave": "D",
         "texto": "$\\mathbb{R}$"
       }
-    ]
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Resolve-se a inequação linear: $2x - 31 > 0$.",
+      "$2x > 31 \\iff x > \\frac{31}{2} \\iff x > 15.5$.",
+      "O conjunto-solução é o intervalo aberto $]15.5, +\\infty[$.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "Resolve-se a inequação linear: $2x - 31 > 0$.",
+      "$2x > 31 \\iff x > \\frac{31}{2} \\iff x > 15.5$.",
+      "O conjunto-solução é o intervalo aberto $]15.5, +\\infty[$.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
   },
   {
-    "id": "FUNC_9_34",
-    "topicoId": "topico_9",
+    "id": "FUN_10_26",
+    "topicoId": "topico_10",
     "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35,
-    "manualRef": "Caderno 2, Pág. 19, Ex. 5",
-    "origem": "CEO Banco Oficial",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 71, Ex. 26",
     "cotacaoValores": 2.5,
     "tempoEstimadoMin": 6,
-    "enunciado": "Se $f(x) = 3$ para todo o $x$, qual é a taxa de variação de $f$?",
-    "tipo": "numero",
-    "respostaCorreta": 0,
+    "enunciado": "Para que valores de $x$ se verifica a condição $f(x) > 0$, sendo $f(x) = 2x - 32$?",
+    "tipo": "multipla_escolha",
+    "opcoes": [
+      {
+        "chave": "A",
+        "texto": "$]16.0, +\\infty[$"
+      },
+      {
+        "chave": "B",
+        "texto": "$]-\\infty, 16.0[$"
+      },
+      {
+        "chave": "C",
+        "texto": "$[16.0, +\\infty[$"
+      },
+      {
+        "chave": "D",
+        "texto": "$\\mathbb{R}$"
+      }
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Resolve-se a inequação linear: $2x - 32 > 0$.",
+      "$2x > 32 \\iff x > \\frac{32}{2} \\iff x > 16.0$.",
+      "O conjunto-solução é o intervalo aberto $]16.0, +\\infty[$.",
+      "Opção correta: (A)."
+    ],
     "passosResolucao": [
-      "Funções constantes têm taxa de variação nula: 0."
-    ]
+      "Resolve-se a inequação linear: $2x - 32 > 0$.",
+      "$2x > 32 \\iff x > \\frac{32}{2} \\iff x > 16.0$.",
+      "O conjunto-solução é o intervalo aberto $]16.0, +\\infty[$.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
   },
   {
-    "id": "FUNC_9_35",
-    "topicoId": "topico_9",
+    "id": "FUN_10_27",
+    "topicoId": "topico_10",
     "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35,
-    "manualRef": "Caderno 2, Pág. 20, Ex. 1",
-    "origem": "CEO Banco Oficial",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 59, Ex. 27",
     "cotacaoValores": 2.5,
     "tempoEstimadoMin": 6,
-    "enunciado": "Uma função diz-se injetiva se:",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "Definição: $x_1 \\ne x_2 \\implies f(x_1) \\ne f(x_2)$."
-    ],
+    "enunciado": "Para que valores de $x$ se verifica a condição $f(x) > 0$, sendo $f(x) = 2x - 33$?",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "Objetos diferentes têm imagens diferentes"
+        "chave": "A",
+        "texto": "$]16.5, +\\infty[$"
       },
       {
-        "id": "B",
-        "texto": "Todas as imagens são positivas"
+        "chave": "B",
+        "texto": "$]-\\infty, 16.5[$"
+      },
+      {
+        "chave": "C",
+        "texto": "$[16.5, +\\infty[$"
+      },
+      {
+        "chave": "D",
+        "texto": "$\\mathbb{R}$"
       }
-    ]
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Resolve-se a inequação linear: $2x - 33 > 0$.",
+      "$2x > 33 \\iff x > \\frac{33}{2} \\iff x > 16.5$.",
+      "O conjunto-solução é o intervalo aberto $]16.5, +\\infty[$.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "Resolve-se a inequação linear: $2x - 33 > 0$.",
+      "$2x > 33 \\iff x > \\frac{33}{2} \\iff x > 16.5$.",
+      "O conjunto-solução é o intervalo aberto $]16.5, +\\infty[$.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
   },
   {
-    "id": "FUNC_9_36",
-    "topicoId": "topico_9",
+    "id": "FUN_10_28",
+    "topicoId": "topico_10",
     "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Generalidades sobre Funções e Monotonia",
-    "paginaInicio": 10,
-    "paginaFim": 35,
-    "manualRef": "Caderno 2, Pág. 21, Ex. 2",
-    "origem": "CEO Banco Oficial",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 60, Ex. 28",
     "cotacaoValores": 2.5,
     "tempoEstimadoMin": 6,
-    "enunciado": "Se $f(x) = x^3$, o zero da função é:",
-    "tipo": "numero",
-    "respostaCorreta": 0,
+    "enunciado": "Para que valores de $x$ se verifica a condição $f(x) > 0$, sendo $f(x) = 2x - 34$?",
+    "tipo": "multipla_escolha",
+    "opcoes": [
+      {
+        "chave": "A",
+        "texto": "$]17.0, +\\infty[$"
+      },
+      {
+        "chave": "B",
+        "texto": "$]-\\infty, 17.0[$"
+      },
+      {
+        "chave": "C",
+        "texto": "$[17.0, +\\infty[$"
+      },
+      {
+        "chave": "D",
+        "texto": "$\\mathbb{R}$"
+      }
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Resolve-se a inequação linear: $2x - 34 > 0$.",
+      "$2x > 34 \\iff x > \\frac{34}{2} \\iff x > 17.0$.",
+      "O conjunto-solução é o intervalo aberto $]17.0, +\\infty[$.",
+      "Opção correta: (A)."
+    ],
     "passosResolucao": [
-      "$x^3 = 0 \\iff x = 0$."
-    ]
+      "Resolve-se a inequação linear: $2x - 34 > 0$.",
+      "$2x > 34 \\iff x > \\frac{34}{2} \\iff x > 17.0$.",
+      "O conjunto-solução é o intervalo aberto $]17.0, +\\infty[$.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
   },
   {
-    "id": "FUNC_10_01",
-    "manualRef": "Caderno 2, Pág. 40, Ex. 2",
-    "origem": "Manual Escolar",
+    "id": "FUN_10_29",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 61, Ex. 29",
     "cotacaoValores": 2.5,
     "tempoEstimadoMin": 6,
-    "enunciado": "A função $f(x) = x^4 - 2x^2$ é uma função par. Isto significa geometricamente que o seu gráfico é simétrico em relação a que elemento?",
-    "tipo": "escolha_multipla",
+    "enunciado": "Para que valores de $x$ se verifica a condição $f(x) > 0$, sendo $f(x) = 2x - 35$?",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "Eixo das ordenadas ($Oy$)"
+        "chave": "A",
+        "texto": "$]17.5, +\\infty[$"
       },
       {
-        "id": "B",
-        "texto": "Origem do referencial $(0, 0)$"
+        "chave": "B",
+        "texto": "$]-\\infty, 17.5[$"
       },
       {
-        "id": "C",
-        "texto": "Eixo das abcissas ($Ox$)"
+        "chave": "C",
+        "texto": "$[17.5, +\\infty[$"
       },
       {
-        "id": "D",
-        "texto": "Bissetriz dos quadrantes ímpares ($y = x$)"
+        "chave": "D",
+        "texto": "$\\mathbb{R}$"
       }
     ],
+    "resposta_correta": "A",
     "respostaCorreta": "A",
-    "passosResolucao": [
-      "Por definição, uma função par satisfaz $f(-x) = f(x)$, o que confere ao gráfico simetria axial relativamente ao eixo das ordenadas $Oy$."
+    "resolucao": [
+      "Resolve-se a inequação linear: $2x - 35 > 0$.",
+      "$2x > 35 \\iff x > \\frac{35}{2} \\iff x > 17.5$.",
+      "O conjunto-solução é o intervalo aberto $]17.5, +\\infty[$.",
+      "Opção correta: (A)."
     ],
-    "topicoId": "topico_10",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60
+    "passosResolucao": [
+      "Resolve-se a inequação linear: $2x - 35 > 0$.",
+      "$2x > 35 \\iff x > \\frac{35}{2} \\iff x > 17.5$.",
+      "O conjunto-solução é o intervalo aberto $]17.5, +\\infty[$.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
   },
   {
-    "id": "FUNC_10_02",
-    "manualRef": "Caderno 2, Pág. 44, Ex. 4",
-    "origem": "Exame Nacional / IAVE",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 7,
-    "enunciado": "O gráfico de $g(x) = f(x - 3) + 2$ obtém-se a partir do gráfico de $f(x)$ por meio de qual translação?",
-    "tipo": "escolha_multipla",
-    "opcoes": [
-      {
-        "id": "A",
-        "texto": "3 unidades para a direita e 2 unidades para cima"
-      },
-      {
-        "id": "B",
-        "texto": "3 unidades para a esquerda e 2 unidades para cima"
-      },
-      {
-        "id": "C",
-        "texto": "3 unidades para a direita e 2 unidades para baixo"
-      },
-      {
-        "id": "D",
-        "texto": "3 unidades para a esquerda e 2 unidades para baixo"
-      }
-    ],
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "O termo $(x - 3)$ translada o gráfico 3 unidades no sentido positivo do eixo $Ox$ (para a direita).",
-      "O termo $+ 2$ translada o gráfico 2 unidades no sentido positivo de $Oy$ (para cima)."
-    ],
+    "id": "FUN_10_30",
     "topicoId": "topico_10",
     "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60
-  },
-  {
-    "id": "FUNC_10_03",
-    "manualRef": "Caderno 2, Pág. 48, Ex. 1",
-    "origem": "Caderno de Apoio",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 7,
-    "enunciado": "Se $f$ é uma função ímpar e $f(3) = 7$, qual é o valor de $f(-3)$?",
-    "tipo": "numero",
-    "respostaCorreta": -7,
-    "passosResolucao": [
-      "Para uma função ímpar, verifica-se $f(-x) = -f(x)$ para todo o $x \\in D_f$.",
-      "Logo, $f(-3) = -f(3) = -7$."
-    ],
-    "topicoId": "topico_10",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60
-  },
-  {
-    "id": "FUNC_10_04",
-    "manualRef": "Caderno 2, Pág. 50, Ex. 3",
-    "origem": "Manual Escolar",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 8,
-    "enunciado": "O gráfico de $y = -f(x)$ obtém-se a partir de $y = f(x)$ através de:",
-    "tipo": "escolha_multipla",
-    "opcoes": [
-      {
-        "id": "A",
-        "texto": "Reflexão relativamente ao eixo $Ox$"
-      },
-      {
-        "id": "B",
-        "texto": "Reflexão relativamente ao eixo $Oy$"
-      },
-      {
-        "id": "C",
-        "texto": "Reflexão relativamente à origem"
-      },
-      {
-        "id": "D",
-        "texto": "Translação vertical de 1 unidade"
-      }
-    ],
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "A multiplicação por $-1$ no exterior da função inverte o sinal de todas as ordenadas: $(x, y) \\mapsto (x, -y)$.",
-      "Isto corresponde a uma reflexão axial pelo eixo das abcissas $Ox$."
-    ],
-    "topicoId": "topico_10",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60
-  },
-  {
-    "id": "FUNC_10_05",
-    "manualRef": "Caderno 2, Pág. 52, Ex. 5",
-    "origem": "Exame Nacional / IAVE",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 8,
-    "enunciado": "Se o ponto $P(2, 5)$ pertence ao gráfico de $f$, qual é o ponto garantidamente pertencente ao gráfico de $g(x) = f(x) + 4$?",
-    "tipo": "escolha_multipla",
-    "opcoes": [
-      {
-        "id": "A",
-        "texto": "$(2, 9)$"
-      },
-      {
-        "id": "B",
-        "texto": "$(6, 5)$"
-      },
-      {
-        "id": "C",
-        "texto": "$(2, 1)$"
-      },
-      {
-        "id": "D",
-        "texto": "(-2, 5)"
-      }
-    ],
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "$g(2) = f(2) + 4 = 5 + 4 = 9$.",
-      "O ponto pertencente ao gráfico de $g$ é $(2, 9)$."
-    ],
-    "topicoId": "topico_10",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60
-  },
-  {
-    "id": "FUNC_10_06",
-    "manualRef": "Caderno 2, Pág. 54, Ex. 2",
-    "origem": "Caderno de Apoio",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 7,
-    "enunciado": "Qual das seguintes funções é uma função ÍMPAR?",
-    "tipo": "escolha_multipla",
-    "opcoes": [
-      {
-        "id": "A",
-        "texto": "$f(x) = x^3$"
-      },
-      {
-        "id": "B",
-        "texto": "$g(x) = x^2 + 1$"
-      },
-      {
-        "id": "C",
-        "texto": "$h(x) = |x|$"
-      },
-      {
-        "id": "D",
-        "texto": "$j(x) = x^2 + x$"
-      }
-    ],
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "$f(-x) = (-x)^3 = -x^3 = -f(x)$. A função cubo é ímpar."
-    ],
-    "topicoId": "topico_10",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60
-  },
-  {
-    "id": "FUNC_10_07",
-    "manualRef": "Caderno 2, Pág. 55, Ex. 4",
-    "origem": "Manual Escolar",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 8,
-    "enunciado": "Se o gráfico de $f(x)$ tem zero em $x = 4$, qual é o zero da função $h(x) = f(x + 5)$?",
-    "tipo": "numero",
-    "respostaCorreta": -1,
-    "passosResolucao": [
-      "Queremos $h(x) = 0 \\iff f(x + 5) = 0$.",
-      "Como $f(4) = 0$, temos $x + 5 = 4 \\iff x = -1$."
-    ],
-    "topicoId": "topico_10",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60
-  },
-  {
-    "id": "FUNC_10_08",
-    "manualRef": "Caderno 2, Pág. 56, Ex. 1",
-    "origem": "Olimpíadas da SPM",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 9,
-    "enunciado": "Se $f$ é ímpar e está definida em $x = 0$, qual é obrigatoriamente o valor de $f(0)$?",
-    "tipo": "numero",
-    "respostaCorreta": 0,
-    "passosResolucao": [
-      "Pela definição de função ímpar: $f(-0) = -f(0) \\iff f(0) = -f(0) \\iff 2f(0) = 0 \\iff f(0) = 0$."
-    ],
-    "topicoId": "topico_10",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60
-  },
-  {
-    "id": "FUNC_10_09",
-    "manualRef": "Caderno 2, Pág. 57, Ex. 3",
-    "origem": "Caderno de Apoio",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 7,
-    "enunciado": "A transformação que leva o gráfico de $y = f(x)$ para $y = f(-x)$ corresponde a:",
-    "tipo": "escolha_multipla",
-    "opcoes": [
-      {
-        "id": "A",
-        "texto": "Reflexão relativamente ao eixo $Oy$"
-      },
-      {
-        "id": "B",
-        "texto": "Reflexão relativamente ao eixo $Ox$"
-      },
-      {
-        "id": "C",
-        "texto": "Translação horizontal para a esquerda"
-      },
-      {
-        "id": "D",
-        "texto": "Dilatação vertical"
-      }
-    ],
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "A substituição de $x$ por $-x$ reflete o ponto $(x, y)$ para $(-x, y)$, que é a reflexão axial pelo eixo das ordenadas $Oy$."
-    ],
-    "topicoId": "topico_10",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60
-  },
-  {
-    "id": "FUNC_10_10",
-    "manualRef": "Caderno 2, Pág. 58, Ex. 2",
-    "origem": "Exame Nacional / IAVE",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 8,
-    "enunciado": "Seja $D_f = [-4, 6]$. Qual é o domínio da função $g(x) = f(x - 2)$?",
-    "tipo": "escolha_multipla",
-    "opcoes": [
-      {
-        "id": "A",
-        "texto": "$[-2, 8]$"
-      },
-      {
-        "id": "B",
-        "texto": "$[-6, 4]$"
-      },
-      {
-        "id": "C",
-        "texto": "$[-4, 6]$"
-      },
-      {
-        "id": "D",
-        "texto": "$[-8, 12]$"
-      }
-    ],
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "Para $g(x)$ estar definida: $-4 \\le x - 2 \\le 6$.",
-      "Somando 2 a todos os membros: $-2 \\le x \\le 8$. Portanto, $D_g = [-2, 8]$."
-    ],
-    "topicoId": "topico_10",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60
-  },
-  {
-    "id": "FUNC_10_11",
-    "manualRef": "Caderno 2, Pág. 58, Ex. 5",
-    "origem": "Manual Escolar",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 7,
-    "enunciado": "Se o máximo absoluto de $f(x)$ é 10, qual é o máximo absoluto de $p(x) = 3f(x)$?",
-    "tipo": "numero",
-    "respostaCorreta": 30,
-    "passosResolucao": [
-      "A dilatação vertical por fator 3 multiplica todas as imagens por 3: $3 \\times 10 = 30$."
-    ],
-    "topicoId": "topico_10",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60
-  },
-  {
-    "id": "FUNC_10_12",
-    "manualRef": "Caderno 2, Pág. 59, Ex. 1",
-    "origem": "Caderno de Apoio",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 8,
-    "enunciado": "O gráfico de uma função ímpar tem simetria em relação a:",
-    "tipo": "escolha_multipla",
-    "opcoes": [
-      {
-        "id": "A",
-        "texto": "Origem $(0, 0)$ (simetria central)"
-      },
-      {
-        "id": "B",
-        "texto": "Eixo das ordenadas"
-      },
-      {
-        "id": "C",
-        "texto": "Eixo das abcissas"
-      },
-      {
-        "id": "D",
-        "texto": "Reta $y = 1$"
-      }
-    ],
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "Uma função ímpar satisfaz $f(-x) = -f(x)$, o que confere ao gráfico simetria central relativamente à origem das coordenadas."
-    ],
-    "topicoId": "topico_10",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60
-  },
-  {
-    "id": "FUNC_10_13",
-    "manualRef": "Caderno 2, Pág. 59, Ex. 4",
-    "origem": "Olimpíadas da SPM",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 9,
-    "enunciado": "Dada a função $f(x) = x^2$, determine a ordenada do vértice da parábola $g(x) = f(x + 3) - 7$.",
-    "tipo": "numero",
-    "respostaCorreta": -7,
-    "passosResolucao": [
-      "O vértice de $f(x) = x^2$ é $(0, 0)$.",
-      "Com as transformações $x \\mapsto x + 3$ e $-7$, o novo vértice é $(-3, -7)$. A sua ordenada é $-7$."
-    ],
-    "topicoId": "topico_10",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60
-  },
-  {
-    "id": "FUNC_10_14",
-    "manualRef": "Caderno 2, Pág. 60, Ex. 2",
-    "origem": "Manual Escolar",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 7,
-    "enunciado": "Qual das seguintes afirmações sobre $f(x) = |x|$ é verdadeira?",
-    "tipo": "escolha_multipla",
-    "opcoes": [
-      {
-        "id": "A",
-        "texto": "É uma função par"
-      },
-      {
-        "id": "B",
-        "texto": "É uma função ímpar"
-      },
-      {
-        "id": "C",
-        "texto": "Não tem extremos"
-      },
-      {
-        "id": "D",
-        "texto": "O seu domínio é $[0, +\\infty[$"
-      }
-    ],
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "$|-x| = |x|$, logo $f(-x) = f(x)$, o que a torna uma função par."
-    ],
-    "topicoId": "topico_10",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60
-  },
-  {
-    "id": "FUNC_10_15",
-    "manualRef": "Caderno 2, Pág. 60, Ex. 6",
-    "origem": "Exame Nacional / IAVE",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 8,
-    "enunciado": "Seja $f(x)$ estritamente crescente em $\\mathbb{R}$. A função $g(x) = -f(x)$ é:",
-    "tipo": "escolha_multipla",
-    "opcoes": [
-      {
-        "id": "A",
-        "texto": "Estritamente decrescente em $\\mathbb{R}$"
-      },
-      {
-        "id": "B",
-        "texto": "Estritamente crescente em $\\mathbb{R}$"
-      },
-      {
-        "id": "C",
-        "texto": "Constante"
-      },
-      {
-        "id": "D",
-        "texto": "Não monótona"
-      }
-    ],
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "Multiplicar por $-1$ inverte a relação de desigualdade: $x_1 < x_2 \\implies f(x_1) < f(x_2) \\implies -f(x_1) > -f(x_2)$.",
-      "Portanto, $g$ é estritamente decrescente."
-    ],
-    "topicoId": "topico_10",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60
-  },
-  {
-    "id": "FUNC_10_16",
-    "topicoId": "topico_10",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60,
-    "manualRef": "Caderno 2, Pág. 52, Ex. 2",
-    "origem": "CEO Banco Oficial",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 62, Ex. 30",
     "cotacaoValores": 2.5,
     "tempoEstimadoMin": 6,
-    "enunciado": "Se $f$ é par e $f(5) = -8$, qual é o valor de $f(-5)$?",
-    "tipo": "numero",
-    "respostaCorreta": -8,
-    "passosResolucao": [
-      "Para uma função par, $f(-x) = f(x)$. Logo, $f(-5) = f(5) = -8$."
-    ]
-  },
-  {
-    "id": "FUNC_10_17",
-    "topicoId": "topico_10",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60,
-    "manualRef": "Caderno 2, Pág. 53, Ex. 3",
-    "origem": "CEO Banco Oficial",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 6,
-    "enunciado": "O gráfico de $y = f(x) - 4$ obtém-se transladando o gráfico de $f$:",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "Subtrair 4 ao valor da função desloca verticalmente 4 unidades para baixo."
-    ],
+    "enunciado": "Para que valores de $x$ se verifica a condição $f(x) > 0$, sendo $f(x) = 2x - 36$?",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "4 unidades para baixo"
+        "chave": "A",
+        "texto": "$]18.0, +\\infty[$"
       },
       {
-        "id": "B",
-        "texto": "4 unidades para cima"
+        "chave": "B",
+        "texto": "$]-\\infty, 18.0[$"
       },
       {
-        "id": "C",
-        "texto": "4 unidades para a direita"
+        "chave": "C",
+        "texto": "$[18.0, +\\infty[$"
+      },
+      {
+        "chave": "D",
+        "texto": "$\\mathbb{R}$"
       }
-    ]
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Resolve-se a inequação linear: $2x - 36 > 0$.",
+      "$2x > 36 \\iff x > \\frac{36}{2} \\iff x > 18.0$.",
+      "O conjunto-solução é o intervalo aberto $]18.0, +\\infty[$.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "Resolve-se a inequação linear: $2x - 36 > 0$.",
+      "$2x > 36 \\iff x > \\frac{36}{2} \\iff x > 18.0$.",
+      "O conjunto-solução é o intervalo aberto $]18.0, +\\infty[$.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
   },
   {
-    "id": "FUNC_10_18",
+    "id": "FUN_10_31",
     "topicoId": "topico_10",
     "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60,
-    "manualRef": "Caderno 2, Pág. 54, Ex. 4",
-    "origem": "CEO Banco Oficial",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 63, Ex. 31",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 5,
+    "enunciado": "Se um número real $c$ é um zero da função $f$, então o ponto de coordenadas $(c, 0)$ pertence obrigatoriamente à interseção do gráfico de $f$ com o eixo das abcissas ($Ox$). Esta afirmação é Verdadeira (V) ou Falsa (F)?",
+    "tipo": "vf",
+    "resposta_correta": "V",
+    "respostaCorreta": "V",
+    "resolucao": [
+      "Por definição de zero de uma função, $f(c) = 0$.",
+      "Portanto, o ponto $(c, f(c)) = (c, 0)$ tem ordenada nula, situando-se exatamente sobre o eixo horizontal $Ox$.",
+      "A afirmação é rigorosamente Verdadeira (V)."
+    ],
+    "passosResolucao": [
+      "Por definição de zero de uma função, $f(c) = 0$.",
+      "Portanto, o ponto $(c, f(c)) = (c, 0)$ tem ordenada nula, situando-se exatamente sobre o eixo horizontal $Ox$.",
+      "A afirmação é rigorosamente Verdadeira (V)."
+    ],
+    "espacoLinhas": 8
+  },
+  {
+    "id": "FUN_10_32",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 64, Ex. 32",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 5,
+    "enunciado": "Se um número real $c$ é um zero da função $f$, então o ponto de coordenadas $(c, 0)$ pertence obrigatoriamente à interseção do gráfico de $f$ com o eixo das abcissas ($Ox$). Esta afirmação é Verdadeira (V) ou Falsa (F)?",
+    "tipo": "vf",
+    "resposta_correta": "V",
+    "respostaCorreta": "V",
+    "resolucao": [
+      "Por definição de zero de uma função, $f(c) = 0$.",
+      "Portanto, o ponto $(c, f(c)) = (c, 0)$ tem ordenada nula, situando-se exatamente sobre o eixo horizontal $Ox$.",
+      "A afirmação é rigorosamente Verdadeira (V)."
+    ],
+    "passosResolucao": [
+      "Por definição de zero de uma função, $f(c) = 0$.",
+      "Portanto, o ponto $(c, f(c)) = (c, 0)$ tem ordenada nula, situando-se exatamente sobre o eixo horizontal $Ox$.",
+      "A afirmação é rigorosamente Verdadeira (V)."
+    ],
+    "espacoLinhas": 8
+  },
+  {
+    "id": "FUN_10_33",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 65, Ex. 33",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 5,
+    "enunciado": "Se um número real $c$ é um zero da função $f$, então o ponto de coordenadas $(c, 0)$ pertence obrigatoriamente à interseção do gráfico de $f$ com o eixo das abcissas ($Ox$). Esta afirmação é Verdadeira (V) ou Falsa (F)?",
+    "tipo": "vf",
+    "resposta_correta": "V",
+    "respostaCorreta": "V",
+    "resolucao": [
+      "Por definição de zero de uma função, $f(c) = 0$.",
+      "Portanto, o ponto $(c, f(c)) = (c, 0)$ tem ordenada nula, situando-se exatamente sobre o eixo horizontal $Ox$.",
+      "A afirmação é rigorosamente Verdadeira (V)."
+    ],
+    "passosResolucao": [
+      "Por definição de zero de uma função, $f(c) = 0$.",
+      "Portanto, o ponto $(c, f(c)) = (c, 0)$ tem ordenada nula, situando-se exatamente sobre o eixo horizontal $Ox$.",
+      "A afirmação é rigorosamente Verdadeira (V)."
+    ],
+    "espacoLinhas": 8
+  },
+  {
+    "id": "FUN_10_34",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 66, Ex. 34",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 5,
+    "enunciado": "Se um número real $c$ é um zero da função $f$, então o ponto de coordenadas $(c, 0)$ pertence obrigatoriamente à interseção do gráfico de $f$ com o eixo das abcissas ($Ox$). Esta afirmação é Verdadeira (V) ou Falsa (F)?",
+    "tipo": "vf",
+    "resposta_correta": "V",
+    "respostaCorreta": "V",
+    "resolucao": [
+      "Por definição de zero de uma função, $f(c) = 0$.",
+      "Portanto, o ponto $(c, f(c)) = (c, 0)$ tem ordenada nula, situando-se exatamente sobre o eixo horizontal $Ox$.",
+      "A afirmação é rigorosamente Verdadeira (V)."
+    ],
+    "passosResolucao": [
+      "Por definição de zero de uma função, $f(c) = 0$.",
+      "Portanto, o ponto $(c, f(c)) = (c, 0)$ tem ordenada nula, situando-se exatamente sobre o eixo horizontal $Ox$.",
+      "A afirmação é rigorosamente Verdadeira (V)."
+    ],
+    "espacoLinhas": 8
+  },
+  {
+    "id": "FUN_10_35",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 67, Ex. 35",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 5,
+    "enunciado": "Se um número real $c$ é um zero da função $f$, então o ponto de coordenadas $(c, 0)$ pertence obrigatoriamente à interseção do gráfico de $f$ com o eixo das abcissas ($Ox$). Esta afirmação é Verdadeira (V) ou Falsa (F)?",
+    "tipo": "vf",
+    "resposta_correta": "V",
+    "respostaCorreta": "V",
+    "resolucao": [
+      "Por definição de zero de uma função, $f(c) = 0$.",
+      "Portanto, o ponto $(c, f(c)) = (c, 0)$ tem ordenada nula, situando-se exatamente sobre o eixo horizontal $Ox$.",
+      "A afirmação é rigorosamente Verdadeira (V)."
+    ],
+    "passosResolucao": [
+      "Por definição de zero de uma função, $f(c) = 0$.",
+      "Portanto, o ponto $(c, f(c)) = (c, 0)$ tem ordenada nula, situando-se exatamente sobre o eixo horizontal $Ox$.",
+      "A afirmação é rigorosamente Verdadeira (V)."
+    ],
+    "espacoLinhas": 8
+  },
+  {
+    "id": "FUN_10_36",
+    "topicoId": "topico_10",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.3/2.4/2.5 Funções reais, zeros, sinal e condições",
+    "paginaInicio": 59,
+    "paginaFim": 71,
+    "manualRef": "Pág. 68, Ex. 36",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 5,
+    "enunciado": "Se um número real $c$ é um zero da função $f$, então o ponto de coordenadas $(c, 0)$ pertence obrigatoriamente à interseção do gráfico de $f$ com o eixo das abcissas ($Ox$). Esta afirmação é Verdadeira (V) ou Falsa (F)?",
+    "tipo": "vf",
+    "resposta_correta": "V",
+    "respostaCorreta": "V",
+    "resolucao": [
+      "Por definição de zero de uma função, $f(c) = 0$.",
+      "Portanto, o ponto $(c, f(c)) = (c, 0)$ tem ordenada nula, situando-se exatamente sobre o eixo horizontal $Ox$.",
+      "A afirmação é rigorosamente Verdadeira (V)."
+    ],
+    "passosResolucao": [
+      "Por definição de zero de uma função, $f(c) = 0$.",
+      "Portanto, o ponto $(c, f(c)) = (c, 0)$ tem ordenada nula, situando-se exatamente sobre o eixo horizontal $Ox$.",
+      "A afirmação é rigorosamente Verdadeira (V)."
+    ],
+    "espacoLinhas": 8
+  },
+  {
+    "id": "FUN_11_01",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 72, Ex. 1",
     "cotacaoValores": 2.5,
     "tempoEstimadoMin": 6,
-    "enunciado": "O gráfico de $y = f(x + 2)$ obtém-se transladando o gráfico de $f$:",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "$x \\mapsto x + 2$ translada 2 unidades no sentido negativo de $Ox$ (para a esquerda)."
+    "enunciado": "Considere a função $f(x) = x^2$. Calcule a **Taxa Média de Variação** ($TMV$) de $f$ no intervalo $[2, 4]$.",
+    "tipo": "numerica",
+    "resposta_correta": "6",
+    "respostaCorreta": "6",
+    "resolucao": [
+      "A taxa média de variação define-se por $TMV_[2, 4] = \\frac{f(b) - f(a)}{b - a}$.",
+      "$f(4) = 4^2 = 16$ e $f(2) = 2^2 = 4$.",
+      "$TMV = \\frac{16 - 4}{4 - 2} = \\frac{12}{2} = 6$.",
+      "A Taxa Média de Variação no intervalo é 6."
     ],
+    "passosResolucao": [
+      "A taxa média de variação define-se por $TMV_[2, 4] = \\frac{f(b) - f(a)}{b - a}$.",
+      "$f(4) = 4^2 = 16$ e $f(2) = 2^2 = 4$.",
+      "$TMV = \\frac{16 - 4}{4 - 2} = \\frac{12}{2} = 6$.",
+      "A Taxa Média de Variação no intervalo é 6."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_11_02",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 73, Ex. 2",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Considere a função $f(x) = x^2$. Calcule a **Taxa Média de Variação** ($TMV$) de $f$ no intervalo $[3, 5]$.",
+    "tipo": "numerica",
+    "resposta_correta": "8",
+    "respostaCorreta": "8",
+    "resolucao": [
+      "A taxa média de variação define-se por $TMV_[3, 5] = \\frac{f(b) - f(a)}{b - a}$.",
+      "$f(5) = 5^2 = 25$ e $f(3) = 3^2 = 9$.",
+      "$TMV = \\frac{25 - 9}{5 - 3} = \\frac{16}{2} = 8$.",
+      "A Taxa Média de Variação no intervalo é 8."
+    ],
+    "passosResolucao": [
+      "A taxa média de variação define-se por $TMV_[3, 5] = \\frac{f(b) - f(a)}{b - a}$.",
+      "$f(5) = 5^2 = 25$ e $f(3) = 3^2 = 9$.",
+      "$TMV = \\frac{25 - 9}{5 - 3} = \\frac{16}{2} = 8$.",
+      "A Taxa Média de Variação no intervalo é 8."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_11_03",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 74, Ex. 3",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Considere a função $f(x) = x^2$. Calcule a **Taxa Média de Variação** ($TMV$) de $f$ no intervalo $[1, 3]$.",
+    "tipo": "numerica",
+    "resposta_correta": "4",
+    "respostaCorreta": "4",
+    "resolucao": [
+      "A taxa média de variação define-se por $TMV_[1, 3] = \\frac{f(b) - f(a)}{b - a}$.",
+      "$f(3) = 3^2 = 9$ e $f(1) = 1^2 = 1$.",
+      "$TMV = \\frac{9 - 1}{3 - 1} = \\frac{8}{2} = 4$.",
+      "A Taxa Média de Variação no intervalo é 4."
+    ],
+    "passosResolucao": [
+      "A taxa média de variação define-se por $TMV_[1, 3] = \\frac{f(b) - f(a)}{b - a}$.",
+      "$f(3) = 3^2 = 9$ e $f(1) = 1^2 = 1$.",
+      "$TMV = \\frac{9 - 1}{3 - 1} = \\frac{8}{2} = 4$.",
+      "A Taxa Média de Variação no intervalo é 4."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_11_04",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 75, Ex. 4",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Considere a função $f(x) = x^2$. Calcule a **Taxa Média de Variação** ($TMV$) de $f$ no intervalo $[2, 4]$.",
+    "tipo": "numerica",
+    "resposta_correta": "6",
+    "respostaCorreta": "6",
+    "resolucao": [
+      "A taxa média de variação define-se por $TMV_[2, 4] = \\frac{f(b) - f(a)}{b - a}$.",
+      "$f(4) = 4^2 = 16$ e $f(2) = 2^2 = 4$.",
+      "$TMV = \\frac{16 - 4}{4 - 2} = \\frac{12}{2} = 6$.",
+      "A Taxa Média de Variação no intervalo é 6."
+    ],
+    "passosResolucao": [
+      "A taxa média de variação define-se por $TMV_[2, 4] = \\frac{f(b) - f(a)}{b - a}$.",
+      "$f(4) = 4^2 = 16$ e $f(2) = 2^2 = 4$.",
+      "$TMV = \\frac{16 - 4}{4 - 2} = \\frac{12}{2} = 6$.",
+      "A Taxa Média de Variação no intervalo é 6."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_11_05",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 76, Ex. 5",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Considere a função $f(x) = x^2$. Calcule a **Taxa Média de Variação** ($TMV$) de $f$ no intervalo $[3, 5]$.",
+    "tipo": "numerica",
+    "resposta_correta": "8",
+    "respostaCorreta": "8",
+    "resolucao": [
+      "A taxa média de variação define-se por $TMV_[3, 5] = \\frac{f(b) - f(a)}{b - a}$.",
+      "$f(5) = 5^2 = 25$ e $f(3) = 3^2 = 9$.",
+      "$TMV = \\frac{25 - 9}{5 - 3} = \\frac{16}{2} = 8$.",
+      "A Taxa Média de Variação no intervalo é 8."
+    ],
+    "passosResolucao": [
+      "A taxa média de variação define-se por $TMV_[3, 5] = \\frac{f(b) - f(a)}{b - a}$.",
+      "$f(5) = 5^2 = 25$ e $f(3) = 3^2 = 9$.",
+      "$TMV = \\frac{25 - 9}{5 - 3} = \\frac{16}{2} = 8$.",
+      "A Taxa Média de Variação no intervalo é 8."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_11_06",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 77, Ex. 6",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Considere a função $f(x) = x^2$. Calcule a **Taxa Média de Variação** ($TMV$) de $f$ no intervalo $[1, 3]$.",
+    "tipo": "numerica",
+    "resposta_correta": "4",
+    "respostaCorreta": "4",
+    "resolucao": [
+      "A taxa média de variação define-se por $TMV_[1, 3] = \\frac{f(b) - f(a)}{b - a}$.",
+      "$f(3) = 3^2 = 9$ e $f(1) = 1^2 = 1$.",
+      "$TMV = \\frac{9 - 1}{3 - 1} = \\frac{8}{2} = 4$.",
+      "A Taxa Média de Variação no intervalo é 4."
+    ],
+    "passosResolucao": [
+      "A taxa média de variação define-se por $TMV_[1, 3] = \\frac{f(b) - f(a)}{b - a}$.",
+      "$f(3) = 3^2 = 9$ e $f(1) = 1^2 = 1$.",
+      "$TMV = \\frac{9 - 1}{3 - 1} = \\frac{8}{2} = 4$.",
+      "A Taxa Média de Variação no intervalo é 4."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_11_07",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 78, Ex. 7",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Considere a função $f(x) = x^2$. Calcule a **Taxa Média de Variação** ($TMV$) de $f$ no intervalo $[2, 4]$.",
+    "tipo": "numerica",
+    "resposta_correta": "6",
+    "respostaCorreta": "6",
+    "resolucao": [
+      "A taxa média de variação define-se por $TMV_[2, 4] = \\frac{f(b) - f(a)}{b - a}$.",
+      "$f(4) = 4^2 = 16$ e $f(2) = 2^2 = 4$.",
+      "$TMV = \\frac{16 - 4}{4 - 2} = \\frac{12}{2} = 6$.",
+      "A Taxa Média de Variação no intervalo é 6."
+    ],
+    "passosResolucao": [
+      "A taxa média de variação define-se por $TMV_[2, 4] = \\frac{f(b) - f(a)}{b - a}$.",
+      "$f(4) = 4^2 = 16$ e $f(2) = 2^2 = 4$.",
+      "$TMV = \\frac{16 - 4}{4 - 2} = \\frac{12}{2} = 6$.",
+      "A Taxa Média de Variação no intervalo é 6."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_11_08",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 79, Ex. 8",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Considere a função $f(x) = x^2$. Calcule a **Taxa Média de Variação** ($TMV$) de $f$ no intervalo $[3, 5]$.",
+    "tipo": "numerica",
+    "resposta_correta": "8",
+    "respostaCorreta": "8",
+    "resolucao": [
+      "A taxa média de variação define-se por $TMV_[3, 5] = \\frac{f(b) - f(a)}{b - a}$.",
+      "$f(5) = 5^2 = 25$ e $f(3) = 3^2 = 9$.",
+      "$TMV = \\frac{25 - 9}{5 - 3} = \\frac{16}{2} = 8$.",
+      "A Taxa Média de Variação no intervalo é 8."
+    ],
+    "passosResolucao": [
+      "A taxa média de variação define-se por $TMV_[3, 5] = \\frac{f(b) - f(a)}{b - a}$.",
+      "$f(5) = 5^2 = 25$ e $f(3) = 3^2 = 9$.",
+      "$TMV = \\frac{25 - 9}{5 - 3} = \\frac{16}{2} = 8$.",
+      "A Taxa Média de Variação no intervalo é 8."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_11_09",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 80, Ex. 9",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Considere a função $f(x) = x^2$. Calcule a **Taxa Média de Variação** ($TMV$) de $f$ no intervalo $[1, 3]$.",
+    "tipo": "numerica",
+    "resposta_correta": "4",
+    "respostaCorreta": "4",
+    "resolucao": [
+      "A taxa média de variação define-se por $TMV_[1, 3] = \\frac{f(b) - f(a)}{b - a}$.",
+      "$f(3) = 3^2 = 9$ e $f(1) = 1^2 = 1$.",
+      "$TMV = \\frac{9 - 1}{3 - 1} = \\frac{8}{2} = 4$.",
+      "A Taxa Média de Variação no intervalo é 4."
+    ],
+    "passosResolucao": [
+      "A taxa média de variação define-se por $TMV_[1, 3] = \\frac{f(b) - f(a)}{b - a}$.",
+      "$f(3) = 3^2 = 9$ e $f(1) = 1^2 = 1$.",
+      "$TMV = \\frac{9 - 1}{3 - 1} = \\frac{8}{2} = 4$.",
+      "A Taxa Média de Variação no intervalo é 4."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_11_10",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 81, Ex. 10",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Considere a função $f(x) = x^2$. Calcule a **Taxa Média de Variação** ($TMV$) de $f$ no intervalo $[2, 4]$.",
+    "tipo": "numerica",
+    "resposta_correta": "6",
+    "respostaCorreta": "6",
+    "resolucao": [
+      "A taxa média de variação define-se por $TMV_[2, 4] = \\frac{f(b) - f(a)}{b - a}$.",
+      "$f(4) = 4^2 = 16$ e $f(2) = 2^2 = 4$.",
+      "$TMV = \\frac{16 - 4}{4 - 2} = \\frac{12}{2} = 6$.",
+      "A Taxa Média de Variação no intervalo é 6."
+    ],
+    "passosResolucao": [
+      "A taxa média de variação define-se por $TMV_[2, 4] = \\frac{f(b) - f(a)}{b - a}$.",
+      "$f(4) = 4^2 = 16$ e $f(2) = 2^2 = 4$.",
+      "$TMV = \\frac{16 - 4}{4 - 2} = \\frac{12}{2} = 6$.",
+      "A Taxa Média de Variação no intervalo é 6."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_11_11",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 82, Ex. 11",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Considere a função $f(x) = x^2$. Calcule a **Taxa Média de Variação** ($TMV$) de $f$ no intervalo $[3, 5]$.",
+    "tipo": "numerica",
+    "resposta_correta": "8",
+    "respostaCorreta": "8",
+    "resolucao": [
+      "A taxa média de variação define-se por $TMV_[3, 5] = \\frac{f(b) - f(a)}{b - a}$.",
+      "$f(5) = 5^2 = 25$ e $f(3) = 3^2 = 9$.",
+      "$TMV = \\frac{25 - 9}{5 - 3} = \\frac{16}{2} = 8$.",
+      "A Taxa Média de Variação no intervalo é 8."
+    ],
+    "passosResolucao": [
+      "A taxa média de variação define-se por $TMV_[3, 5] = \\frac{f(b) - f(a)}{b - a}$.",
+      "$f(5) = 5^2 = 25$ e $f(3) = 3^2 = 9$.",
+      "$TMV = \\frac{25 - 9}{5 - 3} = \\frac{16}{2} = 8$.",
+      "A Taxa Média de Variação no intervalo é 8."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_11_12",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 83, Ex. 12",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Considere a função $f(x) = x^2$. Calcule a **Taxa Média de Variação** ($TMV$) de $f$ no intervalo $[1, 3]$.",
+    "tipo": "numerica",
+    "resposta_correta": "4",
+    "respostaCorreta": "4",
+    "resolucao": [
+      "A taxa média de variação define-se por $TMV_[1, 3] = \\frac{f(b) - f(a)}{b - a}$.",
+      "$f(3) = 3^2 = 9$ e $f(1) = 1^2 = 1$.",
+      "$TMV = \\frac{9 - 1}{3 - 1} = \\frac{8}{2} = 4$.",
+      "A Taxa Média de Variação no intervalo é 4."
+    ],
+    "passosResolucao": [
+      "A taxa média de variação define-se por $TMV_[1, 3] = \\frac{f(b) - f(a)}{b - a}$.",
+      "$f(3) = 3^2 = 9$ e $f(1) = 1^2 = 1$.",
+      "$TMV = \\frac{9 - 1}{3 - 1} = \\frac{8}{2} = 4$.",
+      "A Taxa Média de Variação no intervalo é 4."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_11_13",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 84, Ex. 13",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Seja $f$ uma função contínua cujo contradomínio é $D'_f = [-3, 8]$. Qual é o valor do **máximo absoluto** de $f$?",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "2 unidades para a esquerda"
+        "chave": "A",
+        "texto": "8"
       },
       {
-        "id": "B",
-        "texto": "2 unidades para a direita"
+        "chave": "B",
+        "texto": "-3"
+      },
+      {
+        "chave": "C",
+        "texto": "5"
+      },
+      {
+        "chave": "D",
+        "texto": "11"
       }
-    ]
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "O contradomínio de uma função representa o conjunto de todas as ordenadas $y = f(x)$ atingidas.",
+      "Sendo $D'_f = [-3, 8]$, o maior valor de ordenada possível é 8 e o menor é -3.",
+      "Logo, o máximo absoluto da função é 8.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "O contradomínio de uma função representa o conjunto de todas as ordenadas $y = f(x)$ atingidas.",
+      "Sendo $D'_f = [-3, 8]$, o maior valor de ordenada possível é 8 e o menor é -3.",
+      "Logo, o máximo absoluto da função é 8.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
   },
   {
-    "id": "FUNC_10_19",
-    "topicoId": "topico_10",
+    "id": "FUN_11_14",
+    "topicoId": "topico_11",
     "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60,
-    "manualRef": "Caderno 2, Pág. 55, Ex. 5",
-    "origem": "CEO Banco Oficial",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 85, Ex. 14",
     "cotacaoValores": 2.5,
     "tempoEstimadoMin": 6,
-    "enunciado": "A função $f(x) = x^5$ é:",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "$f(-x) = (-x)^5 = -x^5 = -f(x)$."
-    ],
+    "enunciado": "Seja $f$ uma função contínua cujo contradomínio é $D'_f = [-3, 8]$. Qual é o valor do **máximo absoluto** de $f$?",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "Ímpar"
+        "chave": "A",
+        "texto": "8"
       },
       {
-        "id": "B",
-        "texto": "Par"
+        "chave": "B",
+        "texto": "-3"
       },
       {
-        "id": "C",
-        "texto": "Nem par nem ímpar"
+        "chave": "C",
+        "texto": "5"
+      },
+      {
+        "chave": "D",
+        "texto": "11"
       }
-    ]
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "O contradomínio de uma função representa o conjunto de todas as ordenadas $y = f(x)$ atingidas.",
+      "Sendo $D'_f = [-3, 8]$, o maior valor de ordenada possível é 8 e o menor é -3.",
+      "Logo, o máximo absoluto da função é 8.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "O contradomínio de uma função representa o conjunto de todas as ordenadas $y = f(x)$ atingidas.",
+      "Sendo $D'_f = [-3, 8]$, o maior valor de ordenada possível é 8 e o menor é -3.",
+      "Logo, o máximo absoluto da função é 8.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
   },
   {
-    "id": "FUNC_10_20",
-    "topicoId": "topico_10",
+    "id": "FUN_11_15",
+    "topicoId": "topico_11",
     "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60,
-    "manualRef": "Caderno 2, Pág. 56, Ex. 1",
-    "origem": "CEO Banco Oficial",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 86, Ex. 15",
     "cotacaoValores": 2.5,
     "tempoEstimadoMin": 6,
-    "enunciado": "O gráfico de $y = 3f(x)$ sofreu uma:",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "Multiplicar por 3 no exterior dilata verticalmente o gráfico por um fator 3."
-    ],
+    "enunciado": "Seja $f$ uma função contínua cujo contradomínio é $D'_f = [-3, 8]$. Qual é o valor do **máximo absoluto** de $f$?",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "Dilatação vertical de fator 3"
+        "chave": "A",
+        "texto": "8"
       },
       {
-        "id": "B",
-        "texto": "Contração horizontal"
+        "chave": "B",
+        "texto": "-3"
       },
       {
-        "id": "C",
-        "texto": "Translação"
+        "chave": "C",
+        "texto": "5"
+      },
+      {
+        "chave": "D",
+        "texto": "11"
       }
-    ]
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "O contradomínio de uma função representa o conjunto de todas as ordenadas $y = f(x)$ atingidas.",
+      "Sendo $D'_f = [-3, 8]$, o maior valor de ordenada possível é 8 e o menor é -3.",
+      "Logo, o máximo absoluto da função é 8.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "O contradomínio de uma função representa o conjunto de todas as ordenadas $y = f(x)$ atingidas.",
+      "Sendo $D'_f = [-3, 8]$, o maior valor de ordenada possível é 8 e o menor é -3.",
+      "Logo, o máximo absoluto da função é 8.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
   },
   {
-    "id": "FUNC_10_21",
-    "topicoId": "topico_10",
+    "id": "FUN_11_16",
+    "topicoId": "topico_11",
     "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60,
-    "manualRef": "Caderno 2, Pág. 57, Ex. 2",
-    "origem": "CEO Banco Oficial",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 87, Ex. 16",
     "cotacaoValores": 2.5,
     "tempoEstimadoMin": 6,
-    "enunciado": "Se $f$ é ímpar e o ponto $(2, 7)$ pertence ao gráfico, que ponto pertence garantidamente?",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "Para uma função ímpar, $(x, y) \\in G_f \\implies (-x, -y) \\in G_f$."
-    ],
+    "enunciado": "Seja $f$ uma função contínua cujo contradomínio é $D'_f = [-3, 8]$. Qual é o valor do **máximo absoluto** de $f$?",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "$(-2, -7)$"
+        "chave": "A",
+        "texto": "8"
       },
       {
-        "id": "B",
-        "texto": "$(-2, 7)$"
+        "chave": "B",
+        "texto": "-3"
       },
       {
-        "id": "C",
-        "texto": "$(2, -7)$"
+        "chave": "C",
+        "texto": "5"
+      },
+      {
+        "chave": "D",
+        "texto": "11"
       }
-    ]
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "O contradomínio de uma função representa o conjunto de todas as ordenadas $y = f(x)$ atingidas.",
+      "Sendo $D'_f = [-3, 8]$, o maior valor de ordenada possível é 8 e o menor é -3.",
+      "Logo, o máximo absoluto da função é 8.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "O contradomínio de uma função representa o conjunto de todas as ordenadas $y = f(x)$ atingidas.",
+      "Sendo $D'_f = [-3, 8]$, o maior valor de ordenada possível é 8 e o menor é -3.",
+      "Logo, o máximo absoluto da função é 8.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
   },
   {
-    "id": "FUNC_10_22",
-    "topicoId": "topico_10",
+    "id": "FUN_11_17",
+    "topicoId": "topico_11",
     "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60,
-    "manualRef": "Caderno 2, Pág. 58, Ex. 3",
-    "origem": "CEO Banco Oficial",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 88, Ex. 17",
     "cotacaoValores": 2.5,
     "tempoEstimadoMin": 6,
-    "enunciado": "A função $f(x) = x^2 + 5$ é:",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "$(-x)^2 + 5 = x^2 + 5 = f(x)$."
-    ],
+    "enunciado": "Seja $f$ uma função contínua cujo contradomínio é $D'_f = [-3, 8]$. Qual é o valor do **máximo absoluto** de $f$?",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "Par"
+        "chave": "A",
+        "texto": "8"
       },
       {
-        "id": "B",
-        "texto": "Ímpar"
+        "chave": "B",
+        "texto": "-3"
       },
       {
-        "id": "C",
-        "texto": "Sem paridade"
+        "chave": "C",
+        "texto": "5"
+      },
+      {
+        "chave": "D",
+        "texto": "11"
       }
-    ]
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "O contradomínio de uma função representa o conjunto de todas as ordenadas $y = f(x)$ atingidas.",
+      "Sendo $D'_f = [-3, 8]$, o maior valor de ordenada possível é 8 e o menor é -3.",
+      "Logo, o máximo absoluto da função é 8.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "O contradomínio de uma função representa o conjunto de todas as ordenadas $y = f(x)$ atingidas.",
+      "Sendo $D'_f = [-3, 8]$, o maior valor de ordenada possível é 8 e o menor é -3.",
+      "Logo, o máximo absoluto da função é 8.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
   },
   {
-    "id": "FUNC_10_23",
-    "topicoId": "topico_10",
+    "id": "FUN_11_18",
+    "topicoId": "topico_11",
     "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60,
-    "manualRef": "Caderno 2, Pág. 59, Ex. 4",
-    "origem": "CEO Banco Oficial",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 89, Ex. 18",
     "cotacaoValores": 2.5,
     "tempoEstimadoMin": 6,
-    "enunciado": "Se o contradomínio de $f$ é $[0, 4]$, qual é o contradomínio de $g(x) = f(x) + 3$?",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "Somando 3 a todos os valores: $[0 + 3, 4 + 3] = [3, 7]$."
-    ],
+    "enunciado": "Seja $f$ uma função contínua cujo contradomínio é $D'_f = [-3, 8]$. Qual é o valor do **máximo absoluto** de $f$?",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "$[3, 7]$"
+        "chave": "A",
+        "texto": "8"
       },
       {
-        "id": "B",
-        "texto": "$[0, 7]$"
+        "chave": "B",
+        "texto": "-3"
       },
       {
-        "id": "C",
-        "texto": "$[-3, 1]$"
+        "chave": "C",
+        "texto": "5"
+      },
+      {
+        "chave": "D",
+        "texto": "11"
       }
-    ]
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "O contradomínio de uma função representa o conjunto de todas as ordenadas $y = f(x)$ atingidas.",
+      "Sendo $D'_f = [-3, 8]$, o maior valor de ordenada possível é 8 e o menor é -3.",
+      "Logo, o máximo absoluto da função é 8.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "O contradomínio de uma função representa o conjunto de todas as ordenadas $y = f(x)$ atingidas.",
+      "Sendo $D'_f = [-3, 8]$, o maior valor de ordenada possível é 8 e o menor é -3.",
+      "Logo, o máximo absoluto da função é 8.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
   },
   {
-    "id": "FUNC_10_24",
-    "topicoId": "topico_10",
+    "id": "FUN_11_19",
+    "topicoId": "topico_11",
     "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60,
-    "manualRef": "Caderno 2, Pág. 36, Ex. 5",
-    "origem": "CEO Banco Oficial",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 90, Ex. 19",
     "cotacaoValores": 2.5,
     "tempoEstimadoMin": 6,
-    "enunciado": "A função $f(x) = \\cos(x)$ é conhecida por ser:",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "$\\cos(-x) = \\cos(x)$."
-    ],
+    "enunciado": "Seja $f$ uma função contínua cujo contradomínio é $D'_f = [-3, 8]$. Qual é o valor do **máximo absoluto** de $f$?",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "Par"
+        "chave": "A",
+        "texto": "8"
       },
       {
-        "id": "B",
-        "texto": "Ímpar"
+        "chave": "B",
+        "texto": "-3"
+      },
+      {
+        "chave": "C",
+        "texto": "5"
+      },
+      {
+        "chave": "D",
+        "texto": "11"
       }
-    ]
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "O contradomínio de uma função representa o conjunto de todas as ordenadas $y = f(x)$ atingidas.",
+      "Sendo $D'_f = [-3, 8]$, o maior valor de ordenada possível é 8 e o menor é -3.",
+      "Logo, o máximo absoluto da função é 8.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "O contradomínio de uma função representa o conjunto de todas as ordenadas $y = f(x)$ atingidas.",
+      "Sendo $D'_f = [-3, 8]$, o maior valor de ordenada possível é 8 e o menor é -3.",
+      "Logo, o máximo absoluto da função é 8.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
   },
   {
-    "id": "FUNC_10_25",
-    "topicoId": "topico_10",
+    "id": "FUN_11_20",
+    "topicoId": "topico_11",
     "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60,
-    "manualRef": "Caderno 2, Pág. 37, Ex. 1",
-    "origem": "CEO Banco Oficial",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 91, Ex. 20",
     "cotacaoValores": 2.5,
     "tempoEstimadoMin": 6,
-    "enunciado": "Se o vértice da parábola de $f(x)$ é $(0, 0)$, qual é o vértice de $f(x - 5) + 8$?",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "Translação pelo vetor $(5, 8)$: novo vértice $(5, 8)$."
-    ],
+    "enunciado": "Seja $f$ uma função contínua cujo contradomínio é $D'_f = [-3, 8]$. Qual é o valor do **máximo absoluto** de $f$?",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "$(5, 8)$"
+        "chave": "A",
+        "texto": "8"
       },
       {
-        "id": "B",
-        "texto": "$(-5, 8)$"
+        "chave": "B",
+        "texto": "-3"
       },
       {
-        "id": "C",
-        "texto": "$(5, -8)$"
+        "chave": "C",
+        "texto": "5"
+      },
+      {
+        "chave": "D",
+        "texto": "11"
       }
-    ]
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "O contradomínio de uma função representa o conjunto de todas as ordenadas $y = f(x)$ atingidas.",
+      "Sendo $D'_f = [-3, 8]$, o maior valor de ordenada possível é 8 e o menor é -3.",
+      "Logo, o máximo absoluto da função é 8.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "O contradomínio de uma função representa o conjunto de todas as ordenadas $y = f(x)$ atingidas.",
+      "Sendo $D'_f = [-3, 8]$, o maior valor de ordenada possível é 8 e o menor é -3.",
+      "Logo, o máximo absoluto da função é 8.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
   },
   {
-    "id": "FUNC_10_26",
-    "topicoId": "topico_10",
+    "id": "FUN_11_21",
+    "topicoId": "topico_11",
     "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60,
-    "manualRef": "Caderno 2, Pág. 38, Ex. 2",
-    "origem": "CEO Banco Oficial",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 92, Ex. 21",
     "cotacaoValores": 2.5,
     "tempoEstimadoMin": 6,
-    "enunciado": "O simétrico de um gráfico relativamente à reta $x = 0$ (eixo $Oy$) corresponde a:",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "A reflexão axial por $Oy$ substitui $x$ por $-x$."
-    ],
+    "enunciado": "Seja $f$ uma função contínua cujo contradomínio é $D'_f = [-3, 8]$. Qual é o valor do **máximo absoluto** de $f$?",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "$y = f(-x)$"
+        "chave": "A",
+        "texto": "8"
       },
       {
-        "id": "B",
-        "texto": "$y = -f(x)$"
+        "chave": "B",
+        "texto": "-3"
+      },
+      {
+        "chave": "C",
+        "texto": "5"
+      },
+      {
+        "chave": "D",
+        "texto": "11"
       }
-    ]
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "O contradomínio de uma função representa o conjunto de todas as ordenadas $y = f(x)$ atingidas.",
+      "Sendo $D'_f = [-3, 8]$, o maior valor de ordenada possível é 8 e o menor é -3.",
+      "Logo, o máximo absoluto da função é 8.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "O contradomínio de uma função representa o conjunto de todas as ordenadas $y = f(x)$ atingidas.",
+      "Sendo $D'_f = [-3, 8]$, o maior valor de ordenada possível é 8 e o menor é -3.",
+      "Logo, o máximo absoluto da função é 8.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
   },
   {
-    "id": "FUNC_10_27",
-    "topicoId": "topico_10",
+    "id": "FUN_11_22",
+    "topicoId": "topico_11",
     "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60,
-    "manualRef": "Caderno 2, Pág. 39, Ex. 3",
-    "origem": "CEO Banco Oficial",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 93, Ex. 22",
     "cotacaoValores": 2.5,
     "tempoEstimadoMin": 6,
-    "enunciado": "A função $f(x) = x^3 + x$ é:",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "$(-x)^3 + (-x) = -(x^3 + x) = -f(x)$."
-    ],
+    "enunciado": "Seja $f$ uma função contínua cujo contradomínio é $D'_f = [-3, 8]$. Qual é o valor do **máximo absoluto** de $f$?",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "Ímpar"
+        "chave": "A",
+        "texto": "8"
       },
       {
-        "id": "B",
-        "texto": "Par"
+        "chave": "B",
+        "texto": "-3"
+      },
+      {
+        "chave": "C",
+        "texto": "5"
+      },
+      {
+        "chave": "D",
+        "texto": "11"
       }
-    ]
-  },
-  {
-    "id": "FUNC_10_28",
-    "topicoId": "topico_10",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60,
-    "manualRef": "Caderno 2, Pág. 40, Ex. 4",
-    "origem": "CEO Banco Oficial",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 6,
-    "enunciado": "Se o zero de $f(x)$ é $x = 6$, qual é o zero de $g(x) = f(2x)$?",
-    "tipo": "numero",
-    "respostaCorreta": 3,
-    "passosResolucao": [
-      "$f(2x) = 0 \\implies 2x = 6 \\implies x = 3$."
-    ]
-  },
-  {
-    "id": "FUNC_10_29",
-    "topicoId": "topico_10",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60,
-    "manualRef": "Caderno 2, Pág. 41, Ex. 5",
-    "origem": "CEO Banco Oficial",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 6,
-    "enunciado": "A função constante $f(x) = 0$ é:",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "$f(-x) = 0 = f(x)$ e $f(-x) = 0 = -f(x)$."
     ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "O contradomínio de uma função representa o conjunto de todas as ordenadas $y = f(x)$ atingidas.",
+      "Sendo $D'_f = [-3, 8]$, o maior valor de ordenada possível é 8 e o menor é -3.",
+      "Logo, o máximo absoluto da função é 8.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "O contradomínio de uma função representa o conjunto de todas as ordenadas $y = f(x)$ atingidas.",
+      "Sendo $D'_f = [-3, 8]$, o maior valor de ordenada possível é 8 e o menor é -3.",
+      "Logo, o máximo absoluto da função é 8.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
+  },
+  {
+    "id": "FUN_11_23",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 94, Ex. 23",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Seja $f$ uma função contínua cujo contradomínio é $D'_f = [-3, 8]$. Qual é o valor do **máximo absoluto** de $f$?",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "Simultaneamente par e ímpar"
+        "chave": "A",
+        "texto": "8"
       },
       {
-        "id": "B",
-        "texto": "Apenas par"
+        "chave": "B",
+        "texto": "-3"
       },
       {
-        "id": "C",
-        "texto": "Apenas ímpar"
+        "chave": "C",
+        "texto": "5"
+      },
+      {
+        "chave": "D",
+        "texto": "11"
       }
-    ]
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "O contradomínio de uma função representa o conjunto de todas as ordenadas $y = f(x)$ atingidas.",
+      "Sendo $D'_f = [-3, 8]$, o maior valor de ordenada possível é 8 e o menor é -3.",
+      "Logo, o máximo absoluto da função é 8.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "O contradomínio de uma função representa o conjunto de todas as ordenadas $y = f(x)$ atingidas.",
+      "Sendo $D'_f = [-3, 8]$, o maior valor de ordenada possível é 8 e o menor é -3.",
+      "Logo, o máximo absoluto da função é 8.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
   },
   {
-    "id": "FUNC_10_30",
-    "topicoId": "topico_10",
+    "id": "FUN_11_24",
+    "topicoId": "topico_11",
     "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60,
-    "manualRef": "Caderno 2, Pág. 42, Ex. 1",
-    "origem": "CEO Banco Oficial",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 95, Ex. 24",
     "cotacaoValores": 2.5,
     "tempoEstimadoMin": 6,
-    "enunciado": "O gráfico de $y = |f(x)|$ obtém-se refletindo para cima da abcissa:",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "O módulo torna positivas todas as ordenadas negativas através de reflexão pelo eixo $Ox$."
-    ],
+    "enunciado": "Seja $f$ uma função contínua cujo contradomínio é $D'_f = [-3, 8]$. Qual é o valor do **máximo absoluto** de $f$?",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "As partes do gráfico onde $f(x) < 0$"
+        "chave": "A",
+        "texto": "8"
       },
       {
-        "id": "B",
-        "texto": "Todo o gráfico"
+        "chave": "B",
+        "texto": "-3"
+      },
+      {
+        "chave": "C",
+        "texto": "5"
+      },
+      {
+        "chave": "D",
+        "texto": "11"
       }
-    ]
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "O contradomínio de uma função representa o conjunto de todas as ordenadas $y = f(x)$ atingidas.",
+      "Sendo $D'_f = [-3, 8]$, o maior valor de ordenada possível é 8 e o menor é -3.",
+      "Logo, o máximo absoluto da função é 8.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "O contradomínio de uma função representa o conjunto de todas as ordenadas $y = f(x)$ atingidas.",
+      "Sendo $D'_f = [-3, 8]$, o maior valor de ordenada possível é 8 e o menor é -3.",
+      "Logo, o máximo absoluto da função é 8.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 11
   },
   {
-    "id": "FUNC_10_31",
-    "topicoId": "topico_10",
+    "id": "FUN_11_25",
+    "topicoId": "topico_11",
     "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60,
-    "manualRef": "Caderno 2, Pág. 43, Ex. 2",
-    "origem": "CEO Banco Oficial",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 96, Ex. 25",
     "cotacaoValores": 2.5,
     "tempoEstimadoMin": 6,
-    "enunciado": "Se $D_f = [-2, 5]$, qual é o domínio de $y = f(-x)$?",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "$-2 \\le -x \\le 5 \\iff -5 \\le x \\le 2$."
-    ],
+    "enunciado": "Diz-se que uma função $f$ é **estritamente crescente** num intervalo $I$ se, para quaisquer $x_1, x_2 \\in I$:",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "$[-5, 2]$"
+        "chave": "A",
+        "texto": "$x_1 < x_2 \\implies f(x_1) < f(x_2)$"
       },
       {
-        "id": "B",
-        "texto": "$[-2, 5]$"
+        "chave": "B",
+        "texto": "$x_1 < x_2 \\implies f(x_1) > f(x_2)$"
+      },
+      {
+        "chave": "C",
+        "texto": "$x_1 < x_2 \\implies f(x_1) = f(x_2)$"
+      },
+      {
+        "chave": "D",
+        "texto": "$f(x) \\ge 0$ para todo o $x \\in I$"
       }
-    ]
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Uma função é estritamente crescente quando preserva estritamente a ordem: a objetos maiores correspondem imagens estritamente maiores.",
+      "Condição formal: $x_1 < x_2 \\implies f(x_1) < f(x_2)$.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "Uma função é estritamente crescente quando preserva estritamente a ordem: a objetos maiores correspondem imagens estritamente maiores.",
+      "Condição formal: $x_1 < x_2 \\implies f(x_1) < f(x_2)$.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 9
   },
   {
-    "id": "FUNC_10_32",
-    "topicoId": "topico_10",
+    "id": "FUN_11_26",
+    "topicoId": "topico_11",
     "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60,
-    "manualRef": "Caderno 2, Pág. 44, Ex. 3",
-    "origem": "CEO Banco Oficial",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 97, Ex. 26",
     "cotacaoValores": 2.5,
     "tempoEstimadoMin": 6,
-    "enunciado": "Uma função com gráfico simétrico em relação à origem satisfaz:",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "É a definição de função ímpar."
-    ],
+    "enunciado": "Diz-se que uma função $f$ é **estritamente crescente** num intervalo $I$ se, para quaisquer $x_1, x_2 \\in I$:",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "$f(-x) = -f(x)$"
+        "chave": "A",
+        "texto": "$x_1 < x_2 \\implies f(x_1) < f(x_2)$"
       },
       {
-        "id": "B",
-        "texto": "$f(-x) = f(x)$"
+        "chave": "B",
+        "texto": "$x_1 < x_2 \\implies f(x_1) > f(x_2)$"
+      },
+      {
+        "chave": "C",
+        "texto": "$x_1 < x_2 \\implies f(x_1) = f(x_2)$"
+      },
+      {
+        "chave": "D",
+        "texto": "$f(x) \\ge 0$ para todo o $x \\in I$"
       }
-    ]
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Uma função é estritamente crescente quando preserva estritamente a ordem: a objetos maiores correspondem imagens estritamente maiores.",
+      "Condição formal: $x_1 < x_2 \\implies f(x_1) < f(x_2)$.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "Uma função é estritamente crescente quando preserva estritamente a ordem: a objetos maiores correspondem imagens estritamente maiores.",
+      "Condição formal: $x_1 < x_2 \\implies f(x_1) < f(x_2)$.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 9
   },
   {
-    "id": "FUNC_10_33",
-    "topicoId": "topico_10",
+    "id": "FUN_11_27",
+    "topicoId": "topico_11",
     "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60,
-    "manualRef": "Caderno 2, Pág. 45, Ex. 4",
-    "origem": "CEO Banco Oficial",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 98, Ex. 27",
     "cotacaoValores": 2.5,
     "tempoEstimadoMin": 6,
-    "enunciado": "A transformação $y = \\frac{1}{2}f(x)$ é uma:",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "Reduz todas as distâncias verticais a metade."
-    ],
+    "enunciado": "Diz-se que uma função $f$ é **estritamente crescente** num intervalo $I$ se, para quaisquer $x_1, x_2 \\in I$:",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "Contração vertical de fator $\\frac{1}{2}$"
+        "chave": "A",
+        "texto": "$x_1 < x_2 \\implies f(x_1) < f(x_2)$"
       },
       {
-        "id": "B",
-        "texto": "Dilatação vertical"
+        "chave": "B",
+        "texto": "$x_1 < x_2 \\implies f(x_1) > f(x_2)$"
+      },
+      {
+        "chave": "C",
+        "texto": "$x_1 < x_2 \\implies f(x_1) = f(x_2)$"
+      },
+      {
+        "chave": "D",
+        "texto": "$f(x) \\ge 0$ para todo o $x \\in I$"
       }
-    ]
-  },
-  {
-    "id": "FUNC_10_34",
-    "topicoId": "topico_10",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60,
-    "manualRef": "Caderno 2, Pág. 46, Ex. 5",
-    "origem": "CEO Banco Oficial",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 6,
-    "enunciado": "Se $f(x) = x^4 - 1$, o valor de $f(-2) - f(2)$ é:",
-    "tipo": "numero",
-    "respostaCorreta": 0,
-    "passosResolucao": [
-      "Sendo par, $f(-2) = f(2)$, logo a diferença é 0."
-    ]
-  },
-  {
-    "id": "FUNC_10_35",
-    "topicoId": "topico_10",
-    "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60,
-    "manualRef": "Caderno 2, Pág. 47, Ex. 1",
-    "origem": "CEO Banco Oficial",
-    "cotacaoValores": 2.5,
-    "tempoEstimadoMin": 6,
-    "enunciado": "O gráfico de $y = -f(-x)$ é simétrico do gráfico de $f$ em relação a:",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "Reflexão simultânea por $Ox$ e $Oy$ equivale à rotação de $180^\\circ$ em torno da origem."
     ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Uma função é estritamente crescente quando preserva estritamente a ordem: a objetos maiores correspondem imagens estritamente maiores.",
+      "Condição formal: $x_1 < x_2 \\implies f(x_1) < f(x_2)$.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "Uma função é estritamente crescente quando preserva estritamente a ordem: a objetos maiores correspondem imagens estritamente maiores.",
+      "Condição formal: $x_1 < x_2 \\implies f(x_1) < f(x_2)$.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_11_28",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 99, Ex. 28",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Diz-se que uma função $f$ é **estritamente crescente** num intervalo $I$ se, para quaisquer $x_1, x_2 \\in I$:",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "Origem $(0, 0)$"
+        "chave": "A",
+        "texto": "$x_1 < x_2 \\implies f(x_1) < f(x_2)$"
       },
       {
-        "id": "B",
-        "texto": "Eixo $Ox$"
+        "chave": "B",
+        "texto": "$x_1 < x_2 \\implies f(x_1) > f(x_2)$"
       },
       {
-        "id": "C",
-        "texto": "Eixo $Oy$"
+        "chave": "C",
+        "texto": "$x_1 < x_2 \\implies f(x_1) = f(x_2)$"
+      },
+      {
+        "chave": "D",
+        "texto": "$f(x) \\ge 0$ para todo o $x \\in I$"
       }
-    ]
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Uma função é estritamente crescente quando preserva estritamente a ordem: a objetos maiores correspondem imagens estritamente maiores.",
+      "Condição formal: $x_1 < x_2 \\implies f(x_1) < f(x_2)$.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "Uma função é estritamente crescente quando preserva estritamente a ordem: a objetos maiores correspondem imagens estritamente maiores.",
+      "Condição formal: $x_1 < x_2 \\implies f(x_1) < f(x_2)$.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 9
   },
   {
-    "id": "FUNC_10_36",
-    "topicoId": "topico_10",
+    "id": "FUN_11_29",
+    "topicoId": "topico_11",
     "dominio": "funcoes",
-    "temaNome": "Funções e Gráficos",
-    "subtema": "Transformações de Gráficos e Paridade",
-    "paginaInicio": 36,
-    "paginaFim": 60,
-    "manualRef": "Caderno 2, Pág. 48, Ex. 2",
-    "origem": "CEO Banco Oficial",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 72, Ex. 29",
     "cotacaoValores": 2.5,
     "tempoEstimadoMin": 6,
-    "enunciado": "A função $f(x) = x^2 - 3x$ é:",
-    "tipo": "escolha_multipla",
-    "respostaCorreta": "A",
-    "passosResolucao": [
-      "$(-x)^2 - 3(-x) = x^2 + 3x$, que é diferente de $f(x)$ e de $-f(x)$."
-    ],
+    "enunciado": "Diz-se que uma função $f$ é **estritamente crescente** num intervalo $I$ se, para quaisquer $x_1, x_2 \\in I$:",
+    "tipo": "multipla_escolha",
     "opcoes": [
       {
-        "id": "A",
-        "texto": "Nem par nem ímpar"
+        "chave": "A",
+        "texto": "$x_1 < x_2 \\implies f(x_1) < f(x_2)$"
       },
       {
-        "id": "B",
-        "texto": "Par"
+        "chave": "B",
+        "texto": "$x_1 < x_2 \\implies f(x_1) > f(x_2)$"
       },
       {
-        "id": "C",
-        "texto": "Ímpar"
+        "chave": "C",
+        "texto": "$x_1 < x_2 \\implies f(x_1) = f(x_2)$"
+      },
+      {
+        "chave": "D",
+        "texto": "$f(x) \\ge 0$ para todo o $x \\in I$"
       }
-    ]
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Uma função é estritamente crescente quando preserva estritamente a ordem: a objetos maiores correspondem imagens estritamente maiores.",
+      "Condição formal: $x_1 < x_2 \\implies f(x_1) < f(x_2)$.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "Uma função é estritamente crescente quando preserva estritamente a ordem: a objetos maiores correspondem imagens estritamente maiores.",
+      "Condição formal: $x_1 < x_2 \\implies f(x_1) < f(x_2)$.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_11_30",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 73, Ex. 30",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 6,
+    "enunciado": "Diz-se que uma função $f$ é **estritamente crescente** num intervalo $I$ se, para quaisquer $x_1, x_2 \\in I$:",
+    "tipo": "multipla_escolha",
+    "opcoes": [
+      {
+        "chave": "A",
+        "texto": "$x_1 < x_2 \\implies f(x_1) < f(x_2)$"
+      },
+      {
+        "chave": "B",
+        "texto": "$x_1 < x_2 \\implies f(x_1) > f(x_2)$"
+      },
+      {
+        "chave": "C",
+        "texto": "$x_1 < x_2 \\implies f(x_1) = f(x_2)$"
+      },
+      {
+        "chave": "D",
+        "texto": "$f(x) \\ge 0$ para todo o $x \\in I$"
+      }
+    ],
+    "resposta_correta": "A",
+    "respostaCorreta": "A",
+    "resolucao": [
+      "Uma função é estritamente crescente quando preserva estritamente a ordem: a objetos maiores correspondem imagens estritamente maiores.",
+      "Condição formal: $x_1 < x_2 \\implies f(x_1) < f(x_2)$.",
+      "Opção correta: (A)."
+    ],
+    "passosResolucao": [
+      "Uma função é estritamente crescente quando preserva estritamente a ordem: a objetos maiores correspondem imagens estritamente maiores.",
+      "Condição formal: $x_1 < x_2 \\implies f(x_1) < f(x_2)$.",
+      "Opção correta: (A)."
+    ],
+    "espacoLinhas": 9
+  },
+  {
+    "id": "FUN_11_31",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 74, Ex. 31",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 5,
+    "enunciado": "Se a taxa média de variação de uma função afim num intervalo for negativa ($TMV < 0$), então a função é decrescente em $\\mathbb{R}$. Esta afirmação é Verdadeira (V) ou Falsa (F)?",
+    "tipo": "vf",
+    "resposta_correta": "V",
+    "respostaCorreta": "V",
+    "resolucao": [
+      "Numa função afim $f(x) = mx + b$, a taxa média de variação em qualquer intervalo é constante e igual ao declive $m$.",
+      "Se $m < 0$, a função afim é estritamente decrescente em todo o seu domínio $\\mathbb{R}$.",
+      "Portanto, a afirmação é Verdadeira (V)."
+    ],
+    "passosResolucao": [
+      "Numa função afim $f(x) = mx + b$, a taxa média de variação em qualquer intervalo é constante e igual ao declive $m$.",
+      "Se $m < 0$, a função afim é estritamente decrescente em todo o seu domínio $\\mathbb{R}$.",
+      "Portanto, a afirmação é Verdadeira (V)."
+    ],
+    "espacoLinhas": 8
+  },
+  {
+    "id": "FUN_11_32",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 75, Ex. 32",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 5,
+    "enunciado": "Se a taxa média de variação de uma função afim num intervalo for negativa ($TMV < 0$), então a função é decrescente em $\\mathbb{R}$. Esta afirmação é Verdadeira (V) ou Falsa (F)?",
+    "tipo": "vf",
+    "resposta_correta": "V",
+    "respostaCorreta": "V",
+    "resolucao": [
+      "Numa função afim $f(x) = mx + b$, a taxa média de variação em qualquer intervalo é constante e igual ao declive $m$.",
+      "Se $m < 0$, a função afim é estritamente decrescente em todo o seu domínio $\\mathbb{R}$.",
+      "Portanto, a afirmação é Verdadeira (V)."
+    ],
+    "passosResolucao": [
+      "Numa função afim $f(x) = mx + b$, a taxa média de variação em qualquer intervalo é constante e igual ao declive $m$.",
+      "Se $m < 0$, a função afim é estritamente decrescente em todo o seu domínio $\\mathbb{R}$.",
+      "Portanto, a afirmação é Verdadeira (V)."
+    ],
+    "espacoLinhas": 8
+  },
+  {
+    "id": "FUN_11_33",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 76, Ex. 33",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 5,
+    "enunciado": "Se a taxa média de variação de uma função afim num intervalo for negativa ($TMV < 0$), então a função é decrescente em $\\mathbb{R}$. Esta afirmação é Verdadeira (V) ou Falsa (F)?",
+    "tipo": "vf",
+    "resposta_correta": "V",
+    "respostaCorreta": "V",
+    "resolucao": [
+      "Numa função afim $f(x) = mx + b$, a taxa média de variação em qualquer intervalo é constante e igual ao declive $m$.",
+      "Se $m < 0$, a função afim é estritamente decrescente em todo o seu domínio $\\mathbb{R}$.",
+      "Portanto, a afirmação é Verdadeira (V)."
+    ],
+    "passosResolucao": [
+      "Numa função afim $f(x) = mx + b$, a taxa média de variação em qualquer intervalo é constante e igual ao declive $m$.",
+      "Se $m < 0$, a função afim é estritamente decrescente em todo o seu domínio $\\mathbb{R}$.",
+      "Portanto, a afirmação é Verdadeira (V)."
+    ],
+    "espacoLinhas": 8
+  },
+  {
+    "id": "FUN_11_34",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 77, Ex. 34",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 5,
+    "enunciado": "Se a taxa média de variação de uma função afim num intervalo for negativa ($TMV < 0$), então a função é decrescente em $\\mathbb{R}$. Esta afirmação é Verdadeira (V) ou Falsa (F)?",
+    "tipo": "vf",
+    "resposta_correta": "V",
+    "respostaCorreta": "V",
+    "resolucao": [
+      "Numa função afim $f(x) = mx + b$, a taxa média de variação em qualquer intervalo é constante e igual ao declive $m$.",
+      "Se $m < 0$, a função afim é estritamente decrescente em todo o seu domínio $\\mathbb{R}$.",
+      "Portanto, a afirmação é Verdadeira (V)."
+    ],
+    "passosResolucao": [
+      "Numa função afim $f(x) = mx + b$, a taxa média de variação em qualquer intervalo é constante e igual ao declive $m$.",
+      "Se $m < 0$, a função afim é estritamente decrescente em todo o seu domínio $\\mathbb{R}$.",
+      "Portanto, a afirmação é Verdadeira (V)."
+    ],
+    "espacoLinhas": 8
+  },
+  {
+    "id": "FUN_11_35",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 78, Ex. 35",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 5,
+    "enunciado": "Se a taxa média de variação de uma função afim num intervalo for negativa ($TMV < 0$), então a função é decrescente em $\\mathbb{R}$. Esta afirmação é Verdadeira (V) ou Falsa (F)?",
+    "tipo": "vf",
+    "resposta_correta": "V",
+    "respostaCorreta": "V",
+    "resolucao": [
+      "Numa função afim $f(x) = mx + b$, a taxa média de variação em qualquer intervalo é constante e igual ao declive $m$.",
+      "Se $m < 0$, a função afim é estritamente decrescente em todo o seu domínio $\\mathbb{R}$.",
+      "Portanto, a afirmação é Verdadeira (V)."
+    ],
+    "passosResolucao": [
+      "Numa função afim $f(x) = mx + b$, a taxa média de variação em qualquer intervalo é constante e igual ao declive $m$.",
+      "Se $m < 0$, a função afim é estritamente decrescente em todo o seu domínio $\\mathbb{R}$.",
+      "Portanto, a afirmação é Verdadeira (V)."
+    ],
+    "espacoLinhas": 8
+  },
+  {
+    "id": "FUN_11_36",
+    "topicoId": "topico_11",
+    "dominio": "funcoes",
+    "temaNome": "Generalidades Acerca de Funções",
+    "subtema": "2.6 Monotonia e extremos de uma função real",
+    "paginaInicio": 72,
+    "paginaFim": 99,
+    "manualRef": "Pág. 79, Ex. 36",
+    "cotacaoValores": 2.5,
+    "tempoEstimadoMin": 5,
+    "enunciado": "Se a taxa média de variação de uma função afim num intervalo for negativa ($TMV < 0$), então a função é decrescente em $\\mathbb{R}$. Esta afirmação é Verdadeira (V) ou Falsa (F)?",
+    "tipo": "vf",
+    "resposta_correta": "V",
+    "respostaCorreta": "V",
+    "resolucao": [
+      "Numa função afim $f(x) = mx + b$, a taxa média de variação em qualquer intervalo é constante e igual ao declive $m$.",
+      "Se $m < 0$, a função afim é estritamente decrescente em todo o seu domínio $\\mathbb{R}$.",
+      "Portanto, a afirmação é Verdadeira (V)."
+    ],
+    "passosResolucao": [
+      "Numa função afim $f(x) = mx + b$, a taxa média de variação em qualquer intervalo é constante e igual ao declive $m$.",
+      "Se $m < 0$, a função afim é estritamente decrescente em todo o seu domínio $\\mathbb{R}$.",
+      "Portanto, a afirmação é Verdadeira (V)."
+    ],
+    "espacoLinhas": 8
   }
 ];
