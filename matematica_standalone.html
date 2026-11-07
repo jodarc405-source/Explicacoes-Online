@@ -41,7 +41,7 @@
         font-size: 11pt;
       }
 
-      header, nav, #painel-controlo, #status-sessao, #painel-submissao, #botoes-impressao, #aba-dashboard, #modal-login, #modal-justificar-faltas, #modal-parecer-pais {
+      header, nav, #painel-controlo, #status-sessao, #painel-submissao, #botoes-impressao, #aba-dashboard, #modal-login, #modal-justificar-faltas, #modal-parecer-pais, #modal-alterar-senha {
         display: none !important;
       }
 
@@ -66,7 +66,7 @@
       .area-resolucao-impressao {
         display: block !important;
         border: 1px solid #cbd5e1 !important;
-        min-height: 140px;
+        min-height: 150px;
         margin-top: 10px;
       }
 
@@ -117,12 +117,16 @@
           </button>
         </nav>
 
-        <!-- Barra de Utilizador / Login Interligado -->
-        <div class="flex items-center gap-2 bg-indigo-950/80 px-2.5 py-1.5 rounded-xl border border-indigo-700/70">
-          <div id="badge-perfil-usuario" class="flex items-center gap-2 text-xs font-semibold">
+        <!-- Barra de Utilizador / Login Interligado e Senha -->
+        <div class="flex items-center gap-1.5 bg-indigo-950/80 px-2 py-1.5 rounded-xl border border-indigo-700/70">
+          <div id="badge-perfil-usuario" class="flex items-center gap-1.5 text-xs font-semibold px-1">
             <!-- Injetado por JS -->
           </div>
-          <button onclick="abrirModalLogin()" title="Alternar entre Aluno e Encarregados de Educação" class="px-2 py-1 bg-indigo-800 hover:bg-indigo-700 text-indigo-100 hover:text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5">
+          <button onclick="abrirModalAlterarSenha()" title="Alterar Palavra-passe da Conta" class="px-2 py-1 bg-indigo-800 hover:bg-indigo-700 text-indigo-100 hover:text-white rounded-lg text-xs font-bold transition flex items-center gap-1">
+            <i class="fa-solid fa-key"></i>
+            <span class="hidden md:inline">Senha</span>
+          </button>
+          <button onclick="abrirModalLogin()" title="Alternar entre Aluno e Encarregados de Educação" class="px-2 py-1 bg-indigo-800 hover:bg-indigo-700 text-indigo-100 hover:text-white rounded-lg text-xs font-bold transition flex items-center gap-1">
             <i class="fa-solid fa-right-left"></i>
             <span class="hidden md:inline">Trocar</span>
           </button>
@@ -302,7 +306,7 @@
         </div>
       </div>
 
-      <!-- Lista de Exercícios -->
+      <!-- Lista de Exercícios (Com espaço para resolução e rascunho entre exercícios) -->
       <div id="container-exercicios" class="space-y-6">
         <!-- Renderizado dinamicamente pelo JavaScript -->
       </div>
@@ -498,7 +502,7 @@
 
   <!-- ==================== MODAL 1: LOGIN FAMILIAR (ALUNO & PAIS INTERLIGADOS) ==================== -->
   <div id="modal-login" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/70 backdrop-blur-sm p-4">
-    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-5 animate-fade-in">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-5">
       <div class="text-center space-y-1">
         <img src="logo_ceo.png" alt="CEO" class="w-16 h-16 rounded-2xl mx-auto shadow border border-indigo-200 object-cover bg-indigo-950" />
         <h3 class="text-xl font-black text-slate-800">CEO &bull; Centro de Estudo Online</h3>
@@ -545,9 +549,12 @@
         </div>
       </div>
 
-      <div class="flex gap-2 pt-2">
+      <div class="flex flex-col gap-2 pt-2">
         <button onclick="submeterLogin()" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm">
           <i class="fa-solid fa-arrow-right-to-bracket"></i> Iniciar Sessão
+        </button>
+        <button onclick="abrirModalAlterarSenha()" class="text-xs text-indigo-600 hover:text-indigo-800 font-semibold text-center mt-1">
+          <i class="fa-solid fa-key mr-1"></i> Deseja alterar a palavra-passe?
         </button>
       </div>
     </div>
@@ -620,6 +627,59 @@
 
       <div class="text-center pt-1">
         <button onclick="fecharModalParecerPais()" class="text-xs text-slate-500 hover:text-slate-800 font-semibold">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 4: ALTERAÇÃO DE PALAVRA-PASSE (ALUNO & PAIS) ==================== -->
+  <div id="modal-alterar-senha" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/70 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-4">
+      <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+        <div class="bg-amber-100 text-amber-700 p-2.5 rounded-xl text-xl">
+          <i class="fa-solid fa-key"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-800 text-base">Alterar Palavra-passe</h4>
+          <p class="text-xs text-slate-500" id="senha-subtitulo-perfil">Conta: aluno10</p>
+        </div>
+      </div>
+
+      <!-- Seletor de Perfil para Alteração (Se for Pais, pode alterar de ambos) -->
+      <div id="grupo-seletor-alvo-senha" class="space-y-1 text-xs">
+        <label class="block font-bold text-slate-700 uppercase">Perfil a Alterar</label>
+        <select id="senha-alvo-perfil" onchange="atualizarFormAlterarSenha()" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold text-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+          <option value="aluno">Palavra-passe do Aluno</option>
+          <option value="pais">Palavra-passe dos Encarregados de Educação</option>
+        </select>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 uppercase mb-1">Palavra-passe Atual</label>
+          <input type="password" id="senha-atual" placeholder="Digita a tua palavra-passe atual" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-medium text-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 uppercase mb-1">Nova Palavra-passe</label>
+          <input type="password" id="senha-nova" placeholder="Mínimo de 4 caracteres" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-medium text-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 uppercase mb-1">Confirmar Nova Palavra-passe</label>
+          <input type="password" id="senha-confirmar" placeholder="Repete a nova palavra-passe" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-medium text-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+        </div>
+
+        <div id="senha-msg-erro" class="hidden p-2.5 bg-rose-50 border border-rose-200 text-rose-800 rounded-xl font-medium text-xs"></div>
+        <div id="senha-msg-sucesso" class="hidden p-2.5 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl font-medium text-xs"></div>
+      </div>
+
+      <div class="flex gap-2 pt-2">
+        <button onclick="submeterAlteracaoSenha()" class="flex-1 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs shadow transition flex items-center justify-center gap-1.5">
+          <i class="fa-solid fa-floppy-disk"></i> Guardar Nova Senha
+        </button>
+        <button onclick="fecharModalAlterarSenha()" class="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs transition">
+          Cancelar
+        </button>
       </div>
     </div>
   </div>
@@ -13990,6 +14050,38 @@ let faltaEmRecuperacaoId = null;
 let dataCalendarioAtual = new Date();
 
 // ==========================================
+// FUNÇÕES DE ACESSO AO BANCO DE EXERCÍCIOS
+// (504 Exercícios distribuídos pelos 14 temas)
+// ==========================================
+function obterTodosExercicios() {
+  const todos = [];
+  if (typeof EXERCICIOS_LOGICA !== 'undefined' && Array.isArray(EXERCICIOS_LOGICA)) {
+    todos.push(...EXERCICIOS_LOGICA);
+  }
+  if (typeof EXERCICIOS_GEOMETRIA_PLANO !== 'undefined' && Array.isArray(EXERCICIOS_GEOMETRIA_PLANO)) {
+    todos.push(...EXERCICIOS_GEOMETRIA_PLANO);
+  }
+  if (typeof EXERCICIOS_GEOMETRIA_ESPACO !== 'undefined' && Array.isArray(EXERCICIOS_GEOMETRIA_ESPACO)) {
+    todos.push(...EXERCICIOS_GEOMETRIA_ESPACO);
+  }
+  if (typeof EXERCICIOS_FUNCOES_1 !== 'undefined' && Array.isArray(EXERCICIOS_FUNCOES_1)) {
+    todos.push(...EXERCICIOS_FUNCOES_1);
+  }
+  if (typeof EXERCICIOS_FUNCOES_2 !== 'undefined' && Array.isArray(EXERCICIOS_FUNCOES_2)) {
+    todos.push(...EXERCICIOS_FUNCOES_2);
+  }
+  if (typeof EXERCICIOS_ESTATISTICA !== 'undefined' && Array.isArray(EXERCICIOS_ESTATISTICA)) {
+    todos.push(...EXERCICIOS_ESTATISTICA);
+  }
+  return todos;
+}
+
+function obterExerciciosPorTopico(topicoId) {
+  const todos = obterTodosExercicios();
+  return todos.filter(ex => ex.topicoId === topicoId);
+}
+
+// ==========================================
 // INICIALIZAÇÃO DA APLICAÇÃO
 // ==========================================
 window.addEventListener('DOMContentLoaded', () => {
@@ -14009,9 +14101,10 @@ window.addEventListener('DOMContentLoaded', () => {
     selecionarModalidade('diario');
   }
 
-  // Se for aluno, verificar obrigatoriedade de faltas por justificar
+  // Se for aluno e já tiver efetuado pelo menos a primeira ficha, verificar faltas
+  const historico = JSON.parse(localStorage.getItem(STORAGE_HISTORICO) || '[]');
   const auth = obterConfigAuth();
-  if (auth.sessaoAtiva && auth.sessaoAtiva.perfil === 'aluno') {
+  if (historico.length > 0 && auth.sessaoAtiva && auth.sessaoAtiva.perfil === 'aluno') {
     setTimeout(verificarFaltasObrigatoriasAluno, 600);
   }
 });
@@ -14164,7 +14257,8 @@ function submeterLogin() {
 
   carregarDashboard();
 
-  if (perfilIdentificado === 'aluno') {
+  const historico = JSON.parse(localStorage.getItem(STORAGE_HISTORICO) || '[]');
+  if (historico.length > 0 && perfilIdentificado === 'aluno') {
     setTimeout(verificarFaltasObrigatoriasAluno, 500);
   }
 }
@@ -14174,7 +14268,106 @@ function mudarParaPerfilAluno() {
 }
 
 // ==========================================
-// 2. DIAS DE ESTUDO & CONTROLO DE FALTAS
+// 2. ALTERAÇÃO DE PALAVRA-PASSE (ALUNO & PAIS)
+// ==========================================
+function abrirModalAlterarSenha() {
+  const auth = obterConfigAuth();
+  const modal = document.getElementById('modal-alterar-senha');
+  const seletorPerfil = document.getElementById('senha-alvo-perfil');
+  const subtitulo = document.getElementById('senha-subtitulo-perfil');
+  const msgErro = document.getElementById('senha-msg-erro');
+  const msgSucesso = document.getElementById('senha-msg-sucesso');
+
+  if (msgErro) msgErro.classList.add('hidden');
+  if (msgSucesso) msgSucesso.classList.add('hidden');
+
+  document.getElementById('senha-atual').value = '';
+  document.getElementById('senha-nova').value = '';
+  document.getElementById('senha-confirmar').value = '';
+
+  const perfilAtual = auth.sessaoAtiva ? auth.sessaoAtiva.perfil : 'aluno';
+  if (subtitulo) {
+    subtitulo.textContent = `Conta Comum: ${auth.username} (Sessão Ativa: ${perfilAtual === 'aluno' ? 'Aluno' : 'Encarregado de Educação'})`;
+  }
+
+  if (seletorPerfil) {
+    seletorPerfil.value = perfilAtual;
+  }
+
+  if (modal) modal.classList.remove('hidden');
+}
+
+function fecharModalAlterarSenha() {
+  const modal = document.getElementById('modal-alterar-senha');
+  if (modal) modal.classList.add('hidden');
+}
+
+function atualizarFormAlterarSenha() {
+  const msgErro = document.getElementById('senha-msg-erro');
+  const msgSucesso = document.getElementById('senha-msg-sucesso');
+  if (msgErro) msgErro.classList.add('hidden');
+  if (msgSucesso) msgSucesso.classList.add('hidden');
+}
+
+function submeterAlteracaoSenha() {
+  const auth = obterConfigAuth();
+  const alvoPerfil = document.getElementById('senha-alvo-perfil').value; // 'aluno' ou 'pais'
+  const senhaAtual = document.getElementById('senha-atual').value.trim();
+  const senhaNova = document.getElementById('senha-nova').value.trim();
+  const senhaConfirmar = document.getElementById('senha-confirmar').value.trim();
+
+  const msgErro = document.getElementById('senha-msg-erro');
+  const msgSucesso = document.getElementById('senha-msg-sucesso');
+  msgErro.classList.add('hidden');
+  msgSucesso.classList.add('hidden');
+
+  // Verificar senha atual
+  const perfilAtivo = auth.sessaoAtiva ? auth.sessaoAtiva.perfil : 'aluno';
+  const senhaEsperada = (perfilAtivo === 'pais') ? auth.senhaPais : auth.senhaAluno;
+
+  if (senhaAtual !== senhaEsperada) {
+    msgErro.textContent = 'A palavra-passe atual inserida está incorreta.';
+    msgErro.classList.remove('hidden');
+    return;
+  }
+
+  // Se for aluno, não pode alterar a senha dos pais!
+  if (perfilAtivo === 'aluno' && alvoPerfil === 'pais') {
+    msgErro.textContent = 'O Aluno apenas tem permissão para alterar a sua própria palavra-passe.';
+    msgErro.classList.remove('hidden');
+    return;
+  }
+
+  if (senhaNova.length < 4) {
+    msgErro.textContent = 'A nova palavra-passe deve conter pelo menos 4 caracteres.';
+    msgErro.classList.remove('hidden');
+    return;
+  }
+
+  if (senhaNova !== senhaConfirmar) {
+    msgErro.textContent = 'A confirmação não coincide com a nova palavra-passe.';
+    msgErro.classList.remove('hidden');
+    return;
+  }
+
+  // Salvar a nova palavra-passe
+  if (alvoPerfil === 'aluno') {
+    auth.senhaAluno = senhaNova;
+  } else {
+    auth.senhaPais = senhaNova;
+  }
+  salvarConfigAuth(auth);
+
+  msgSucesso.textContent = `Palavra-passe de ${alvoPerfil === 'aluno' ? 'Aluno' : 'Encarregado de Educação'} alterada com sucesso!`;
+  msgSucesso.classList.remove('hidden');
+
+  setTimeout(() => {
+    fecharModalAlterarSenha();
+  }, 1200);
+}
+
+// ==========================================
+// 3. DIAS DE ESTUDO & REGISTO DE FALTAS
 // ==========================================
 // Regime oficial: Segundas (1), Quartas (3), Sextas (5), Sábado (6) e Domingo (0).
 // Terças (2) e Quintas (4) são dias de descanso.
@@ -14209,38 +14402,51 @@ function salvarFaltas(faltas) {
   localStorage.setItem(STORAGE_FALTAS, JSON.stringify(faltas));
 }
 
-// Sincroniza os dias de estudo passados com o histórico para identificar faltas reais
+// REGRA: AS FALTAS INICIAM SÓ DEPOIS DO ALUNO EFETUAR A PRIMEIRA FICHA!
 function sincronizarFaltasComHistorico() {
   const historico = JSON.parse(localStorage.getItem(STORAGE_HISTORICO) || '[]');
-  let faltas = obterFaltas();
 
-  // Conjunto de datas em que houve pelo menos 1 ficha concluída
-  const datasComFicha = new Set(historico.map(s => s.data.split('T')[0]));
+  // Se o aluno ainda não efetuou nenhuma ficha, não há qualquer falta!
+  if (historico.length === 0) {
+    salvarFaltas([]);
+    return;
+  }
+
+  // Data da primeira ficha realizada
+  const timestamps = historico.map(s => new Date(s.data).getTime());
+  const dataPrimeiraFicha = new Date(Math.min(...timestamps));
+  dataPrimeiraFicha.setHours(0, 0, 0, 0);
+
+  // As faltas só começam a contar para os dias estritamente posteriores à primeira ficha realizada
+  const dataInicioFaltas = new Date(dataPrimeiraFicha);
+  dataInicioFaltas.setDate(dataInicioFaltas.getDate() + 1);
 
   const hoje = new Date();
   hoje.setHours(0, 0, 0, 0);
 
-  // Analisar os dias de estudo dos últimos 14 dias (ou desde 1 do mês corrente)
-  const inicio = new Date(hoje.getFullYear(), hoje.getMonth(), 1);
-  // Se o início for há menos de 10 dias, recua 12 dias para ter histórico pedagógico relevante
-  const limiteMinimo = new Date(hoje);
-  limiteMinimo.setDate(hoje.getDate() - 12);
-  const dataInicioVarredura = inicio < limiteMinimo ? inicio : limiteMinimo;
+  if (dataInicioFaltas >= hoje) {
+    // Ainda não decorreram dias completos de estudo após a primeira ficha
+    let faltasValidas = obterFaltas().filter(f => new Date(f.data + 'T00:00:00') >= dataInicioFaltas);
+    salvarFaltas(faltasValidas);
+    return;
+  }
 
-  for (let cursor = new Date(dataInicioVarredura); cursor < hoje; cursor.setDate(cursor.getDate() + 1)) {
+  const datasComFicha = new Set(historico.map(s => s.data.split('T')[0]));
+  let faltas = obterFaltas().filter(f => new Date(f.data + 'T00:00:00') >= dataInicioFaltas);
+
+  for (let cursor = new Date(dataInicioFaltas); cursor < hoje; cursor.setDate(cursor.getDate() + 1)) {
     if (isDiaDeEstudo(cursor)) {
       const dataIso = formatarDataIso(cursor);
       const fezFicha = datasComFicha.has(dataIso);
 
       if (!fezFicha) {
-        // Aluno faltou a este dia de estudo obrigatório
         const faltaExistente = faltas.find(f => f.data === dataIso);
         if (!faltaExistente) {
           faltas.push({
             id: 'falta_' + dataIso,
             data: dataIso,
             diaSemana: obterNomeDiaSemana(cursor),
-            justificacaoAluno: null, // por preencher obrigatoriamente pelo aluno
+            justificacaoAluno: null, // pendente de preenchimento obrigatório
             dataRecuperacaoAgendada: null,
             recuperada: false,
             dataRecuperacaoEfetiva: null,
@@ -14253,7 +14459,7 @@ function sincronizarFaltasComHistorico() {
     }
   }
 
-  // Verificar se há faltas que já foram recuperadas no histórico
+  // Sincronizar faltas que já foram recuperadas
   historico.forEach(s => {
     if (s.faltaIdRecuperada) {
       const f = faltas.find(item => item.id === s.faltaIdRecuperada);
@@ -14264,17 +14470,19 @@ function sincronizarFaltasComHistorico() {
     }
   });
 
-  // Ordenar por data decrescente
   faltas.sort((a, b) => b.data.localeCompare(a.data));
   salvarFaltas(faltas);
 }
 
 // ==========================================
-// 3. OBRIGATORIEDADE DE JUSTIFICAÇÃO (ALUNO)
+// 4. OBRIGATORIEDADE DE JUSTIFICAÇÃO (ALUNO)
 // ==========================================
 function verificarFaltasObrigatoriasAluno() {
   const auth = obterConfigAuth();
   if (!auth.sessaoAtiva || auth.sessaoAtiva.perfil !== 'aluno') return;
+
+  const historico = JSON.parse(localStorage.getItem(STORAGE_HISTORICO) || '[]');
+  if (historico.length === 0) return; // As faltas só iniciam depois da primeira ficha
 
   const faltas = obterFaltas();
   const faltasSemJustificacao = faltas.filter(f => !f.justificacaoAluno || f.justificacaoAluno.trim() === '');
@@ -14322,7 +14530,6 @@ function submeterJustificacoesAluno() {
   const faltas = obterFaltas();
   const faltasSemJustificacao = faltas.filter(f => !f.justificacaoAluno || f.justificacaoAluno.trim() === '');
 
-  // Validação estrita
   for (const f of faltasSemJustificacao) {
     const motivoElem = document.getElementById(`justif_motivo_${f.id}`);
     const dataElem = document.getElementById(`justif_data_${f.id}`);
@@ -14358,7 +14565,7 @@ function submeterJustificacoesAluno() {
 }
 
 // ==========================================
-// 4. HOMOLOGAÇÃO PARENTAL DE FALTAS (PAIS)
+// 5. HOMOLOGAÇÃO PARENTAL DE FALTAS (PAIS)
 // ==========================================
 function abrirModalParecerPais(faltaId) {
   const auth = obterConfigAuth();
@@ -14404,7 +14611,7 @@ function confirmarDecisaoPais(decisao) {
 }
 
 // ==========================================
-// 5. ESCALA DO TIPO DE ALUNO & MÉTRICAS
+// 6. ESCALA DO TIPO DE ALUNO & MÉTRICAS
 // ==========================================
 function calcularMetricasAssiduidade() {
   const historico = JSON.parse(localStorage.getItem(STORAGE_HISTORICO) || '[]');
@@ -14419,12 +14626,34 @@ function calcularMetricasAssiduidade() {
 
   const totalDiasEstudoEsperados = fichasFeitas + faltasTotal;
 
+  // Se o aluno ainda não fez nenhuma ficha, está no início da jornada
+  if (fichasFeitas === 0) {
+    return {
+      fichasFeitas: 0,
+      faltasTotal: 0,
+      faltasJustificadas: 0,
+      faltasInjustificadas: 0,
+      faltasRecuperadas: 0,
+      faltasPendentes: 0,
+      totalDiasEstudoEsperados: 0,
+      taxaAssiduidade: 100,
+      escala: {
+        nivel: 'exemplar',
+        titulo: 'Aluno Exemplar (Início)',
+        icone: 'fa-trophy',
+        corTexto: 'text-amber-500',
+        corBg: 'bg-amber-50',
+        corBorda: 'border-amber-300',
+        descricao: 'Pronto para iniciar! Realiza a tua primeira ficha de 60 minutos para inaugurar o teu histórico escolar e a contagem de assiduidade.'
+      }
+    };
+  }
+
   let taxaAssiduidade = 100;
   if (totalDiasEstudoEsperados > 0) {
     taxaAssiduidade = Math.min(100, Math.round(((fichasFeitas + faltasRecuperadas) / totalDiasEstudoEsperados) * 100));
   }
 
-  // Determinar a escala do Aluno
   let escala = {
     nivel: 'exemplar',
     titulo: 'Aluno Exemplar',
@@ -14549,7 +14778,7 @@ function renderizarEscalaTipoAluno() {
 }
 
 // ==========================================
-// 6. REGISTO DE FALTAS & RECUPERAÇÃO
+// 7. REGISTO DE FALTAS & RECUPERAÇÃO
 // ==========================================
 function renderizarRegistoFaltas() {
   const container = document.getElementById('card-registo-faltas');
@@ -14586,12 +14815,10 @@ function renderizarRegistoFaltas() {
     `;
 
     faltas.forEach(f => {
-      // Estado de recuperação
       let badgeRecuperacao = f.recuperada
         ? `<span class="bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded-full font-bold flex items-center gap-1 w-fit"><i class="fa-solid fa-check"></i> Recuperada</span>`
         : `<span class="bg-amber-100 text-amber-900 border border-amber-300 px-2 py-0.5 rounded-full font-bold flex items-center gap-1 w-fit"><i class="fa-solid fa-clock"></i> Pendente</span>`;
 
-      // Decisão dos pais
       let badgePais = '';
       if (f.estadoPais === 'Justificada') {
         badgePais = `<span class="bg-blue-100 text-blue-900 border border-blue-300 px-2 py-0.5 rounded-full font-bold">🟢 Justificada</span>`;
@@ -14601,7 +14828,6 @@ function renderizarRegistoFaltas() {
         badgePais = `<span class="bg-slate-100 text-slate-700 border border-slate-300 px-2 py-0.5 rounded-full font-bold">🟡 Aguarda Parecer</span>`;
       }
 
-      // Ações consoante perfil
       let acaoHtml = '';
       if (isPais) {
         acaoHtml = `
@@ -14675,7 +14901,6 @@ function iniciarRecuperacaoFalta(faltaId) {
 
   faltaEmRecuperacaoId = falta.id;
 
-  // Atualizar banner de recuperação
   const bannerRecup = document.getElementById('banner-modo-recuperacao');
   const textoRecup = document.getElementById('texto-banner-recuperacao');
   if (bannerRecup && textoRecup) {
@@ -14694,7 +14919,7 @@ function cancelarModoRecuperacao() {
 }
 
 // ==========================================
-// 7. CALENDÁRIO MENSAL INTEGRADO
+// 8. CALENDÁRIO MENSAL INTEGRADO
 // ==========================================
 const NOMES_MESES = [
   'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
@@ -14741,8 +14966,8 @@ function renderizarCalendario() {
 
   // Primeiro dia do mês (0 = dom, 1 = seg...)
   const primeiroDiaDoMes = new Date(ano, mes, 1);
-  let diaSemanaInicial = primeiroDiaDoMes.getDay(); // 0 a 6
-  diaSemanaInicial = diaSemanaInicial === 0 ? 6 : diaSemanaInicial - 1; // ajustar para Segunda = 0
+  let diaSemanaInicial = primeiroDiaDoMes.getDay();
+  diaSemanaInicial = diaSemanaInicial === 0 ? 6 : diaSemanaInicial - 1; // Segunda = 0
 
   const totalDiasMes = new Date(ano, mes + 1, 0).getDate();
   const totalDiasMesAnterior = new Date(ano, mes, 0).getDate();
@@ -14787,7 +15012,6 @@ function renderizarCalendario() {
     let bordaClasse = isHoje ? 'border-2 border-indigo-500 bg-indigo-50/30' : 'border border-slate-200 bg-white hover:border-indigo-300';
 
     if (sessoesNesteDia.length > 0) {
-      // Obter a melhor nota do dia
       const melhorNota = Math.max(...sessoesNesteDia.map(s => s.nota));
 
       if (melhorNota >= 18) {
@@ -14842,7 +15066,6 @@ function renderizarCalendario() {
         bordaClasse = 'border-2 border-rose-400 bg-rose-50/30';
       }
     } else if (isPassado && eDiaEstudo) {
-      // Dia de estudo passado sem ficha = Falta
       if (faltaNesteDia && faltaNesteDia.recuperada) {
         conteudoIcone = `
           <div class="flex flex-col items-center mt-1">
@@ -14873,7 +15096,7 @@ function renderizarCalendario() {
           </div>
         `;
         bordaClasse = 'border border-blue-300 bg-blue-50/30';
-      } else {
+      } else if (faltaNesteDia) {
         conteudoIcone = `
           <div class="flex flex-col items-center mt-1">
             <i class="fa-solid fa-triangle-exclamation text-amber-500 text-base"></i>
@@ -14894,7 +15117,6 @@ function renderizarCalendario() {
       `;
     }
 
-    // Badge de Dia de Estudo vs Descanso
     const badgeEstudo = eDiaEstudo
       ? `<span class="text-[8px] font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 px-1 rounded">Estudo</span>`
       : `<span class="text-[8px] font-medium text-slate-400 bg-slate-100 px-1 rounded">Livre</span>`;
@@ -14918,7 +15140,6 @@ function renderizarCalendario() {
   container.innerHTML = html;
 }
 
-// Detalhe ao clicar num dia do calendário
 function mostrarDetalheDia(dataIso) {
   const historico = JSON.parse(localStorage.getItem(STORAGE_HISTORICO) || '[]');
   const faltas = obterFaltas();
@@ -14987,7 +15208,7 @@ function mostrarDetalheDia(dataIso) {
 }
 
 // ==========================================
-// 8. NAVEGAÇÃO & CONTROLO DAS ABAS
+// 9. NAVEGAÇÃO & CONTROLO DAS ABAS
 // ==========================================
 function mudarAba(aba) {
   ['treino', 'resultados', 'dashboard'].forEach(nome => {
@@ -15123,7 +15344,6 @@ function atualizarResumoEstruturaSessao(topicoAtual) {
   `;
 }
 
-// Histórico de erros da semana para fim de semana
 function obterErrosSemanaAtual() {
   const historico = JSON.parse(localStorage.getItem(STORAGE_HISTORICO) || '[]');
   const agora = new Date();
@@ -15177,14 +15397,14 @@ function obterExerciciosFeitosSemanaAtual() {
 }
 
 // ==========================================
-// 9. GERAÇÃO & EXECUÇÃO DO TREINO DE 1 HORA
+// 10. GERAÇÃO & EXECUÇÃO DO TREINO DE 1 HORA
 // ==========================================
 function iniciarSessao() {
   const topicoId = document.getElementById('seletor-topico').value;
   const topicoAtual = TOPICOS_MANUAL.find(t => t.id === topicoId);
   if (!topicoAtual) return;
 
-  // Gerar exercícios
+  // Gerar exercícios utilizando o mapeamento central
   if (modalidadeSessao === 'sabado' || modalidadeSessao === 'domingo') {
     exerciciosAtuais = gerarFichaFimDeSemana(modalidadeSessao, topicoAtual);
   } else {
@@ -15221,13 +15441,17 @@ function iniciarSessao() {
 
   renderizarListaExercicios();
   renderizarMatematica();
+
+  // Scroll suave até aos exercícios
+  document.getElementById('status-sessao').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function gerarFichaDiariaRegular(topicoAtual) {
   const indexTopico = TOPICOS_MANUAL.findIndex(t => t.id === topicoAtual.id);
   const topicosAnteriores = TOPICOS_MANUAL.slice(0, indexTopico);
 
-  const bancoAtual = window[topicoAtual.id] || [];
+  // Obter o banco do tópico atual (36 exercícios disponíveis)
+  const bancoAtual = obterExerciciosPorTopico(topicoAtual.id);
   const exerciciosSelecionados = [];
 
   const historico = JSON.parse(localStorage.getItem(STORAGE_HISTORICO) || '[]');
@@ -15245,11 +15469,11 @@ function gerarFichaDiariaRegular(topicoAtual) {
     return shuffle.slice(0, NUMERO_EXERCICIOS);
   }
 
-  // 5 da matéria atual
+  // 5 exercícios inéditos da matéria atual
   const shuffleAtual = [...poolAtual].sort(() => 0.5 - Math.random());
   exerciciosSelecionados.push(...shuffleAtual.slice(0, 5));
 
-  // 3 das matérias anteriores distribuídos equitativamente
+  // 3 exercícios de matérias anteriores distribuídos equitativamente
   const contagemPorTopico = {};
   topicosAnteriores.forEach(t => { contagemPorTopico[t.id] = 0; });
   historico.forEach(s => {
@@ -15268,7 +15492,7 @@ function gerarFichaDiariaRegular(topicoAtual) {
 
   const topicosParaRevisao = topicosOrdenadosPorMenosUsados.slice(0, 3);
   topicosParaRevisao.forEach(tRev => {
-    const bancoRev = window[tRev.id] || [];
+    const bancoRev = obterExerciciosPorTopico(tRev.id);
     if (bancoRev.length > 0) {
       const exRev = bancoRev[Math.floor(Math.random() * bancoRev.length)];
       exerciciosSelecionados.push({
@@ -15328,7 +15552,7 @@ function gerarFichaFimDeSemana(modo, topicoAtual) {
 
   // 3. Se ainda faltar, preenche com exercícios da matéria em estudo
   if (listaFimDeSemana.length < NUMERO_EXERCICIOS) {
-    const bancoAtual = window[topicoAtual.id] || [];
+    const bancoAtual = obterExerciciosPorTopico(topicoAtual.id);
     const pool = bancoAtual.filter(ex => !idsVistos.has(ex.id));
     const qtd = NUMERO_EXERCICIOS - listaFimDeSemana.length;
     pool.slice(0, qtd).forEach(ex => {
@@ -15347,6 +15571,7 @@ function atualizarCronometro() {
   if (elem) elem.textContent = texto;
 }
 
+// Renderização dos Exercícios com Espaço Amplo para Resolução e Rascunho
 function renderizarListaExercicios() {
   const container = document.getElementById('container-exercicios');
   container.innerHTML = '';
@@ -15357,7 +15582,7 @@ function renderizarListaExercicios() {
 
     const etiqueta = ex.etiquetaRevisao
       ? `<span class="bg-amber-100 text-amber-900 border border-amber-300 text-[10px] font-bold px-2 py-0.5 rounded-full">${ex.etiquetaRevisao}</span>`
-      : `<span class="bg-indigo-100 text-indigo-800 text-[10px] font-bold px-2 py-0.5 rounded-full">${ex.subtema} (Pág. ${ex.pagina})</span>`;
+      : `<span class="bg-indigo-100 text-indigo-800 text-[10px] font-bold px-2 py-0.5 rounded-full">${ex.subtema} (Pág. ${ex.paginaInicio || ex.pagina || '10'})</span>`;
 
     card.innerHTML = `
       <div class="flex justify-between items-center border-b border-slate-100 pb-2.5">
@@ -15375,14 +15600,25 @@ function renderizarListaExercicios() {
       </div>
 
       <!-- Campo de Resposta no Ecrã -->
-      <div class="campo-input-ecra pt-2">
+      <div class="campo-input-ecra pt-1">
         ${renderizarOpcoesOuInput(ex)}
       </div>
 
+      <!-- ESPAÇO PARA O ALUNO RESOLVER O EXERCÍCIO NO ECRÃ (Rascunho & Deduções) -->
+      <div class="mt-4 pt-3 border-t border-slate-100 space-y-1.5 no-print">
+        <div class="flex items-center justify-between text-xs text-slate-600 font-bold">
+          <span class="flex items-center gap-1.5">
+            <i class="fa-solid fa-pencil text-indigo-600"></i> Espaço de Resolução &amp; Rascunho do Aluno:
+          </span>
+          <span class="text-[10px] text-slate-400 font-normal">Podes efetuar aqui os teus cálculos intermédios</span>
+        </div>
+        <textarea id="rascunho_${ex.id}" rows="4" placeholder="✍️ Utiliza este espaço para cálculos, passos intermédios, equações e deduções..." class="w-full p-3 bg-amber-50/20 border border-slate-300 rounded-xl text-xs font-mono text-slate-800 placeholder:text-slate-400 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none transition resize-y"></textarea>
+      </div>
+
       <!-- Área de Resolução e Cálculos na Impressão A4 (Folha Milimétrica Oficial) -->
-      <div class="area-resolucao-impressao grid-papel-resolucao p-3 rounded">
+      <div class="area-resolucao-impressao grid-papel-resolucao p-3 rounded mt-3">
         <div class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1">
-          Espaço reservado para cálculos, deduções e justificação formal (Folha Milimétrica)
+          Espaço reservado para cálculos, deduções e justificação formal (Folha Milimétrica Oficial)
         </div>
       </div>
     `;
@@ -15417,10 +15653,10 @@ function renderizarOpcoesOuInput(ex) {
     `;
   } else {
     return `
-      <div class="flex items-center gap-3">
-        <span class="text-xs font-bold text-slate-600">Resposta:</span>
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="text-xs font-bold text-slate-600">Resposta Final:</span>
         <input type="text" placeholder="Ex: 5, -2, 3/4 ou [1, 5]" oninput="registarResposta('${ex.id}', this.value)" class="p-2.5 px-3 border border-slate-300 rounded-xl text-xs font-bold text-slate-800 bg-slate-50 focus:ring-2 focus:ring-indigo-500 focus:outline-none w-48" />
-        <span class="text-[11px] text-slate-400">Insere o valor numérico, fração ou intervalo.</span>
+        <span class="text-[11px] text-slate-400">Insere o valor numérico, fração simplificada ou intervalo.</span>
       </div>
     `;
   }
@@ -15441,7 +15677,7 @@ function imprimirResolucaoCompleta() {
 }
 
 // ==========================================
-// 10. AVALIAÇÃO FORMAL (0 A 20 VALORES)
+// 11. AVALIAÇÃO FORMAL (0 A 20 VALORES)
 // ==========================================
 function avaliarResposta(correta, dada, tipo) {
   if (!dada) return false;
@@ -15500,13 +15736,11 @@ function submeterTreino() {
 
   const notaCalculada = parseFloat((certas * PONTOS_POR_EXERCICIO).toFixed(1));
 
-  // Guardar no histórico e verificar recuperação de faltas
   guardarHistoricoSessao(notaCalculada, certas, NUMERO_EXERCICIOS, detalhes, modalidadeSessao);
 
   apresentarResultadosComResolucao(notaCalculada, certas, NUMERO_EXERCICIOS, detalhes);
   mudarAba('resultados');
 
-  // Se estava a recuperar uma falta, avisar o aluno
   if (faltaEmRecuperacaoId) {
     alert(`Parabéns! Realizaste a ficha de recuperação com classificação de ${notaCalculada}/20 valores.\nA tua falta foi devidamente regularizada!`);
     cancelarModoRecuperacao();
@@ -15603,7 +15837,6 @@ function guardarHistoricoSessao(nota, certas, total, detalhes, modalidade) {
   historico.unshift(novaSessao);
   localStorage.setItem(STORAGE_HISTORICO, JSON.stringify(historico));
 
-  // Se recuperou uma falta, atualizar o registo de faltas
   if (faltaEmRecuperacaoId) {
     const faltas = obterFaltas();
     const f = faltas.find(item => item.id === faltaEmRecuperacaoId);
@@ -15618,7 +15851,7 @@ function guardarHistoricoSessao(nota, certas, total, detalhes, modalidade) {
 }
 
 // ==========================================
-// 11. DASHBOARD & DIAGNÓSTICO PEDAGÓGICO
+// 12. DASHBOARD & DIAGNÓSTICO PEDAGÓGICO
 // ==========================================
 let chartEvolucao = null;
 let chartDominio = null;
@@ -15636,11 +15869,9 @@ function carregarDashboard() {
 
   document.getElementById('kpi-streak').textContent = `${calcularStreak(historico)} dias`;
 
-  // Renderizar a Escala do Aluno e o Registo de Faltas
   renderizarEscalaTipoAluno();
   renderizarRegistoFaltas();
 
-  // Renderizar Calendário e Gráficos
   renderizarCalendario();
   renderizarGraficoEvolucao(historico);
   renderizarGraficoDominio(historico);

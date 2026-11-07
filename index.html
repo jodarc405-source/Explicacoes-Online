@@ -41,7 +41,7 @@
         font-size: 11pt;
       }
 
-      header, nav, #painel-controlo, #status-sessao, #painel-submissao, #botoes-impressao, #aba-dashboard, #modal-login, #modal-justificar-faltas, #modal-parecer-pais {
+      header, nav, #painel-controlo, #status-sessao, #painel-submissao, #botoes-impressao, #aba-dashboard, #modal-login, #modal-justificar-faltas, #modal-parecer-pais, #modal-alterar-senha {
         display: none !important;
       }
 
@@ -66,7 +66,7 @@
       .area-resolucao-impressao {
         display: block !important;
         border: 1px solid #cbd5e1 !important;
-        min-height: 140px;
+        min-height: 150px;
         margin-top: 10px;
       }
 
@@ -117,12 +117,16 @@
           </button>
         </nav>
 
-        <!-- Barra de Utilizador / Login Interligado -->
-        <div class="flex items-center gap-2 bg-indigo-950/80 px-2.5 py-1.5 rounded-xl border border-indigo-700/70">
-          <div id="badge-perfil-usuario" class="flex items-center gap-2 text-xs font-semibold">
+        <!-- Barra de Utilizador / Login Interligado e Senha -->
+        <div class="flex items-center gap-1.5 bg-indigo-950/80 px-2 py-1.5 rounded-xl border border-indigo-700/70">
+          <div id="badge-perfil-usuario" class="flex items-center gap-1.5 text-xs font-semibold px-1">
             <!-- Injetado por JS -->
           </div>
-          <button onclick="abrirModalLogin()" title="Alternar entre Aluno e Encarregados de Educação" class="px-2 py-1 bg-indigo-800 hover:bg-indigo-700 text-indigo-100 hover:text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5">
+          <button onclick="abrirModalAlterarSenha()" title="Alterar Palavra-passe da Conta" class="px-2 py-1 bg-indigo-800 hover:bg-indigo-700 text-indigo-100 hover:text-white rounded-lg text-xs font-bold transition flex items-center gap-1">
+            <i class="fa-solid fa-key"></i>
+            <span class="hidden md:inline">Senha</span>
+          </button>
+          <button onclick="abrirModalLogin()" title="Alternar entre Aluno e Encarregados de Educação" class="px-2 py-1 bg-indigo-800 hover:bg-indigo-700 text-indigo-100 hover:text-white rounded-lg text-xs font-bold transition flex items-center gap-1">
             <i class="fa-solid fa-right-left"></i>
             <span class="hidden md:inline">Trocar</span>
           </button>
@@ -302,7 +306,7 @@
         </div>
       </div>
 
-      <!-- Lista de Exercícios -->
+      <!-- Lista de Exercícios (Com espaço para resolução e rascunho entre exercícios) -->
       <div id="container-exercicios" class="space-y-6">
         <!-- Renderizado dinamicamente pelo JavaScript -->
       </div>
@@ -498,7 +502,7 @@
 
   <!-- ==================== MODAL 1: LOGIN FAMILIAR (ALUNO & PAIS INTERLIGADOS) ==================== -->
   <div id="modal-login" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/70 backdrop-blur-sm p-4">
-    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-5 animate-fade-in">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-5">
       <div class="text-center space-y-1">
         <img src="logo_ceo.png" alt="CEO" class="w-16 h-16 rounded-2xl mx-auto shadow border border-indigo-200 object-cover bg-indigo-950" />
         <h3 class="text-xl font-black text-slate-800">CEO &bull; Centro de Estudo Online</h3>
@@ -545,9 +549,12 @@
         </div>
       </div>
 
-      <div class="flex gap-2 pt-2">
+      <div class="flex flex-col gap-2 pt-2">
         <button onclick="submeterLogin()" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm">
           <i class="fa-solid fa-arrow-right-to-bracket"></i> Iniciar Sessão
+        </button>
+        <button onclick="abrirModalAlterarSenha()" class="text-xs text-indigo-600 hover:text-indigo-800 font-semibold text-center mt-1">
+          <i class="fa-solid fa-key mr-1"></i> Deseja alterar a palavra-passe?
         </button>
       </div>
     </div>
@@ -620,6 +627,59 @@
 
       <div class="text-center pt-1">
         <button onclick="fecharModalParecerPais()" class="text-xs text-slate-500 hover:text-slate-800 font-semibold">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 4: ALTERAÇÃO DE PALAVRA-PASSE (ALUNO & PAIS) ==================== -->
+  <div id="modal-alterar-senha" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/70 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-4">
+      <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+        <div class="bg-amber-100 text-amber-700 p-2.5 rounded-xl text-xl">
+          <i class="fa-solid fa-key"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-800 text-base">Alterar Palavra-passe</h4>
+          <p class="text-xs text-slate-500" id="senha-subtitulo-perfil">Conta: aluno10</p>
+        </div>
+      </div>
+
+      <!-- Seletor de Perfil para Alteração (Se for Pais, pode alterar de ambos) -->
+      <div id="grupo-seletor-alvo-senha" class="space-y-1 text-xs">
+        <label class="block font-bold text-slate-700 uppercase">Perfil a Alterar</label>
+        <select id="senha-alvo-perfil" onchange="atualizarFormAlterarSenha()" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold text-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+          <option value="aluno">Palavra-passe do Aluno</option>
+          <option value="pais">Palavra-passe dos Encarregados de Educação</option>
+        </select>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 uppercase mb-1">Palavra-passe Atual</label>
+          <input type="password" id="senha-atual" placeholder="Digita a tua palavra-passe atual" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-medium text-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 uppercase mb-1">Nova Palavra-passe</label>
+          <input type="password" id="senha-nova" placeholder="Mínimo de 4 caracteres" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-medium text-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 uppercase mb-1">Confirmar Nova Palavra-passe</label>
+          <input type="password" id="senha-confirmar" placeholder="Repete a nova palavra-passe" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-medium text-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+        </div>
+
+        <div id="senha-msg-erro" class="hidden p-2.5 bg-rose-50 border border-rose-200 text-rose-800 rounded-xl font-medium text-xs"></div>
+        <div id="senha-msg-sucesso" class="hidden p-2.5 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl font-medium text-xs"></div>
+      </div>
+
+      <div class="flex gap-2 pt-2">
+        <button onclick="submeterAlteracaoSenha()" class="flex-1 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs shadow transition flex items-center justify-center gap-1.5">
+          <i class="fa-solid fa-floppy-disk"></i> Guardar Nova Senha
+        </button>
+        <button onclick="fecharModalAlterarSenha()" class="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs transition">
+          Cancelar
+        </button>
       </div>
     </div>
   </div>
