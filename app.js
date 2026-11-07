@@ -1,40 +1,44 @@
-// ==========================================
-// CEO - CENTRO DE ESTUDO ONLINE
-// APLICAÇÃO DE TREINO DE MATEMÁTICA 10.º ANO
-// ==========================================
+// ==============================================================================
+// CEO - CENTRO DE ESTUDO ONLINE | MATEMÁTICA 10.º ANO
+// Sistema de Treino Diário, Avaliação Formativa, Assiduidade Parental e Dashboard
+// ==============================================================================
 
-// 1. UNIFICAÇÃO E DEDUPLICAÇÃO DO BANCO (504 EXERCÍCIOS / 100 DIAS)
-const BANCO_EXERCICIOS = [
-  ...(typeof EXERCICIOS_LOGICA !== 'undefined' ? EXERCICIOS_LOGICA : []),
-  ...(typeof EXERCICIOS_GEOMETRIA_PLANO !== 'undefined' ? EXERCICIOS_GEOMETRIA_PLANO : []),
-  ...(typeof EXERCICIOS_GEOMETRIA_ESPACO !== 'undefined' ? EXERCICIOS_GEOMETRIA_ESPACO : []),
-  ...(typeof EXERCICIOS_GEOMETRIA !== 'undefined' ? EXERCICIOS_GEOMETRIA : []),
-  ...(typeof EXERCICIOS_FUNCOES_1 !== 'undefined' ? EXERCICIOS_FUNCOES_1 : []),
-  ...(typeof EXERCICIOS_FUNCOES_2 !== 'undefined' ? EXERCICIOS_FUNCOES_2 : []),
-  ...(typeof EXERCICIOS_FUNCOES !== 'undefined' ? EXERCICIOS_FUNCOES : []),
-  ...(typeof EXERCICIOS_ESTATISTICA !== 'undefined' ? EXERCICIOS_ESTATISTICA : [])
-];
-
-const BANCO_EXERCICIOS_DEDUP = Array.from(new Map(BANCO_EXERCICIOS.map(item => [item.id, item])).values());
-
-// 2. ESTADO DA SESSÃO, MODALIDADE E CRONÓMETRO
+// Constantes Globais Pedagógicas (Preservação Integral)
+const DURACAO_SESSAO_SEGUNDOS = 3600; // 60 minutos
 const NUMERO_EXERCICIOS = 8;
-let modalidadeAtual = 'diario'; // 'diario' | 'sabado' | 'domingo'
-let sessaoAtiva = [];
-let respostasUtilizador = {};
-let tempoRestanteSegundos = 3600;
+const PONTOS_POR_EXERCICIO = 2.5;     // 8 * 2.5 = 20.0 valores
+
+// Chaves de Persistência no LocalStorage
+const STORAGE_HISTORICO = 'mat10_historico';
+const STORAGE_AUTH = 'mat10_auth';
+const STORAGE_FALTAS = 'mat10_faltas';
+
+// Estado da Aplicação
+let modalidadeSessao = 'diario'; // 'diario' | 'sabado' | 'domingo'
+let exerciciosAtuais = [];
+let respostasAluno = {};
+let segundosRestantes = DURACAO_SESSAO_SEGUNDOS;
 let intervaloCronometro = null;
+let sessaoEmAndamento = false;
+
+// Recuperação de Faltas
+let faltaEmRecuperacaoId = null;
 
 // Variáveis para o Calendário Mensal
 let dataCalendarioAtual = new Date();
 
+// ==========================================
+// INICIALIZAÇÃO DA APLICAÇÃO
+// ==========================================
 window.addEventListener('DOMContentLoaded', () => {
+  inicializarAuth();
+  sincronizarFaltasComHistorico();
   atualizarListaTopicos();
   carregarDashboard();
   renderizarMatematica();
-  
+
   // Sugestão automática de fim de semana se for Sábado ou Domingo
-  const diaSemanaHoje = new Date().getDay(); // 0 = Domingo, 6 = Sábado
+  const diaSemanaHoje = new Date().getDay(); // 0 = Dom, 6 = Sáb
   if (diaSemanaHoje === 6) {
     selecionarModalidade('sabado');
   } else if (diaSemanaHoje === 0) {
@@ -42,9 +46,987 @@ window.addEventListener('DOMContentLoaded', () => {
   } else {
     selecionarModalidade('diario');
   }
+
+  // Se for aluno, verificar obrigatoriedade de faltas por justificar
+  const auth = obterConfigAuth();
+  if (auth.sessaoAtiva && auth.sessaoAtiva.perfil === 'aluno') {
+    setTimeout(verificarFaltasObrigatoriasAluno, 600);
+  }
 });
 
-// Navegação entre abas
+// ==========================================
+// 1. SISTEMA DE LOGIN & PERFIS INTERLIGADOS
+// ==========================================
+let loginTabAtiva = 'aluno'; // 'aluno' | 'pais'
+
+function obterConfigAuth() {
+  const padrao = {
+    username: 'aluno10',
+    senhaAluno: 'aluno123',
+    senhaPais: 'pais123',
+    nomeAluno: 'Aluno do 10.º Ano',
+    nomePais: 'Encarregados de Educação',
+    sessaoAtiva: { perfil: 'aluno', username: 'aluno10', loginEm: new Date().toISOString() }
+  };
+  const gravado = localStorage.getItem(STORAGE_AUTH);
+  if (!gravado) {
+    localStorage.setItem(STORAGE_AUTH, JSON.stringify(padrao));
+    return padrao;
+  }
+  try {
+    return JSON.parse(gravado);
+  } catch (e) {
+    return padrao;
+  }
+}
+
+function salvarConfigAuth(config) {
+  localStorage.setItem(STORAGE_AUTH, JSON.stringify(config));
+}
+
+function inicializarAuth() {
+  const auth = obterConfigAuth();
+  if (!auth.sessaoAtiva) {
+    abrirModalLogin('aluno');
+  } else {
+    atualizarBarraUsuario(auth.sessaoAtiva);
+  }
+}
+
+function atualizarBarraUsuario(sessao) {
+  const container = document.getElementById('badge-perfil-usuario');
+  const bannerPais = document.getElementById('banner-aviso-pais');
+
+  if (!container) return;
+
+  if (sessao.perfil === 'aluno') {
+    container.innerHTML = `
+      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+      <i class="fa-solid fa-graduation-cap text-amber-300"></i>
+      <span class="text-white">Aluno</span>
+      <span class="text-[10px] text-indigo-300">(${sessao.username})</span>
+    `;
+    if (bannerPais) bannerPais.classList.add('hidden');
+  } else {
+    container.innerHTML = `
+      <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+      <i class="fa-solid fa-user-shield text-amber-300"></i>
+      <span class="text-amber-200">Encarregado de Educação</span>
+      <span class="text-[10px] text-indigo-300">(${sessao.username})</span>
+    `;
+    if (bannerPais) bannerPais.classList.remove('hidden');
+  }
+}
+
+function abrirModalLogin(perfilInicial = 'aluno') {
+  const modal = document.getElementById('modal-login');
+  if (modal) modal.classList.remove('hidden');
+  selecionarTabLogin(perfilInicial);
+  const erro = document.getElementById('login-mensagem-erro');
+  if (erro) erro.classList.add('hidden');
+  const pass = document.getElementById('login-password');
+  if (pass) pass.value = '';
+}
+
+function fecharModalLogin() {
+  const auth = obterConfigAuth();
+  if (auth.sessaoAtiva) {
+    const modal = document.getElementById('modal-login');
+    if (modal) modal.classList.add('hidden');
+  }
+}
+
+function selecionarTabLogin(perfil) {
+  loginTabAtiva = perfil;
+  const tabAluno = document.getElementById('login-tab-aluno');
+  const tabPais = document.getElementById('login-tab-pais');
+  const labelSenha = document.getElementById('login-label-senha');
+  const dicaSenha = document.getElementById('login-dica-senha');
+  const textoPriv = document.getElementById('login-texto-privilegios');
+
+  if (perfil === 'aluno') {
+    tabAluno.className = 'py-2.5 rounded-xl transition bg-indigo-600 text-white shadow-sm flex items-center justify-center gap-1.5';
+    tabPais.className = 'py-2.5 rounded-xl transition text-slate-600 hover:text-slate-900 flex items-center justify-center gap-1.5';
+    labelSenha.textContent = 'Palavra-passe do Aluno';
+    dicaSenha.textContent = 'Padrão: aluno123';
+    textoPriv.innerHTML = '&bull; <strong>Aluno:</strong> Realizar fichas, ver resoluções, justificar faltas e agendar recuperação.';
+  } else {
+    tabPais.className = 'py-2.5 rounded-xl transition bg-amber-600 text-white shadow-sm flex items-center justify-center gap-1.5';
+    tabAluno.className = 'py-2.5 rounded-xl transition text-slate-600 hover:text-slate-900 flex items-center justify-center gap-1.5';
+    labelSenha.textContent = 'Palavra-passe do Encarregado de Educação';
+    dicaSenha.textContent = 'Padrão: pais123';
+    textoPriv.innerHTML = '&bull; <strong>Encarregado de Educação:</strong> Acompanhar desempenho, calendário, notas e <u>homologar faltas como Justificadas ou Injustificadas</u>.';
+  }
+}
+
+function submeterLogin() {
+  const auth = obterConfigAuth();
+  const userInput = document.getElementById('login-username').value.trim();
+  const passInput = document.getElementById('login-password').value.trim();
+  const erro = document.getElementById('login-mensagem-erro');
+
+  if (userInput !== auth.username) {
+    erro.textContent = `Utilizador não encontrado. O utilizador padrão da família é '${auth.username}'.`;
+    erro.classList.remove('hidden');
+    return;
+  }
+
+  let perfilIdentificado = null;
+  if (loginTabAtiva === 'aluno') {
+    if (passInput === auth.senhaAluno) {
+      perfilIdentificado = 'aluno';
+    } else {
+      erro.textContent = 'Palavra-passe do Aluno incorreta (padrão: aluno123).';
+      erro.classList.remove('hidden');
+      return;
+    }
+  } else {
+    if (passInput === auth.senhaPais) {
+      perfilIdentificado = 'pais';
+    } else {
+      erro.textContent = 'Palavra-passe dos Encarregados de Educação incorreta (padrão: pais123).';
+      erro.classList.remove('hidden');
+      return;
+    }
+  }
+
+  auth.sessaoAtiva = {
+    perfil: perfilIdentificado,
+    username: auth.username,
+    loginEm: new Date().toISOString()
+  };
+  salvarConfigAuth(auth);
+
+  atualizarBarraUsuario(auth.sessaoAtiva);
+  document.getElementById('modal-login').classList.add('hidden');
+
+  carregarDashboard();
+
+  if (perfilIdentificado === 'aluno') {
+    setTimeout(verificarFaltasObrigatoriasAluno, 500);
+  }
+}
+
+function mudarParaPerfilAluno() {
+  abrirModalLogin('aluno');
+}
+
+// ==========================================
+// 2. DIAS DE ESTUDO & CONTROLO DE FALTAS
+// ==========================================
+// Regime oficial: Segundas (1), Quartas (3), Sextas (5), Sábado (6) e Domingo (0).
+// Terças (2) e Quintas (4) são dias de descanso.
+function isDiaDeEstudo(dataObj) {
+  const diaSem = dataObj.getDay();
+  return (diaSem === 1 || diaSem === 3 || diaSem === 5 || diaSem === 6 || diaSem === 0);
+}
+
+function obterNomeDiaSemana(dataObj) {
+  const dias = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+  return dias[dataObj.getDay()];
+}
+
+function formatarDataIso(dataObj) {
+  const y = dataObj.getFullYear();
+  const m = String(dataObj.getMonth() + 1).padStart(2, '0');
+  const d = String(dataObj.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
+function obterFaltas() {
+  const gravado = localStorage.getItem(STORAGE_FALTAS);
+  if (!gravado) return [];
+  try {
+    return JSON.parse(gravado);
+  } catch (e) {
+    return [];
+  }
+}
+
+function salvarFaltas(faltas) {
+  localStorage.setItem(STORAGE_FALTAS, JSON.stringify(faltas));
+}
+
+// Sincroniza os dias de estudo passados com o histórico para identificar faltas reais
+function sincronizarFaltasComHistorico() {
+  const historico = JSON.parse(localStorage.getItem(STORAGE_HISTORICO) || '[]');
+  let faltas = obterFaltas();
+
+  // Conjunto de datas em que houve pelo menos 1 ficha concluída
+  const datasComFicha = new Set(historico.map(s => s.data.split('T')[0]));
+
+  const hoje = new Date();
+  hoje.setHours(0, 0, 0, 0);
+
+  // Analisar os dias de estudo dos últimos 14 dias (ou desde 1 do mês corrente)
+  const inicio = new Date(hoje.getFullYear(), hoje.getMonth(), 1);
+  // Se o início for há menos de 10 dias, recua 12 dias para ter histórico pedagógico relevante
+  const limiteMinimo = new Date(hoje);
+  limiteMinimo.setDate(hoje.getDate() - 12);
+  const dataInicioVarredura = inicio < limiteMinimo ? inicio : limiteMinimo;
+
+  for (let cursor = new Date(dataInicioVarredura); cursor < hoje; cursor.setDate(cursor.getDate() + 1)) {
+    if (isDiaDeEstudo(cursor)) {
+      const dataIso = formatarDataIso(cursor);
+      const fezFicha = datasComFicha.has(dataIso);
+
+      if (!fezFicha) {
+        // Aluno faltou a este dia de estudo obrigatório
+        const faltaExistente = faltas.find(f => f.data === dataIso);
+        if (!faltaExistente) {
+          faltas.push({
+            id: 'falta_' + dataIso,
+            data: dataIso,
+            diaSemana: obterNomeDiaSemana(cursor),
+            justificacaoAluno: null, // por preencher obrigatoriamente pelo aluno
+            dataRecuperacaoAgendada: null,
+            recuperada: false,
+            dataRecuperacaoEfetiva: null,
+            estadoPais: 'Pendente', // 'Pendente' | 'Justificada' | 'Injustificada'
+            parecerPais: '',
+            criadaEm: new Date().toISOString()
+          });
+        }
+      }
+    }
+  }
+
+  // Verificar se há faltas que já foram recuperadas no histórico
+  historico.forEach(s => {
+    if (s.faltaIdRecuperada) {
+      const f = faltas.find(item => item.id === s.faltaIdRecuperada);
+      if (f) {
+        f.recuperada = true;
+        f.dataRecuperacaoEfetiva = s.data.split('T')[0];
+      }
+    }
+  });
+
+  // Ordenar por data decrescente
+  faltas.sort((a, b) => b.data.localeCompare(a.data));
+  salvarFaltas(faltas);
+}
+
+// ==========================================
+// 3. OBRIGATORIEDADE DE JUSTIFICAÇÃO (ALUNO)
+// ==========================================
+function verificarFaltasObrigatoriasAluno() {
+  const auth = obterConfigAuth();
+  if (!auth.sessaoAtiva || auth.sessaoAtiva.perfil !== 'aluno') return;
+
+  const faltas = obterFaltas();
+  const faltasSemJustificacao = faltas.filter(f => !f.justificacaoAluno || f.justificacaoAluno.trim() === '');
+
+  const modal = document.getElementById('modal-justificar-faltas');
+  const container = document.getElementById('lista-formulario-faltas-pendentes');
+
+  if (faltasSemJustificacao.length === 0) {
+    if (modal) modal.classList.add('hidden');
+    return;
+  }
+
+  // Renderizar o formulário obrigatório
+  let html = '';
+  const hojeIso = formatarDataIso(new Date());
+
+  faltasSemJustificacao.forEach((f, idx) => {
+    html += `
+      <div class="p-4 bg-rose-50/70 border border-rose-200 rounded-2xl space-y-3">
+        <div class="flex justify-between items-center">
+          <span class="font-bold text-rose-950 text-sm flex items-center gap-1.5">
+            <i class="fa-solid fa-calendar-xmark text-rose-600"></i> Falta #${idx + 1}: ${f.diaSemana}, ${f.data}
+          </span>
+          <span class="text-[10px] uppercase font-bold bg-rose-200 text-rose-900 px-2 py-0.5 rounded-full">Obrigatório</span>
+        </div>
+
+        <div class="space-y-1">
+          <label class="block text-xs font-bold text-slate-700">1. Porque faltaste à execução da ficha neste dia? *</label>
+          <textarea id="justif_motivo_${f.id}" rows="2" placeholder="Explica com rigor o motivo que te impediu de realizar o treino de 60 minutos..." class="w-full p-2.5 bg-white border border-rose-300 rounded-xl text-xs text-slate-800 font-medium focus:ring-2 focus:ring-rose-500 focus:outline-none"></textarea>
+        </div>
+
+        <div class="space-y-1">
+          <label class="block text-xs font-bold text-slate-700">2. Em que dia vais realizar a ficha a que faltaste? (Compromisso de Recuperação) *</label>
+          <input type="date" id="justif_data_${f.id}" min="${hojeIso}" value="${hojeIso}" class="w-full sm:w-64 p-2.5 bg-white border border-rose-300 rounded-xl text-xs text-slate-800 font-bold focus:ring-2 focus:ring-rose-500 focus:outline-none" />
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+  modal.classList.remove('hidden');
+}
+
+function submeterJustificacoesAluno() {
+  const faltas = obterFaltas();
+  const faltasSemJustificacao = faltas.filter(f => !f.justificacaoAluno || f.justificacaoAluno.trim() === '');
+
+  // Validação estrita
+  for (const f of faltasSemJustificacao) {
+    const motivoElem = document.getElementById(`justif_motivo_${f.id}`);
+    const dataElem = document.getElementById(`justif_data_${f.id}`);
+
+    if (!motivoElem || !dataElem) continue;
+
+    const motivo = motivoElem.value.trim();
+    const dataRecup = dataElem.value;
+
+    if (!motivo || motivo.length < 5) {
+      alert(`Por favor, preenche a justificação da falta de ${f.data} com clareza.`);
+      motivoElem.focus();
+      return;
+    }
+
+    if (!dataRecup) {
+      alert(`Por favor, indica a data de recuperação para a falta de ${f.data}.`);
+      dataElem.focus();
+      return;
+    }
+
+    f.justificacaoAluno = motivo;
+    f.dataRecuperacaoAgendada = dataRecup;
+    f.dataJustificacao = new Date().toISOString();
+  }
+
+  salvarFaltas(faltas);
+  document.getElementById('modal-justificar-faltas').classList.add('hidden');
+
+  alert('Justificações e agendamentos de recuperação submetidos com sucesso!\nOs teus Encarregados de Educação irão agora homologar as tuas faltas.');
+
+  carregarDashboard();
+}
+
+// ==========================================
+// 4. HOMOLOGAÇÃO PARENTAL DE FALTAS (PAIS)
+// ==========================================
+function abrirModalParecerPais(faltaId) {
+  const auth = obterConfigAuth();
+  if (!auth.sessaoAtiva || auth.sessaoAtiva.perfil !== 'pais') {
+    alert('Apenas os Encarregados de Educação têm privilégio para homologar faltas como Justificadas ou Injustificadas.');
+    return;
+  }
+
+  const faltas = obterFaltas();
+  const falta = faltas.find(f => f.id === faltaId);
+  if (!falta) return;
+
+  document.getElementById('modal-pais-falta-id').value = falta.id;
+  document.getElementById('modal-pais-falta-data').innerHTML = `<strong>Data da Falta:</strong> ${falta.diaSemana}, ${falta.data}`;
+  document.getElementById('modal-pais-falta-motivo').innerHTML = `<strong>Motivo do Aluno:</strong> "${falta.justificacaoAluno || 'Falta ainda não justificada pelo aluno'}"`;
+  document.getElementById('modal-pais-falta-recuperacao').innerHTML = `<strong>Recuperação Agendada:</strong> ${falta.dataRecuperacaoAgendada || 'Não agendada'}`;
+  document.getElementById('modal-pais-parecer').value = falta.parecerPais || '';
+
+  document.getElementById('modal-parecer-pais').classList.remove('hidden');
+}
+
+function fecharModalParecerPais() {
+  document.getElementById('modal-parecer-pais').classList.add('hidden');
+}
+
+function confirmarDecisaoPais(decisao) {
+  const faltaId = document.getElementById('modal-pais-falta-id').value;
+  const parecer = document.getElementById('modal-pais-parecer').value.trim();
+
+  const faltas = obterFaltas();
+  const falta = faltas.find(f => f.id === faltaId);
+  if (!falta) return;
+
+  falta.estadoPais = decisao; // 'Justificada' ou 'Injustificada'
+  falta.parecerPais = parecer;
+  falta.dataHomologacaoPais = new Date().toISOString();
+
+  salvarFaltas(faltas);
+  fecharModalParecerPais();
+
+  alert(`Falta de ${falta.data} registada como: ${decisao.toUpperCase()}.`);
+  carregarDashboard();
+}
+
+// ==========================================
+// 5. ESCALA DO TIPO DE ALUNO & MÉTRICAS
+// ==========================================
+function calcularMetricasAssiduidade() {
+  const historico = JSON.parse(localStorage.getItem(STORAGE_HISTORICO) || '[]');
+  const faltas = obterFaltas();
+
+  const fichasFeitas = historico.length;
+  const faltasTotal = faltas.length;
+  const faltasJustificadas = faltas.filter(f => f.estadoPais === 'Justificada').length;
+  const faltasInjustificadas = faltas.filter(f => f.estadoPais === 'Injustificada').length;
+  const faltasRecuperadas = faltas.filter(f => f.recuperada === true).length;
+  const faltasPendentes = faltas.filter(f => f.estadoPais === 'Pendente').length;
+
+  const totalDiasEstudoEsperados = fichasFeitas + faltasTotal;
+
+  let taxaAssiduidade = 100;
+  if (totalDiasEstudoEsperados > 0) {
+    taxaAssiduidade = Math.min(100, Math.round(((fichasFeitas + faltasRecuperadas) / totalDiasEstudoEsperados) * 100));
+  }
+
+  // Determinar a escala do Aluno
+  let escala = {
+    nivel: 'exemplar',
+    titulo: 'Aluno Exemplar',
+    icone: 'fa-trophy',
+    corTexto: 'text-amber-500',
+    corBg: 'bg-amber-50',
+    corBorda: 'border-amber-300',
+    descricao: 'Dedicação Máxima (100% de assiduidade): Cumpre rigorosamente todas as fichas nos dias oficiais de estudo sem faltas. Pontualidade, compromisso e autonomia irrepreensíveis!'
+  };
+
+  if (faltasInjustificadas >= 2 || taxaAssiduidade < 60) {
+    escala = {
+      nivel: 'baldas',
+      titulo: 'Aluno Baldas',
+      icone: 'fa-triangle-exclamation',
+      corTexto: 'text-rose-600',
+      corBg: 'bg-rose-50',
+      corBorda: 'border-rose-400',
+      descricao: 'Atenção Crítica: O aluno tem faltas injustificadas pelos encarregados de educação ou assiduidade abaixo de 60%. Demonstra desleixo ("balda-se aos exercícios"). Requer reposição imediata das fichas!'
+    };
+  } else if (taxaAssiduidade < 85 || faltasInjustificadas === 1) {
+    escala = {
+      nivel: 'regular',
+      titulo: 'Aluno Regular',
+      icone: 'fa-scale-balanced',
+      corTexto: 'text-orange-500',
+      corBg: 'bg-orange-50',
+      corBorda: 'border-orange-300',
+      descricao: 'Desempenho Intermédio: O aluno realiza alguns treinos, mas a assiduidade é oscilante e acumula fichas em atraso. Necessita de maior consistência nas segundas, quartas, sextas e fins de semana.'
+    };
+  } else if (faltasTotal > 0 && faltasInjustificadas === 0) {
+    escala = {
+      nivel: 'responsavel',
+      titulo: 'Aluno Responsável',
+      icone: 'fa-medal',
+      corTexto: 'text-indigo-600',
+      corBg: 'bg-indigo-50',
+      corBorda: 'border-indigo-300',
+      descricao: 'Bom Compromisso: O aluno cumpre com regularidade a sua rotina e, perante imprevistos, apresenta justificações válidas e assume o compromisso de recuperação das fichas em falta.'
+    };
+  }
+
+  return {
+    fichasFeitas,
+    faltasTotal,
+    faltasJustificadas,
+    faltasInjustificadas,
+    faltasRecuperadas,
+    faltasPendentes,
+    totalDiasEstudoEsperados,
+    taxaAssiduidade,
+    escala
+  };
+}
+
+function renderizarEscalaTipoAluno() {
+  const container = document.getElementById('card-escala-tipo-aluno');
+  if (!container) return;
+
+  const m = calcularMetricasAssiduidade();
+  const e = m.escala;
+
+  container.innerHTML = `
+    <div class="flex flex-wrap justify-between items-center gap-3 border-b border-slate-100 pb-3">
+      <div>
+        <h4 class="font-bold text-slate-800 text-base flex items-center gap-2">
+          <i class="fa-solid fa-chart-pie text-indigo-600"></i> Escala e Perfil do Aluno (Compromisso &amp; Assiduidade)
+        </h4>
+        <p class="text-xs text-slate-500">Avaliação do cumprimento dos 5 dias oficiais de estudo (Seg, Qua, Sex, Sáb, Dom) e regularização de faltas.</p>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="text-xs font-bold text-slate-500">Taxa de Cumprimento:</span>
+        <span class="text-base font-black text-indigo-900 bg-indigo-50 px-3 py-1 rounded-xl border border-indigo-200">${m.taxaAssiduidade}%</span>
+      </div>
+    </div>
+
+    <!-- Destaque do Perfil Atual -->
+    <div class="p-4 rounded-2xl border-2 ${e.corBorda} ${e.corBg} flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-4">
+        <div class="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-3xl ${e.corTexto} border border-slate-200/80">
+          <i class="fa-solid ${e.icone}"></i>
+        </div>
+        <div>
+          <div class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Classificação Atual do Aluno:</div>
+          <div class="text-xl font-black ${e.corTexto}">${e.titulo}</div>
+          <p class="text-xs text-slate-700 mt-0.5 max-w-xl">${e.descricao}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barra de Progresso Visual de Assiduidade -->
+    <div class="space-y-1.5">
+      <div class="flex justify-between text-xs font-bold text-slate-600">
+        <span>Assiduidade Global dos Dias de Estudo</span>
+        <span>${m.fichasFeitas + m.faltasRecuperadas} de ${Math.max(1, m.totalDiasEstudoEsperados)} sessões cumpridas</span>
+      </div>
+      <div class="w-full bg-slate-200 rounded-full h-3.5 overflow-hidden p-0.5">
+        <div class="bg-gradient-to-r from-indigo-500 to-emerald-500 h-2.5 rounded-full transition-all duration-500" style="width: ${m.taxaAssiduidade}%"></div>
+      </div>
+    </div>
+
+    <!-- 4 Indicadores Rápidos -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2 text-center text-xs">
+      <div class="bg-slate-50 border border-slate-200 p-2.5 rounded-xl">
+        <div class="text-slate-500 font-bold">Fichas Realizadas</div>
+        <div class="text-lg font-black text-slate-800">${m.fichasFeitas}</div>
+      </div>
+      <div class="bg-emerald-50 border border-emerald-200 p-2.5 rounded-xl">
+        <div class="text-emerald-800 font-bold">Faltas Recuperadas</div>
+        <div class="text-lg font-black text-emerald-700">${m.faltasRecuperadas}</div>
+      </div>
+      <div class="bg-blue-50 border border-blue-200 p-2.5 rounded-xl">
+        <div class="text-blue-800 font-bold">Faltas Justificadas</div>
+        <div class="text-lg font-black text-blue-700">${m.faltasJustificadas}</div>
+      </div>
+      <div class="bg-rose-50 border border-rose-200 p-2.5 rounded-xl">
+        <div class="text-rose-800 font-bold">Faltas Injustificadas (Baldas)</div>
+        <div class="text-lg font-black text-rose-700">${m.faltasInjustificadas}</div>
+      </div>
+    </div>
+  `;
+}
+
+// ==========================================
+// 6. REGISTO DE FALTAS & RECUPERAÇÃO
+// ==========================================
+function renderizarRegistoFaltas() {
+  const container = document.getElementById('card-registo-faltas');
+  if (!container) return;
+
+  const faltas = obterFaltas();
+  const auth = obterConfigAuth();
+  const isPais = auth.sessaoAtiva && auth.sessaoAtiva.perfil === 'pais';
+
+  let tabelaHtml = '';
+
+  if (faltas.length === 0) {
+    tabelaHtml = `
+      <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-900 flex items-center gap-2">
+        <i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i>
+        <span><strong>Excelente!</strong> Não existem faltas registadas. O aluno está a cumprir o calendário de estudo sem interrupções.</span>
+      </div>
+    `;
+  } else {
+    tabelaHtml = `
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="bg-slate-100 text-slate-700 font-bold uppercase text-[10px] tracking-wider border-b border-slate-200">
+              <th class="p-2.5">Data da Falta</th>
+              <th class="p-2.5">Motivo (Justificação do Aluno)</th>
+              <th class="p-2.5">Recuperação Agendada</th>
+              <th class="p-2.5">Estado da Recuperação</th>
+              <th class="p-2.5">Decisão dos Pais</th>
+              <th class="p-2.5 text-right">Ação</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 font-medium">
+    `;
+
+    faltas.forEach(f => {
+      // Estado de recuperação
+      let badgeRecuperacao = f.recuperada
+        ? `<span class="bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded-full font-bold flex items-center gap-1 w-fit"><i class="fa-solid fa-check"></i> Recuperada</span>`
+        : `<span class="bg-amber-100 text-amber-900 border border-amber-300 px-2 py-0.5 rounded-full font-bold flex items-center gap-1 w-fit"><i class="fa-solid fa-clock"></i> Pendente</span>`;
+
+      // Decisão dos pais
+      let badgePais = '';
+      if (f.estadoPais === 'Justificada') {
+        badgePais = `<span class="bg-blue-100 text-blue-900 border border-blue-300 px-2 py-0.5 rounded-full font-bold">🟢 Justificada</span>`;
+      } else if (f.estadoPais === 'Injustificada') {
+        badgePais = `<span class="bg-rose-100 text-rose-900 border border-rose-300 px-2 py-0.5 rounded-full font-black">🔴 Injustificada (Balda)</span>`;
+      } else {
+        badgePais = `<span class="bg-slate-100 text-slate-700 border border-slate-300 px-2 py-0.5 rounded-full font-bold">🟡 Aguarda Parecer</span>`;
+      }
+
+      // Ações consoante perfil
+      let acaoHtml = '';
+      if (isPais) {
+        acaoHtml = `
+          <button onclick="abrirModalParecerPais('${f.id}')" class="px-2.5 py-1 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-bold transition flex items-center gap-1 text-[11px] ml-auto">
+            <i class="fa-solid fa-gavel"></i> Homologar
+          </button>
+        `;
+      } else {
+        if (!f.recuperada) {
+          acaoHtml = `
+            <button onclick="iniciarRecuperacaoFalta('${f.id}')" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold transition flex items-center gap-1 text-[11px] ml-auto">
+              <i class="fa-solid fa-play"></i> Recuperar Agora
+            </button>
+          `;
+        } else {
+          acaoHtml = `<span class="text-slate-400 text-[11px]">Concluída</span>`;
+        }
+      }
+
+      tabelaHtml += `
+        <tr class="hover:bg-slate-50 transition">
+          <td class="p-2.5 whitespace-nowrap">
+            <div class="font-bold text-slate-800">${f.diaSemana}</div>
+            <div class="text-[11px] text-slate-500">${f.data}</div>
+          </td>
+          <td class="p-2.5 max-w-xs">
+            <p class="text-slate-700 italic">${f.justificacaoAluno ? `"${f.justificacaoAluno}"` : '<span class="text-rose-500 font-bold">Por justificar</span>'}</p>
+            ${f.parecerPais ? `<p class="text-[10px] text-indigo-700 font-semibold mt-0.5">Nota dos Pais: "${f.parecerPais}"</p>` : ''}
+          </td>
+          <td class="p-2.5 whitespace-nowrap font-bold text-slate-800">
+            ${f.dataRecuperacaoAgendada || '--'}
+          </td>
+          <td class="p-2.5 whitespace-nowrap">
+            ${badgeRecuperacao}
+          </td>
+          <td class="p-2.5 whitespace-nowrap">
+            ${badgePais}
+          </td>
+          <td class="p-2.5 text-right whitespace-nowrap">
+            ${acaoHtml}
+          </td>
+        </tr>
+      `;
+    });
+
+    tabelaHtml += `
+          </tbody>
+        </table>
+      </div>
+    `;
+  }
+
+  container.innerHTML = `
+    <div class="flex flex-wrap justify-between items-center gap-3 border-b border-slate-100 pb-3">
+      <div>
+        <h4 class="font-bold text-slate-800 text-base flex items-center gap-2">
+          <i class="fa-solid fa-clipboard-user text-indigo-600"></i> Registo e Controlo de Assiduidade e Recuperação de Faltas
+        </h4>
+        <p class="text-xs text-slate-500">Treinos obrigatórios: <strong>Segundas, Quartas, Sextas, Sábado e Domingo</strong>. As faltas devem ser recuperadas pelo aluno e homologadas pelos pais.</p>
+      </div>
+      ${isPais ? '<span class="text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300 px-3 py-1 rounded-xl"><i class="fa-solid fa-user-shield mr-1"></i>Privilégio de Encarregado Ativo</span>' : ''}
+    </div>
+    ${tabelaHtml}
+  `;
+}
+
+function iniciarRecuperacaoFalta(faltaId) {
+  const faltas = obterFaltas();
+  const falta = faltas.find(f => f.id === faltaId);
+  if (!falta) return;
+
+  faltaEmRecuperacaoId = falta.id;
+
+  // Atualizar banner de recuperação
+  const bannerRecup = document.getElementById('banner-modo-recuperacao');
+  const textoRecup = document.getElementById('texto-banner-recuperacao');
+  if (bannerRecup && textoRecup) {
+    textoRecup.innerHTML = `<strong>A recuperar falta de ${falta.diaSemana}, ${falta.data}:</strong> Resolve esta ficha de 8 exercícios (cotação: 20,0 valores). Ao submeteres, a tua falta ficará regularizada!`;
+    bannerRecup.classList.remove('hidden');
+  }
+
+  mudarAba('treino');
+  iniciarSessao();
+}
+
+function cancelarModoRecuperacao() {
+  faltaEmRecuperacaoId = null;
+  const bannerRecup = document.getElementById('banner-modo-recuperacao');
+  if (bannerRecup) bannerRecup.classList.add('hidden');
+}
+
+// ==========================================
+// 7. CALENDÁRIO MENSAL INTEGRADO
+// ==========================================
+const NOMES_MESES = [
+  'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+  'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+];
+
+function mudarMesCalendario(offset) {
+  dataCalendarioAtual.setMonth(dataCalendarioAtual.getMonth() + offset);
+  renderizarCalendario();
+}
+
+function irParaHojeCalendario() {
+  dataCalendarioAtual = new Date();
+  renderizarCalendario();
+}
+
+function renderizarCalendario() {
+  const historico = JSON.parse(localStorage.getItem(STORAGE_HISTORICO) || '[]');
+  const faltas = obterFaltas();
+
+  const ano = dataCalendarioAtual.getFullYear();
+  const mes = dataCalendarioAtual.getMonth();
+
+  document.getElementById('label-mes-ano-calendario').textContent = `${NOMES_MESES[mes]} ${ano}`;
+
+  // Mapear histórico por dia (formato YYYY-MM-DD)
+  const mapaHistoricoPorDia = {};
+  historico.forEach(item => {
+    const dStr = item.data.split('T')[0];
+    if (!mapaHistoricoPorDia[dStr]) {
+      mapaHistoricoPorDia[dStr] = [];
+    }
+    mapaHistoricoPorDia[dStr].push(item);
+  });
+
+  // Mapear faltas por dia
+  const mapaFaltasPorDia = {};
+  faltas.forEach(f => {
+    mapaFaltasPorDia[f.data] = f;
+  });
+
+  // Dias da semana
+  const diasSemana = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
+
+  // Primeiro dia do mês (0 = dom, 1 = seg...)
+  const primeiroDiaDoMes = new Date(ano, mes, 1);
+  let diaSemanaInicial = primeiroDiaDoMes.getDay(); // 0 a 6
+  diaSemanaInicial = diaSemanaInicial === 0 ? 6 : diaSemanaInicial - 1; // ajustar para Segunda = 0
+
+  const totalDiasMes = new Date(ano, mes + 1, 0).getDate();
+  const totalDiasMesAnterior = new Date(ano, mes, 0).getDate();
+
+  const container = document.getElementById('grelha-calendario-container');
+
+  let html = `
+    <div class="min-w-[650px]">
+      <div class="grid grid-cols-7 gap-2 text-center text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+        ${diasSemana.map(d => `<div class="py-1">${d}</div>`).join('')}
+      </div>
+      <div class="grid grid-cols-7 gap-2">
+  `;
+
+  // Dias do mês anterior
+  for (let i = diaSemanaInicial - 1; i >= 0; i--) {
+    const numDia = totalDiasMesAnterior - i;
+    html += `
+      <div class="min-h-[85px] p-1.5 rounded-xl border border-slate-100 bg-slate-50/50 text-slate-300 text-xs font-semibold">
+        <span>${numDia}</span>
+      </div>
+    `;
+  }
+
+  // Dias do mês atual
+  const hoje = new Date();
+  hoje.setHours(0, 0, 0, 0);
+  const hojeStr = formatarDataIso(hoje);
+
+  for (let dia = 1; dia <= totalDiasMes; dia++) {
+    const dataObj = new Date(ano, mes, dia);
+    const dataIso = formatarDataIso(dataObj);
+
+    const isHoje = dataIso === hojeStr;
+    const isPassado = dataObj < hoje;
+    const eDiaEstudo = isDiaDeEstudo(dataObj);
+
+    const sessoesNesteDia = mapaHistoricoPorDia[dataIso] || [];
+    const faltaNesteDia = mapaFaltasPorDia[dataIso];
+
+    let conteudoIcone = '';
+    let bordaClasse = isHoje ? 'border-2 border-indigo-500 bg-indigo-50/30' : 'border border-slate-200 bg-white hover:border-indigo-300';
+
+    if (sessoesNesteDia.length > 0) {
+      // Obter a melhor nota do dia
+      const melhorNota = Math.max(...sessoesNesteDia.map(s => s.nota));
+
+      if (melhorNota >= 18) {
+        conteudoIcone = `
+          <div class="flex flex-col items-center mt-1">
+            <i class="fa-solid fa-trophy text-amber-500 text-lg drop-shadow-sm"></i>
+            <span class="text-[9px] font-black bg-amber-100 text-amber-900 border border-amber-300 px-1 py-0.2 rounded-full mt-0.5">
+              ${melhorNota} val. (Ouro)
+            </span>
+          </div>
+        `;
+        bordaClasse = 'border-2 border-amber-400 bg-amber-50/30';
+      } else if (melhorNota >= 14) {
+        conteudoIcone = `
+          <div class="flex flex-col items-center mt-1">
+            <i class="fa-solid fa-medal text-slate-400 text-lg drop-shadow-sm"></i>
+            <span class="text-[9px] font-black bg-slate-200 text-slate-800 border border-slate-300 px-1 py-0.2 rounded-full mt-0.5">
+              ${melhorNota} val. (Prata)
+            </span>
+          </div>
+        `;
+        bordaClasse = 'border-2 border-slate-300 bg-slate-50';
+      } else if (melhorNota >= 10) {
+        conteudoIcone = `
+          <div class="flex flex-col items-center mt-1">
+            <i class="fa-solid fa-award text-amber-700 text-lg drop-shadow-sm"></i>
+            <span class="text-[9px] font-black bg-amber-100/70 text-amber-950 border border-amber-400 px-1 py-0.2 rounded-full mt-0.5">
+              ${melhorNota} val. (Bronze)
+            </span>
+          </div>
+        `;
+        bordaClasse = 'border-2 border-amber-500/50 bg-amber-50/20';
+      } else if (melhorNota >= 6) {
+        conteudoIcone = `
+          <div class="flex flex-col items-center mt-1">
+            <i class="fa-solid fa-face-frown text-orange-500 text-lg"></i>
+            <span class="text-[9px] font-black bg-orange-100 text-orange-900 border border-orange-300 px-1 py-0.2 rounded-full mt-0.5">
+              ${melhorNota} val. (Mau)
+            </span>
+          </div>
+        `;
+        bordaClasse = 'border-2 border-orange-400 bg-orange-50/30';
+      } else {
+        conteudoIcone = `
+          <div class="flex flex-col items-center mt-1">
+            <i class="fa-solid fa-face-sad-tear text-rose-600 text-lg"></i>
+            <span class="text-[9px] font-black bg-rose-100 text-rose-900 border border-rose-300 px-1 py-0.2 rounded-full mt-0.5">
+              ${melhorNota} val. (Muito Mau)
+            </span>
+          </div>
+        `;
+        bordaClasse = 'border-2 border-rose-400 bg-rose-50/30';
+      }
+    } else if (isPassado && eDiaEstudo) {
+      // Dia de estudo passado sem ficha = Falta
+      if (faltaNesteDia && faltaNesteDia.recuperada) {
+        conteudoIcone = `
+          <div class="flex flex-col items-center mt-1">
+            <i class="fa-solid fa-clock-rotate-left text-emerald-600 text-base"></i>
+            <span class="text-[8px] font-bold bg-emerald-100 text-emerald-900 border border-emerald-300 px-1 py-0.2 rounded mt-0.5">
+              Recuperada
+            </span>
+          </div>
+        `;
+        bordaClasse = 'border border-emerald-300 bg-emerald-50/30';
+      } else if (faltaNesteDia && faltaNesteDia.estadoPais === 'Injustificada') {
+        conteudoIcone = `
+          <div class="flex flex-col items-center mt-1">
+            <i class="fa-solid fa-circle-xmark text-rose-600 text-base"></i>
+            <span class="text-[8px] font-black bg-rose-100 text-rose-900 border border-rose-300 px-1 py-0.2 rounded mt-0.5">
+              Balda (Falta)
+            </span>
+          </div>
+        `;
+        bordaClasse = 'border-2 border-rose-400 bg-rose-50/40';
+      } else if (faltaNesteDia && faltaNesteDia.estadoPais === 'Justificada') {
+        conteudoIcone = `
+          <div class="flex flex-col items-center mt-1">
+            <i class="fa-solid fa-file-circle-check text-blue-600 text-base"></i>
+            <span class="text-[8px] font-bold bg-blue-100 text-blue-900 border border-blue-300 px-1 py-0.2 rounded mt-0.5">
+              Justificada
+            </span>
+          </div>
+        `;
+        bordaClasse = 'border border-blue-300 bg-blue-50/30';
+      } else {
+        conteudoIcone = `
+          <div class="flex flex-col items-center mt-1">
+            <i class="fa-solid fa-triangle-exclamation text-amber-500 text-base"></i>
+            <span class="text-[8px] font-bold bg-amber-100 text-amber-900 border border-amber-300 px-1 py-0.2 rounded mt-0.5">
+              Falta Pendente
+            </span>
+          </div>
+        `;
+        bordaClasse = 'border border-amber-300 bg-amber-50/30';
+      }
+    } else if (isHoje && eDiaEstudo) {
+      conteudoIcone = `
+        <div class="flex flex-col items-center mt-1">
+          <span class="text-[9px] font-bold text-indigo-700 bg-indigo-100/80 px-1.5 py-0.5 rounded-full">
+            <i class="fa-solid fa-hourglass-half mr-0.5"></i> Pendente Hoje
+          </span>
+        </div>
+      `;
+    }
+
+    // Badge de Dia de Estudo vs Descanso
+    const badgeEstudo = eDiaEstudo
+      ? `<span class="text-[8px] font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 px-1 rounded">Estudo</span>`
+      : `<span class="text-[8px] font-medium text-slate-400 bg-slate-100 px-1 rounded">Livre</span>`;
+
+    html += `
+      <div onclick="mostrarDetalheDia('${dataIso}')" class="min-h-[85px] p-2 rounded-xl transition cursor-pointer flex flex-col justify-between ${bordaClasse}">
+        <div class="flex justify-between items-center text-xs font-bold">
+          <span class="${isHoje ? 'bg-indigo-600 text-white w-5 h-5 flex items-center justify-center rounded-full text-[10px]' : 'text-slate-700'}">${dia}</span>
+          ${badgeEstudo}
+        </div>
+        ${conteudoIcone}
+      </div>
+    `;
+  }
+
+  html += `
+      </div>
+    </div>
+  `;
+
+  container.innerHTML = html;
+}
+
+// Detalhe ao clicar num dia do calendário
+function mostrarDetalheDia(dataIso) {
+  const historico = JSON.parse(localStorage.getItem(STORAGE_HISTORICO) || '[]');
+  const faltas = obterFaltas();
+
+  const sessoesNesteDia = historico.filter(s => s.data.startsWith(dataIso));
+  const faltaNesteDia = faltas.find(f => f.data === dataIso);
+
+  const dataObj = new Date(dataIso + 'T00:00:00');
+  const nomeDia = obterNomeDiaSemana(dataObj);
+  const eDiaEstudo = isDiaDeEstudo(dataObj);
+
+  const div = document.getElementById('detalhe-dia-calendario');
+
+  let sessoesHtml = '';
+  if (sessoesNesteDia.length > 0) {
+    sessoesHtml = sessoesNesteDia.map((s, idx) => `
+      <div class="p-2.5 bg-white border border-indigo-200 rounded-lg flex justify-between items-center text-xs">
+        <div>
+          <span class="font-bold text-slate-800">Sessão #${idx + 1} (${s.modalidade || 'diário'}):</span>
+          <span class="ml-1 text-slate-600">${s.certas}/${s.total} acertos &bull; 60 min</span>
+        </div>
+        <span class="font-black px-2 py-0.5 rounded ${s.nota >= 14 ? 'bg-emerald-100 text-emerald-800' : (s.nota >= 10 ? 'bg-amber-100 text-amber-800' : 'bg-rose-100 text-rose-800')}">
+          ${s.nota} / 20 valores
+        </span>
+      </div>
+    `).join('');
+  } else {
+    sessoesHtml = `<p class="italic text-slate-500">Nenhuma sessão de treino concluída neste dia.</p>`;
+  }
+
+  let infoFaltaHtml = '';
+  if (faltaNesteDia) {
+    infoFaltaHtml = `
+      <div class="p-2.5 bg-rose-50 border border-rose-200 rounded-lg text-xs space-y-1">
+        <div class="font-bold text-rose-900 flex items-center gap-1.5">
+          <i class="fa-solid fa-triangle-exclamation text-rose-600"></i> Falta Registada
+        </div>
+        <div><strong>Justificação do Aluno:</strong> ${faltaNesteDia.justificacaoAluno || '<span class="text-rose-500">Pendente de justificação</span>'}</div>
+        <div><strong>Recuperação Agendada:</strong> ${faltaNesteDia.dataRecuperacaoAgendada || 'Não agendada'}</div>
+        <div><strong>Estado da Recuperação:</strong> ${faltaNesteDia.recuperada ? '✅ Recuperada' : '⏳ Pendente'}</div>
+        <div><strong>Decisão dos Pais:</strong> <span class="font-bold">${faltaNesteDia.estadoPais}</span> ${faltaNesteDia.parecerPais ? `("${faltaNesteDia.parecerPais}")` : ''}</div>
+      </div>
+    `;
+  }
+
+  div.innerHTML = `
+    <div class="flex justify-between items-center border-b border-indigo-200/80 pb-2">
+      <div class="font-bold text-indigo-950 text-sm">
+        <i class="fa-solid fa-calendar-day text-indigo-600 mr-1.5"></i>
+        ${nomeDia}, ${dataIso} &bull; ${eDiaEstudo ? '<span class="text-indigo-600 font-bold">Dia Oficial de Estudo</span>' : '<span class="text-slate-500">Dia de Descanso</span>'}
+      </div>
+      <button onclick="document.getElementById('detalhe-dia-calendario').classList.add('hidden')" class="text-slate-400 hover:text-slate-700 text-xs font-bold">
+        <i class="fa-solid fa-xmark"></i> Fechar
+      </button>
+    </div>
+    <div class="space-y-2 mt-2">
+      ${infoFaltaHtml}
+      <div class="space-y-1.5">
+        <div class="font-bold text-slate-700 text-xs">Fichas Realizadas:</div>
+        ${sessoesHtml}
+      </div>
+    </div>
+  `;
+
+  div.classList.remove('hidden');
+}
+
+// ==========================================
+// 8. NAVEGAÇÃO & CONTROLO DAS ABAS
+// ==========================================
 function mudarAba(aba) {
   ['treino', 'resultados', 'dashboard'].forEach(nome => {
     document.getElementById(`aba-${nome}`).classList.add('hidden');
@@ -64,80 +1046,76 @@ function mudarAba(aba) {
   renderizarMatematica();
 }
 
-// ==========================================
-// 3. GESTÃO DE MODALIDADES (DIÁRIO / SÁBADO / DOMINGO)
-// ==========================================
 function selecionarModalidade(modo) {
-  modalidadeAtual = modo;
-  
+  modalidadeSessao = modo;
   const btnDiario = document.getElementById('btn-modo-diario');
   const btnSabado = document.getElementById('btn-modo-sabado');
   const btnDomingo = document.getElementById('btn-modo-domingo');
   const banner = document.getElementById('texto-banner-modalidade');
-  const btnIniciar = document.getElementById('btn-iniciar-sessao');
 
   [btnDiario, btnSabado, btnDomingo].forEach(b => {
-    b.className = "px-4 py-2 rounded-xl border transition flex items-center gap-2 bg-slate-100 text-slate-700 border-slate-300 hover:bg-slate-200";
+    b.className = 'px-4 py-2 rounded-xl border transition flex items-center gap-2 bg-slate-100 text-slate-700 border-slate-300 hover:bg-slate-200';
   });
 
   if (modo === 'diario') {
-    btnDiario.className = "px-4 py-2 rounded-xl border transition flex items-center gap-2 bg-indigo-600 text-white border-indigo-700 shadow-sm";
-    banner.innerHTML = "<strong>Modo Treino Diário (Seg–Sex):</strong> 5 exercícios inéditos da matéria em estudo + 3 exercícios de matérias anteriores rodados equitativamente.";
-    btnIniciar.innerHTML = '<i class="fa-solid fa-play"></i> Gerar Ficha Diária de 1 Hora';
+    btnDiario.className = 'px-4 py-2 rounded-xl border transition flex items-center gap-2 bg-indigo-600 text-white border-indigo-700 shadow-sm';
+    banner.innerHTML = '<strong>Modo Diário Ativo:</strong> 5 exercícios inéditos da matéria em estudo + 3 exercícios de matérias anteriores rodados equitativamente.';
   } else if (modo === 'sabado') {
-    btnSabado.className = "px-4 py-2 rounded-xl border transition flex items-center gap-2 bg-indigo-600 text-white border-indigo-700 shadow-sm";
-    banner.innerHTML = "<strong>Ficha de Sábado (Consolidação Semanal - Parte 1):</strong> Resumo semanal focado prioritariamente na <strong>retificação dos exercícios que o aluno errou durante a semana</strong>, consolidando lacunas.";
-    btnIniciar.innerHTML = '<i class="fa-solid fa-play"></i> Gerar Ficha de Sábado (Retificar Erros da Semana)';
+    btnSabado.className = 'px-4 py-2 rounded-xl border transition flex items-center gap-2 bg-amber-600 text-white border-amber-700 shadow-sm';
+    banner.innerHTML = '<strong>Modo Sábado Ativo (Consolidação Semanal):</strong> Resumo das matérias estudadas durante a semana, priorizando questões onde o aluno teve dúvidas ou erros.';
   } else if (modo === 'domingo') {
-    btnDomingo.className = "px-4 py-2 rounded-xl border transition flex items-center gap-2 bg-amber-600 text-white border-amber-700 shadow-sm";
-    banner.innerHTML = "<strong>Ficha de Domingo (Consolidação Semanal - Parte 2):</strong> Revisão global integradora dos temas estudados na semana para solidificar a matéria antes do início da nova semana letiva.";
-    btnIniciar.innerHTML = '<i class="fa-solid fa-play"></i> Gerar Ficha de Domingo (Consolidação Semanal)';
+    btnDomingo.className = 'px-4 py-2 rounded-xl border transition flex items-center gap-2 bg-purple-600 text-white border-purple-700 shadow-sm';
+    banner.innerHTML = '<strong>Modo Domingo Ativo (Revisão & Retificação):</strong> Incide prioritariamente sobre os exercícios errados durante a semana para solidificar o conhecimento antes da nova semana escolar.';
   }
 
-  const topicoId = document.getElementById('seletor-topico').value;
-  const topicoAtual = TOPICOS_MANUAL.find(t => t.id === topicoId);
-  if (topicoAtual) atualizarResumoEstruturaSessao(topicoAtual);
+  const topicoSelect = document.getElementById('seletor-topico');
+  if (topicoSelect && topicoSelect.value) {
+    const topico = TOPICOS_MANUAL.find(t => t.id === topicoSelect.value);
+    if (topico) atualizarResumoEstruturaSessao(topico);
+  }
 }
 
-// ==========================================
-// 4. SINCRONIZAÇÃO DE TÓPICOS E PÁGINAS DO MANUAL
-// ==========================================
 function atualizarListaTopicos() {
-  const cadernoSel = parseInt(document.getElementById('seletor-caderno').value);
-  const topicosFiltrados = TOPICOS_MANUAL.filter(t => t.caderno === cadernoSel);
-  
-  const selectTopico = document.getElementById('seletor-topico');
-  selectTopico.innerHTML = '';
+  const cadernoSelecionado = parseInt(document.getElementById('seletor-caderno').value, 10);
+  const seletorTopico = document.getElementById('seletor-topico');
 
-  topicosFiltrados.forEach((t, index) => {
+  const topicosFiltrados = TOPICOS_MANUAL.filter(t => t.caderno === cadernoSelecionado);
+
+  seletorTopico.innerHTML = '';
+  topicosFiltrados.forEach(topico => {
     const opt = document.createElement('option');
-    opt.value = t.id;
-    opt.textContent = `Págs. ${t.paginaInicio}–${t.paginaFim}: ${t.subtema}`;
-    if (index === 0) opt.selected = true;
-    selectTopico.appendChild(opt);
+    opt.value = topico.id;
+    opt.textContent = `${topico.temaNome} - ${topico.subtema} (Págs. ${topico.paginaInicio}–${topico.paginaFim})`;
+    seletorTopico.appendChild(opt);
   });
 
-  atualizarPaginaPorTopico();
+  if (topicosFiltrados.length > 0) {
+    seletorTopico.value = topicosFiltrados[0].id;
+    atualizarPaginaPorTopico();
+  }
 }
 
 function atualizarPaginaPorTopico() {
   const topicoId = document.getElementById('seletor-topico').value;
   const topico = TOPICOS_MANUAL.find(t => t.id === topicoId);
-  if (topico) {
-    document.getElementById('input-pagina-estudada').value = topico.paginaFim;
-    document.getElementById('label-intervalo-paginas').textContent = `Págs. ${topico.paginaInicio}–${topico.paginaFim}`;
-    atualizarResumoEstruturaSessao(topico);
-  }
+  if (!topico) return;
+
+  const inputPagina = document.getElementById('input-pagina-estudada');
+  inputPagina.min = topico.paginaInicio;
+  inputPagina.max = topico.paginaFim;
+  inputPagina.value = topico.paginaInicio;
+
+  document.getElementById('label-intervalo-paginas').textContent = `Págs. ${topico.paginaInicio}–${topico.paginaFim}`;
+  atualizarResumoEstruturaSessao(topico);
 }
 
 function sincronizarPorNumeroPagina(paginaStr) {
-  const pag = parseInt(paginaStr);
+  const pag = parseInt(paginaStr, 10);
   if (isNaN(pag)) return;
 
-  const cadernoSel = parseInt(document.getElementById('seletor-caderno').value);
-  const topicoCorrespondente = TOPICOS_MANUAL.find(t => t.caderno === cadernoSel && pag >= t.paginaInicio && pag <= t.paginaFim);
-  
+  const topicoCorrespondente = TOPICOS_MANUAL.find(t => pag >= t.paginaInicio && pag <= t.paginaFim);
   if (topicoCorrespondente) {
+    document.getElementById('seletor-caderno').value = topicoCorrespondente.caderno;
     document.getElementById('seletor-topico').value = topicoCorrespondente.id;
     document.getElementById('label-intervalo-paginas').textContent = `Págs. ${topicoCorrespondente.paginaInicio}–${topicoCorrespondente.paginaFim}`;
     atualizarResumoEstruturaSessao(topicoCorrespondente);
@@ -145,389 +1123,351 @@ function sincronizarPorNumeroPagina(paginaStr) {
 }
 
 function atualizarResumoEstruturaSessao(topicoAtual) {
-  const containerResumo = document.getElementById('resumo-estrutura-sessao');
+  const container = document.getElementById('resumo-estrutura-sessao');
+  const indexTopico = TOPICOS_MANUAL.findIndex(t => t.id === topicoAtual.id);
+  const topicosAnteriores = TOPICOS_MANUAL.slice(0, indexTopico);
 
-  if (modalidadeAtual === 'sabado' || modalidadeAtual === 'domingo') {
+  let descricaoComposicao = '';
+
+  if (modalidadeSessao === 'sabado' || modalidadeSessao === 'domingo') {
     const errosSemana = obterErrosSemanaAtual();
-    const numErros = errosSemana.length;
-    const nomeFicha = modalidadeAtual === 'sabado' ? 'Sábado (Parte 1)' : 'Domingo (Parte 2)';
-    
-    containerResumo.innerHTML = `
+    descricaoComposicao = `
       <div class="flex items-center gap-2">
-        <i class="fa-solid fa-clock-rotate-left text-amber-600 text-base"></i>
-        <div>
-          <strong>Ficha de ${nomeFicha}:</strong> 
-          Detetados <strong>${numErros} erro(s) registados durante a semana</strong>. A ficha incluirá esses exercícios para retificação imediata e ${Math.max(0, 8 - numErros)} exercícios de consolidação semanal.
-        </div>
-      </div>
-      <div class="font-mono font-bold text-xs bg-amber-100 text-amber-900 px-2.5 py-1 rounded">
-        ${Math.min(8, numErros)} Erros a Rever &bull; ${Math.max(0, 8 - numErros)} Consolidação
+        <i class="fa-solid fa-repeat text-amber-600"></i>
+        <span><strong>Ficha de Fim de Semana:</strong> 8 exercícios de consolidação. Detetados <strong>${errosSemana.length}</strong> exercícios errados nesta semana (priorizados para retificação).</span>
       </div>
     `;
-    return;
-  }
-
-  const indexAtual = TOPICOS_MANUAL.findIndex(t => t.id === topicoAtual.id);
-  const topicosAnteriores = TOPICOS_MANUAL.slice(0, indexAtual);
-  
-  if (topicosAnteriores.length === 0) {
-    containerResumo.innerHTML = `
+  } else if (topicosAnteriores.length === 0) {
+    descricaoComposicao = `
       <div class="flex items-center gap-2">
-        <i class="fa-solid fa-circle-info text-indigo-600 text-base"></i>
-        <div>
-          <strong>Primeiras Páginas do Programa (${topicoAtual.subtema}):</strong> 
-          Como é o início do estudo, a sessão de 1 hora terá <strong>8 exercícios focados nesta matéria</strong> para consolidação base.
-        </div>
+        <i class="fa-solid fa-book-open text-indigo-600"></i>
+        <span><strong>Tópico Inicial:</strong> 8 exercícios da matéria selecionada (${topicoAtual.subtema}).</span>
       </div>
-      <div class="font-mono font-bold text-xs bg-indigo-100 text-indigo-800 px-2.5 py-1 rounded">8 Atuais &bull; 0 Anteriores</div>
     `;
   } else {
-    const numAnteriores = Math.min(3, topicosAnteriores.length);
-    const numAtuais = 8 - numAnteriores;
-    containerResumo.innerHTML = `
+    descricaoComposicao = `
       <div class="flex items-center gap-2">
-        <i class="fa-solid fa-arrows-rotate text-indigo-600 text-base"></i>
-        <div>
-          <strong>Distribuição Equitativa da Ficha de Hoje:</strong> 
-          <strong>${numAtuais} exercícios</strong> da matéria atual (Págs. ${topicoAtual.paginaInicio}–${topicoAtual.paginaFim}, inéditos) + 
-          <strong>${numAnteriores} exercícios de revisão</strong> (cada um de uma matéria anterior diferente, rodados de forma igual ao longo dos dias).
-        </div>
+        <i class="fa-solid fa-layer-group text-indigo-600"></i>
+        <span><strong>Estrutura Pedagógica:</strong> 5 exercícios inéditos de <em>${topicoAtual.subtema}</em> + 3 de matérias anteriores rodados equitativamente.</span>
       </div>
-      <div class="font-mono font-bold text-xs bg-indigo-100 text-indigo-800 px-2.5 py-1 rounded">${numAtuais} Atuais &bull; ${numAnteriores} Revisão</div>
     `;
   }
+
+  container.innerHTML = `
+    ${descricaoComposicao}
+    <div class="font-bold text-indigo-700 bg-white/90 border border-indigo-200 px-3 py-1 rounded-lg">
+      Cotação: 8 &times; 2,5 = 20,0 valores
+    </div>
+  `;
 }
 
-// Obter exercícios errados durante a semana corrente (Segunda a Sexta)
+// Histórico de erros da semana para fim de semana
 function obterErrosSemanaAtual() {
-  const historico = JSON.parse(localStorage.getItem('mat10_historico') || '[]');
-  const hoje = new Date();
-  
-  // Calcular início da semana (segunda-feira 00:00:00)
-  const diaSemana = hoje.getDay(); // 0 = dom, 1 = seg...
-  const diasDesdeSegunda = diaSemana === 0 ? 6 : diaSemana - 1;
-  const segundaFeira = new Date(hoje);
-  segundaFeira.setDate(hoje.getDate() - diasDesdeSegunda);
-  segundaFeira.setHours(0, 0, 0, 0);
+  const historico = JSON.parse(localStorage.getItem(STORAGE_HISTORICO) || '[]');
+  const agora = new Date();
+  const diaSemanaHoje = agora.getDay();
+  const diasDesdeSegunda = diaSemanaHoje === 0 ? 6 : diaSemanaHoje - 1;
 
-  const idsErros = new Set();
-  const listaExerciciosErrados = [];
+  const inicioSemana = new Date(agora);
+  inicioSemana.setDate(agora.getDate() - diasDesdeSegunda);
+  inicioSemana.setHours(0, 0, 0, 0);
 
+  const erros = [];
   historico.forEach(sessao => {
     const dataSessao = new Date(sessao.data);
-    if (dataSessao >= segundaFeira && sessao.detalhes) {
-      sessao.detalhes.forEach(d => {
-        if (d.acertou === false && d.id && !idsErros.has(d.id)) {
-          idsErros.add(d.id);
-          const objOriginal = BANCO_EXERCICIOS_DEDUP.find(e => e.id === d.id);
-          if (objOriginal) {
-            listaExerciciosErrados.push({
-              ...objOriginal,
-              isErroSemanal: true,
-              dataErro: dataSessao.toLocaleDateString('pt-PT')
-            });
+    if (dataSessao >= inicioSemana) {
+      if (sessao.detalhes && Array.isArray(sessao.detalhes)) {
+        sessao.detalhes.forEach(d => {
+          if (!d.acertou && d.exercicio) {
+            erros.push(d.exercicio);
           }
-        }
-      });
+        });
+      }
     }
   });
 
-  return listaExerciciosErrados;
+  return erros;
 }
 
-// Obter todos os exercícios tentados durante a semana corrente
 function obterExerciciosFeitosSemanaAtual() {
-  const historico = JSON.parse(localStorage.getItem('mat10_historico') || '[]');
-  const hoje = new Date();
-  const diaSemana = hoje.getDay();
-  const diasDesdeSegunda = diaSemana === 0 ? 6 : diaSemana - 1;
-  const segundaFeira = new Date(hoje);
-  segundaFeira.setDate(hoje.getDate() - diasDesdeSegunda);
-  segundaFeira.setHours(0, 0, 0, 0);
+  const historico = JSON.parse(localStorage.getItem(STORAGE_HISTORICO) || '[]');
+  const agora = new Date();
+  const diaSemanaHoje = agora.getDay();
+  const diasDesdeSegunda = diaSemanaHoje === 0 ? 6 : diaSemanaHoje - 1;
 
-  const idsFeitos = new Set();
-  const lista = [];
+  const inicioSemana = new Date(agora);
+  inicioSemana.setDate(agora.getDate() - diasDesdeSegunda);
+  inicioSemana.setHours(0, 0, 0, 0);
 
+  const feitos = [];
   historico.forEach(sessao => {
     const dataSessao = new Date(sessao.data);
-    if (dataSessao >= segundaFeira && sessao.detalhes) {
-      sessao.detalhes.forEach(d => {
-        if (d.id && !idsFeitos.has(d.id)) {
-          idsFeitos.add(d.id);
-          const objOriginal = BANCO_EXERCICIOS_DEDUP.find(e => e.id === d.id);
-          if (objOriginal) lista.push(objOriginal);
-        }
-      });
+    if (dataSessao >= inicioSemana) {
+      if (sessao.detalhes && Array.isArray(sessao.detalhes)) {
+        sessao.detalhes.forEach(d => {
+          if (d.exercicio) feitos.push(d.exercicio);
+        });
+      }
     }
   });
 
-  return lista;
+  return feitos;
 }
 
 // ==========================================
-// 5. ALGORITMO DE CRIAÇÃO DA FICHA
+// 9. GERAÇÃO & EXECUÇÃO DO TREINO DE 1 HORA
 // ==========================================
 function iniciarSessao() {
   const topicoId = document.getElementById('seletor-topico').value;
   const topicoAtual = TOPICOS_MANUAL.find(t => t.id === topicoId);
   if (!topicoAtual) return;
 
-  if (modalidadeAtual === 'sabado' || modalidadeAtual === 'domingo') {
-    gerarFichaFimDeSemana(modalidadeAtual, topicoAtual);
+  // Gerar exercícios
+  if (modalidadeSessao === 'sabado' || modalidadeSessao === 'domingo') {
+    exerciciosAtuais = gerarFichaFimDeSemana(modalidadeSessao, topicoAtual);
   } else {
-    gerarFichaDiariaRegular(topicoAtual);
+    exerciciosAtuais = gerarFichaDiariaRegular(topicoAtual);
   }
 
-  // Reset de respostas e cronómetro de 60 minutos
-  respostasUtilizador = {};
-  tempoRestanteSegundos = 3600;
+  respostasAluno = {};
+  sessaoEmAndamento = true;
 
+  // Atualizar cabeçalho de impressão
+  const printSub = document.getElementById('print-subtitulo-materia');
+  if (printSub) {
+    printSub.textContent = `Matéria Avaliada: ${topicoAtual.temaNome} - ${topicoAtual.subtema} (Modalidade: ${modalidadeSessao.toUpperCase()})`;
+  }
+
+  // Cronómetro
+  segundosRestantes = DURACAO_SESSAO_SEGUNDOS;
+  atualizarCronometro();
   if (intervaloCronometro) clearInterval(intervaloCronometro);
-  intervaloCronometro = setInterval(atualizarCronometro, 1000);
+  intervaloCronometro = setInterval(() => {
+    segundosRestantes--;
+    atualizarCronometro();
+    if (segundosRestantes <= 0) {
+      clearInterval(intervaloCronometro);
+      alert('O tempo de 60 minutos terminou! A tua ficha será submetida para avaliação agora.');
+      submeterTreino();
+    }
+  }, 1000);
 
-  // Interface
+  // Exibir componentes
   document.getElementById('status-sessao').classList.remove('hidden');
   document.getElementById('painel-submissao').classList.remove('hidden');
   document.getElementById('btn-imprimir-enunciado').classList.remove('hidden');
-  document.getElementById('btn-imprimir-enunciado').classList.add('flex');
-  document.getElementById('progresso-exercicios').textContent = `0/${sessaoAtiva.length}`;
-
-  const tituloImpressao = modalidadeAtual === 'sabado'
-    ? 'Ficha de Sábado (Consolidação e Retificação de Erros da Semana)'
-    : (modalidadeAtual === 'domingo' ? 'Ficha de Domingo (Consolidação Semanal Integradora)' : `Tema Principal: ${topicoAtual.temaNome} - ${topicoAtual.subtema}`);
-
-  document.getElementById('print-subtitulo-materia').textContent = 
-    `${tituloImpressao} (Págs. ${topicoAtual.paginaInicio} a ${topicoAtual.paginaFim})`;
 
   renderizarListaExercicios();
+  renderizarMatematica();
 }
 
-// Geração da Ficha Diária (Segunda a Sexta) com Banco de 504 Itens
 function gerarFichaDiariaRegular(topicoAtual) {
-  const indexAtual = TOPICOS_MANUAL.findIndex(t => t.id === topicoAtual.id);
-  const topicosAnteriores = TOPICOS_MANUAL.slice(0, indexAtual);
+  const indexTopico = TOPICOS_MANUAL.findIndex(t => t.id === topicoAtual.id);
+  const topicosAnteriores = TOPICOS_MANUAL.slice(0, indexTopico);
 
-  const numRevisao = Math.min(3, topicosAnteriores.length);
-  const numAtuais = 8 - numRevisao;
+  const bancoAtual = window[topicoAtual.id] || [];
+  const exerciciosSelecionados = [];
 
-  // 1. Obter exercícios da Matéria Atual SEM REPETIÇÃO
-  let resolvidosGlobal = JSON.parse(localStorage.getItem('mat10_resolvidos_v3') || '[]');
-  let poolAtual = BANCO_EXERCICIOS_DEDUP.filter(ex => ex.topicoId === topicoAtual.id);
-  let naoResolvidosAtual = poolAtual.filter(ex => !resolvidosGlobal.includes(ex.id));
-
-  // Se esgotar os inéditos do tópico (cada tópico tem 36 itens), renova o ciclo desse tópico
-  if (naoResolvidosAtual.length < numAtuais) {
-    const idsDesteTopico = new Set(poolAtual.map(e => e.id));
-    resolvidosGlobal = resolvidosGlobal.filter(id => !idsDesteTopico.has(id));
-    localStorage.setItem('mat10_resolvidos_v3', JSON.stringify(resolvidosGlobal));
-    naoResolvidosAtual = [...poolAtual];
-  }
-
-  naoResolvidosAtual.sort(() => 0.5 - Math.random());
-  const exerciciosAtuais = naoResolvidosAtual.slice(0, numAtuais).map(ex => ({
-    ...ex,
-    isRevisao: false,
-    badgeTexto: `Matéria Atual (Págs. ${ex.paginaInicio}–${ex.paginaFim})`
-  }));
-
-  exerciciosAtuais.forEach(ex => {
-    if (!resolvidosGlobal.includes(ex.id)) resolvidosGlobal.push(ex.id);
+  const historico = JSON.parse(localStorage.getItem(STORAGE_HISTORICO) || '[]');
+  const idsJaFeitos = new Set();
+  historico.forEach(s => {
+    if (s.detalhes) s.detalhes.forEach(d => idsJaFeitos.add(d.id));
   });
-  localStorage.setItem('mat10_resolvidos_v3', JSON.stringify(resolvidosGlobal));
 
-  // 2. Selecionar até 3 exercícios de matérias anteriores DISTINTAS e EQUITATIVAS
-  let exerciciosRevisao = [];
-  if (numRevisao > 0) {
-    let contagemTopicos = JSON.parse(localStorage.getItem('mat10_contagem_topicos_revisao') || '{}');
+  const bancoNaoRepetido = bancoAtual.filter(ex => !idsJaFeitos.has(ex.id));
+  const poolAtual = bancoNaoRepetido.length >= 5 ? bancoNaoRepetido : bancoAtual;
 
-    let topicosOrdenados = [...topicosAnteriores].sort((a, b) => {
-      const countA = contagemTopicos[a.id] || 0;
-      const countB = contagemTopicos[b.id] || 0;
-      if (countA === countB) return 0.5 - Math.random();
-      return countA - countB;
-    });
-
-    const topicosEscolhidosParaRevisao = topicosOrdenados.slice(0, numRevisao);
-
-    topicosEscolhidosParaRevisao.forEach(t => {
-      const poolTopico = BANCO_EXERCICIOS_DEDUP.filter(ex => ex.topicoId === t.id);
-      if (poolTopico.length > 0) {
-        const exSorteado = poolTopico[Math.floor(Math.random() * poolTopico.length)];
-        exerciciosRevisao.push({
-          ...exSorteado,
-          isRevisao: true,
-          badgeTexto: `Revisão Cumulativa (Págs. ${exSorteado.paginaInicio}–${exSorteado.paginaFim})`
-        });
-        contagemTopicos[t.id] = (contagemTopicos[t.id] || 0) + 1;
-      }
-    });
-
-    localStorage.setItem('mat10_contagem_topicos_revisao', JSON.stringify(contagemTopicos));
+  // Se for o primeiro tópico
+  if (topicosAnteriores.length === 0) {
+    const shuffle = [...poolAtual].sort(() => 0.5 - Math.random());
+    return shuffle.slice(0, NUMERO_EXERCICIOS);
   }
 
-  sessaoAtiva = [...exerciciosAtuais, ...exerciciosRevisao].sort(() => 0.5 - Math.random());
+  // 5 da matéria atual
+  const shuffleAtual = [...poolAtual].sort(() => 0.5 - Math.random());
+  exerciciosSelecionados.push(...shuffleAtual.slice(0, 5));
+
+  // 3 das matérias anteriores distribuídos equitativamente
+  const contagemPorTopico = {};
+  topicosAnteriores.forEach(t => { contagemPorTopico[t.id] = 0; });
+  historico.forEach(s => {
+    if (s.detalhes) {
+      s.detalhes.forEach(d => {
+        if (contagemPorTopico[d.topicoId] !== undefined) {
+          contagemPorTopico[d.topicoId]++;
+        }
+      });
+    }
+  });
+
+  const topicosOrdenadosPorMenosUsados = [...topicosAnteriores].sort((a, b) => {
+    return contagemPorTopico[a.id] - contagemPorTopico[b.id];
+  });
+
+  const topicosParaRevisao = topicosOrdenadosPorMenosUsados.slice(0, 3);
+  topicosParaRevisao.forEach(tRev => {
+    const bancoRev = window[tRev.id] || [];
+    if (bancoRev.length > 0) {
+      const exRev = bancoRev[Math.floor(Math.random() * bancoRev.length)];
+      exerciciosSelecionados.push({
+        ...exRev,
+        etiquetaRevisao: `Revisão: ${tRev.subtema} (Pág. ${tRev.paginaInicio})`
+      });
+    }
+  });
+
+  // Preencher até 8 se necessário
+  while (exerciciosSelecionados.length < NUMERO_EXERCICIOS && poolAtual.length > 0) {
+    const extra = poolAtual[Math.floor(Math.random() * poolAtual.length)];
+    if (!exerciciosSelecionados.some(e => e.id === extra.id)) {
+      exerciciosSelecionados.push(extra);
+    } else {
+      break;
+    }
+  }
+
+  return exerciciosSelecionados;
 }
 
-// Geração da Ficha de Fim de Semana (Sábado / Domingo)
 function gerarFichaFimDeSemana(modo, topicoAtual) {
+  const listaFimDeSemana = [];
   const errosSemana = obterErrosSemanaAtual();
   const feitosSemana = obterExerciciosFeitosSemanaAtual();
-  
-  let selecionados = [];
 
-  // 1. Prioridade máxima: Exercícios errados na semana
-  errosSemana.sort(() => 0.5 - Math.random());
-  const errosParaFicha = errosSemana.slice(0, 8).map(ex => ({
-    ...ex,
-    isRevisao: true,
-    badgeTexto: `⚠️ Retificação de Erro da Semana (${ex.subtema})`
-  }));
-  selecionados.push(...errosParaFicha);
-
-  // 2. Se faltarem exercícios para perfazer 8:
-  if (selecionados.length < 8) {
-    const idsJaSelecionados = new Set(selecionados.map(e => e.id));
-    
-    // Complementar com exercícios praticados durante a semana
-    const feitosRestantes = feitosSemana.filter(e => !idsJaSelecionados.has(e.id));
-    feitosRestantes.sort(() => 0.5 - Math.random());
-    
-    while (selecionados.length < 8 && feitosRestantes.length > 0) {
-      const ex = feitosRestantes.pop();
-      idsJaSelecionados.add(ex.id);
-      selecionados.push({
+  // 1. Prioridade absoluta: exercícios errados durante a semana
+  const errosUnicos = [];
+  const idsVistos = new Set();
+  errosSemana.forEach(ex => {
+    if (!idsVistos.has(ex.id)) {
+      idsVistos.add(ex.id);
+      errosUnicos.push({
         ...ex,
-        isRevisao: true,
-        badgeTexto: `Consolidação da Matéria da Semana (${ex.subtema})`
+        etiquetaRevisao: `⚠️ Retificação de Erro da Semana (${ex.subtema || 'Consolidação'})`
       });
     }
-  }
+  });
 
-  // 3. Se ainda faltar (ex: semana começou agora ou sem dados suficientes):
-  if (selecionados.length < 8) {
-    const idsJaSelecionados = new Set(selecionados.map(e => e.id));
-    const poolTopico = BANCO_EXERCICIOS_DEDUP.filter(e => e.topicoId === topicoAtual.id && !idsJaSelecionados.has(e.id));
-    poolTopico.sort(() => 0.5 - Math.random());
+  listaFimDeSemana.push(...errosUnicos.slice(0, 5));
 
-    while (selecionados.length < 8 && poolTopico.length > 0) {
-      const ex = poolTopico.pop();
-      selecionados.push({
+  // 2. Faltando para 8: exercícios feitos durante a semana para fixação
+  if (listaFimDeSemana.length < NUMERO_EXERCICIOS) {
+    const restantesSemana = feitosSemana.filter(ex => !idsVistos.has(ex.id));
+    const shuffleRestantes = [...restantesSemana].sort(() => 0.5 - Math.random());
+    const qtdNecessaria = NUMERO_EXERCICIOS - listaFimDeSemana.length;
+
+    shuffleRestantes.slice(0, qtdNecessaria).forEach(ex => {
+      idsVistos.add(ex.id);
+      listaFimDeSemana.push({
         ...ex,
-        isRevisao: false,
-        badgeTexto: `Consolidação: ${ex.subtema}`
+        etiquetaRevisao: `Consolidação Semanal: ${ex.subtema || 'Revisão'}`
       });
-    }
+    });
   }
 
-  sessaoAtiva = selecionados.sort(() => 0.5 - Math.random());
+  // 3. Se ainda faltar, preenche com exercícios da matéria em estudo
+  if (listaFimDeSemana.length < NUMERO_EXERCICIOS) {
+    const bancoAtual = window[topicoAtual.id] || [];
+    const pool = bancoAtual.filter(ex => !idsVistos.has(ex.id));
+    const qtd = NUMERO_EXERCICIOS - listaFimDeSemana.length;
+    pool.slice(0, qtd).forEach(ex => {
+      listaFimDeSemana.push(ex);
+    });
+  }
+
+  return listaFimDeSemana;
 }
 
-// Cronómetro decrescente de 60 minutos
 function atualizarCronometro() {
-  if (tempoRestanteSegundos <= 0) {
-    clearInterval(intervaloCronometro);
-    alert('Terminaram os 60 minutos de estudo. Submissão automática da ficha.');
-    submeterTreino();
-    return;
-  }
-  tempoRestanteSegundos--;
-  const min = Math.floor(tempoRestanteSegundos / 60);
-  const seg = tempoRestanteSegundos % 60;
-  document.getElementById('cronometro-sessao').textContent = 
-    `${String(min).padStart(2, '0')}:${String(seg).padStart(2, '0')}`;
+  const m = Math.floor(segundosRestantes / 60);
+  const s = segundosRestantes % 60;
+  const texto = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+  const elem = document.getElementById('cronometro-sessao');
+  if (elem) elem.textContent = texto;
 }
 
-// Renderização dos cartões de exercícios
 function renderizarListaExercicios() {
   const container = document.getElementById('container-exercicios');
   container.innerHTML = '';
 
-  sessaoAtiva.forEach((ex, idx) => {
+  exerciciosAtuais.forEach((ex, idx) => {
     const card = document.createElement('div');
-    card.className = "bg-white p-5 rounded-2xl shadow-sm border border-slate-200 a4-page-break space-y-4";
-    
-    let badgeCor = "bg-indigo-100 text-indigo-900 border border-indigo-200";
-    if (ex.badgeTexto && ex.badgeTexto.includes('⚠️')) {
-      badgeCor = "bg-rose-100 text-rose-900 border border-rose-300";
-    } else if (ex.isRevisao) {
-      badgeCor = "bg-amber-100 text-amber-900 border border-amber-300";
-    }
+    card.className = 'bg-white p-6 rounded-2xl shadow-sm border border-slate-200 a4-page-break space-y-4';
+
+    const etiqueta = ex.etiquetaRevisao
+      ? `<span class="bg-amber-100 text-amber-900 border border-amber-300 text-[10px] font-bold px-2 py-0.5 rounded-full">${ex.etiquetaRevisao}</span>`
+      : `<span class="bg-indigo-100 text-indigo-800 text-[10px] font-bold px-2 py-0.5 rounded-full">${ex.subtema} (Pág. ${ex.pagina})</span>`;
 
     card.innerHTML = `
-      <div class="flex flex-wrap justify-between items-center border-b border-slate-200 pb-2 gap-2">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-2.5">
         <div class="flex items-center gap-2">
-          <span class="bg-indigo-900 text-white text-xs font-bold px-2 py-0.5 rounded">
-            Item ${idx + 1}
-          </span>
-          <span class="text-xs font-bold px-2.5 py-0.5 rounded-full ${badgeCor}">
-            ${ex.badgeTexto}
-          </span>
-          <span class="text-xs font-semibold text-slate-600 hidden sm:inline">&bull; ${ex.subtema}</span>
+          <span class="w-7 h-7 bg-indigo-900 text-white rounded-lg flex items-center justify-center font-bold text-xs">${idx + 1}</span>
+          ${etiqueta}
         </div>
         <div class="text-xs font-bold text-slate-500">
-          Cotação: ${ex.cotacaoValores} val. &nbsp;|&nbsp; Ref: ${ex.manualRef}
+          Cotação: <span class="text-indigo-600 font-black">2,5 valores</span>
         </div>
       </div>
 
-      <div class="text-slate-900 text-base leading-relaxed math-font py-1">
+      <div class="text-sm font-medium text-slate-800 leading-relaxed math-font">
         ${ex.enunciado}
       </div>
 
-      <!-- Seletor de Escolha Múltipla se aplicável -->
-      ${renderizarOpcoesOuInput(ex)}
+      <!-- Campo de Resposta no Ecrã -->
+      <div class="campo-input-ecra pt-2">
+        ${renderizarOpcoesOuInput(ex)}
+      </div>
 
-      <!-- Área Milimétrica de Resolução (Visível exclusivamente na impressão A4) -->
-      <div class="area-resolucao-impressao rounded p-3">
-        <div class="text-[9px] font-bold text-gray-500 uppercase tracking-widest mb-1">
-          Espaço reservado à demonstração, cálculos e resposta do Item ${idx + 1}:
+      <!-- Área de Resolução e Cálculos na Impressão A4 (Folha Milimétrica Oficial) -->
+      <div class="area-resolucao-impressao grid-papel-resolucao p-3 rounded">
+        <div class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1">
+          Espaço reservado para cálculos, deduções e justificação formal (Folha Milimétrica)
         </div>
-        <div class="w-full h-36 grid-papel-resolucao rounded"></div>
       </div>
     `;
+
     container.appendChild(card);
   });
-
-  renderizarMatematica();
 }
 
 function renderizarOpcoesOuInput(ex) {
-  if (ex.tipo === 'escolha_multipla' && ex.opcoes && ex.opcoes.length > 0) {
-    const opcoesHtml = ex.opcoes.map(op => `
-      <label class="flex items-center gap-2 p-2 rounded-xl border border-slate-200 hover:bg-indigo-50/50 cursor-pointer text-sm">
-        <input type="radio" name="opcao-${ex.id}" value="${op.id}" onchange="registarResposta('${ex.id}', '${op.id}')" class="text-indigo-600 focus:ring-indigo-500" />
-        <span class="font-bold text-slate-700">${op.id})</span>
-        <span class="math-font text-slate-800">${op.texto}</span>
-      </label>
-    `).join('');
-
+  if (ex.tipo === 'multipla_escolha') {
     return `
-      <div class="campo-input-ecra pt-2 space-y-2">
-        <div class="text-xs font-bold uppercase text-slate-500">Opções de resposta:</div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          ${opcoesHtml}
-        </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+        ${ex.opcoes.map(op => `
+          <label class="flex items-center gap-2.5 p-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-indigo-50/50 hover:border-indigo-300 transition cursor-pointer">
+            <input type="radio" name="resposta_${ex.id}" value="${op.chave}" onchange="registarResposta('${ex.id}', '${op.chave}')" class="text-indigo-600 focus:ring-indigo-500" />
+            <span class="font-bold text-slate-800">(${op.chave})</span>
+            <span class="math-font">${op.texto}</span>
+          </label>
+        `).join('')}
+      </div>
+    `;
+  } else if (ex.tipo === 'vf') {
+    return `
+      <div class="flex gap-4 text-xs font-bold">
+        <label class="flex items-center gap-2 p-2.5 px-4 rounded-xl border border-slate-200 bg-slate-50 hover:bg-indigo-50 cursor-pointer">
+          <input type="radio" name="resposta_${ex.id}" value="V" onchange="registarResposta('${ex.id}', 'V')" /> Verdadeira (V)
+        </label>
+        <label class="flex items-center gap-2 p-2.5 px-4 rounded-xl border border-slate-200 bg-slate-50 hover:bg-indigo-50 cursor-pointer">
+          <input type="radio" name="resposta_${ex.id}" value="F" onchange="registarResposta('${ex.id}', 'F')" /> Falsa (F)
+        </label>
+      </div>
+    `;
+  } else {
+    return `
+      <div class="flex items-center gap-3">
+        <span class="text-xs font-bold text-slate-600">Resposta:</span>
+        <input type="text" placeholder="Ex: 5, -2, 3/4 ou [1, 5]" oninput="registarResposta('${ex.id}', this.value)" class="p-2.5 px-3 border border-slate-300 rounded-xl text-xs font-bold text-slate-800 bg-slate-50 focus:ring-2 focus:ring-indigo-500 focus:outline-none w-48" />
+        <span class="text-[11px] text-slate-400">Insere o valor numérico, fração ou intervalo.</span>
       </div>
     `;
   }
-
-  return `
-    <div class="campo-input-ecra pt-2 flex items-center gap-3">
-      <label class="text-xs font-bold uppercase text-slate-500">A tua resposta final:</label>
-      <input 
-        type="text" 
-        placeholder="Ex: 5, -2, 3/4..." 
-        id="resp-${ex.id}"
-        oninput="registarResposta('${ex.id}', this.value)"
-        class="w-48 bg-slate-50 border border-slate-300 rounded-xl px-3 py-1.5 font-medium text-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-      />
-    </div>
-  `;
 }
 
 function registarResposta(id, valor) {
-  respostasUtilizador[id] = valor.trim();
-  const respondidas = Object.values(respostasUtilizador).filter(v => v !== '').length;
-  document.getElementById('progresso-exercicios').textContent = `${respondidas}/${sessaoAtiva.length}`;
+  respostasAluno[id] = valor;
+  const numRespondidas = Object.keys(respostasAluno).length;
+  document.getElementById('progresso-exercicios').textContent = `${numRespondidas}/${NUMERO_EXERCICIOS}`;
 }
 
 function imprimirFichaEnunciado() {
@@ -539,154 +1479,190 @@ function imprimirResolucaoCompleta() {
 }
 
 // ==========================================
-// 6. AVALIAÇÃO E APRESENTAÇÃO DE RESULTADOS
+// 10. AVALIAÇÃO FORMAL (0 A 20 VALORES)
 // ==========================================
 function avaliarResposta(correta, dada, tipo) {
   if (!dada) return false;
-  const dLimpa = dada.toLowerCase().replace(/\s+/g, '');
-  const cLimpa = String(correta).toLowerCase().replace(/\s+/g, '');
+  const limpa = str => String(str).trim().toLowerCase().replace(/\s+/g, '');
 
-  if (dLimpa === cLimpa) return true;
-
-  if (tipo === 'numero') {
-    const valDada = resolverFracao(dLimpa);
-    const valCorreta = Number(correta);
-    if (!isNaN(valDada) && Math.abs(valDada - valCorreta) < 0.05) return true;
+  if (tipo === 'multipla_escolha' || tipo === 'vf') {
+    return limpa(correta) === limpa(dada);
   }
-  return false;
+
+  if (tipo === 'numerica') {
+    const valCorreto = resolverFracao(correta);
+    const valDado = resolverFracao(dada);
+    if (!isNaN(valCorreto) && !isNaN(valDado)) {
+      return Math.abs(valCorreto - valDado) < 0.05;
+    }
+  }
+
+  return limpa(correta) === limpa(dada);
 }
 
 function resolverFracao(str) {
-  if (str.includes('/')) {
-    const partes = str.split('/');
-    return parseFloat(partes[0]) / parseFloat(partes[1]);
+  if (!str) return NaN;
+  const s = String(str).replace(',', '.').trim();
+  if (s.includes('/')) {
+    const parts = s.split('/');
+    return parseFloat(parts[0]) / parseFloat(parts[1]);
   }
-  return parseFloat(str.replace(',', '.'));
+  return parseFloat(s);
 }
 
 function submeterTreino() {
   if (intervaloCronometro) clearInterval(intervaloCronometro);
+  sessaoEmAndamento = false;
 
-  let cotacaoTotalObtida = 0;
   let certas = 0;
-  const relatorioSessao = [];
+  const detalhes = [];
 
-  sessaoAtiva.forEach(ex => {
-    const dada = respostasUtilizador[ex.id] || "";
-    const acertou = avaliarResposta(ex.respostaCorreta, dada, ex.tipo);
-    
-    if (acertou) {
-      certas++;
-      cotacaoTotalObtida += ex.cotacaoValores;
-    }
+  exerciciosAtuais.forEach(ex => {
+    const respostaDada = respostasAluno[ex.id] || '';
+    const acertou = avaliarResposta(ex.resposta_correta, respostaDada, ex.tipo);
+    if (acertou) certas++;
 
-    relatorioSessao.push({
+    detalhes.push({
       id: ex.id,
-      enunciado: ex.enunciado,
-      manualRef: ex.manualRef,
-      subtema: ex.subtema,
+      topicoId: ex.topicoId,
       dominio: ex.dominio,
-      cotacaoValores: ex.cotacaoValores,
-      respostaCorreta: ex.respostaCorreta,
-      passosResolucao: ex.passosResolucao,
-      respostaDada: dada,
-      acertou: acertou,
-      isRevisao: ex.isRevisao
+      subtema: ex.subtema,
+      enunciado: ex.enunciado,
+      respostaDada,
+      respostaCorreta: ex.resposta_correta,
+      acertou,
+      resolucao: ex.resolucao,
+      exercicio: ex
     });
   });
 
-  const notaFinal = Number(cotacaoTotalObtida.toFixed(1));
+  const notaCalculada = parseFloat((certas * PONTOS_POR_EXERCICIO).toFixed(1));
 
-  guardarHistoricoSessao(notaFinal, certas, sessaoAtiva.length, relatorioSessao, modalidadeAtual);
-  apresentarResultadosComResolucao(notaFinal, certas, sessaoAtiva.length, relatorioSessao);
+  // Guardar no histórico e verificar recuperação de faltas
+  guardarHistoricoSessao(notaCalculada, certas, NUMERO_EXERCICIOS, detalhes, modalidadeSessao);
+
+  apresentarResultadosComResolucao(notaCalculada, certas, NUMERO_EXERCICIOS, detalhes);
   mudarAba('resultados');
+
+  // Se estava a recuperar uma falta, avisar o aluno
+  if (faltaEmRecuperacaoId) {
+    alert(`Parabéns! Realizaste a ficha de recuperação com classificação de ${notaCalculada}/20 valores.\nA tua falta foi devidamente regularizada!`);
+    cancelarModoRecuperacao();
+  }
 }
 
 function apresentarResultadosComResolucao(nota, certas, total, lista) {
-  const card = document.getElementById('card-nota');
-  let corNota = nota >= 14 ? 'text-emerald-600' : (nota >= 10 ? 'text-amber-600' : 'text-rose-600');
-  
-  let medalhaTexto = "";
-  if (nota >= 18) medalhaTexto = "🥇 Desempenho Ouro (Excelente!)";
-  else if (nota >= 14) medalhaTexto = "🥈 Desempenho Prata (Muito Bom)";
-  else if (nota >= 10) medalhaTexto = "🥉 Desempenho Bronze (Suficiente)";
-  else if (nota >= 6) medalhaTexto = "⚠️ Desempenho Insuficiente (Mau)";
-  else medalhaTexto = "🛑 Desempenho Crítico (Muito Mau)";
+  const cardNota = document.getElementById('card-nota');
+  let corBadge = 'bg-rose-100 text-rose-800 border-rose-300';
+  let mensagem = 'Necessitas de rever a matéria e refazer os exercícios errados.';
 
-  card.innerHTML = `
-    <div class="text-xs font-bold uppercase tracking-wider text-slate-400">Classificação Oficial da Ficha Diária (1 Hora)</div>
-    <div class="text-5xl font-black ${corNota}">${nota} <span class="text-2xl text-slate-400">/ 20</span></div>
-    <div class="text-sm font-bold text-slate-700 mt-1">${medalhaTexto}</div>
-    <div class="text-xs font-medium text-slate-500">${certas} de ${total} exercícios corretos</div>
+  if (nota >= 18) {
+    corBadge = 'bg-amber-100 text-amber-900 border-amber-300';
+    mensagem = 'Excelente! Domínio completo da matéria do programa escolar.';
+  } else if (nota >= 14) {
+    corBadge = 'bg-emerald-100 text-emerald-900 border-emerald-300';
+    mensagem = 'Bom desempenho! Raciocínio matemático sólido e consistente.';
+  } else if (nota >= 10) {
+    corBadge = 'bg-blue-100 text-blue-900 border-blue-300';
+    mensagem = 'Positiva alcançada. Analisa com atenção os passos da resolução.';
+  }
+
+  cardNota.innerHTML = `
+    <div class="flex items-center gap-4">
+      <div class="px-5 py-3 rounded-2xl border-2 ${corBadge} text-center">
+        <div class="text-[10px] font-bold uppercase tracking-wider">Classificação Oficial</div>
+        <div class="text-3xl font-black">${nota} <span class="text-base font-bold">/ 20</span></div>
+      </div>
+      <div>
+        <h4 class="font-bold text-slate-800 text-base">Desafio de 60 Minutos Concluído</h4>
+        <p class="text-xs text-slate-600">${certas} de ${total} exercícios corretos &bull; Cotação: 2,5 val. cada</p>
+        <p class="text-xs font-semibold text-indigo-700 mt-1">${mensagem}</p>
+      </div>
+    </div>
   `;
 
-  const containerResolucoes = document.getElementById('lista-resolucoes');
-  containerResolucoes.innerHTML = '';
+  const containerResolucao = document.getElementById('lista-resolucoes');
+  containerResolucao.innerHTML = '';
 
   lista.forEach((item, idx) => {
     const div = document.createElement('div');
-    div.className = `p-5 rounded-2xl border ${item.acertou ? 'bg-emerald-50/40 border-emerald-300' : 'bg-rose-50/40 border-rose-300'} a4-page-break space-y-3`;
-
-    let passosHtml = item.passosResolucao.map(p => `<li class="math-font leading-relaxed">${p}</li>`).join('');
+    div.className = `p-5 rounded-2xl border ${item.acertou ? 'bg-emerald-50/50 border-emerald-200' : 'bg-rose-50/50 border-rose-200'} space-y-3 a4-page-break`;
 
     div.innerHTML = `
-      <div class="flex justify-between items-center text-xs border-b pb-2">
-        <span class="font-bold uppercase ${item.acertou ? 'text-emerald-700' : 'text-rose-700'}">
-          <i class="fa-solid ${item.acertou ? 'fa-circle-check' : 'fa-circle-xmark'} mr-1"></i>
-          Item ${idx + 1}: ${item.acertou ? `Cotação Plena (+${item.cotacaoValores} val)` : '0,0 valores'}
+      <div class="flex justify-between items-center border-b border-slate-200/60 pb-2">
+        <span class="font-bold text-xs ${item.acertou ? 'text-emerald-800' : 'text-rose-800'}">
+          Exercício #${idx + 1} (${item.subtema}) &bull; ${item.acertou ? '2,5 / 2,5 val.' : '0,0 / 2,5 val.'}
         </span>
-        <span class="text-slate-500 font-semibold">${item.manualRef}</span>
+        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${item.acertou ? 'bg-emerald-200 text-emerald-900' : 'bg-rose-200 text-rose-900'}">
+          ${item.acertou ? 'Correto' : 'Incorreto'}
+        </span>
       </div>
 
-      <div class="text-slate-900 font-medium math-font text-sm">
+      <div class="text-xs text-slate-700 font-medium math-font">
         ${item.enunciado}
       </div>
 
-      <div class="text-xs flex gap-6 bg-white/80 p-2.5 rounded-xl border border-slate-200">
-        <div><span class="text-slate-500 font-bold uppercase">Resposta submetida:</span> <span class="font-mono font-bold">${item.respostaDada || '(em branco)'}</span></div>
-        <div><span class="text-slate-500 font-bold uppercase">Solução matemática:</span> <span class="font-mono font-bold text-indigo-700">${item.respostaCorreta}</span></div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs bg-white/80 p-3 rounded-xl border border-slate-200/80">
+        <div><strong>Tua Resposta:</strong> <span class="math-font ${item.acertou ? 'text-emerald-700 font-bold' : 'text-rose-600 font-bold'}">${item.respostaDada || 'Não respondeu'}</span></div>
+        <div><strong>Resposta Correta:</strong> <span class="math-font text-emerald-800 font-bold">${item.respostaCorreta}</span></div>
       </div>
 
-      <div>
-        <div class="text-xs font-bold uppercase text-slate-700 mb-1.5 flex items-center gap-1.5">
-          <i class="fa-solid fa-graduation-cap text-indigo-600"></i> Demonstração Analítica Passo a Passo:
+      <div class="pt-2 text-xs text-slate-800 space-y-1">
+        <div class="font-bold text-slate-700 flex items-center gap-1.5">
+          <i class="fa-solid fa-graduation-cap text-indigo-600"></i> Demonstração e Resolução Passo a Passo:
         </div>
-        <ol class="list-decimal list-inside text-xs text-slate-800 space-y-1.5 bg-white p-3.5 rounded-xl border border-slate-200">
-          ${passosHtml}
-        </ol>
+        <div class="pl-3 border-l-2 border-indigo-400 space-y-1 text-slate-600 math-font">
+          ${item.resolucao.map(passo => `<p>&bull; ${passo}</p>`).join('')}
+        </div>
       </div>
     `;
-    containerResolucoes.appendChild(div);
+
+    containerResolucao.appendChild(div);
   });
 
   renderizarMatematica();
 }
 
-// ==========================================
-// 7. HISTÓRICO E PERSISTÊNCIA LOCALSTORAGE
-// ==========================================
 function guardarHistoricoSessao(nota, certas, total, detalhes, modalidade) {
-  const historico = JSON.parse(localStorage.getItem('mat10_historico') || '[]');
-  historico.push({
-    data: new Date().toISOString(),
-    nota: nota,
-    certas: certas,
-    total: total,
-    horas: 1,
-    modalidade: modalidade || 'diario',
-    detalhes: detalhes
-  });
-  localStorage.setItem('mat10_historico', JSON.stringify(historico));
+  const historico = JSON.parse(localStorage.getItem(STORAGE_HISTORICO) || '[]');
+  const hoje = new Date().toISOString();
+
+  const novaSessao = {
+    id: 'sessao_' + Date.now(),
+    data: hoje,
+    nota,
+    certas,
+    total,
+    modalidade,
+    faltaIdRecuperada: faltaEmRecuperacaoId,
+    detalhes
+  };
+
+  historico.unshift(novaSessao);
+  localStorage.setItem(STORAGE_HISTORICO, JSON.stringify(historico));
+
+  // Se recuperou uma falta, atualizar o registo de faltas
+  if (faltaEmRecuperacaoId) {
+    const faltas = obterFaltas();
+    const f = faltas.find(item => item.id === faltaEmRecuperacaoId);
+    if (f) {
+      f.recuperada = true;
+      f.dataRecuperacaoEfetiva = formatarDataIso(new Date());
+      salvarFaltas(faltas);
+    }
+  }
+
+  sincronizarFaltasComHistorico();
 }
 
 // ==========================================
-// 8. DASHBOARD, GRÁFICOS E CALENDÁRIO MENSAL
+// 11. DASHBOARD & DIAGNÓSTICO PEDAGÓGICO
 // ==========================================
 let chartEvolucao = null;
 let chartDominio = null;
 
 function carregarDashboard() {
-  const historico = JSON.parse(localStorage.getItem('mat10_historico') || '[]');
+  const historico = JSON.parse(localStorage.getItem(STORAGE_HISTORICO) || '[]');
 
   document.getElementById('kpi-horas').textContent = `${historico.length * 1}h`;
   document.getElementById('kpi-total-ex').textContent = `${historico.length * NUMERO_EXERCICIOS}`;
@@ -698,6 +1674,11 @@ function carregarDashboard() {
 
   document.getElementById('kpi-streak').textContent = `${calcularStreak(historico)} dias`;
 
+  // Renderizar a Escala do Aluno e o Registo de Faltas
+  renderizarEscalaTipoAluno();
+  renderizarRegistoFaltas();
+
+  // Renderizar Calendário e Gráficos
   renderizarCalendario();
   renderizarGraficoEvolucao(historico);
   renderizarGraficoDominio(historico);
@@ -718,272 +1699,74 @@ function calcularStreak(historico) {
   return streak;
 }
 
-// ==========================================
-// CALENDÁRIO MENSAL COM OS 5 ÍCONES OFICIAIS
-// ==========================================
-const NOMES_MESES = [
-  'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-  'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
-];
-
-function mudarMesCalendario(offset) {
-  dataCalendarioAtual.setMonth(dataCalendarioAtual.getMonth() + offset);
-  renderizarCalendario();
-}
-
-function irParaHojeCalendario() {
-  dataCalendarioAtual = new Date();
-  renderizarCalendario();
-}
-
-function renderizarCalendario() {
-  const historico = JSON.parse(localStorage.getItem('mat10_historico') || '[]');
-  
-  const ano = dataCalendarioAtual.getFullYear();
-  const mes = dataCalendarioAtual.getMonth();
-
-  document.getElementById('label-mes-ano-calendario').textContent = `${NOMES_MESES[mes]} ${ano}`;
-
-  // Mapear histórico por dia (formato YYYY-MM-DD)
-  const mapaHistoricoPorDia = {};
-  historico.forEach(item => {
-    const dStr = item.data.split('T')[0];
-    if (!mapaHistoricoPorDia[dStr]) {
-      mapaHistoricoPorDia[dStr] = [];
-    }
-    mapaHistoricoPorDia[dStr].push(item);
-  });
-
-  // Dias da semana
-  const diasSemana = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
-  
-  // Primeiro dia do mês (0 = dom, 1 = seg...)
-  const primeiroDiaDoMes = new Date(ano, mes, 1);
-  let diaSemanaInicial = primeiroDiaDoMes.getDay(); // 0 a 6
-  diaSemanaInicial = diaSemanaInicial === 0 ? 6 : diaSemanaInicial - 1; // ajustar para Segunda = 0
-
-  const totalDiasMes = new Date(ano, mes + 1, 0).getDate();
-  const totalDiasMesAnterior = new Date(ano, mes, 0).getDate();
-
-  const container = document.getElementById('grelha-calendario-container');
-  
-  let html = `
-    <div class="min-w-[650px]">
-      <div class="grid grid-cols-7 gap-2 text-center text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
-        ${diasSemana.map(d => `<div class="py-1">${d}</div>`).join('')}
-      </div>
-      <div class="grid grid-cols-7 gap-2">
-  `;
-
-  // Dias do mês anterior
-  for (let i = diaSemanaInicial - 1; i >= 0; i--) {
-    const numDia = totalDiasMesAnterior - i;
-    html += `
-      <div class="min-h-[75px] p-1.5 rounded-xl border border-slate-100 bg-slate-50/50 text-slate-300 text-xs font-semibold">
-        <span>${numDia}</span>
-      </div>
-    `;
-  }
-
-  // Dias do mês atual
-  const hoje = new Date();
-  const hojeStr = hoje.toISOString().split('T')[0];
-
-  for (let dia = 1; dia <= totalDiasMes; dia++) {
-    const mesFormatado = String(mes + 1).padStart(2, '0');
-    const diaFormatado = String(dia).padStart(2, '0');
-    const dataIso = `${ano}-${mesFormatado}-${diaFormatado}`;
-    
-    const isHoje = dataIso === hojeStr;
-    const sessoesNesteDia = mapaHistoricoPorDia[dataIso] || [];
-    
-    let conteudoIcone = '';
-    let bordaClasse = isHoje ? 'border-2 border-indigo-500 bg-indigo-50/30' : 'border border-slate-200 bg-white hover:border-indigo-300';
-
-    if (sessoesNesteDia.length > 0) {
-      // Obter a melhor nota do dia
-      const melhorNota = Math.max(...sessoesNesteDia.map(s => s.nota));
-      
-      // Ícones conforme especificado:
-      // Ouro: 18 a 20 | Prata: 14 a 17 | Bronze: 10 a 13 | Mau: 6 a 9 | Muito Mau: 0 a 5
-      if (melhorNota >= 18) {
-        conteudoIcone = `
-          <div class="flex flex-col items-center mt-1">
-            <i class="fa-solid fa-trophy text-amber-500 text-xl drop-shadow-sm"></i>
-            <span class="text-[9px] font-black bg-amber-100 text-amber-900 border border-amber-300 px-1.5 py-0.2 rounded-full mt-0.5">
-              ${melhorNota} val. (Ouro)
-            </span>
-          </div>
-        `;
-        bordaClasse = 'border-2 border-amber-400 bg-amber-50/30';
-      } else if (melhorNota >= 14) {
-        conteudoIcone = `
-          <div class="flex flex-col items-center mt-1">
-            <i class="fa-solid fa-medal text-slate-400 text-xl drop-shadow-sm"></i>
-            <span class="text-[9px] font-black bg-slate-200 text-slate-800 border border-slate-300 px-1.5 py-0.2 rounded-full mt-0.5">
-              ${melhorNota} val. (Prata)
-            </span>
-          </div>
-        `;
-        bordaClasse = 'border-2 border-slate-300 bg-slate-50';
-      } else if (melhorNota >= 10) {
-        conteudoIcone = `
-          <div class="flex flex-col items-center mt-1">
-            <i class="fa-solid fa-award text-amber-700 text-xl drop-shadow-sm"></i>
-            <span class="text-[9px] font-black bg-amber-100/70 text-amber-950 border border-amber-400 px-1.5 py-0.2 rounded-full mt-0.5">
-              ${melhorNota} val. (Bronze)
-            </span>
-          </div>
-        `;
-        bordaClasse = 'border-2 border-amber-500/50 bg-amber-50/20';
-      } else if (melhorNota >= 6) {
-        conteudoIcone = `
-          <div class="flex flex-col items-center mt-1">
-            <i class="fa-solid fa-face-frown text-orange-500 text-xl"></i>
-            <span class="text-[9px] font-black bg-orange-100 text-orange-900 border border-orange-300 px-1.5 py-0.2 rounded-full mt-0.5">
-              ${melhorNota} val. (Mau)
-            </span>
-          </div>
-        `;
-        bordaClasse = 'border-2 border-orange-400 bg-orange-50/30';
-      } else {
-        conteudoIcone = `
-          <div class="flex flex-col items-center mt-1">
-            <i class="fa-solid fa-face-sad-tear text-rose-600 text-xl"></i>
-            <span class="text-[9px] font-black bg-rose-100 text-rose-900 border border-rose-300 px-1.5 py-0.2 rounded-full mt-0.5">
-              ${melhorNota} val. (Muito Mau)
-            </span>
-          </div>
-        `;
-        bordaClasse = 'border-2 border-rose-400 bg-rose-50/30';
-      }
-    }
-
-    html += `
-      <div onclick="mostrarDetalheDia('${dataIso}')" class="min-h-[75px] p-2 rounded-xl transition cursor-pointer flex flex-col justify-between ${bordaClasse}">
-        <div class="flex justify-between items-center text-xs font-bold">
-          <span class="${isHoje ? 'bg-indigo-600 text-white w-5 h-5 flex items-center justify-center rounded-full text-[10px]' : 'text-slate-700'}">${dia}</span>
-          ${sessoesNesteDia.length > 1 ? `<span class="text-[9px] text-slate-400">${sessoesNesteDia.length}x</span>` : ''}
-        </div>
-        ${conteudoIcone}
-      </div>
-    `;
-  }
-
-  html += `
-      </div>
-    </div>
-  `;
-
-  container.innerHTML = html;
-}
-
-// Mostrar caixa de resumo ao clicar no dia do calendário
-function mostrarDetalheDia(dataIso) {
-  const historico = JSON.parse(localStorage.getItem('mat10_historico') || '[]');
-  const sessoesNesteDia = historico.filter(s => s.data.startsWith(dataIso));
-  const div = document.getElementById('detalhe-dia-calendario');
-
-  if (sessoesNesteDia.length === 0) {
-    div.classList.remove('hidden');
-    div.innerHTML = `
-      <div class="flex justify-between items-center">
-        <div><strong>Data: ${dataIso}</strong> &bull; Nenhum treino realizado neste dia.</div>
-        <button onclick="document.getElementById('detalhe-dia-calendario').classList.add('hidden')" class="text-slate-400 hover:text-slate-600 font-bold">&times;</button>
-      </div>
-    `;
-    return;
-  }
-
-  const partes = sessoesNesteDia.map((s, i) => {
-    let medalha = "Muito Mau (0 a 5)";
-    if (s.nota >= 18) medalha = "🥇 Ouro (18 a 20)";
-    else if (s.nota >= 14) medalha = "🥈 Prata (14 a 17)";
-    else if (s.nota >= 10) medalha = "🥉 Bronze (10 a 13)";
-    else if (s.nota >= 6) medalha = "⚠️ Mau (6 a 9)";
-
-    const modoTexto = s.modalidade === 'sabado' ? 'Ficha de Sábado' : (s.modalidade === 'domingo' ? 'Ficha de Domingo' : 'Treino Diário');
-
-    return `
-      <div class="bg-white p-2.5 rounded-lg border border-indigo-100 flex justify-between items-center">
-        <div>
-          <span class="font-bold text-slate-800">Ficha #${i + 1} (${modoTexto}):</span> 
-          Classificação de <strong class="text-indigo-700 text-sm">${s.nota} / 20</strong> (${s.certas}/${s.total} acertos).
-        </div>
-        <span class="font-bold text-slate-700 bg-slate-50 px-2 py-0.5 rounded border border-slate-200">${medalha}</span>
-      </div>
-    `;
-  }).join('');
-
-  div.classList.remove('hidden');
-  div.innerHTML = `
-    <div class="flex justify-between items-center border-b border-indigo-200 pb-1 mb-2">
-      <div class="font-bold text-indigo-950">Atividade Realizada em ${dataIso}:</div>
-      <button onclick="document.getElementById('detalhe-dia-calendario').classList.add('hidden')" class="text-slate-400 hover:text-slate-600 font-bold">&times;</button>
-    </div>
-    <div class="space-y-1.5">${partes}</div>
-  `;
-}
-
-// Gráficos do Chart.js
 function renderizarGraficoEvolucao(historico) {
-  const canvas = document.getElementById('grafico-evolucao');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  if (chartEvolucao) chartEvolucao.destroy();
+  const ctx = document.getElementById('grafico-evolucao');
+  if (!ctx) return;
 
-  const labels = historico.map((_, i) => `Ficha ${i+1}`);
-  const notas = historico.map(h => h.nota);
+  const ultimas = historico.slice(0, 10).reverse();
+  const labels = ultimas.map(h => {
+    const d = new Date(h.data);
+    return `${d.getDate()}/${d.getMonth() + 1}`;
+  });
+  const dataNotas = ultimas.map(h => h.nota);
+
+  if (chartEvolucao) chartEvolucao.destroy();
 
   chartEvolucao = new Chart(ctx, {
     type: 'line',
     data: {
       labels: labels.length ? labels : ['Sem dados'],
       datasets: [{
-        label: 'Classificação (0 a 20)',
-        data: notas.length ? notas : [0],
-        borderColor: '#4338ca',
-        backgroundColor: 'rgba(67, 56, 202, 0.1)',
+        label: 'Nota Oficial (0 a 20)',
+        data: dataNotas.length ? dataNotas : [0],
+        borderColor: '#4f46e5',
+        backgroundColor: 'rgba(79, 70, 229, 0.1)',
+        tension: 0.3,
         fill: true,
-        tension: 0.25,
-        borderWidth: 2,
-        pointBackgroundColor: '#4338ca'
+        pointBackgroundColor: '#4f46e5',
+        pointRadius: 5
       }]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
       scales: {
-        y: { min: 0, max: 20, grid: { color: '#f1f5f9' } },
-        x: { grid: { display: false } }
+        y: { min: 0, max: 20, ticks: { stepSize: 5 } }
       }
     }
   });
 }
 
 function renderizarGraficoDominio(historico) {
-  const canvas = document.getElementById('grafico-dominio');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  if (chartDominio) chartDominio.destroy();
+  const ctx = document.getElementById('grafico-dominio');
+  if (!ctx) return;
 
-  const stats = { logica: { t: 0, c: 0 }, geometria: { t: 0, c: 0 }, funcoes: { t: 0, c: 0 }, estatistica: { t: 0, c: 0 } };
+  const dominios = { logica: { c: 0, t: 0 }, geometria: { c: 0, t: 0 }, funcoes: { c: 0, t: 0 }, estatistica: { c: 0, t: 0 } };
 
-  historico.forEach(h => {
-    h.detalhes?.forEach(d => {
-      if (stats[d.dominio]) {
-        stats[d.dominio].t++;
-        if (d.acertou) stats[d.dominio].c++;
-      }
-    });
+  historico.forEach(s => {
+    if (s.detalhes) {
+      s.detalhes.forEach(d => {
+        if (dominios[d.dominio]) {
+          dominios[d.dominio].t++;
+          if (d.acertou) dominios[d.dominio].c++;
+        }
+      });
+    }
   });
 
-  const calcPct = (k) => stats[k].t > 0 ? Math.round((stats[k].c / stats[k].t) * 100) : 0;
+  const calcPct = d => dominios[d].t > 0 ? Math.round((dominios[d].c / dominios[d].t) * 100) : 0;
+
+  if (chartDominio) chartDominio.destroy();
 
   chartDominio = new Chart(ctx, {
     type: 'radar',
     data: {
-      labels: ['Lógica e Conjuntos', 'Geometria Analítica', 'Funções & Gráficos', 'Estatística'],
+      labels: [
+        'Lógica e Teoria de Conjuntos',
+        'Geometria Analítica',
+        'Funções e Gráficos',
+        'Estatística'
+      ],
       datasets: [{
         label: 'Taxa de Acerto (%)',
         data: [calcPct('logica'), calcPct('geometria'), calcPct('funcoes'), calcPct('estatistica')],

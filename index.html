@@ -41,7 +41,7 @@
         font-size: 11pt;
       }
 
-      header, nav, #painel-controlo, #status-sessao, #painel-submissao, #botoes-impressao, #aba-dashboard {
+      header, nav, #painel-controlo, #status-sessao, #painel-submissao, #botoes-impressao, #aba-dashboard, #modal-login, #modal-justificar-faltas, #modal-parecer-pais {
         display: none !important;
       }
 
@@ -103,18 +103,31 @@
         </div>
       </div>
 
-      <!-- Navegação Principal -->
-      <nav class="flex bg-indigo-950/70 p-1 rounded-xl border border-indigo-700/50 text-sm">
-        <button id="nav-btn-treino" onclick="mudarAba('treino')" class="px-3.5 py-1.5 rounded-lg font-medium transition flex items-center gap-2 bg-indigo-600 text-white shadow">
-          <i class="fa-solid fa-pen-ruler"></i> Treino (1h)
-        </button>
-        <button id="nav-btn-resultados" onclick="mudarAba('resultados')" class="px-3.5 py-1.5 rounded-lg font-medium transition flex items-center gap-2 text-indigo-200 hover:text-white">
-          <i class="fa-solid fa-square-poll-vertical"></i> Avaliação &amp; Resolução
-        </button>
-        <button id="nav-btn-dashboard" onclick="mudarAba('dashboard')" class="px-3.5 py-1.5 rounded-lg font-medium transition flex items-center gap-2 text-indigo-200 hover:text-white">
-          <i class="fa-solid fa-chart-line"></i> Dashboard
-        </button>
-      </nav>
+      <!-- Navegação Principal & Estado da Conta -->
+      <div class="flex flex-wrap items-center gap-3">
+        <nav class="flex bg-indigo-950/70 p-1 rounded-xl border border-indigo-700/50 text-sm">
+          <button id="nav-btn-treino" onclick="mudarAba('treino')" class="px-3.5 py-1.5 rounded-lg font-medium transition flex items-center gap-2 bg-indigo-600 text-white shadow">
+            <i class="fa-solid fa-pen-ruler"></i> Treino (1h)
+          </button>
+          <button id="nav-btn-resultados" onclick="mudarAba('resultados')" class="px-3.5 py-1.5 rounded-lg font-medium transition flex items-center gap-2 text-indigo-200 hover:text-white">
+            <i class="fa-solid fa-square-poll-vertical"></i> Avaliação &amp; Resolução
+          </button>
+          <button id="nav-btn-dashboard" onclick="mudarAba('dashboard')" class="px-3.5 py-1.5 rounded-lg font-medium transition flex items-center gap-2 text-indigo-200 hover:text-white">
+            <i class="fa-solid fa-chart-line"></i> Dashboard &amp; Assiduidade
+          </button>
+        </nav>
+
+        <!-- Barra de Utilizador / Login Interligado -->
+        <div class="flex items-center gap-2 bg-indigo-950/80 px-2.5 py-1.5 rounded-xl border border-indigo-700/70">
+          <div id="badge-perfil-usuario" class="flex items-center gap-2 text-xs font-semibold">
+            <!-- Injetado por JS -->
+          </div>
+          <button onclick="abrirModalLogin()" title="Alternar entre Aluno e Encarregados de Educação" class="px-2 py-1 bg-indigo-800 hover:bg-indigo-700 text-indigo-100 hover:text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5">
+            <i class="fa-solid fa-right-left"></i>
+            <span class="hidden md:inline">Trocar</span>
+          </button>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -143,157 +156,201 @@
 
     <!-- ==================== ABA 1: TREINO DIÁRIO E FIM DE SEMANA ==================== -->
     <section id="aba-treino" class="space-y-6">
-      
-      <!-- Seletor de Modalidade: Diária vs Fim de Semana (Sábado/Domingo) -->
-      <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-3">
-        <div class="flex items-center gap-2">
-          <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Modalidade da Ficha:</span>
+
+      <!-- Aviso para Modo Pais / Encarregados de Educação -->
+      <div id="banner-aviso-pais" class="hidden bg-amber-50 border-2 border-amber-300 p-4 rounded-2xl text-xs text-amber-950 flex items-center justify-between shadow-sm">
+        <div class="flex items-center gap-3">
+          <i class="fa-solid fa-user-shield text-amber-600 text-2xl"></i>
+          <div>
+            <h5 class="font-bold text-sm text-amber-900">Modo de Acompanhamento Parental Ativo</h5>
+            <p class="text-amber-800">Encontra-se ligado como <strong>Encarregado de Educação</strong>. As fichas de treino devem ser resolvidas com autonomia pelo Aluno.</p>
+          </div>
         </div>
-        <div class="flex flex-wrap gap-2 text-xs font-bold">
-          <button id="btn-modo-diario" onclick="selecionarModalidade('diario')" class="px-4 py-2 rounded-xl border transition flex items-center gap-2 bg-indigo-600 text-white border-indigo-700 shadow-sm">
-            <i class="fa-solid fa-calendar-day"></i> Treino Diário (Seg–Sex)
-          </button>
-          <button id="btn-modo-sabado" onclick="selecionarModalidade('sabado')" class="px-4 py-2 rounded-xl border transition flex items-center gap-2 bg-slate-100 text-slate-700 border-slate-300 hover:bg-slate-200">
-            <i class="fa-solid fa-calendar-check text-indigo-600"></i> Ficha de Sábado (Consolidação I)
-          </button>
-          <button id="btn-modo-domingo" onclick="selecionarModalidade('domingo')" class="px-4 py-2 rounded-xl border transition flex items-center gap-2 bg-slate-100 text-slate-700 border-slate-300 hover:bg-slate-200">
-            <i class="fa-solid fa-shield-halved text-amber-600"></i> Ficha de Domingo (Consolidação II)
-          </button>
+        <button onclick="mudarParaPerfilAluno()" class="px-3.5 py-2 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-xl text-xs shadow transition">
+          Mudar para Aluno
+        </button>
+      </div>
+
+      <!-- Banner de Modo de Recuperação de Falta -->
+      <div id="banner-modo-recuperacao" class="hidden bg-emerald-50 border-2 border-emerald-400 p-4 rounded-2xl text-xs text-emerald-950 flex items-center justify-between shadow-sm">
+        <div class="flex items-center gap-3">
+          <i class="fa-solid fa-clock-rotate-left text-emerald-600 text-2xl animate-spin-slow"></i>
+          <div>
+            <h5 class="font-bold text-sm text-emerald-900">Modo de Recuperação de Ficha Ativo</h5>
+            <p id="texto-banner-recuperacao" class="text-emerald-800">A resolver ficha formativa para recuperar a falta de [Data]. Ao submeteres com sucesso, a tua falta ficará regularizada!</p>
+          </div>
+        </div>
+        <button onclick="cancelarModoRecuperacao()" class="px-3 py-1.5 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold rounded-xl text-xs transition">
+          Cancelar Recuperação
+        </button>
+      </div>
+
+      <!-- Seletor de Modalidade: Diário vs Sábado vs Domingo -->
+      <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 space-y-3">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+              <i class="fa-solid fa-calendar-check text-indigo-600"></i> Modalidade do Desafio
+            </h3>
+            <p class="text-xs text-slate-500">Dias oficiais de estudo: <strong>Segundas, Quartas, Sextas, Sábado e Domingo</strong> (Terças e Quintas: descanso).</p>
+          </div>
+          <div class="flex flex-wrap gap-2 text-xs font-semibold">
+            <button id="btn-modo-diario" onclick="selecionarModalidade('diario')" class="px-4 py-2 rounded-xl border transition flex items-center gap-2 bg-indigo-600 text-white border-indigo-700 shadow-sm">
+              <i class="fa-solid fa-calendar-day"></i> Ficha Diária Regular
+            </button>
+            <button id="btn-modo-sabado" onclick="selecionarModalidade('sabado')" class="px-4 py-2 rounded-xl border transition flex items-center gap-2 bg-slate-100 text-slate-700 border-slate-300 hover:bg-slate-200">
+              <i class="fa-solid fa-repeat"></i> Ficha de Sábado (Consolidação)
+            </button>
+            <button id="btn-modo-domingo" onclick="selecionarModalidade('domingo')" class="px-4 py-2 rounded-xl border transition flex items-center gap-2 bg-slate-100 text-slate-700 border-slate-300 hover:bg-slate-200">
+              <i class="fa-solid fa-brain"></i> Ficha de Domingo (Revisão &amp; Erros)
+            </button>
+          </div>
+        </div>
+
+        <div id="banner-modalidade" class="bg-indigo-50 border border-indigo-200 p-3.5 rounded-xl flex items-center justify-between text-xs text-indigo-950">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-circle-info text-indigo-600"></i>
+            <span id="texto-banner-modalidade"><strong>Modo Diário Ativo:</strong> 5 exercícios inéditos da matéria em estudo + 3 exercícios de matérias anteriores rodados equitativamente.</span>
+          </div>
         </div>
       </div>
 
-      <!-- Banner Informativo da Modalidade Ativa -->
-      <div id="banner-modalidade" class="bg-indigo-50 border border-indigo-200 p-3.5 rounded-xl flex items-center justify-between text-xs text-indigo-950">
-        <div class="flex items-center gap-2">
-          <i class="fa-solid fa-circle-info text-indigo-600 text-base"></i>
-          <span id="texto-banner-modalidade"><strong>Modo Diário Ativo:</strong> 5 exercícios inéditos da matéria em estudo + 3 exercícios de matérias anteriores rodados equitativamente.</span>
-        </div>
-      </div>
-
-      <!-- Painel de Controlo da Sessão com Seleção por Livro / Páginas -->
+      <!-- Painel de Controlo do Treino -->
       <div id="painel-controlo" class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-4">
         
-        <div class="border-b border-slate-100 pb-3 flex flex-wrap justify-between items-center gap-2">
+        <!-- Cabeçalho Informativo -->
+        <div class="border-b border-slate-100 pb-3 flex flex-wrap justify-between items-center gap-3">
           <div>
-            <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
-              <i class="fa-solid fa-book-open text-indigo-600"></i> Matéria em Estudo na Escola (Manual do 10.º Ano)
-            </h3>
-            <p class="text-xs text-slate-500">Escolha o volume, a matéria e o número de páginas estudadas pelo aluno até ao momento.</p>
+            <h2 class="text-base font-bold text-slate-800 flex items-center gap-2">
+              <i class="fa-solid fa-sliders text-indigo-600"></i> Configuração da Ficha Formativa
+            </h2>
+            <p class="text-xs text-slate-500">Manual Matemática 10.º Ano &bull; Escolha por página ou tema &bull; Sem repetição diária</p>
           </div>
-          <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-3 py-1 rounded-full border border-emerald-200">
-            Banco com 504 Exercícios (100 Dias)
-          </span>
+          <div class="flex items-center gap-2 text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200 px-3 py-1.5 rounded-xl">
+            <i class="fa-solid fa-clock"></i> 60 Minutos &bull; 8 Exercícios &bull; 2,5 val. cada
+          </div>
         </div>
 
-        <!-- Seletores: Caderno, Tópico e Página Atual -->
+        <!-- Seletores por Caderno, Tópico e Número de Página -->
         <div id="grupo-seletores-materia" class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
           
-          <!-- Seletor de Caderno -->
+          <!-- Seletor do Caderno / Volume -->
           <div class="md:col-span-4">
-            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
-              1. Volume / Caderno:
+            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+              1. Selecionar Caderno
             </label>
             <select id="seletor-caderno" onchange="atualizarListaTopicos()" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl p-2.5 font-medium focus:ring-2 focus:ring-indigo-500 focus:outline-none">
-              <option value="1">Caderno 1: Lógica e Geometria (Págs. 10–168)</option>
-              <option value="2">Caderno 2: Funções e Estatística (Págs. 10–160)</option>
+              <option value="1">Caderno 1: Lógica e Geometria Analítica</option>
+              <option value="2">Caderno 2: Funções e Estatística</option>
             </select>
           </div>
 
-          <!-- Seletor de Tópico por Ordem de Páginas -->
+          <!-- Seletor do Tópico do Programa -->
           <div class="md:col-span-5">
-            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
-              2. Matéria em Estudo (por ordem de páginas):
+            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+              2. Matéria / Unidade Curricular
             </label>
             <select id="seletor-topico" onchange="atualizarPaginaPorTopico()" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl p-2.5 font-medium focus:ring-2 focus:ring-indigo-500 focus:outline-none">
-              <!-- Preenchido via JS -->
+              <!-- Preenchido via JavaScript -->
             </select>
           </div>
 
-          <!-- Indicador / Seletor de Página Máxima Estudada -->
+          <!-- Input do Número de Página Estudada -->
           <div class="md:col-span-3">
-            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
-              3. Estudado até à Página:
+            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+              3. Página que Estudou
             </label>
             <div class="flex items-center gap-2">
               <input type="number" id="input-pagina-estudada" oninput="sincronizarPorNumeroPagina(this.value)" class="w-24 bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl p-2.5 font-bold text-center focus:ring-2 focus:ring-indigo-500 focus:outline-none" min="10" max="168" value="25" />
               <span id="label-intervalo-paginas" class="text-xs text-slate-500 font-semibold leading-tight">Págs. 10–25</span>
             </div>
           </div>
+
         </div>
 
-        <!-- Caixa de Resumo Pedagógico da Ficha de 1 Hora -->
+        <!-- Resumo da Composição Pedagógica da Ficha -->
         <div id="resumo-estrutura-sessao" class="bg-indigo-50/70 border border-indigo-200/80 p-3.5 rounded-xl flex flex-wrap items-center justify-between gap-3 text-xs text-indigo-900">
-          <!-- Preenchido dinamicamente via JS -->
+          <!-- Injetado por JS -->
         </div>
 
         <!-- Botões de Ação -->
-        <div class="flex flex-wrap gap-3 pt-2">
+        <div class="pt-2 flex flex-wrap gap-3">
           <button id="btn-iniciar-sessao" onclick="iniciarSessao()" class="flex-1 sm:flex-initial px-6 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow transition flex items-center justify-center gap-2">
-            <i class="fa-solid fa-play"></i> Gerar Ficha Diária de 1 Hora
+            <i class="fa-solid fa-play"></i> Iniciar Desafio (60 Minutos)
           </button>
-          
+
           <button id="btn-imprimir-enunciado" onclick="imprimirFichaEnunciado()" class="hidden flex-1 sm:flex-initial px-5 py-3.5 bg-slate-800 hover:bg-slate-900 text-white font-bold rounded-xl shadow transition items-center justify-center gap-2">
-            <i class="fa-solid fa-print"></i> Imprimir Ficha A4
+            <i class="fa-solid fa-print"></i> Imprimir Ficha A4 Escolar
           </button>
         </div>
+
       </div>
 
-      <!-- Barra de Estado e Cronómetro -->
+      <!-- Barra de Estado do Treino Ativo -->
       <div id="status-sessao" class="hidden bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow flex justify-between items-center">
-        <div class="flex items-center gap-3">
-          <span class="inline-flex items-center justify-center bg-indigo-600 text-white text-xs px-2.5 py-1 rounded-full font-bold">
-            Progresso: <span id="progresso-exercicios" class="ml-1">0/8</span>
-          </span>
-          <span class="text-xs text-slate-300 hidden md:inline">8 itens &bull; Cotação: 2,5 val. cada (Total 20,0)</span>
+        <div class="flex items-center gap-4">
+          <div class="text-xs font-semibold uppercase tracking-wider text-slate-400">
+            Progresso: <span id="progresso-exercicios" class="ml-1 text-white">0/8</span>
+          </div>
+          <div class="hidden sm:block text-xs text-slate-400 border-l border-slate-700 pl-4">
+            Cotação: <strong class="text-amber-400">2,5 val. / exercício</strong>
+          </div>
         </div>
         <div class="flex items-center gap-3">
-          <i class="fa-regular fa-clock text-amber-400 text-lg"></i>
+          <i class="fa-solid fa-stopwatch text-amber-400 text-xl"></i>
           <span id="cronometro-sessao" class="font-mono text-xl font-bold tracking-wider text-amber-400">60:00</span>
         </div>
       </div>
 
       <!-- Lista de Exercícios -->
       <div id="container-exercicios" class="space-y-6">
-        <!-- Renderizado dinamicamente -->
+        <!-- Renderizado dinamicamente pelo JavaScript -->
       </div>
 
       <!-- Painel de Submissão -->
       <div id="painel-submissao" class="hidden text-center pt-4 no-print">
-        <button onclick="submeterTreino()" class="px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-base rounded-xl shadow-lg transition">
-          <i class="fa-solid fa-check-double mr-2"></i> Submeter Respostas e Avaliar (0 a 20)
+        <button onclick="submeterTreino()" class="px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white text-base font-bold rounded-2xl shadow-lg hover:shadow-indigo-500/30 transition transform hover:-translate-y-0.5">
+          <i class="fa-solid fa-check-double mr-2"></i> Submeter Ficha &bull; Avaliar (0 a 20)
         </button>
       </div>
+
     </section>
 
-    <!-- ==================== ABA 2: RESULTADOS & RESOLUÇÃO COMPLETA ==================== -->
+    <!-- ==================== ABA 2: RESULTADOS E RESOLUÇÃO ==================== -->
     <section id="aba-resultados" class="hidden space-y-6">
       
-      <!-- Card com Nota e Botão de Imprimir Resoluções -->
-      <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 max-w-xl mx-auto flex flex-col items-center gap-4 text-center">
+      <!-- Resumo da Avaliação -->
+      <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col md:flex-row items-center justify-between gap-6">
         <div id="card-nota" class="w-full space-y-2">
-          <!-- Preenchido via JS -->
+          <!-- Renderizado via JS -->
         </div>
-        
-        <div class="no-print pt-2">
-          <button onclick="imprimirResolucaoCompleta()" class="px-5 py-2.5 bg-indigo-700 hover:bg-indigo-800 text-white font-bold text-sm rounded-xl shadow transition flex items-center gap-2">
-            <i class="fa-solid fa-file-pdf"></i> Imprimir Critérios e Resolução da Ficha A4
+
+        <div id="botoes-impressao" class="flex flex-wrap gap-3 no-print">
+          <button onclick="imprimirResolucaoCompleta()" class="px-5 py-3 bg-slate-800 hover:bg-slate-900 text-white font-bold rounded-xl shadow transition flex items-center gap-2 text-xs">
+            <i class="fa-solid fa-print"></i> Imprimir Resoluções A4
+          </button>
+          <button onclick="mudarAba('treino')" class="px-5 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow transition flex items-center gap-2 text-xs">
+            <i class="fa-solid fa-arrow-rotate-right"></i> Novo Desafio
           </button>
         </div>
       </div>
 
-      <!-- Resoluções Passo a Passo -->
+      <!-- Lista de Resoluções Passo a Passo -->
       <div class="space-y-4">
-        <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2 border-b pb-2">
-          <i class="fa-solid fa-list-check text-indigo-600"></i> Resolução Integral e Critérios de Classificação da Prova Diária
+        <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
+          <i class="fa-solid fa-list-check text-indigo-600"></i> Resolução Detalhada Passo a Passo
         </h3>
         <div id="lista-resolucoes" class="space-y-4">
-          <!-- Preenchido via JS -->
+          <!-- Renderizado via JS -->
         </div>
       </div>
+
     </section>
 
-    <!-- ==================== ABA 3: DASHBOARD DE DESEMPENHO E CALENDÁRIO ==================== -->
+    <!-- ==================== ABA 3: DASHBOARD E ASSIDUIDADE ==================== -->
     <section id="aba-dashboard" class="hidden space-y-6">
+
+      <!-- 4 KPIs Principais -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3">
           <div class="bg-amber-100 text-amber-600 p-3 rounded-xl text-xl"><i class="fa-solid fa-fire"></i></div>
@@ -328,14 +385,24 @@
         </div>
       </div>
 
+      <!-- ==================== ESCALA DO TIPO DE ALUNO (ASSIDUIDADE E COMPROMISSO) ==================== -->
+      <div id="card-escala-tipo-aluno" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+        <!-- Renderizado dinamicamente via JS -->
+      </div>
+
+      <!-- ==================== REGISTO E CONTROLO DE ASSIDUIDADE E FALTAS ==================== -->
+      <div id="card-registo-faltas" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+        <!-- Renderizado dinamicamente via JS -->
+      </div>
+
       <!-- ==================== CALENDÁRIO MENSAL DE DESEMPENHO E ATIVIDADE ==================== -->
       <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
         <div class="flex flex-wrap justify-between items-center gap-3 border-b border-slate-100 pb-3">
           <div>
             <h4 class="font-bold text-slate-800 text-base flex items-center gap-2">
-              <i class="fa-solid fa-calendar-days text-indigo-600"></i> Calendário Mensal de Atividade e Medalhas
+              <i class="fa-solid fa-calendar-days text-indigo-600"></i> Calendário Mensal de Estudo e Medalhas
             </h4>
-            <p class="text-xs text-slate-500">Histórico dia a dia com ícones de classificação e avaliação de desempenho.</p>
+            <p class="text-xs text-slate-500">Dias de estudo marcados (Seg, Qua, Sex, Sáb, Dom). Clique no dia para ver o registo detalhado.</p>
           </div>
           <div class="flex items-center gap-2">
             <button onclick="mudarMesCalendario(-1)" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-lg transition">
@@ -361,26 +428,35 @@
           <!-- Preenchido via JS ao clicar no dia -->
         </div>
 
-        <!-- Legenda dos Ícones e Medalhas Conforme Especificado -->
-        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 flex flex-wrap items-center justify-between gap-3 text-xs">
+        <!-- Legenda Completa de Medalhas e Faltas Conforme Especificado -->
+        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-2 text-xs">
           <div class="font-bold text-slate-700 flex items-center gap-1.5">
-            <i class="fa-solid fa-ribbon text-indigo-600"></i> Critérios de Medalhas no Calendário:
+            <i class="fa-solid fa-ribbon text-indigo-600"></i> Critérios de Classificação e Símbolos no Calendário:
           </div>
-          <div class="flex flex-wrap items-center gap-3 text-xs font-medium">
-            <div class="flex items-center gap-1.5 bg-amber-50 border border-amber-300 px-2.5 py-1 rounded-lg text-amber-900 font-bold shadow-xs">
-              <i class="fa-solid fa-trophy text-amber-500 text-sm"></i> Ouro (18 a 20)
+          <div class="flex flex-wrap items-center gap-2 text-xs font-medium">
+            <div class="flex items-center gap-1 bg-amber-50 border border-amber-300 px-2 py-0.5 rounded-lg text-amber-900 font-bold">
+              <i class="fa-solid fa-trophy text-amber-500"></i> Ouro (18–20)
             </div>
-            <div class="flex items-center gap-1.5 bg-slate-100 border border-slate-300 px-2.5 py-1 rounded-lg text-slate-800 font-bold shadow-xs">
-              <i class="fa-solid fa-medal text-slate-400 text-sm"></i> Prata (14 a 17)
+            <div class="flex items-center gap-1 bg-slate-100 border border-slate-300 px-2 py-0.5 rounded-lg text-slate-800 font-bold">
+              <i class="fa-solid fa-medal text-slate-400"></i> Prata (14–17)
             </div>
-            <div class="flex items-center gap-1.5 bg-amber-100/70 border border-amber-400 px-2.5 py-1 rounded-lg text-amber-950 font-bold shadow-xs">
-              <i class="fa-solid fa-award text-amber-700 text-sm"></i> Bronze (10 a 13)
+            <div class="flex items-center gap-1 bg-amber-100/70 border border-amber-400 px-2 py-0.5 rounded-lg text-amber-950 font-bold">
+              <i class="fa-solid fa-award text-amber-700"></i> Bronze (10–13)
             </div>
-            <div class="flex items-center gap-1.5 bg-orange-50 border border-orange-300 px-2.5 py-1 rounded-lg text-orange-900 font-bold shadow-xs">
-              <i class="fa-solid fa-face-frown text-orange-500 text-sm"></i> Mau (6 a 9)
+            <div class="flex items-center gap-1 bg-orange-50 border border-orange-300 px-2 py-0.5 rounded-lg text-orange-900 font-bold">
+              <i class="fa-solid fa-face-frown text-orange-500"></i> Mau (6–9)
             </div>
-            <div class="flex items-center gap-1.5 bg-rose-50 border border-rose-300 px-2.5 py-1 rounded-lg text-rose-900 font-bold shadow-xs">
-              <i class="fa-solid fa-face-sad-tear text-rose-600 text-sm"></i> Muito Mau (0 a 5)
+            <div class="flex items-center gap-1 bg-rose-50 border border-rose-300 px-2 py-0.5 rounded-lg text-rose-900 font-bold">
+              <i class="fa-solid fa-face-sad-tear text-rose-600"></i> Muito Mau (0–5)
+            </div>
+            <div class="flex items-center gap-1 bg-rose-100 border border-rose-300 px-2 py-0.5 rounded-lg text-rose-900 font-bold">
+              <i class="fa-solid fa-circle-xmark text-rose-600"></i> Falta Injustificada
+            </div>
+            <div class="flex items-center gap-1 bg-blue-50 border border-blue-300 px-2 py-0.5 rounded-lg text-blue-900 font-bold">
+              <i class="fa-solid fa-file-circle-check text-blue-600"></i> Falta Justificada
+            </div>
+            <div class="flex items-center gap-1 bg-emerald-50 border border-emerald-300 px-2 py-0.5 rounded-lg text-emerald-900 font-bold">
+              <i class="fa-solid fa-circle-check text-emerald-600"></i> Recuperada
             </div>
           </div>
         </div>
@@ -407,6 +483,7 @@
         </div>
       </div>
 
+      <!-- Diagnóstico Pedagógico -->
       <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
         <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
           <i class="fa-solid fa-compass-drafting text-amber-500"></i> Diagnóstico Pedagógico do Aluno
@@ -418,6 +495,134 @@
     </section>
 
   </main>
+
+  <!-- ==================== MODAL 1: LOGIN FAMILIAR (ALUNO & PAIS INTERLIGADOS) ==================== -->
+  <div id="modal-login" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/70 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-5 animate-fade-in">
+      <div class="text-center space-y-1">
+        <img src="logo_ceo.png" alt="CEO" class="w-16 h-16 rounded-2xl mx-auto shadow border border-indigo-200 object-cover bg-indigo-950" />
+        <h3 class="text-xl font-black text-slate-800">CEO &bull; Centro de Estudo Online</h3>
+        <p class="text-xs text-slate-500">Acesso da Família: Aluno e Encarregados de Educação</p>
+      </div>
+
+      <!-- Abas de Perfil Desejado -->
+      <div class="grid grid-cols-2 gap-2 bg-slate-100 p-1.5 rounded-2xl text-xs font-bold">
+        <button id="login-tab-aluno" onclick="selecionarTabLogin('aluno')" class="py-2.5 rounded-xl transition bg-indigo-600 text-white shadow-sm flex items-center justify-center gap-1.5">
+          <i class="fa-solid fa-graduation-cap"></i> Sou Aluno
+        </button>
+        <button id="login-tab-pais" onclick="selecionarTabLogin('pais')" class="py-2.5 rounded-xl transition text-slate-600 hover:text-slate-900 flex items-center justify-center gap-1.5">
+          <i class="fa-solid fa-user-shield"></i> Encarregado de Educação
+        </button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 uppercase mb-1">Conta Familiar (Utilizador Comum)</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400"><i class="fa-solid fa-user"></i></span>
+            <input type="text" id="login-username" value="aluno10" class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold text-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+          </div>
+        </div>
+
+        <div>
+          <div class="flex justify-between items-center mb-1">
+            <label id="login-label-senha" class="block font-bold text-slate-700 uppercase">Palavra-passe do Aluno</label>
+            <span id="login-dica-senha" class="text-[10px] text-indigo-600 font-semibold">Padrão: aluno123</span>
+          </div>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400"><i class="fa-solid fa-lock"></i></span>
+            <input type="password" id="login-password" placeholder="Insere a tua palavra-passe" class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold text-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+          </div>
+        </div>
+
+        <div id="login-mensagem-erro" class="hidden p-2.5 bg-rose-50 border border-rose-200 text-rose-800 rounded-xl font-medium text-xs">
+          <!-- Mensagem de erro -->
+        </div>
+
+        <div class="bg-indigo-50 p-3 rounded-xl border border-indigo-200 text-[11px] text-indigo-900 space-y-1">
+          <p><strong>Privilégios Interligados:</strong></p>
+          <p id="login-texto-privilegios">&bull; <strong>Aluno:</strong> Realizar fichas, ver resoluções, justificar faltas e agendar recuperação.</p>
+        </div>
+      </div>
+
+      <div class="flex gap-2 pt-2">
+        <button onclick="submeterLogin()" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i> Iniciar Sessão
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 2: JUSTIFICAÇÃO OBRIGATÓRIA DE FALTAS (ALUNO) ==================== -->
+  <div id="modal-justificar-faltas" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/80 backdrop-blur-md p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl border-2 border-rose-400 space-y-4 my-8">
+      <div class="flex items-start gap-3 border-b border-slate-100 pb-3">
+        <div class="bg-rose-100 text-rose-600 p-3 rounded-2xl text-2xl flex-shrink-0">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-black text-rose-900">Justificação Obrigatória de Faltas às Fichas</h3>
+          <p class="text-xs text-slate-600">
+            De acordo com o teu plano oficial, tens sessões obrigatórias às <strong>Segundas, Quartas, Sextas, Sábado e Domingo</strong>. Para poderes continuar, deves justificar a razão da(s) falta(s) e agendar o dia de recuperação!
+          </p>
+        </div>
+      </div>
+
+      <!-- Lista de Faltas por Justificar -->
+      <div id="lista-formulario-faltas-pendentes" class="space-y-4 max-h-[60vh] overflow-y-auto pr-1">
+        <!-- Renderizado dinamicamente por JS -->
+      </div>
+
+      <div class="pt-3 border-t border-slate-100 flex justify-end">
+        <button onclick="submeterJustificacoesAluno()" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg transition flex items-center gap-2 text-xs">
+          <i class="fa-solid fa-paper-plane"></i> Submeter Justificação e Agendamento
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 3: DECISÃO PARENTAL SOBRE FALTAS (PAIS) ==================== -->
+  <div id="modal-parecer-pais" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/70 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-4">
+      <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+        <div class="bg-indigo-100 text-indigo-700 p-2.5 rounded-xl text-xl">
+          <i class="fa-solid fa-user-check"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-800 text-sm">Decisão do Encarregado de Educação</h4>
+          <p class="text-xs text-slate-500">Validação formal de justificação de falta</p>
+        </div>
+      </div>
+
+      <input type="hidden" id="modal-pais-falta-id" value="" />
+
+      <div class="space-y-2 text-xs">
+        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+          <div class="font-bold text-slate-700" id="modal-pais-falta-data">Data: --</div>
+          <div class="text-slate-600 mt-1" id="modal-pais-falta-motivo">Motivo do Aluno: --</div>
+          <div class="text-emerald-700 font-semibold mt-1" id="modal-pais-falta-recuperacao">Recuperação Agendada: --</div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 uppercase mb-1">Observação / Parecer dos Pais (Opcional)</label>
+          <input type="text" id="modal-pais-parecer" placeholder="Ex: Autorizado por motivo de saúde / Não autorizado" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-medium focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-2 pt-2">
+        <button onclick="confirmarDecisaoPais('Justificada')" class="py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow transition flex items-center justify-center gap-1.5">
+          <i class="fa-solid fa-check"></i> Justificada
+        </button>
+        <button onclick="confirmarDecisaoPais('Injustificada')" class="py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl text-xs shadow transition flex items-center justify-center gap-1.5">
+          <i class="fa-solid fa-xmark"></i> Injustificada (Balda)
+        </button>
+      </div>
+
+      <div class="text-center pt-1">
+        <button onclick="fecharModalParecerPais()" class="text-xs text-slate-500 hover:text-slate-800 font-semibold">Cancelar</button>
+      </div>
+    </div>
+  </div>
 
   <!-- SCRIPTS DOS DADOS DO MANUAL MATEMÁTICA 10.º ANO (504 EXERCÍCIOS) -->
   <script src="banco_topicos.js"></script>
